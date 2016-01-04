@@ -1,0 +1,167 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{1}{January 4, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+% **** YOUR NOTES GO HERE:
+
+% Admin Info
+\begin{center}
+Admin Info \\
+Yongqiang Zhao 
+Office : MC 6461 \\
+Office Hours : 10:30am - 12:30pm \\
+Email: y354zhao@uwaterloo.ca \\
+Midterm date : Feb 8th, 2016 
+
+\end{center}
+
+%
+\section{Vector Addition and Scaler Multiplication}
+
+Recall : \\
+2-dimensional Euclidian Space
+\[\mathbb{R}^2 = \{(x,y)| x,y \in \mathbb{R}\}\]
+3-dimensional Euclidian Space
+\[\mathbb{R}^3 = \{(x,y,z)| x,y,z \in \mathbb{R}\}\]
+
+
+\begin{ex}
+\[ \vec{x} = \begin{bmatrix} x \\ y \end{bmatrix} \text{corresponds to the point} (x,y) \]
+\end{ex}
+
+\begin{definition}
+We represent vectors as column vectors (matrices of size n × 1) to distinguish them from points\[\vec{v} = \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}, v_i \in \mathbb{R}, 1 \le i \le n\]
+This is called a n-dimensional Euclidean Space
+\end {definition}
+
+
+\section{Operations}
+\textbf{Equality}
+\[\vec{x}=\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} \vec{y}=\begin{bmatrix} y_1 \\ y_2 \\ y_3 \end{bmatrix} \]
+\[\vec{x} = \vec{y} \text{ iff } x_i = y_i ,1 \leq i \leq n \]
+
+\newpage 
+
+\textbf{Addition/Subtraction}
+\[\text{Let  } \vec{x}=\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \text{  and  }\vec{y}=\begin{bmatrix} y_1 \\ \vdots \\ y_n \end{bmatrix} \text{   be 2 vectors}\]
+\[\vec{x}\pm\vec{y} = \begin{bmatrix} x_1 \pm y_1 \\ \vdots \\ x_n \pm y_n \end{bmatrix} \]
+
+
+\textbf{Scaler Multiplication}
+\[c\vec{x} = \begin{bmatrix} cx_1 \\ \vdots \\ cx_n \end{bmatrix}\]
+
+\section{Linear Combination}
+\begin{definition}
+\[\text{For  } \vec{V_1} \ldots \vec{V_2} \ldots \vec{V_n} \in \mathbb{R}\]
+\[\text{We call the sum   } V_1C_1 + V_2C_2 + \ldots V_nC_i \
+\text{   the linear combination of   } \vec{V_1} \ldots \vec{V_2} \ldots \vec{V_n}  \]
+\end{definition}
+
+\section{Fundemental Properties of Vector Operations}
+\begin{theorem}
+\[\text{If  } \ \vec{x}, \vec{y}, \vec{w}  \ \in \mathbb{R}^n \ , c,d \in \mathbb{R}\]
+\begin{itemize}
+\item Closure Under Addition: \[\vec{x} + \vec{y} \in \mathbb{R}^n\]
+\item Associativity : \[(\vec{x} + \vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})\]
+\item Commutativity : \[\vec{x} + \vec{y} = \vec{y} + \vec{x}\]
+\item Additive identity : \[\exists \vec{0} \in \mathbb{R}, \forall \vec{x} \in \mathbb{R}^n, \vec{x} + \vec{0} = \vec{x}\]
+\item Additive inverse : \[\forall \vec{x} \in \mathbb{R}^n, \exists -\vec{x} \in \mathbb{R}^n, \vec{x} + (-\vec{x}) = \vec{0}\]
+\item Closure under scalar multiplication: \[c\vec{x} \in \mathbb{R}^n\]
+\item \[c(d\vec{x}) = (cd)\vec{x}\]
+\item  Scalar distributivity: \[(c + d)\vec{x} = c\vec{x} + d\vec{x}\]
+\item Vector distributivity: \[c(\vec{x} + \vec{y}) = c\vec{x} + c\vec{y}\]
+\item Multiplicative identity: \[1\vec{x} = \vec{x}\]
+
+
+
+
+\end{itemize}
+
+\end{theorem}
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}
+
+
+
+
+
