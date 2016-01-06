@@ -1,0 +1,174 @@
+%Notes by Harsh Mistry 
+%Math 128
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 128 :  Calculus 2 for the Sciences
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{2}{January 6, 2016}{Jen Nelson}{Harsh Mistry}
+
+
+% **** YOUR NOTES GO HERE:
+
+
+%
+\section{Integration by Subsitution Examples }
+\begin{ex}
+\begin{equation}
+\begin{aligned}
+\int \frac{x^3}{(x+5)^2}  & = \int \frac{(u-5)^3}{u} du   \ \textbf{ Let u = x + 5} \\
+& = \int \frac{u^3 - 15u^2 + 75u - 125}{u^2} \\
+& = \int u - 15 + \frac{75}{u} - \frac{125}{u^2}\\
+& = \begin{bmatrix} \frac{u^2}{2} - 15u + 75 \ln u + \frac{125}{u} + c \end{bmatrix} \\
+& = \begin{bmatrix} \frac{(x+5)^2}{2} - 15(x+5) + 75 \ln (x+5) + \frac{125}{x+5} + c \end{bmatrix} 
+\end{aligned}
+\end{equation}
+\end{ex}
+
+\begin{ex}
+\begin{equation}
+\begin{aligned}
+\int_{1}^{2} \frac{e^\frac{1}{x}}{x^2} dx & = -1 \int_{1}^{\frac{1}{2}} e^u du \ \textbf{ Let u = } \frac{1}{x} \\
+& = - \begin{bmatrix} e^u \end{bmatrix}_{1}^{\frac{1}{2}} \\
+& = -e^\frac{1}{2} + e
+\end{aligned}
+\end{equation}
+\end{ex}
+
+\begin{ex}
+\begin{equation}
+\begin{aligned}
+\int \tan x dx = \int \frac{\sin x}{\cos x} & = - \int \frac{1}{u} du \ \textbf{ Let u = } \cos x\\
+& = - \ln \mid u \mid\ + \ c  \\
+& = - \ln \mid \cos x \mid\ + \ c  \ \textbf{ or }  \ln \mid \sec \mid\ + \  c  
+\end{aligned}
+\end{equation}
+\end{ex}
+
+\textbf{Practice Problem}
+\[ \int \sec x \ dx   \text{ Hint : Multiply by } \frac{\sec x + \tan x}{\sec x + \tan x} \]
+
+\begin{ex}
+\begin{equation}
+\begin{aligned}
+\int_{-1}^{1} \frac{\sin x}{1 + x^2} dx   =  0  \textbf{ Integral is 0 because the function is odd }
+\end{aligned}
+\end{equation}
+\end{ex}
+
+
+
+
+
+\section{Integration by Parts (IBP)}
+\textbf{IBP Formula}
+\[\int udv = uv - \int v du \]
+
+\textbf{Why?} \\
+Reverse Engineering the product rule results in the IBP formula
+
+\begin{proof}
+\[ \text{The product rule : } \frac{d}{dx} (f(x)g(x))  = f \prime (x) g(x) + f(x) g \prime (x) \]
+Integrate both sides with respect to x 
+$$\int \frac{d}{dx} (f(x)g(x)) dx  = \int f \prime (x) g(x) + f(x) g \prime (x) dx $$
+$$\implies  f(x)g(x) = \int f \prime (x) g(x)  dx + \int f(x) g \prime (x) dx$$
+$$\implies  \int f(x) g \prime (x) dx = f(x)g(x) - \int f \prime (x) g(x)$$
+\begin{center}
+let u = f(x) and v = g(x) 
+\end{center}
+$$\therefore \int udv = uv - \int vdu $$
+\end{proof}
+
+\textbf{Process : }\\
+So, divide the integrand into 2 parts u \& dv. Then apply the IBP formula.  
+\[\text{You'll find that calculating } \int udv \text{ reduces } \int vdu\]
+
+\begin{ex}
+
+\[\int xe^x \]
+\[\textbf{Suppose } u = x  \ \&  \ dv = e^x \ dx \ \rightarrow du = dx \ \& \ v = e^x \]
+\[\int xe^x \ dx  = xe^x  - \int e^x dx \]
+\[= xe^x - e^x + c \]
+
+\end{ex}
+\textbf{Practice Problem}
+$$\int x^2 \cos x \ dx $$
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

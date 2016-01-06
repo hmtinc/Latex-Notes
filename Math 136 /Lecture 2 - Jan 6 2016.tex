@@ -1,0 +1,158 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{2}{January 6, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+% **** YOUR NOTES GO HERE:
+
+
+
+%
+\section{Proofs for Fundemental Operations}
+
+\textbf{Commutativity}
+$$\text{Let  } \vec{x}=\begin{bmatrix} x_1 \\ \vdots \\ xn \end{bmatrix} \text{  and  }\vec{y}=\begin{bmatrix} y_1 \\ \vdots \\ y_n \end{bmatrix} \text{   be 2 vectors}$$
+$$\vec{x}+\vec{y} = \begin{bmatrix} x_1 +  y_1 \\ \vdots \\ x_n + y_n  \end{bmatrix} =  \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} + \begin{bmatrix} y_1 \\ \vdots \\ y_n \end{bmatrix} = \vec{y} + \vec{x} $$
+
+
+$$\therefore \vec{x}+\vec{y} = \vec{y} + \vec{x}$$
+
+
+\textbf{Vector Distributivity}
+$$ c(\vec{x}+\vec{y}) = c \begin{bmatrix} x_1 +  y_1 \\ \vdots \\ x_n + y_n  \end{bmatrix} = \begin{bmatrix} c(x_1 +  y_1) \\ \vdots \\ c(x_n + y_n)  \end{bmatrix} = \begin{bmatrix} cx_1 + c y_1 \\ \vdots \\ cx_n + cy_n  \end{bmatrix} = \begin{bmatrix} cx_1 \\ \vdots \\ cx_n \end{bmatrix} + \begin{bmatrix} cy_1 \\ \vdots \\ cy_n \end{bmatrix} = c\vec{x} + c\vec{y}$$
+
+
+
+$$\therefore c(\vec{x}+\vec{y})= c\vec{x} + c\vec{y}$$
+
+\section{Span}
+\begin{definition}
+\textbf{Linear Span}
+\\ For a given set of vectors \[B = \{ \vec{u} , \vec{u_2} \ldots \vec{u_n} \}  \subset \mathbb{R}^n \]
+we define the span set as
+\[ Span_b  = \{ t_1\vec{v_1} + t_2\vec{v_2} + t_n\vec{v_n} \mid t_1 \ldots t_n \in \mathbb{R}\} \, \  \ \text{B is a spanning set of } Span_b \]
+
+So, a span is just the set of all linear combinations of the vectors in the set, which can also be written as
+\[Span{\vec{v_1}, \vec{v_2} \ldots \vec{v_n}} \] 
+\end {definition}
+
+\newpage
+\begin{ex}
+\[\textbf{Show that  } S = Span\left\{ \begin{bmatrix} 1 \\ 0 \\ 0\end{bmatrix} \begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 1\end{bmatrix} \right\} = \mathbb{R}^3 \]
+\[\text{Clearly } S \subseteq \mathbb{R}^3 \text{, we need to show } \mathbb{R}^3 \subseteq S \]
+\[\implies \forall \vec{x} = \begin{bmatrix} x \\ y \\z \end{bmatrix} \in \mathbb{R}^3 \]
+\[\implies \vec{x} =\begin{bmatrix} x \\ y \\z \end{bmatrix} =  \vec{x}\begin{bmatrix} 1 \\ 0 \\ 0\end{bmatrix} \vec{y}\begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix} \vec{z}\begin{bmatrix} 0 \\ 0 \\ 1\end{bmatrix}  \in S \]
+\[\implies \mathbb{R}^3 \subseteq S \text{ thus } S = \mathbb{R}^3 \]
+\end{ex}
+
+\begin{ex}
+\[ \text {Does the spanning set } S = Span \left\{ \begin{bmatrix} 1 \\ 0 \\ 2 \end{bmatrix} \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix} \right\} \text{ contain the vector } \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \]
+\[ \textbf{Solution : } \text{Suppose that } \begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix} \in S \]
+\begin{equation}
+\begin{aligned}
+\begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix} & =  t_1\begin{bmatrix} 1 \\ 0 \\ 2 \end{bmatrix} + t_2 \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix} \\
+& = \begin{bmatrix} t_1 + 2t_2 \\ 0 \\ 2t_1 + t_1\end{bmatrix} \\
+1 & = 0 \textbf{, Contradiction, 1 can't equal 0}
+\end{aligned}
+\end{equation}
+
+\[ \therefore  \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \text{ is not in the span set } S \]
+
+\end{ex} 
+
+\begin{ex}
+\[ S = Span \left\{ \begin{bmatrix} 1 \\ 2 \end{bmatrix} \begin{bmatrix} 2 \\ 4 \end{bmatrix} \right\} \subseteq \mathbb{R}^2 \textbf{ Show } S = Span \left\{\begin{bmatrix} 1 \\ 2 \end{bmatrix} \right\} \]
+
+\begin{equation}
+\begin{aligned}
+\text{for any } \vec{x} \in S \text{ , } \vec{x} = t_1 \begin{bmatrix} 1 \\ 2\end{bmatrix} + \begin{bmatrix} 2 \\ 4 \end{bmatrix} & = t_1 \begin{bmatrix} 1 \\ 2\end{bmatrix} + 2t_2 \begin{bmatrix} 1 \\ 2\end{bmatrix} \\
+& = (t_1 + t_2) \begin{bmatrix} 1 \\ 2\end{bmatrix} \ \text{Let t =  } (t_1 + t_2) \\
+& = t\begin{bmatrix} 1 \\ 2\end{bmatrix}  \in Span\begin{bmatrix} 1 \\ 2\end{bmatrix} 
+\end{aligned}
+\end{equation}
+\end{ex}
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}
