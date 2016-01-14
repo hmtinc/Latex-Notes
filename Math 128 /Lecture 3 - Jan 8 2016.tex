@@ -1,0 +1,236 @@
+%Notes by Harsh Mistry 
+%Math 128
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{blindtext}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 128 :  Calculus 2 for the Sciences
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{3}{January 8, 2016}{Jen Nelson}{Harsh Mistry}
+
+%
+\section{IBP}
+\begin{ex} - \\
+\begin{minipage}{.5\textwidth} %
+$$
+\begin{aligned}
+\int x^2 \cos 3x dx  & = \frac{x^2 \sin 3x}{3} - \frac{2}{3} \int x \sin 3x dx \\
+& = \frac{x^2 \sin 3x}{3} - \frac{2}{3} \left( \frac{-x^2 \cos 3x}{3}  + \frac{1}{3} \int \cos 3x \right) \\
+& = \frac{x^2 \sin 3x}{3} + \frac{2}{9} x \cos 3x -  \frac{2}{27} \sin 3x + C 
+\end{aligned}
+$$
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+$$ u = x^2 \ dv = \cos 3x $$
+$$ du = 2x dx  \  v = \frac{\sin 3x}{3} $$
+$$ u = x \ dv = \sin x $$
+$$ du = dx  \  v = \frac{- \cos 3x}{3} $$
+\end{minipage}
+\end{ex}
+
+\section{IBP for Definite Integrals} 
+The IBP Formula can also be used for definite integrals
+$$ \int_{a}^{b} udv = uv \mid_{a}^{b} - \int_{a}^{b} vdu $$
+
+\begin{ex} - \\
+\begin{minipage}{.5\textwidth} %
+$$
+\begin{aligned}
+\int_{0}^{\frac{1}{2}} \cos ^{-1} x dx & = x \cos ^{-1} x \mid_{0}^{\frac{1}{2}} + \int_{0}^{\frac{1}{2}}
+\frac{x}{\sqrt{1 - x^2}} \\
+& = x \cos ^{-1} x \mid_{0}^{\frac{1}{2}} + \int_{1}^{\frac{3}{4}}
+\frac{\frac{dt}{-2}}{\sqrt{2}} \\
+& = \ldots \\
+& = \frac{\pi}{6} - \frac{\sqrt{3}}{2} + 1
+\end{aligned}
+$$
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+$$ u = cos^{-1} \ du = \frac{-1}{\sqrt{-x^2}} $$
+$$ dv = 2x dx  \  v = \frac{\sin 3x}{3} $$
+$$ \text{Let } t = 1 - x^2 $$
+$$ dt = 2x dx $$
+\end{minipage}
+\end{ex}
+
+
+\textbf{Practice} : Sometimes IBP or U-sub will work
+\[ \int x \sqrt{x + 1 }\]
+Evalute using : 
+\begin{enumerate}
+  \item IBP
+  \item U-Sub
+\end{enumerate}
+
+
+\begin{ex} - \\
+\begin{minipage}{.5\textwidth} %
+$$
+\begin{aligned}
+\int e^{-1} \sin 2x \ dx & = \frac{-e^{-x}2x}{2} - \frac{1}{2} \int e^{-x} \cos 2x dx \\
+& = \frac{-e^{-x}2x}{2} - \frac{1}{2} \left( \frac{e^{-x}2x}{2} + \frac{1}{2} \int e^{-1} \sin 2x \ dx \right) \\
+\frac{5}{4} \int e^{-1} \sin 2x \ dx & =   \frac{-e^{-x}2x}{2} - \frac{1}{4} e^{-x} \sin 2x\\
+\therefore \int e^{-1} \sin 2x \ dx & = \frac{-2}{5} e^{-x} \cos 2x - \frac{e^{-x} \sin 2x}{5}  +  C 
+\end{aligned}
+$$
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+$$ u = e^{-x} \ du = -e^{-x}$$
+$$ dv = \sin 2x \ dx \ v = \frac{- \cos 2x}{2} $$
+$$ u = e^{-x} \ du = -e^{-x}$$
+$$ dv = \cos 2x \ dx \ v = \frac{ \sin 2x}{2} $$
+\end{minipage}
+\end{ex}
+This is called Integration by reproduction 
+
+\textbf{Practice : }
+\[ \int \sin (\ln x) dx \ \text{ Hint : let u = } \ln x \text{ then use IBP } \] 
+
+
+
+\section{Trig Integrals}
+Recall : Basic Trig Derivatives \\
+$$ \frac{d}{x} \sin x \ \frac{d}{x} \cos x \ \frac{d}{x} tan \ \frac{d}{x} \sec $$
+There is a pairing between sin/cos and tan/sec  
+
+\subsection{Integrals Involving Sin and Cos}
+$$ \int \sin ^m x  \cos ^n x \ dx \text{ , m, n } \in \mathbb{Z} \text{ m, n} \geq 0 $$
+
+\begin{ex} - \\
+\begin{minipage}{.5\textwidth} %
+$$
+\begin{aligned}
+\int \sin ^5 x \cos x \ dx & = \int u^5 \ dx \\
+& = \frac{u^6}{6} + C \\
+& = \frac{(\sin x)^6}{6} + C
+\end{aligned}
+$$
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+$$ \text{Let u = } \sin x $$
+$$ du = \cos x \ dx $$
+\end{minipage}
+\end{ex}
+
+\newpage 
+
+\begin{ex} 
+-\\
+\begin{minipage}{.5\textwidth} %
+$$\int \sin ^5 x \ dx $$
+This integral does not have a extra Cos like 3.4, which allowed for u-sub to work 
+$$
+\begin{aligned}
+\int \sin ^4 x  \ \sin x  \ dx & = \int ( 1 - \cos ^2 x) ^2 \sin x \ dx \\
+& = - \int (1 - u) ^ 2 du \\
+& = - \int 1 - 2u^2 + u^4  \ du \\
+& = u + \frac{2u^3}{3} - \frac{u}{5} + C \\
+& = \cos x + \frac{2(\cos x)^3}{3} - \frac{\cos x}{5} + C
+\end{aligned}
+$$
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+$$ Let \ \ u = \cos x $$
+$$ du = -sinx dx $$
+\end{minipage}
+\end{ex}
+The Method in 3.5 worked because the power was odd 
+
+\begin{ex} 
+-\\
+\begin{minipage}{.5\textwidth} %
+$$\int \sin ^2 x \cos ^5 x \ dx $$
+The exponent of Cos is odd, so same method can be used
+$$
+\begin{aligned}
+\int \sin ^2 x  \ \cos ^4 x \ \cos x  \ dx & = \int \sin ^2 x (1 - sin ^2 x) ^2 \cos x \ dx \\
+& = \int u^2 (1-u^2) du \\
+& = \int (u^2 - 2u^4 + u^6) du \\
+& = \frac{u^3}{3} - \frac{2u^5}{5} + \frac{u^7}{7} + C \\
+& = \frac{\sin ^3 x}{3} - \frac{2 \sin ^5 x}{5} + \frac{\sin ^7 x}{7} + + C
+\end{aligned}
+$$
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+$$ Let \ \ u = \sin x $$
+$$ du = cos  x \ dx $$
+\end{minipage}
+\end{ex}
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

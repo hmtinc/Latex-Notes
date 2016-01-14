@@ -1,0 +1,153 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{5}{January 13, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+\section{Subspace Basis Examples}
+\textbf{Find the basis for a given subspace}
+\[\begin{aligned} S_2 = \left\{ \begin{bmatrix} a-b \\ b-c \\ c-a \end{bmatrix} \mid a , b , c \in \mathbb{R}^3 \right\} \end{aligned}\]
+\[\forall \vec{x} \in S_2 \ \vec{x} = \begin{bmatrix} a-b \\ b-c \\ c-a \end{bmatrix} = a \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} + b \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix} + c\begin{bmatrix} 0 \\ -1 \\ 1 \end{bmatrix}\]
+\[ \begin{aligned} \vec{x} \in Span \left\{ \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix}  \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix} \right\}  \end{aligned} \]
+\[ S_2 = Span \left\{ \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix}  \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix} \right\} = Span \left\{ \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix} \right\} \text{ which is linearly independant}\]
+$$ \therefore \text{ this is a basis for } S_2 $$ 
+
+\section{Dot Product}
+\textbf{Recall : } 
+\begin{itemize}
+\item In \( \mathbb{R}^2 , \forall \vec{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} , \vec{y} = \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} , \vec{x} \cdot \vec{y} = x_1y_1 + x_2y_2 \)
+\item \( \| \vec{x} \| = \sqrt{x_1 ^2 + x_2 ^2}  =  \sqrt{\vec{x} \cdot \vec{x}}\)
+\item \( \vec{x} \cdot \vec{y} = \| x \| \| y\| \cos \theta \)
+\end{itemize}
+
+\begin{proof}
+\[ \begin{aligned} \vec{x} - \vec{y} = \begin{bmatrix} x_1 - y_1 \\ x_2- y_2\end{bmatrix} \cos \theta & =  \frac{\|\vec{x}\|^2 + \|\vec{y}\|^2 - \| \vec{x} - \vec{y}\| ^2}{2\|\vec{x}\| \vec{y}\|} \\
+& = \frac{x_1^2 + x_2^2 + y_2^2 + y_2^2 - ( (x_1 - y_1) ^2 + (x_2 - y_2) ^2)}{2\|\vec{x}\| \vec{y}\|} \\ 
+\cos \theta & = \frac{2x_1y_1 + 2x_2y_2}{2\|\vec{x}\| \vec{y}\|} = \frac{x_1\theta_1 + x_2\theta_2}{\|\vec{x}\| \vec{y}\|}  \\
+& =  \vec{x}\cdot \vec{y}  = x_1y_2+x_2y_2 \\
+& = \|\vec{x}\| \|\vec{y} \| \cos \theta \end{aligned} \]
+\end{proof}
+
+\begin{definition} \( \forall \vec{x} = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} , \vec{y} = \begin{bmatrix} y_1 \\  \vdots \\ y_n \end{bmatrix} \in \mathbb{R}^n , \vec{x}\cdot \vec{y} = x_1y_1 + \ldots + x_ny_n = \sum\limits_{i=1}^{n} x_iy_i \)
+\end{definition}
+
+\begin{proposition}
+\[\forall \vec{x} , \vec{y} , \vec{z} \in \mathbb{R}^n , \forall s, t \in \mathbb{R} \]
+\begin{enumerate}
+\item \(\vec{x} \cdot \vec{x} = 0  \text{ iff } \vec{x} = \vec{0} \)
+\item \(\vec{x} \cdot \vec{y} = \vec{y} = \vec{x} \)
+\item \(  \vec{x}  (t\vec{y} + s\vec{z}) = t(\vec{x} \cdot \vec{y}) + s(\vec{x} \cdot \vec{z}) \)
+\end{enumerate}
+\end{proposition}
+
+\begin{definition} \( \forall \vec{x} \in \mathbb{R} \) The length (or norm) of \( \vec{x} \text{ is } \|\vec{x}\| = \sqrt{\vec{x}\cdot \vec{x}}\)\end{definition}
+\textbf{Also , \( \vec{x} \) is called the unit vector if \( \|\vec{x}\| = 1\)}
+
+\begin{theorem} \( \forall \vec{x} \vec{y} \in \mathbb{R}^n , t\in \mathbb{R} \) we have \\
+\begin{enumerate}
+\item \(\|\vec{x}\| \geq 0 \text{ iff } \vec{x} = \vec{0} \)
+\item \(\|t\vec{x}\|  = \mid t \mid \|\vec{x}\| \)
+\item Cauchy Schwarz inequality : \( \| \vec{x} \cdot \vec{y} \| \leq \|\vec{x}\| \|\vec{y}\| \)
+\item Triangle inequality : \( \|\vec{x} + \vec{y}\| \leq \|\vec{x}\| + \|\vec{y}\| \)
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} Cauchy Schwarz inequality \\
+\[ \begin{aligned} \text{If }  \vec{x} & = \vec{0} \text { it is clear,  suppose } \vec{x} \neq \vec{0} \\ 
+0 & \leq \| t\vec{x} + t\vec{y} \| ^2 = (t\vec{x} + y) \cdot (t\vec{x} + y) = t^2 \vec{x} \cdot \vec{x} + 2t\vec{x}\cdot \vec{y} + \vec{y} \cdot \vec{y} \\
+0 & \leq \|x \| ^2 t^2 + 2(\vec{x} \cdot \vec{y}) t + \|\vec{y}\| , \forall t \in \mathbb{R} \\
+4 (\vec{x} \cdot \vec{y}) ^2 & \leq 4 \|\vec{x}\| ^ 2 \|\vec{y}\| ^ 2   \text{ Using the discriminant} \\
+\|\vec{x} + \vec{y}\| & \leq \|\vec{x}\| + \|\vec{y}\| 
+\end{aligned} \]
+\end{proof}
+
+\textbf{Remarks} : If \( \vec{x} = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} , \vec{y} = \begin{bmatrix} y_1 \\  \vdots \\ y_n \end{bmatrix}\) \\
+\[\vec{x} - \vec{y}  = x_1y_1 + \ldots  + x_ny_n \]
+\[ \| \vec{x} \| = x_1 ^2 + \ldots x_n^2 \ \ \ \| \vec{y} \| = y_1 ^2 + \ldots y_n^2 \|\]
+Coordinate Form of C S 
+\[\| x_1y_1 + \ldots + x_ny_n\| \leq \sqrt{x_1 ^2 + \ldots x_n^2} \sqrt{y_1 ^2 + \ldots y_n^2} \]
+Try letting n = 3
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

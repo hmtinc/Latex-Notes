@@ -1,0 +1,190 @@
+%Notes by Harsh Mistry 
+%Math 128
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{blindtext}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 128 :  Calculus 2 for the Sciences
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{4}{January 11, 2016}{Jen Nelson}{Harsh Mistry}
+
+%
+\section{Half Angle Identities}
+\begin{itemize}
+\item \( \cos ^2 x = \frac{1}{2} (1 + \cos 2x) \)
+\item \( \sin ^2 x  = \frac{1}{2} (1 - \cos 2x) \)
+\end{itemize}
+
+\begin{ex}
+\[ \begin{aligned} \int_{0}^{\frac{\pi}{3}} \cos ^2 x dx & = \int_{0}^{\frac{\pi}{3}} \frac{1}{2} (1 + \cos 2x) dx \\
+& = \frac{1}{2} (x + \frac{\sin 2x}{2}) \mid_{0}^{\frac{\pi}{3}}  \\
+& = \frac{1}{2} (\frac{\pi}{3} + \frac{\frac{\sqrt{3}}{2}}{2} ) \\
+& = \frac{\pi}{6} + \frac{\sqrt{3}}{8}\end{aligned} \]
+\end{ex}
+
+\begin{ex}
+\[ \begin{aligned} \int \sin ^2x  \cos ^2x dx\ & = \frac{1}{4} \int (1 - \cos 2x) (1 + \cos 2x) dx \\
+& =  \frac{1}{4} \int (1 - \cos ^2 2x) \\
+& = \frac{1}{4} \int (1 - \frac{1}{2} ( 1+ cos ^4 x)) dx \\
+& = \frac{1}{4} \int (\frac{1}{2} - \frac{1}{2} \cos 4x) \\
+& = \frac{1}{8} ( x - \frac{\sin 4x}{4}) + C \end{aligned} \]
+\end{ex}
+
+\section{Integrals Involving Tan and Sec} 
+$$ \int \tan ^m x \sec ^n x dx , m , n \in \mathbb{Z} , m , n \geq 0  $$
+
+\newpage
+
+\textbf{Known Derivatives}
+$$ \frac{d}{dx} \tan  x = \sec ^2 x  \ \ \ \frac{d}{dx} \sec x = \sec x \tan x $$
+$$ \frac{d}{dx} \tan ^m x = m \tan ^{m-1} x \sec ^2 x \ \ \ \ \frac{d}{dx} \sec ^m = n \sec ^{n-1} x \sec x \tan x = n \sec ^n x \tan x $$
+
+\begin{itemize}
+\item Try to manipulate expression, so we have \( \tan x \text{ or} \sec ^2 x \)
+\item Use identity \( 1 + \tan ^2 x = \sec ^2 x \) 
+\end{itemize}
+
+\begin{ex} - \\
+\begin{minipage}{.5\textwidth} %
+$$
+\begin{aligned}
+\int \sec ^9 x \tan ^5 x dx & = \int \sec ^9 x \tan ^4 x \tan x dx \\
+& = \int \sec ^9 x (\sec ^2 x -1) ^2 \tan x dx \\
+& = \int \sec ^9 x (\sec 3x - 1) ^2 \tan x dx \\
+& = \int u^8 (u^2 -1 ) ^2 du \\
+& = \int u^8 (u^4 - 2u^2 + 1) du \\
+& = \frac{u^13}{13} - \frac{2u^11}{11} + \frac{u^9 }{8 } + C \\
+& = \frac{\sec ^13 x}{13} - \frac{2\sec ^11 x}{11} + \frac{\sec ^9 x}{9} + C 
+\end{aligned}
+$$
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+$$ u = \sec x \implies du = \sec x \tan x $$
+\end{minipage}
+\end{ex}
+
+\begin{ex} - \\
+\begin{minipage}{.5\textwidth} %
+$$
+\begin{aligned}
+\int \sec ^4 x \tan ^2 x dx & = \int \sec 3x \tan ^2 x \sec ^2 x dx \\ 
+& = \int (1 + tan^2 x ) \tan 3x \sec ^2 x dx \\
+& = \int ( 1 + u^2) u^2 du \\
+& = \frac{u^3}{3} + \frac{u^5}{5} + C \\
+& = \frac{\tan ^3 x}{3} + \frac{ \tan ^5 x}{5} + C 
+\end{aligned}
+$$
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+$$ u = \tan x \implies  du = \sec ^2 x$$
+\end{minipage}
+\end{ex}
+
+\begin{ex} - \\
+\begin{minipage}{.5\textwidth} %
+$$
+\begin{aligned}
+\int \sec ^3 x dx & = \sec x \tan x - \int \tan ^2 x \sec x dx \\
+& = \sec x \tan x  - \int (\sec ^2 x - 1) \sec x dx \\
+& = \sec x \tan x - \int \sec ^3 x dx + \int \sec x dx \\
+\int \sec ^3 x dx  & = \frac{1}{2} \sec x \tan x + \frac{1}{2} \ln \mid \sec x + \tan x \mid + C
+\end{aligned}
+$$
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+
+$$ u = \sec x \implies  du = \sec x \tan x $$
+$$ dv = \sec ^2 x dx \implies v = \tan x $$
+\end{minipage}
+\end{ex}
+
+\textbf{Note : } Integrals involving Cot and Csc share a similar strategy 
+
+\section{Trig Substitution}
+Interested in integrals containing \( \sqrt{a^2 - b^2 x^2} , \sqrt{a^2+b^2x^2} \text { or } \sqrt{b^2x^2 - a^2} \)
+
+\begin{ex} -\\
+\[ \int \frac{1}{\sqrt{1 -x^2}} dx  ( = \arcsin x + C ) \] \\
+Another Way to Solve : \\
+Inverse Subsitution \( \begin{cases} x = \sin \beta \\ dx = \cos \beta d\beta \end{cases} \) \\
+\[ \int \frac{\cos \beta}{\sqrt{1 - sin ^2 \beta}} = \int \frac{\cos}{\sqrt{\cos 3x}} \]
+\end{ex}
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

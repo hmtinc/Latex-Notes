@@ -1,0 +1,159 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{4}{January 11, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+\section{Basis Examples}
+\textbf{Standard Basis}
+$$ \mathbb{R}^n \left\{ \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix} \ldots \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix} \right\} $$
+So, a standard basis is when all numbers in the vector except the corresponding component are 0 
+
+\begin{ex} \textbf{Determine if the set is a basis} \\
+\[\begin{aligned} \left\{ \begin{bmatrix} 1 \\ 2 \end{bmatrix} \begin{bmatrix} 2 \\ 1 \end{bmatrix} \right\} \textbf{ For } \mathbb{R}^2 \end{aligned} \]
+\[ \forall \vec{x} \in \mathbb{R}^2 \text{ , } \vec{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} \text{ ,  If }  \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = t_1 \begin{bmatrix} 1 \\ 2 \end{bmatrix} + t_1 \begin{bmatrix} 2 \\ 1 \end{bmatrix} \]
+\[ \begin{cases} t_1 + 2t_2 = x_1 \\ 2t_1 + t_2 = x_2 \end{cases}  \implies \begin{cases} t_1 = \frac{2x_2 - x_1}{3} \\ t_2 = \frac{2x_1- x_2}{3} \end{cases}  \implies \vec{x} \in Span\left\{ \begin{bmatrix} 1 \\ 2 \end{bmatrix} \begin{bmatrix} 2 \\ 1 \end{bmatrix} \right\} \implies \mathbb{R}^2 = Span \left\{ \begin{bmatrix} 1 \\ 2 \end{bmatrix} \begin{bmatrix} 2 \\ 1 \end{bmatrix} \right\}\]
+Suppose \( \vec{x} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \) , then we get \( t_1 = t_2 = 0 \) , so \( \left\{ \begin{bmatrix} 1 \\ 2 \end{bmatrix} \begin{bmatrix} 2 \\ 1 \end{bmatrix} \right\} \) is linearly independant
+\end {ex}
+
+\begin{definition} -\\
+\begin{enumerate}
+\item Let \(\vec{v} \ \vec{b} \in \mathbb{R} ^ n \) , \( \vec{v} \neq \vec{0} \) \\
+The set  \(\{ \vec{x} \mid \vec{x} = t\vec{x} + t\vec{b} \text{ , } t \in \mathbb{R} \} \) is called a line in \( \mathbb{R} ^n \)
+\item Let \(\vec{v} \ \vec{v_2} \in \mathbb{R} ^ n \) , \( \{ \vec{v_1} \vec{v_2} \} \) being  linear independant  and \(\vec{b} \in \mathbb{R} ^ n \) \\
+then set \( \{ \vec{x} \mid \vec{x} = t_1\vec{v_1} + t_2\vec{v_2} + \vec{b} \) , \( t_1 \ t_2 \in \mathbb{R} \} \) is called a plane
+\item Let \( \vec{v_1} \ldots \vec{v_{n-1}} \in \text{ and } \mathbb{R}^n  \{ \vec{v_1} \ldots \vec{v_{n-1}}\}\) be linearly independant \\
+\( \vec{b} \in \mathbb{R} ^ n \) the set \( \{ \vec{x} \mid \vec{x} = t_1\vec{v_1} \ldots t_{n-1} \vec{v{n-1}} + \vec{b_1}  ,  
+t_n \ldots t_{n-1} \in \mathbb{R} \} \)
+\end{enumerate}
+\end{definition}
+\newpage
+\section{Subspaces}
+\begin{definition} -\\
+A non-empty set S or \( \mathbb{R}^n \) is called a subaspace if S is closed under adddion and scaler multiplication
+\begin{itemize}
+\item \( \forall \vec{x} \ \vec{y} \in S , \vec{x} + \vec{y} \in S \)
+\item \( \forall \vec{x} \in S , \forall C \in \mathbb{R} , C\vec{x} \in S \)
+\end{itemize}
+\end{definition} 
+
+\textbf{Remarks}
+\begin{itemize}
+\item For any subspace S \( \vec{0} \in S \) 
+\item \( \{ \vec{0}\} \text{ and } \mathbb{R}^n \) are subspaces of \( \mathbb{R} ^ n \) 
+\end{itemize}
+
+\begin{ex} Determine if the given set is a subspace \\
+%split into 2 mini pages 
+\begin{minipage}{.5\textwidth} %
+\textbf{a)}
+\[\begin{aligned} S_1 \left\{ \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} \in \mathbb{R}^2 \mid x_1 - x_2 = 0 \right\} \end{aligned} \] 
+\begin{enumerate}
+\item \( \vec{0} \in S \)  , So \( S_1\) is non-empty
+\item \( \forall \vec{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} , \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} \in S_1 \implies x_1 - x_2 = 0  \text{ and } y_1 - y_2 = 0 \implies (x_1 + y_1) - (x_2 + y_2) = 0 \implies \vec{x} + \vec{y} \in S_1 \)
+\item \(\forall c \in \mathbb{R} , cx_1 - cx_2  = c(x_1 - x_2) = 0 \implies c\vec{x} \in S_1\)
+\end{enumerate}
+\( \therefore S_1\) is a subspace 
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+\textbf{b)}
+\[\begin{aligned} S_1 \left\{ \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} \in \mathbb{R}^2 \mid x_1 - x_2 = 1 \right\} \end{aligned} \] 
+\[\vec{0} \notin \ S_2 \ \therefore S_2 \text{ is not a subspace } \]
+\end{minipage}
+\end{ex}
+
+\begin{theorem}
+Given \( S = \{ \vec{v_1} , \vec{v_2} , \vec{v_k} \} ,  Span_b  \) is a subspace  
+\end{theorem}
+
+\section{Basis of a subspace}
+\textbf{Questions for Next Lecture} : Find the basis of the following subspaces 
+\begin{itemize}
+\item \( S_1 = \left\{ \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} \in \mathbb{R} \mid x_1 + x_2 - x_3 = 0 \right\} \)
+\item \( S_2 = \left\{ \begin{bmatrix} a - b \\ b - c \\ c - a \end{bmatrix} \in \mathbb{R} \mid a , b , c \in \mathbb{R}  \right\} \)
+\item \( \forall \vec{x} \in S_1 , \vec{x} \begin{bmatrix} x_1 \\ x_2 \\ x_1 + x_2 \end{bmatrix} = x_1 \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} + x_2 \begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix} \)
+\end{itemize}
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

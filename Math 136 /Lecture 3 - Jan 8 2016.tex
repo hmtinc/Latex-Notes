@@ -1,0 +1,202 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{3}{January 8, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+%drop box info 
+\begin{center}
+\textbf{Dropbox Info} \\
+Drop Box 1\\
+Slot \#1 A - F  \\
+Slot \#2 G - L \\
+Slot \#3 M - R \\
+Slot \#4 S - Z
+\end{center}
+
+%
+\section{Geometry of Spanning}
+
+\begin{ex}
+\[Span\left\{\begin{bmatrix} 1 \\ 1 \end{bmatrix} \right\} \subseteq \mathbb{R}^2 \]
+By Definition, 
+\[\vec{x}\in Span\left\{\begin{bmatrix} 1 \\ 1 \end{bmatrix} \right\} \text{ , } \vec{x} = t \ \begin{bmatrix} 1 \\ 1 \end{bmatrix} \text{ , } t \in \mathbb{R} \]
+\[\therefore \ \ \ Span\left\{\begin{bmatrix} 1 \\ 1 \end{bmatrix} \right\} 
+\text{ is a line with the direction vector } \begin{bmatrix} 1 \\ 1 \end{bmatrix} \]
+\end{ex}
+
+\begin{ex}
+\[S = Span \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right\} \]
+No vectors in the set are scaler multiples, therfore the spanning setting can not be further simplified
+\[ \vec{x} = x\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + y\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \]
+\[ \therefore \ \ \ S \text{ is the xy plane in  } \mathbb{R}^3 \] 
+\end{ex}
+
+\section{Simplify Spanning Sets}
+\begin{theorem}
+\[ \text{If } \vec{v}_{k+1} \text{ is a linear combination of } \{\vec{v}_1\ldots \vec{v}_k\} \text{  then, } 
+Span\{\vec{v}_1\ldots \vec{v}_{k+1} \}  = \{\vec{v}_1\ldots \vec{v}_k\} \]
+\end{theorem}
+
+\newpage
+
+\begin{ex}
+\textbf{Simplify}\\
+
+
+%split into 2 mini pages 
+\begin{minipage}{.5\textwidth} %
+\textbf{a)}
+\[\begin{aligned} S & = Span\left\{ \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \right\} \\ 
+& =  Span\left\{ \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} \right\} \\ 
+& = x \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} + 2y \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} \\
+& = (x + 2y)\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} \text{ , Let c = x + 2y} \\
+& = c\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} \end{aligned} \]
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+\textbf{b)}
+\[ \begin{aligned} S & = Span\left\{ \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} \begin{bmatrix} 2 \\ 1 \\  0\end{bmatrix} \begin{bmatrix} -1 \\ -1 \\ 1 \end{bmatrix} \right\} \\ 
+& = Span\left\{ \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} \begin{bmatrix} 2 \\ 1 \\  0\end{bmatrix} \right\} \end{aligned} \]
+\[ \text{ note : } \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} -  \begin{bmatrix} 2 \\ 1 \\  0\end{bmatrix} = \begin{bmatrix} -1 \\ -1 \\ 1 \end{bmatrix} \]
+\end{minipage}
+\end{ex}
+
+\section{Linear Independance}
+\begin{definition}
+\[ \{ \vec{v_1} \ldots \vec{v_k} \} \subseteq \mathbb{R} \text{ is called linear dependant if } \exists \ n \text{ (non-zero) solution to }  t_1 v_1 + \ldots + t_k v_k  = \vec{0}\]
+\[ \text {If the only solution to }  t_1 v_1 + \ldots + t_k v_k  = \vec{0}  
+\text{ is } t_1 = t_2  = t_k \text{, we say it is linearly independent} \]
+\end {definition}
+
+\begin{theorem}
+\[ \{\vec{v_1} \ldots \vec{v_k} \} \text{ is linearly dependant iff }  \ \exists \ c_i \ \text{ , } 1 \leq i \leq  k  \text{ such that, } \]
+\[ v_1 \in \ Span \{ \vec{v_1} \ldots \vec{v_{i-1} }, \vec{v_{i+1}} \ldots \vec{v_k} \} \]
+\end{theorem}
+
+\textbf{Idea : }
+\[ \vec{v} = t\vec{v_1} + t_{i-1} \vec{v_{i -1}} + t_{i+1} \vec{v_{i+1}} + \ldots + t_k \vec{v_k} \]
+
+\begin{corollary}
+\[ \text{ If } \{\vec{v_1} \ldots \vec{k} \} \text{ contains the 0 vector, then it is linearly dependant} \] 
+\end{corollary}
+
+\newpage
+\
+
+\begin{ex}
+\textbf{Determine whether the following  sets are linear dependant or independant}
+
+\begin{minipage}{.5\textwidth} %
+\textbf{a)}
+\[\left\{ \begin{bmatrix} 1 \\ 0 \\ 1\end{bmatrix} \begin{bmatrix} 0 \\ 3 \\ 2 \end{bmatrix} \begin{bmatrix} 0 \\ -1 \\ 2\end{bmatrix} \right\}\]
+\[ \begin{cases} t_1 = 0 \\ 3t_2 - t_3 = 0 \\ t_1 + 2t_2 + 2t_3 = 0 \end{cases} \]
+\[t_1 = t_2 = t_3 = 0 \]
+\[\therefore \text{set is linear independant} \]
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+\textbf{b)}
+\[\left\{ \begin{bmatrix} 1 \\ 0 \\ -1\end{bmatrix} \begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \\ 0\end{bmatrix} \right\}\]
+\[=  \begin{cases} t_1 - t_2 + t_3 = 0 \text{ (1) } \\ t_2 + t_3 = 0 \text{ (2) } \\ -t_1 + 2t_2 = 0 \text{ (3) } \end{cases}  \text{ (2) - (1) = (3) }\]
+\[= \begin{cases} t_1 - t_2 + t_3 = 0 \\ t_2 + t_3 = 0 \end{cases} \]
+\[ t_3 = -1 \text{ , } t_1 = 2 \text{ , } t_2 = 1\]
+\[ 2 \begin{bmatrix} 1 \\ 0 \\ -1\end{bmatrix} +  \begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix} - \begin{bmatrix} 1 \\ 1 \\ 0\end{bmatrix}  = \vec{0} \implies \text{ Linear dependant}  \]
+\end{minipage}
+\end{ex}
+
+\begin{definition}
+\[ \text{If } S = Span \{ \vec{v_1} \ldots \vec{v_k } \} \text{ and }  \{ \vec{v_1} \ldots \vec{v_k } \} \text{ are linearly independant} \]
+\[ \text{Then, }  \{ \vec{v_1} \ldots \vec{v_k } \} \text{ is called a basis of S } \]
+\end {definition}
+
+\textbf{Practice :  Prove}
+\[ \left\{ \begin{bmatrix} 1 \\ 0 \end{bmatrix} \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right\} \text{ is a basis of } \mathbb{R}^2  \]
+
+Check : 
+\begin{enumerate}
+  \item \[ \mathbb{R}^2 = span \left\{ \begin{bmatrix} 1 \\ 0 \end{bmatrix} \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right\} \]
+  \item Set is linear independant 
+\end{enumerate}
+
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}
