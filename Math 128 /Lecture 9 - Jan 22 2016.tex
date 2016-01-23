@@ -1,0 +1,117 @@
+%Notes by Harsh Mistry 
+%Math 128
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{blindtext}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 128 :  Calculus 2 for the Sciences
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{9}{January 22, 2016}{Jen Nelson}{Harsh Mistry}
+
+%
+\section{The Comparison Test} if f and g are continous and \( 0 \leq g(x) \leq f(x) \) for \(x \geq a \)
+\begin{itemize}
+\item \(\int_{a}^{\infty} f(x) dx \text{ converges then } \int_{a}^{\infty} g(x) dx\) converges
+\item \(\int_{a}^{\infty} f(x) dx \text{ diverges then } \int_{a}^{\infty} g(x) dx\) diverges
+\end{itemize}
+
+\begin{ex}
+Does \(\int_{0}^{\infty} \frac{x+5}{1+x^2} \) converge or diverge ? \\
+Note : \( \frac{x+5}{1+x^2} \geq \frac{x}{1+x^2} \)\\
+\[\int_{0}^{\infty} \frac{x}{1+x^2} dx = \lim_{b\to\infty} \int_{0}^{b} \frac{x}{1+x^2} = \lim_{b\to\infty} \begin{bmatrix} \frac{\ln\mid 1+x^2 \mid }{2}\end{bmatrix}_{0}^{b} =  \lim_{b\to\infty}  \frac{\ln(1+b^2)}{2} - \frac{\ln (1)}{2} = \infty \]
+\( \int_{0}^{\infty} \frac{x}{1+x^2} dx\) diverges so, \( \int_{0}^{\infty} \frac{x+5}{1+x^2}\) diverges by the comparison test
+\end{ex}
+
+\begin{ex}
+Does \(\int_{1}^{\infty} \frac{\sin ^2 x}{x^2} dx \) converge or diverge ? \\
+\[ \begin{aligned} -1 & \leq \sin x \leq 1 \\
+\implies 0 & \leq \sin ^2 x \leq 1 \\
+\implies 0 & \leq \frac{\sin ^2 x}{x} \leq \frac{1}{x^2} \\
+& \int_{1}^{\infty} \frac{1}{x^2} dx \text{ converges since } (P = 2 > 1)  \end{aligned} \]
+\( \therefore \int_{1}^{\infty} \frac{\sin ^2 x}{x^2}\) dx converges by the comparison test
+\end{ex}
+
+\section{Review : Area Between Curves} Consider \( f(x) g(x) on\) [a, b] with \( f(x) \geq g(x) \). The area bounded by \( f(x) \& g(x) \) between a and b can be repersented as. 
+$$ A = \int_{a}^{b} f(x) dx - \int_{a}^{b} g(x) dx  $$
+
+
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

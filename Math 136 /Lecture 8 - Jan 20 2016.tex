@@ -1,0 +1,149 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{8}{January 20, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+\section{Projection Examples }
+\begin{ex}
+Find projection of \(\vec{u} = \begin{bmatrix} 1 \\ -1 \\-1 \end{bmatrix} \) onto the line \( \vec{x} = t\begin{bmatrix} 1 \\ 2 \\2 \end{bmatrix} + \begin{bmatrix} 2016 \\ 2017\\ 2018 \end{bmatrix}\)\\
+\[ Proj_{\vec{v}} (\vec{u}) = \frac{\vec{u}\cdot\vec{v}}{\|\vec{v}\|^2} \vec{v} = \frac{-3}{9} \begin{bmatrix} 1 \\ 2\\ 2 \end{bmatrix} = \begin{bmatrix} \frac{-1}{3} \\ \frac{-2}{3} \\ \frac{-2}{3}  \end{bmatrix}\]
+\end{ex}
+\begin{ex}
+Find the projection of \( \vec{u}\) onto the plane \( 2x_1 - x_2 + 2x_3 = 2016 \)\\
+\[ \begin{aligned} \vec{n} & = \begin{bmatrix} 2 \\ -1 \\ 2 \end{bmatrix} \\
+ Proj_{\vec{v}} (\vec{u}) & = \frac{\vec{u}\cdot\vec{v}}{\|\vec{v}\|^2} \vec{v} = \frac{1}{9} \begin{bmatrix} 2\\ -1\\ 2 \end{bmatrix}\\
+ Proj_{Plane} (\vec{u}) & = \vec{u} - Proj_{\vec{n}} (\vec{u}) \\
+& = \begin{bmatrix} 1 \\ -1\\ -1 \end{bmatrix} - \begin{bmatrix} \frac{2}{9} \\ \frac{3}{9}\\ \frac{2}{9} \end{bmatrix} = \begin{bmatrix} \frac{7}{9} \\ \frac{-8}{9}\\ \frac{-11}{9} \end{bmatrix} \end{aligned} \]
+\end{ex}
+
+
+\section{Chapter 2 : System of Linear Equations}
+\begin{definition}
+A set of m linear equations with n variables \(x_1 \ldots x_n \) is called a system of m linear equations \\
+\[ (\ast) \begin{cases} a_{11} x_1 + \ldots + a_{1n} x_n = b_1 \\ a_{21}x_1 + \ldots + a_{2n} x_n = b_2 \\
+\vdots \\ a_{m1}x_1 + \ldots + a_{mn} x_n = b_m \end{cases} \]
+
+A solution for \( (\ast) \) will be written as \(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \) solution vector \\
+If \( (\ast) \) has atleast 1 solution, then it is consistent, otherwise it is inconsistent
+\end{definition}
+
+\begin{ex}
+\[\begin{cases} x + y = 1 \\ x - y = 1 \end{cases} \]
+\[\begin{cases} x = 1 \\ y = 0 \end{cases}  \text{ A unique solution} \]
+\end{ex}
+
+\begin{ex}
+\[\begin{cases} 2x - y = 2 \\ -x - \frac{1}{2}y = 1 \end{cases} \iff \begin{cases} 2x -  y = 2 \\ 2x - y = 2 \end{cases} \iff 2x - y = 2 \text{ Let y = 2t - 2 and x = t}\]
+\[\begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} t \\ 2t-2 \end{bmatrix}  = t \begin{bmatrix} 1 \\ 2 \end{bmatrix} + \begin{bmatrix} 0 \\ -2 \end{bmatrix}\]
+Solution Set : \( \{ \vec{x} \mid \vec{x} = t \begin{bmatrix} 1 \\ 2 \end{bmatrix} + \begin{bmatrix} 0 \\ 2  \end{bmatrix} , t \in \mathbb{R} \} \),  There is a infinite number of solutions 
+\end{ex}
+
+\begin{ex}
+\[\begin{cases} x + 3y = 6 \\ 3x + 9y = 10 \end{cases} \iff  \begin{cases} x + 3y = 1 \\ x + 3y = \frac{10}{3} \end{cases} \] 
+Not consistent! , So there is no solution
+\end{ex}
+
+\textbf{Geometry} : Solving linear system \( \iff \) finding the intersection of set of hypothesis in \( \mathbb{R}^n\) 
+
+\begin{definition} - \\ A linear system that has the form \\
+\[ (\ast \ast) \begin{cases} a_{11} x_1 + \ldots + a_{1n} x_n = 0 \\ a_{21}x_1 + \ldots + a_{2n} x_n = 0 \\
+\vdots \\ a_{m1}x_1 + \ldots + a_{mn} x_n = 0 \end{cases} \]
+is called a homogeneous system
+\end{definition}
+
+\textbf{Remark : } A homogeneous systenm is alwasy consistent as \( \vec{0} = \begin{bmatrix}
+0 \\ 0  \\ \vdots \\ 0
+\end{bmatrix}\)
+
+\begin{theorem} The solution set of \( (\ast \ast) \) is a subspace of \( \mathbb{R} ^n \) 
+\end{theorem}
+\begin{theorem} Given a linear system that is consistent \\
+\[ (A) \begin{cases} a_{11} x_1 + \ldots + a_{1n} x_n = b_1 \\ a_{21}x_1 + \ldots + a_{2n} x_n = b_2 \\
+\vdots \\ a_{m1}x_1 + \ldots + a_{mn} x_n = b_m \end{cases} \]
+\[ (B) \begin{cases} a_{11} x_1 + \ldots + a_{1n} x_n = 0 \\ a_{21}x_1 + \ldots + a_{2n} x_n = 0 \\
+\vdots \\ a_{m1}x_1 + \ldots + a_{mn} x_n = 0 \end{cases} \]
+To be Continued Next Lecture
+\end{theorem}
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

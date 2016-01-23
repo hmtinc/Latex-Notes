@@ -1,0 +1,131 @@
+%Notes by Harsh Mistry 
+%Math 128
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{blindtext}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 128 :  Calculus 2 for the Sciences
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{7}{January 18, 2016}{Jen Nelson}{Harsh Mistry}
+
+%
+\section{Partial Fraction Examples}
+
+
+\begin{ex} - \\
+\[\int \frac{4x}{3x^2-5x^2+x+1} dx \]
+\[\frac{4x}{3x^2-5x+4} = \frac{A}{x-1} + \frac{B}{(x-1)^2} + \frac{C}{3x+1}\]
+\[\implies 4x = A(x+1)(3x+1) + B(3x+1) + c(x-1)^2 \]     
+\begin{itemize}
+\item x = 1 :  \( 4(1) = B(3(1) + 1) \implies B = 1\)
+\item x = \( \frac{1}{3} \) : \(\frac{4}{3} = c(\frac{-4}{3}) ^2 \implies C = \frac{-3}{4}\)
+\item x = 0 : \( 0 = -A + B + C \implies A = \frac{1}{4}\)
+\end{itemize}
+\end{ex}
+
+\begin{ex}
+\[ \int \frac{x^3-2x^2+8x-4}{x(x^2+2)^2} dx = \int \frac{A}{x} + \frac{Bx+C}{x^2 +2 } + \frac{Dx + E}{(x^2 + 2)^2} dx \]
+Expand, Multiply, and then compare coefficients (Do as practice)\\
+A = -1 B = -1 C = 1, D = 0, E = 6 \\
+\[ \begin{aligned} \int \frac{x^3-2x^2+8x-4}{x(x^2+2)^2} dx 7 & = \int \frac{-1}{x} + \frac{x+1}{x^2 +2 } + \frac{6}{(x^2 + 2)^2} dx \\
+& =  \int \frac{-1}{x} dx + \int \frac{x+1}{x^2 +2 } dx + \int \frac{6}{(x^2 + 2)^2} dx  \\
+\vdots\\
+& = -\ln \mid x \mid + \frac{1}{2} \ln \mid x^2 + 2 \mid + \frac{5\sqrt{2}}{4} \arctan (\frac{x}{\sqrt{2}}) + \frac{3x}{4(x^2+2)}  \end{aligned}\]
+\end{ex}
+
+\begin{ex} Determine the form of the partial fraction decomposition of : \\
+\[ \frac{x+1}{(x) (x-1)^2 (x+2) (x^2 - 2x + 4) (x^2+1)^2} \]
+\[= \frac{A}{x} + \frac{B}{x+2} + \frac{C}{x-1} + \frac{D}{(x-1)^2} + \frac{Ex + F}{x^2 -2x + 4} + \frac{Gx+H}{x^2 + 1} + \frac{Jx+K}{(x^2+1)^2} \]
+\end{ex}
+
+\section{Improper Integral (Type 1)}
+\textbf{Infinite Interval } \( ( a = \infty \text{ and/or } b = \infty) \) \\
+Consider \( \int_{1}^{\infty} \frac{1}{x^2} dx \) This integeral is improper since the upper limit is not finite. Think of the integral in terms of area. \\
+
+Consider the area under \( \frac{1}{x^2} on \) [1, t] where t is finite.\\
+We can then use FTC II: 
+\(\int_{1}^{t} \frac{1}{x^2} dx = \frac{1}{x} \mid_{1}^{t} = 1 - \frac{1}{t} \) \\
+We can determine the area on [1, \(\infty \)] by letting \( t \rightarrow \infty\) : \\
+
+$$ \int_{1}^{\infty} \frac{1}{x^2} dx = \lim{t \to \infty} \int_{1}^{t} \frac{1}{x^2} dx = \lim_{t \to \infty} (1 - \frac{1}{t}) = 1 $$
+
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

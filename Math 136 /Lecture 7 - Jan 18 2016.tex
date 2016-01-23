@@ -1,0 +1,127 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{7}{January 18, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+\section{Scaler Equations Examples}
+\begin{ex} Find a normal vector of the plane \(x_1 + x_2 + 3x_3 = 2\) \\
+$$\vec{n} = \begin{bmatrix} 1 \\ 1 \\ 3 \end{bmatrix} $$
+\end{ex}
+
+\begin{ex} Find a scaler equivalent of the of the plane with ethe normal vector \(\begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix} \) and passes through the point (2, 1, 0) \\
+\(\vec{b} =  \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix}    \ \ \ ( \vec{x} - \vec{b} ) \cdot \begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix} = 0 \implies -x_1+x_2+2x_3 = \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix} \cdot \begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix} = 1  \)
+\( \ \ \therefore x_1 - x_2 -2x_3 = 1\)
+\end{ex}
+
+\begin{ex} Find a scaler equation of the plan that passes through P(1, 2 , 0) , \(P_2\)(2, 1, 1), \(P_3\)(-1, 0, 2) \\
+Let \( \vec{u} = \vec{P_1P_2} = \begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix} \) and \( \vec{v} = \vec{P_1P_3} = \begin{bmatrix} -2 \\ -2 \\ 2  \end{bmatrix} \)\\
+ \( \{ \vec{x} , \vec{v}\} \) is linear independant \( \implies \vec{x} = s\vec{u} + t\vec{v} + \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix}  \ \ \leftarrow \text{ Vector equation}\) \\
+ Scaler : \( \vec{n} = \vec{u} \times \vec{v} = \begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix} \times \begin{bmatrix} -2 \\ 2 \\ 2 \end{bmatrix} = \begin{bmatrix} 6 \\ -4 \\ 4 \end{bmatrix} \rightarrow \vec{x} \cdot \vec{n} = \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix} \cdot \vec{n} \implies x_2 + x_3 = 2 \) 
+\end{ex}
+
+\section{Projections}
+Given \( \vec{u} \in \mathbb{R}^n \) , a Line L with \( \vec{x} = t\vec{v}+ \vec{b} , t \in \mathbb{R} \) \\
+\( \vec{u} \cdot \vec{v} = ( c\vec{u} + w) \vec{v} = c \| \vec{v} \| ^ 2 \) 
+\begin{definition} 
+- Given \(\vec{v} \in \mathbb{R} , \vec{u} \in \mathbb{R}^n, \vec{v} \neq \vec{0 } \) \\
+We define the projection of \( \vec{u} \text{ on } \vec{v} \) as
+ \[ Proj_{\vec{v}} ( \vec{u}) = \frac{\vec{u} \cdot \vec{v}}{\|\vec{v} \| ^2} \vec{v} \]
+ Also the perpendicular vector of \( \vec{u} \text{ onto }  \vec{v} \) is defined as \\
+ \[ Perp_{\vec{v}} (\vec{u}) = \vec{u} - Proj_{\vec{v}} ( \vec{u}) \]
+\end {definition}
+
+\begin{proposition} Given \(\vec{v} \in \mathbb{R}^n , \vec{v} \neq \vec{0} , \text{ and } c\in \mathbb{R} , c \neq 0 \) we have 
+\begin{enumerate}
+\item  \( Proj_{c\vec{v}} ( \vec{u}) = Proj_{\vec{v}} ( \vec{u}) \)
+\item \( Proj_{\vec{v}} (\cdot)\) is the "Linear Map"
+\item \( Perp_{\vec{v}} (\cdot)\) is also a linearmap
+\end{enumerate}
+\end{proposition}
+
+\section{Projection onto Planes}
+For a Plane P with \( \vec{n} \) , we define the projection to P as \( Proj_P (\vec{u}) = Perp_{\vec{n}} ( \vec{u}) \)\\
+
+\textbf{To Be Continued Next Lecture }
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}
