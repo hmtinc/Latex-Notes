@@ -1,0 +1,149 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{12}{January 29, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+\section{Matrix Operations}
+\((A)_{ij} = a_{ij}\) The ij-th entry 
+
+\textbf{Special Cases}
+\begin{itemize}
+\item \(M_{m\times 1 } (\mathbb{R}) = \mathbb{R}^m  \ \ \ \ \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} \in M_{n x 1} (R) \)
+\item \(M_{1 \times n} (\mathbb{R}) \rightarrow ( a_1, a_2 , \ldots , a_n ) \) Row vector 
+\item \(M_{1\times 1} (\mathbb{R}) = \mathbb{R} \)
+\end{itemize}
+
+\begin{definition}
+\(\forall A, B \in M_{m\times n} (\mathbb{R}) , C \in \mathbb{R} \) we define \(A + B = (a_{ij} + b_{ij}\) \\
+If \( A = (a_{ij})  \ B = (b_{ij}) \ CA = (Ca_{ij}) \) 
+\end{definition}
+
+The Set \( M_{m\times n} (\mathbb{R})\) is a "vector space"
+
+\begin{theorem} \(\forall A, B \in M_{m\times n} (\mathbb{R}) , c, d \in \mathbb{R} \)
+\begin{enumerate}
+\item \( A + B \in M_{m\times n} (\mathbb{R})\) 
+\item (A + B) + C = A + (B + C) 
+\item A + B = B + A 
+\item \( \exists O_{m \times n } = \begin{bmatrix} 0 \ldots 0 \\ 0 \ldots 0 \end{bmatrix} \in M_{m\times n} (\mathbb{R}) \) Such That \( \forall A, A + O_{m \times n} = A \)
+\item \( \forall A\) , \( -A = (-1) (A)  \implies A + (-A) = 0_{m \times n} \)
+\item \( cA \in M_{m\times n} (\mathbb{R})  \)
+\item c(dA) = (cd)A = d(cA) 
+\item (c + d)A = cA + dA
+\item c(A + B) = cA + cB 
+\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+The Transpose of \( A_{m \times n}\) is the the matrix \( A^T\) with \( (A^T)_{ij} = a_{ji} \) then \( A^T \in M_{n \times n} (\mathbb{R}) \)
+\end{definition}
+
+\begin{ex} - \\
+\( A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}    \ \ A^T = \begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}\) \\
+\( \vec{v} = \begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix}  \ \ \vec{v}^T = \begin{bmatrix}1 & 2 & 3 & 4 \end{bmatrix}\)
+\end{ex}
+
+\textbf{Properties of transpose } \( \forall A, B \in M_{m \times n} (\mathbb{R}) , \forall x \in \mathbb{R} \) 
+\begin{enumerate}
+\item \( (A^T)^T = A\)
+\item \( (A+B)^T = A^T + B^T\)
+\item \( (cA)^T = cA^T\)
+\end{enumerate}
+
+\section{Matrix Multiplication}
+Given \(A = (a_{ij}) \in M_{m \times n} (\mathbb{R})  \) and  \(B = (b_{ij}) \in M_{n \times s} (\mathbb{R})  \), we define matrix multiplication 
+\( AB \in M_{m \times s} (\mathbb{R})  \) as \((AB)_{ij} = \sum_{k=1}^{n} a_{ik} b_{kj} \)
+\[\begin{bmatrix} a_{11} & \ldots & a_{1n} \\ \ldots & \ldots & \ldots  \\ a_{m1} & \ldots & a_{mn}  \end{bmatrix} \begin{bmatrix} b_{11} & \ldots & b_{1s} \\ \ldots & \ldots & \ldots  \\ b_{n1} & \ldots & a_{ns}  \end{bmatrix} = \begin{bmatrix} \sum_{k=1}^{n} a_{k1} b_{k1} & \ldots & \sum_{k=1}^{n} a_{k} b_{ks}\\ \ldots & \ldots & \ldots  \\ \sum_{k=1}^{n} a_{km} b_{k1} & \ldots & \sum_{k=1}^{n} a_{mk} b_{ks}  \end{bmatrix}\] 
+
+\begin{ex}
+\[\begin{bmatrix} 1 & 2 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = \begin{bmatrix} 1 + 6 & 2+8 \\ 0 - 3 & 0 = 4 \end{bmatrix} = \begin{bmatrix} 7 & 10 \\ -3 & -4 \end{bmatrix} \]
+\end{ex}
+
+Note : \( AB \neq BA\)
+
+\begin{ex}
+\[\begin{cases} a_{11}x_1 + \ldots + a_{xn} x_n = b_1 \\ \vdots \\ a_m x_1 + \ldots + a_{mn}x_n = b_m \end{cases} \iff A\vec{x} = \vec{b} \] 
+\end{ex}
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

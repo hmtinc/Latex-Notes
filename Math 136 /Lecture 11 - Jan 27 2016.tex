@@ -1,0 +1,141 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{11}{January 27, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+\section{Rank Continued}
+r(A) \(\leq r(A\mid\vec{b})\)\\
+r(A) \(= r(A\mid\vec{0})\)
+\begin{corollary}
+A constant linear system \((A\mid \vec{b})\) has a unique solution iff \( r(A) = n \) (no free variables)  \\
+In addition, a homogeneous system (A\(\mid \vec{0}\)) only has a trivial solution iff r(A) = n
+\end{corollary}
+
+\begin{theorem}
+A set of n vectors \( \{ \vec{v_1} \ldots \vec{v_n} \} \subset \mathbb{R}^n \) is linear independent iff it spans \( \mathbb{R}^n\)\\
+\( \implies \{ \vec{v_1} \ldots \vec{v_n} \} \) is a basis iff it is linear independent 
+\end{theorem}
+
+\begin{proof}
+Given \( \{ \vec{v_1} \ldots \vec{v_n} \} \subset \mathbb{R}^n\) , Let A = \( \{ \vec{v_1} \ldots \vec{v_n} \}\) \\
+\(SpanA = \mathbb{R}^n \iff \forall \vec{x} \in \mathbb{R}^n , \vec{x} = t_1\vec{v_1}+\ldots+t_n\vec{v_n} \iff (A \mid \vec{x} ) \) is constant for any \( \vec{x} \in \mathbb{R}^n \iff  \\
+ r(A) = n \iff (A \mid \vec{0}\) only has a trivial solution \( \iff t_1\vec{v_1} + \ldots + t_n \vec{v_n} = 0 \) only has a trivial solution  \\ \(\iff \{ \vec{v_1} \ldots \vec{v_n} \} \) is linear independent 
+\end{proof}
+
+\begin{theorem}
+Let \( (A \mid \vec{b} ) \) be a constant linear system, r(A) = r then the solution set has he form 
+\[ \{ \vec{x} \in \mathbb{R}^n \mid \vec{x} = \vec{x_0} + t_1\vec{v_1} + \ldots + t_{n-r} \vec{v_{n-r}} , t_i \in \mathbb{R}\} \}\] where  \(\{ \vec{v_1} \ldots \vec{v_{n-r}} \}\) is linear independent 
+\end{theorem}
+
+\begin{ex}
+\[\begin{bmatrix} 1 & 2 & 0 & \mid & 1 \\ 0 & 0 & 1 & \mid & 1 \end{bmatrix} \rightarrow \begin{cases} x_1 + 2x_2 = 1 \\ x_3 = 1\end{cases} \text{let t = } x_3 \rightarrow \vec{x} = \begin{bmatrix} 1 - 2x \\ x_2 \\ 1 \end{bmatrix} = \begin{bmatrix}1 \\ 0 \\ 1 \end{bmatrix} + t \begin{bmatrix} -2 \\ 1 \\ 0\end{bmatrix} \]
+\end{ex}
+
+\section{Rank and Linear Independence}
+\[ \begin{aligned} \{ \vec{v_1} \ldots \vec{v_n} \} \subset \mathbb{R}^n & \iff t_1\vec{v_1} + \ldots + t_k\vec{v_k} = \vec{0}\text{ has a trivial solution} \\
+& \iff (\vec{v_1} \ldots \vec{v_k} \mid \vec{0}) \text{ only has a trivial solution } \\
+& \iff r(\vec{v_1} \ldots \vec{v_k}) = k  \end{aligned} \]
+ 
+\newpage
+
+\begin{ex}
+Show \( \left\{ \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} \begin{bmatrix} 0 \\ 2 \\ 3 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \\ 2 \end{bmatrix} \right\} \) is linear independent \\
+\[\begin{bmatrix} 1 & 0 & 1 \\ 1 & 2 & 1 \\ 0 & 3 & 2\end{bmatrix} \rightarrow \begin{bmatrix} 1 & 0 & 1 \\ 0 & 2 & 1 \\ 0 & 3 & 2\end{bmatrix}\rightarrow \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 0 \\ 0 & 3 & 2\end{bmatrix}  \rightarrow \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix} \]
+\[ r \begin{bmatrix} 1 & 0 & 1 \\ 1 & 2 & 1 \\ 0 & 3 & 2\end{bmatrix}  = 3\]
+Since there is 3 vectors and the rank is 3, the set is linear independent
+\end{ex}
+
+\begin{ex}
+\( \left\{ \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} \begin{bmatrix} -1 \\ 0 \\ 2 \end{bmatrix} \right\} \subset \mathbb{R}^3 \) is linear independent \\
+\[ \begin{bmatrix} 1 & -1 \\ 2 & 0 \\ 3 & 2 \end{bmatrix} \rightarrow \begin{bmatrix} 1 & -1 \\ 0  & 2 \\ 0 & 5 \end{bmatrix} \rightarrow \begin{bmatrix} 1 & 0 \\ 0 & 1 \\ 0 & 0 \end{bmatrix} \implies Rank = 2  \implies \text{ the set is linear independent} \]
+\end{ex}
+
+\begin{ex}
+Prove \( \left\{ \begin{bmatrix} 2 \\ -1 \\ 2 \end{bmatrix} \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix} \begin{bmatrix} 2 \\ 0 \\ 5 \end{bmatrix} \right\}  \) is a basis of \( \mathbb{R}^3 \) \\
+\[ r\begin{bmatrix} 2 & -1 & 2 \\ -1 & 1 & 0 \\ 2 & 0 & 5 \end{bmatrix} = 3 \implies \text{The set is linear independent} \implies \text{The set spans }\mathbb{R}^3\]
+\end{ex}
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

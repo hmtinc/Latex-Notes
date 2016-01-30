@@ -1,0 +1,132 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%Template Taken from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{10}{January 25, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+\section{Reduced Row Echelon Form (RREF)}
+\begin{enumerate}
+\item All zero rows are "downstairs"
+\item The first non-zero entry in each non-zero row is 1 and is called the leading one
+\item The leading one in non-zero row is to the right of the leading one is the row above
+\item A leading one is the only non-zero entry in its column
+\end{enumerate}
+
+\begin{theorem}
+Every matrix is equivalent to a unique RREF 
+\end{theorem}
+
+\begin{ex}
+Solve the following system \\
+\[ \begin{aligned} \begin{cases} -x_2 + x_3 + x_4 = 4 \\ x_1 + x_2 + x_4 = 1 \\ 2x_1 + x_2 + x_3 + x_4 = -2 \end{cases} & \rightarrow \begin{bmatrix}0 & -1 & 1 & 1 &   4 \\ 1 &  1 &  0 &   1 &  1  \\ 2 &  1 &  1 &  1 &  -2 \end{bmatrix} & \rightarrow \begin{bmatrix}1  & 1 & 0 & 1 &   1 \\ 0 &  -1 &  1 &   1 &  4  \\ 2 &  1 &  1 &  1 &  -2 \end{bmatrix} \\ & \rightarrow \begin{bmatrix}1  & 1 & 0 & 1 &   1 \\ 0 &  -1 &  1 &   1 &  4  \\ 0 &  -1 &  1 &  -1 &  -4 \end{bmatrix}& \rightarrow \begin{bmatrix}1  & 1 & 0 & 1 &   1 \\ 0 &  -1 &  1 &   1 &  4  \\ 0 &  0 &  0 &  -2 &  8 \end{bmatrix} \\
+& \rightarrow \begin{bmatrix}1  & 1 & 0 & 1 &   1 \\ 0 &  1 &  -1 &   -1 &  -4  \\ 0 &  0 &  0 &  1 &  4 \end{bmatrix}  &  \rightarrow  \begin{bmatrix}1  & 1 & 0 & 1 &   1 \\ 0 &  1 &  -1 &  0  &  0  \\ 0 &  0 &  0 &  1 &  4 \end{bmatrix} \\ 
+& \rightarrow \begin{bmatrix}1  & 1 & 0 & 1 &   -2 \\ 0 &  1 &  -1 &   -1 &  -4  \\ 0 &  0 &  0 &  1 &  4 \end{bmatrix} & \implies \begin{cases} x_1 + x_3= -3 \\ x_2 - x_3 = 0 \\ x_4 = 4 \end{cases} \end{aligned} \]
+\[ \text{Let t  = } x_3 \ \ \vec{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} = \begin{bmatrix} -3 -t  \\ t \\ t \\ 4  \end{bmatrix} = \begin{bmatrix} -3 \\ 0 \\ 0 \\ 4 \end{bmatrix} + t \begin{bmatrix} -1 \\ 1 \\ 1 \\ 0 \end{bmatrix} , t \in \mathbb{R} \]
+\end{ex}
+
+\begin{definition}
+Any variable whose column does not contain a leading one in the RREF of the coefficient matrix is called a free variable
+\end{definition}
+
+\begin{definition}
+The rank of a matrix A is the number of leading one's in its RREF and is denoted as \( rankA \) , \( rank(A) \), or \( r(A) \) 
+\end{definition}
+
+\begin{ex}
+$$  r \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} = 2 \ \ \ \ \ r \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} = 3   $$
+\end{ex}
+
+\begin{theorem}
+\( A_{m \times n} , r(A) \leq min\{ m , n \} \) 
+\end{theorem}
+
+\begin{theorem}
+Given a linear system (A \( \mid \vec{b} \) )  
+\begin{enumerate}
+\item (A \( \mid \vec{b} \) )  is consistent iff  r(A \( \mid \vec{b} \)) = r(A)   
+\item if (A \( \mid \vec{b} \) )  is consistent, then it contains n - r(A) free variables
+\item r(A) = m iff (A \( \mid \vec{b} \) ) is consistent for  for every \( \vec{b} \in \mathbb{R} ^m \) 
+\end{enumerate}
+\end{theorem}
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}
