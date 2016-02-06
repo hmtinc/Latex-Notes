@@ -1,0 +1,122 @@
+%Notes by Harsh Mistry 
+%Math 128
+%based on template from : https://www.cs.cmu.edu/~ggordon/10725-F12/
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{blindtext}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 128 :  Calculus 2 for the Sciences
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{13}{February 1, 2016}{Jen Nelson}{Harsh Mistry}
+
+%
+\section{Differential equations}
+A differential equations (DE) is an equation involving an unknown function and one or more of its derivatives
+
+\begin{ex}
+\[\frac{dp}{dt} = kp \leftarrow \text{ Law of Natural Growth} \]
+\[\frac{dp}{dt}  = kp ( 1- \frac{p}{m}) \leftarrow  \text{ Logistic Model for Growth}\]
+\[ \frac{md^2x}{dt^2} = -kx \leftarrow  \text{ Spring Motion} \]
+\[\frac{d^2\theta}{dt^2} + \frac{g}{r} \sin \theta = 0  \leftarrow \text{ Motion of a Pendulum} \]
+\end{ex}
+
+\begin{itemize}
+\item The order of a DE is the order of the highest derivative 
+\item By solving a DE we mean finding the function which makes the equation
+\end{itemize}
+
+\begin{ex}
+Verify that y = \( \frac{x^2}{2} + 4x \) is a solution to the DE \( \frac{dy}{dx} = x^2 + \frac{y}{x} \) \\ 
+To verify, simply just check the left and right side. 
+\end{ex}
+
+\begin{ex}
+Solve \(\frac{dy}{dx} = 6x^2 + 2x \) \\
+\[ y = 2x^3 + x^2 + C \]
+\end{ex}
+
+\begin{ex}
+Solve \(\frac{dy}{dx} = y \) \\
+\[ y = e^x\]
+But there can be can multiple solutions to this DE. So we reprsent the solution using a general solution. These general solutions repersent a family of solutions. The general solution for this DE is : 
+\[ y = ce^x \]
+\end{ex}
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

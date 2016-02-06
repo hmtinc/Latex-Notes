@@ -1,0 +1,121 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{14}{February 3, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+\section{Linear Mappings}
+\begin{definition}
+If A is a \( m \times n \) matrix, then we can define the function \( f : \mathbb{R}^n \rightarrow \mathbb{R}^m \) as \( f (\vec{x} ) = A \vec{x} \)
+ this is called a matrix mapping \end{definition}
+ 
+ \textbf{Matrix Mapping Notation} : 
+ \[f(\begin{bmatrix}x_1 \\ \vdots \\ x_n \end{bmatrix}) =  \begin{bmatrix}y_1 \\ \vdots \\ y_n \end{bmatrix} \]
+ \[f(x_1 \ldots x_n ) = (y_1 \ldots y_n) \]
+ 
+ 
+ \begin{theorem}
+If A is a \( m \times n \) matrix and \( f : \mathbb{R}^n \rightarrow \mathbb{R}^m \)  is defined by \( f(\vec{x})  = A\vec{x} \) , then for all \( \vec{x}, \vec{y} \in \mathbb{R}^n and b, c \in \mathbb{R}\) we have :
+\[ f (b\vec{x} + c\vec{y}) = bf(\vec{x}) + cf(\vec{y}) \] 
+ \end{theorem}
+ 
+ 
+ \begin{definition}
+A function \(A  : \mathbb{R}^n  \rightarrow \mathbb{R}^m \text{ is said to be a } \textbf{ Linear mapping } is for every \vec{x} , \vec{y} \in \mathbb{R}^n \text{ and } b , c \in \mathbb{R} \) we have : 
+\[ L (b\vec{x} + c\vec{y}) = bL(\vec{x}) + cL(\vec{y}) \] \end{definition}
+
+\textbf{Remarks}
+\begin{itemize}
+\item If two linear mappings (L \& M) are said to be equal for all \( \vec{x} \in \mathbb{R}^n \), we write L = M
+\item A linear mapping L : \( \mathbb{R}^n \rightarrow \mathbb{R}^n \) is called a linear operator
+\end{itemize}
+
+\begin{theorem}
+Every linear mapping L : \( \mathbb{R}^n  \rightarrow \mathbb{R}^m  \) can be repersented as a matrix mapping with a matrix whose i-th column is the image of the i-th standard basis vector of \(\mathbb{R}^n \) under L for all \( 1 \leq i \leq n \). That is, \( L(\vec{x}) = \) [L]\(\vec{x}\) where, 
+\[\begin{bmatrix}L\end{bmatrix} = \begin{bmatrix} L(\vec{e_1}) \ldots L(\vec{e_2})\end{bmatrix}\]
+ \end{theorem}
+
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

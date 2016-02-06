@@ -1,0 +1,127 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{13}{February 1, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+\section{Matrix Multiplication Continued}
+Matrix Multiplication can be used to denote dot product \( \vec{x}^T \vec{y} = \vec{x} \cdot \vec{y} \) \\
+
+
+\textbf{Identity Matrix : } \\
+\[ I_1 = \begin{bmatrix} 1 \end{bmatrix}   I_2 = \begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix} \  \ldots  \ I_n - \begin{bmatrix}
+1 & 0 & \ldots & 0 \\ 0 & 1 & \ldots & 0 \\ 0 & 0 & \ldots & 1 \end{bmatrix} \]
+\[ \forall A = (a_{ij}) \in M_{m \times n} (\mathbb{R}), AI_n = A \  I_mA = A \]
+
+\begin{proposition} For materices A, B, C (assuming the required product makes sense), \( t \in \mathbb{R}\) we have, 
+\begin{enumerate}
+\item A(B+C) = AB + AC
+\item t(AB) = (tA)B = A(tB)
+\item A(BC) = (AB) C
+\item \((AB)^T) = B^T A^T\)
+\end{enumerate}
+
+\begin{ex}
+Given \( A_{m\times n} ,  B_{n\times s} ,  C_{n \times s} \) Does the following statement hold : \( AB = AC \implies B = C \) ?\\
+No,  To show this, Let A = \( \begin{bmatrix}  0 & 1 \\ 0 & 0  \end{bmatrix} \) B = \( \begin{bmatrix} 1 & 2 \\ 0 & 0  \end{bmatrix} \) c = \( \begin{bmatrix}  0 & 2016 \\ 0 & 0  \end{bmatrix} \)
+\[  AB = \begin{bmatrix}  0 & 0 \\ 0 & 0  \end{bmatrix}  \text{ and } AC = \begin{bmatrix}  0 & 0 \\ 0 & 0  \end{bmatrix}\implies AB = AC, 
+\text{ but } B \neq C \]
+\end{ex}
+\end{proposition}
+
+\begin{theorem}
+\(\forall A , B \in M_{m\times n } (\mathbb{R}) \) Such That \(A\vec{x} = B \vec{x} \) for any \(\vec{x} \in \mathbb{R}^n , then A = B \) 
+\end{theorem}
+
+\begin{proof}
+Given A = \( (a_1, a_2, \ldots, a_n) \) and B = \( (b_1, b_2, \ldots, b_n) \) \\
+\[ \text{Set } \vec{a_i} = \begin{bmatrix} a_{1i} \\ \vdots \\ a_{mi} \end{bmatrix} , 1 \leq i \leq n \text{ and } \vec{b_i} = \begin{bmatrix} b_{1i} \\ \vdots \\ b_{mi} \end{bmatrix} , 1 \leq i \leq n \]
+\[ A\vec{e_1} = \vec{a_1} \  \ldots \ A\vec{e_n} = \vec{a_n} \text{ and } B\vec{e_1} = \vec{b_1} \  \ldots \ B\vec{e_n} = \vec{b_n}  \implies A
+ = B\]
+
+\end{proof}
+
+\textbf{Note} : 
+\[ AB = A (b_1, b_2, \ldots, b_n) =  (Ab_1, Ab_2, \ldots, Ab_n)\]
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

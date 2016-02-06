@@ -1,0 +1,116 @@
+%Notes by Harsh Mistry 
+%Math 128
+%based on template from : https://www.cs.cmu.edu/~ggordon/10725-F12/
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{blindtext}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 128 :  Calculus 2 for the Sciences
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{14}{February 3, 2016}{Jen Nelson}{Harsh Mistry}
+
+%
+\section{Separable Differential Equations}
+A 1st order separable DE os a DE that can be written as \( \frac{dy}{dx} = g(x)f(x) \)
+
+\begin{ex}
+
+\[\frac{dy}{dx} = x \sin x \leftarrow \text{ is separable} \]
+\[\frac{dy}{dx} - y = ye^x \leftarrow \text{ is separable as } \frac{dy}{dx} =  y(e^x +1) \]
+\[\frac{dx}{dt} = t + x \leftarrow \text{ is not separable} \]
+\end{ex}
+
+
+\textbf{How to solve a separable DE : }\\
+Have \( \frac{dy}{dx} = g(x)f(x) \)
+\begin{enumerate}
+\item Rewrite as \(\frac{dy}{f(y)} = g(x)dx \)
+\item Integrate both sides \(\int \frac{dy}{f(y)} = \int g(x)dx \)
+\end{enumerate}
+
+\textbf{Note} : In Step 1 we assume f(y) \( \neq \) 0 , but it still may be a solution to the DE\\
+
+
+\begin{center}
+Today's note was short as we did alot of examples in class instead of covering new material. 
+\end{center}
+
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}
