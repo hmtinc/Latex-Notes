@@ -1,0 +1,144 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{17}{February 10, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+\section{Special Subspaces Continued}
+\begin{ex}
+For \(\vec{a} \neq 0 \in \mathbb{R}^n  \) Find a basis for the range of \(Proj_{\vec{n}}\) \\
+\[Range (Proj_{\vec{a}}) = \{Proj_{\vec{a}}(\vec{x})\mid \vec{x} \in \mathbb{R}^n \} \]
+\[\forall \vec{x} \in \mathbb{R}^n  Proj_{\vec{n}} (\vec{x}) = \frac{\vec{x} \cdot \vec{n}}{\|\vec{a}\|^2}\vec{a} \in Span \{\vec{a}\} \implies Range(Proj_{\vec{a}}) \subset Span\{\vec{a}\}n \]
+On the other hand, \( Proj_{\vec{a}}(t\vec{a}) = \frac{t \vec{a} \cdot \vec{a}}{\|\vec{a}\|^2} \vec{a} = t\vec{a} \  \forall  t \in \mathbb{R}\)
+\[ \implies Span\{\vec{a}\} \subset Range(Proj_{\vec{a}}) \implies Range(proj_{\vec{a}}) = Span\{\vec{a}\} \]
+\end{ex}
+
+\begin{theorem}
+Suppose L : \(\mathbb{R}^n \rightarrow \mathbb{R}^m \) is linear with the standard matrix 
+\( \begin{bmatrix} L \end{bmatrix} = (L(\vec{e_1}, \ldots, L(\vec{e_n})\)) Then, \\
+\[ Range(L) = Span\{L(\vec{e_1}, \ldots, L(\vec{e_n})\}\]
+\end{theorem}
+
+\begin{proof}
+\[L(\vec{x}) = \text{[L]}\vec{x} = \begin{bmatrix}L(\vec{e_1}, \ldots, L(\vec{e_n})\end{bmatrix} \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} = x_1L(\vec{e_1} +  \ldots + x_n L(\vec{e_n})\]
+\[\therefore  L(\vec{x}) \in Range(L) \iff  L(\vec{x})  \in Span\{L(\vec{e_1}, \ldots, L(\vec{e_n})\}\]
+\end{proof}
+
+\begin{definition}
+Let L : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) be a linear mapping, we define its kernel as 
+\[Ker(L) := \{ \vec{x} \in \mathbb{R}^n \mid L(\vec{x}) = 0 \}\]
+ \end{definition}
+ For L : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\)  and Standard matrix [L]
+ \[L(\vec{x}) = \vec{0} \text{ iff } \begin{bmatrix} L \end{bmatrix} \vec{x} = \vec{0} \]
+ \[\vec{x} \in Ker(L) \text{ iff } \vec{x} \text{ is a soution of } (\begin{bmatrix}L\end{bmatrix} \mid \vec{0})\]
+ 
+ \begin{theorem}
+ If L : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) is linear then \(Ker(L)\) is a subspace of \(\mathbb{R}^n\) 
+ \end{theorem}
+ 
+ \newpage
+ 
+ \begin{ex}
+ Fix \(\vec{a} \neq 0, \vec{a} \in \mathbb{R}\) , What is the \(Ker(Proj_{\vec{a}})\)? For \( \vec{a} = \begin{bmatrix}
+ 2 \\ -1 \\ 5 \end{bmatrix} \) write down a basis for \(Ker(Proj_{\vec{a}})\) \\
+ \[\vec{x} \in Ker(Proj_{\vec{a}}) \iff Proj_{\vec{a}}(\vec{x}) = 0 \iff \frac{x \cdot a }{\|\vec{a}\|^2}\vec{a} = \vec{0} \iff \vec{x} \cdot \vec{a} = 0\]
+ \[\implies Ker(Proj_{\vec{a}}) = \{ \vec{x} \in \mathbb{R}^n \mid \vec{x} \cdot \vec{n}  = 0 \} \]
+ Since \( \vec{a} = \begin{bmatrix} 2 \\ -1 \\5 \end{bmatrix} \) 
+ \[\implies Ker(Proj_{\vec{a}}) = \{ \vec{x} \in \mathbb{R}^3 \mid 2x_1-x_2+5x_3 =0 \} \]
+ \[\therefore \text{ The basis is } \left\{\begin{bmatrix}1 \\ 2 \\ 0 \end{bmatrix} \begin{bmatrix} 0 \\ 5 \\ 1\end{bmatrix} \right\} \]
+ \end{ex}
+ 
+\begin{definition}
+Given A \( \in M_{m\times n} (\mathbb{R})\) we define the nullspace of A as, \\
+\[Null(A) = \{\vec{x} \in \mathbb{R}^n \mid A\vec{x} = 0 \} \]\\
+and if A = (\(\vec{a_1} , \ldots , \vec{a_n} \) ) we define its column space as \\
+\[Col (A) = Span \{\vec{a_1} , \ldots , \vec{a_n}\} \subset \mathbb{R}^m \]
+ \end{definition} 
+ 
+ for given A \( \in M_{m\times n } (\mathbb{R}) \) we define L : \( \mathbb{R}^n \rightarrow \mathbb{R}^m\) as, 
+ \[L(\vec{x}) = A \vec{x} = \begin{bmatrix} L\end{bmatrix} \vec{x} \]
+ then, [L] = A \\
+ \[Ker(L) = \{ \vec{x} \in \mathbb{R}^n \mid L(\vec{x}) = 0 \} = \{ \vec{x} \in \mathbb{R}^n \mid A\vec{x} = 0 \} = Null(A) \]
+\[Range(L) = Span\{\vec{a_1} , \ldots , \vec{a_n}\} = Col(A) \]
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

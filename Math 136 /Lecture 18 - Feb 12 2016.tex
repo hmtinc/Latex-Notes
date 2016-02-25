@@ -1,0 +1,162 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{18}{February 12, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+
+\section{Operations on Linear Mappings}
+
+\begin{definition}
+Let L : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) and  M : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) be linear mappings and let \( c \in \mathbb{R}\), \\ we define L + M : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) and cL : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) by 
+\[(L+M)(\vec{x}) - L(\vec{x}) + M(\vec{x})\]
+\[(cL)(\vec{x}) = cL(\vec{x})\]
+ \end{definition}
+ 
+ \begin{theorem}
+ If L,M : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) are liner mappings and c \(\in \mathbb{R}\), then L + M  : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) and cL : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) are linear mappings. \\
+ Furthermore, 
+ \[\begin{bmatrix} L + M \end{bmatrix} = \begin{bmatrix} L \end{bmatrix} + \begin{bmatrix} M \end{bmatrix}\]
+ \[\begin{bmatrix} cL \end{bmatrix} = c\begin{bmatrix} L \end{bmatrix} \]
+ \end{theorem}
+ 
+ \begin{definition}
+We denote the set of all possible linear mappings with domain \(\mathbb{R}^n\) \\ and co-domain \(\mathbb{R}^m\) as \(\mathbb{L}\)
+ \end{definition}
+
+\begin{theorem} If L, M \( \in \mathbb{L}\) and c, d \( \in \mathbb{R}\) then, 
+\begin{enumerate}
+\item \( L + M \in \mathbb{L}\)
+\item \( (L + M) + N = L + (M + N) \)
+\item \( L + M = M + L \)
+\item There exists a linear mapping O : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\), such that L + O = L for all L 
+\item There exists a linear mapping (-L): \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) with the property that L + (-L) = O
+\item \( cL \in \mathbb{L}\)
+\item \(c(dL) = (cd)L \)
+\item \( (c+d)L = cL + cM \) 
+\item \( c(L+M) = cL + cM\)
+\item 1L = L
+\end{enumerate}
+\end{theorem}
+
+\newpage 
+
+ \begin{definition}
+Let L : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) and M : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) be linear mappings. \\
+The composition of M and L is the function M \(\circ\) L : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) defined by 
+\[(M \circ L ) (\vec{x}) = M (L(\vec{x}))\]
+ \end{definition}
+ 
+ \textbf{Remarks : } The range of L must be a subset of the domain of M for M \(\circ\) L to be defined 
+ 
+ \begin{theorem}
+ If L : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\)  and M : \(\mathbb{R}^m \rightarrow \mathbb{R}^p\) are linear mappings, then M \( \circ \) L : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) is a linear mapping and
+ \[ (M \circ L) = (M)(L) \]
+ \end{theorem}
+ 
+ \begin{definition}
+The Linear Mapping ld : \(\mathbb{R}^n \rightarrow \mathbb{R}^m\) defined by \(ld(\vec{x}) = \vec{x}\) is called the identity mapping 
+ \end{definition}
+ 
+ \section{Vector Spaces}
+ \begin{definition}
+A set \(\mathbb{V}\) with an operation of addition, denoted \(\vec{x} + \vec{y}\) and an operation of scaler multiplication denoted \( c\vec{x} \) is called a vector space over \( \mathbb{R}\) if for every \(\vec{v}, \vec{x}, \vec{y} \in \mathbb{V} \)and  c, d \( \in \mathbb{R}\) we have : 
+\begin{enumerate}
+\item \( \vec{x} + \vec{y} \in \mathbb{V} \)
+\item \( (\vec{x} + \vec{y}) + \vec{v} = \vec{x} + (\vec{y} + \vec{v}) \)
+\item \( \vec{x} + \vec{y} = \vec{y} + \vec{x}\)
+\item There is a vector \(\vec{0} \in \mathbb{V} \) called the zero vector, such that \( \vec{x} + \vec{0} = \vec{x} \ \forall \vec{x} \in \mathbb{V}\) 
+\item There exists an element \( -\vec{x} \in \mathbb{V}\) called the additive inverse of \( \vec{x} \), such that \(\vec{x} + \vec{-x} = \vec{0}\)
+\item \(c\vec{x} \in \mathbb{V}\)
+\item \(c(d\vec{x}) = (cd) \vec{x}\) 
+\item \( (c+d)\vec{x} = c\vec{x} + d\vec{x}\)
+\item \(c(\vec{x} + \vec{y}) = c\vec{x} + c\vec{y}\)
+\item 1x = x
+\end{enumerate}
+
+Elements of \(\mathbb{V}\) are called vectors 
+ \end{definition}
+
+\textbf{Remarks : }  some times \(\oplus\) and \(\odot\) are used to differentiate these from normal scaler multiplication and scaler addition 
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

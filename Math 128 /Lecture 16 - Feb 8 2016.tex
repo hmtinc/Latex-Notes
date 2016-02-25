@@ -1,0 +1,112 @@
+%Notes by Harsh Mistry 
+%Math 128
+%based on template from : https://www.cs.cmu.edu/~ggordon/10725-F12/
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{blindtext}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 128 :  Calculus 2 for the Sciences
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{16}{February 8, 2016}{Jen Nelson}{Harsh Mistry}
+
+%
+\section{1st Order Linear Differential Equations}
+A 1st order linear  DE os a DE that can be written in the form \( \frac{dy}{dx} + P(x)y = Q(x)\) such that y is degree 1 and there is no \(yy'\) terms
+
+\begin{ex}
+\( \frac{dy}{dx}+ \frac{1}{x}y = \frac{\cos x}{x} \) \\
+Solution : Multiply by x 
+\[ \begin{aligned} x \frac{dy}{dx} + y  + y & = \cos x  \\ \frac{dy}{dx} (xy) & = \cos x   \text{ (Integrate with respect to x)} \\
+ xy & = \int \cos x \\ x y & = \sin x + c \\ y & = \frac{\sin x}{x} + \frac{c}{x}   \end{aligned} \]
+\end{ex}
+
+
+\textbf{How to solve a 1st order linear DE : }\\
+Start with DE in standard form 
+\[ \frac{dy}{dx} + P(x) = Q(x) \]
+Multiply by I(x) "The Integrating Factor" 
+\[ I(x) \frac{dy}{dx} + P(x) I(x) y = I(x)Q(y) \]
+We want the final result to become 
+\[\frac{dy}{dx} (I(x)y) = \frac{dI}{dx} y + I(x) \frac{dy}{dx}\]
+So we need \( \frac{dI}{dx} + P(x) I(x) \) (which is separable) 
+\[ \text{So, } \int \frac{dI}{I(x)} = \int P(x) dx\]
+\[ \therefore I(x) = e^{\int P(x) dx} \]
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}
