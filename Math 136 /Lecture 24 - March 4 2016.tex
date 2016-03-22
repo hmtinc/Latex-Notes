@@ -1,0 +1,137 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{24}{March 4, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+\section{Matrix Inverses}
+
+\begin{theorem}
+If \(\beta\) and \(\zeta\) are bases for an n-dimensional vector space \(\mathbb{V}\), then the change of coordinate matrices \({}_\zeta P_\beta \) and \({}_\beta P_\zeta \) satisfy $${}_\zeta P_\beta {}_\beta P_\zeta  = I = {}_\beta P_\zeta {}_\zeta P_\beta $$
+\end{theorem}
+
+This shows that \({}_\zeta P_\beta \) and \({}_\beta P_\zeta \) are multiplicative inverses of each other 
+
+\section{Left and Right Inverse}
+\begin{definition}
+Let  A be a \(m \times n \) matrix. \\ If B is an \(m \times n \) matrix  such that \(AB = I_m\), then B is a right inverse of A \\
+If C is an \(n \times m\) matrix such that \(CA = I_n\), then C is called a left inverse of A
+\end{definition}
+
+\textbf{Note (For Right Inverses) : } \([\vec{e_1} \ldots \vec{e_m}] = AB = [A\vec{b_1} \ldots A\vec{b_m}]\)
+
+\begin{theorem}
+If A is an \(m \times n\) matrix with \(m > n\), then A cannot have a right inverse
+\end{theorem}
+
+\begin{corollary}
+If A is an \(m \times n\) matrix with \( m < n \), then A cannot have a left inverse  
+\end{corollary}
+
+\section{Matrix Inverse}
+\begin{definition}
+An \( n \times n \) matrix is called a square matrix 
+\end{definition}
+
+\begin{definition}
+Let A be a \( n \times n \) matrix. IF B is a matrix such that AB = I = BA, then B is called a inverse of A.\\
+We write \(B = A^{-1}\) and we A is said to be invertible 
+\end{definition}
+
+\textbf{Remark : } If \( B = A^{-1}\) then \( A = B^{-1} \) 
+
+\begin{theorem}
+The inverse of a matrix is unique
+\end{theorem} 
+
+\begin{proof}
+B = BI = B(AC) = (BA)C = IC = C 
+\end{proof}
+
+\begin{theorem}
+If A and B are \( n \times n \) matrices such that AB = I, then A and B are invertible and \(rank A = rank B = n \)
+\end{theorem}
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes}\\
+\textbf{Notes by : Harsh Mistry}
+\end{center}
+\end{document}

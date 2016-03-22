@@ -1,0 +1,112 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{22}{February 28, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+\section{Dimensions Continued}
+
+\begin{theorem}
+if  \(\mathbb{V}\) is an n-dimensional vector space and \( \{\vec{v_1} \ldots \vec{v_k}\}\) is a linearly independant set in  \(\mathbb{V}\) with k < n, then there exist vectors \( \vec{w_{k+1}} \ldots \vec{w_n } \) in  \(\mathbb{V}\) such that 
+\(\{\vec{v_1}, \ldots , \vec{v_k}, \vec{w_{k+1}}, \ldots, \vec{w_n}\}\) is a basis for  \(\mathbb{V}\)
+\end{theorem}
+
+\begin{corollary}
+if \(\mathbb{S}\) is a subspace of a finite dimensional  vector space \(\mathbb{V}\), then \(dim \mathbb{S} \neq dim \mathbb{V}\)
+\end{corollary}
+
+\section{Coordinates with respect to a basis}
+
+\begin{theorem}
+If \(\beta = \{\vec{v_1} \ldots \vec{v_n}\}\) is a basis for a vector space  \(\mathbb{V}\), then every \(\vec{v} \in \mathbb{V}
+\) can be written as a unique linear combination of the vectors in \(\beta\)
+\end{theorem}
+
+\begin{definition}
+If \(\beta = \{ \vec{v_1} \ldots \vec{v_n} \} \) is a basis for a vector space \(\mathbb{V}\)\\
+if \(\vec{v} = b_1 \vec{v_1} + \ldots + b_n \vec{v_n}\), then \(b_1 \ldots b_1\) are called \(\beta\)-coordinates of \(\vec{v}\), and we define the \(\beta\)-coordinate vector by 
+$$ \mid \vec{v}\mid _\beta = \begin{bmatrix} b_1 \\ \vdots \\ b_n\end{bmatrix} $$
+\end{definition}
+
+
+\begin{center}
+\textbf{End of Lecture Notes}\\
+\textbf{Notes by : Harsh Mistry}
+\end{center}
+\end{document}

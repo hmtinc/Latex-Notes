@@ -1,0 +1,145 @@
+%Notes by Harsh Mistry 
+%Math 128
+%based on template from : https://www.cs.cmu.edu/~ggordon/10725-F12/
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{blindtext}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 128 :  Calculus 2 for the Sciences
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+\lecture{17-20}{February 10 - 24 , 2016}{Jen Nelson}{Harsh Mistry}
+
+%
+\section{Parametric Equations}
+Up to now we have defined curves by 
+\begin{itemize}
+\item y = f(x), x = f(y)
+\item F(x,y) = 0 
+\end{itemize}
+
+For many applications this repersentation is not ideal (or even posssible) \\
+Another way to define a curve : \\
+Suppose x and y are given as functions of a third variable \\
+\[x = f(t)\]
+\[y = g(t)\]
+t us the parameter that links x and y 
+
+
+\section{Tangents}
+Given a curve with parametric equations x = f(t) , y = g(t), can we find \(\frac{dy}{dx} \)
+\[\frac{dy}{dt} = \frac{dy}{dt} = \frac{dy}{dx} \frac{dx}{dt}\]
+\[\frac{dy}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}} \text{ provided } \frac{dx}{dt} \neq 0 \]
+
+So the curve will have: 
+\begin{itemize}
+\item Horizontal tangents where \(\frac{dy}{dt} = 0 \text{ and }    \frac{dx}{dt} \neq 0\)
+\item vertical tangents where \(\frac{dx}{dt} = 0 \text{ and } \frac{dy}{dt} \neq 0 \)
+\end{itemize}
+
+If both \(\frac{dy}{dt} =0 \) and \(\frac{dx}{dt} = 0 \) at some \(t^*\), then you need to look at \(\lim_{t\to t^*} \frac{\frac{dy}{dt}}{\frac{dx}{dt}}\)
+
+\section{Area} 
+Given \(y = g(t) , x = f(t) , \alpha \leq t \leq \beta \)
+\[ A = \int_a^b F(x)dx = \int_a^b ydx = \int_{\alpha}^{\beta} g(t) f'(t)dt \]
+
+
+\section{Arc Length}
+If C is a curve describe by parametric equations \(y = g(t) , x = f(t) , \alpha \leq t \leq \beta \), and C is travered exactly once as t increases from \(\alpha \to \beta \), then the length of the curve is given by 
+\[ L = \int_{\alpha}^{\beta} \sqrt{(\frac{dx}{dt})^2 + (\frac{dy}{dt})^2} dt\]
+
+\section{Polar Coordinates}
+Given point (x,y), \((r, \theta)\) is a polar coordinante\\
+\begin{itemize}
+\item r is the distance from O (origin) to P (point) 
+\item \(\theta\) is the angle OP makes with the polar axis 
+\end{itemize}
+
+\section{Polar Coordinates \(\longleftrightarrow\) Cartesian coodinates}
+In general, if P has polar coordinates \((r,\theta)\), its cartiesian coordinates are given by, 
+$$ x = r \cos \theta  ,\ \ y = r \sin \theta $$
+
+In general, if P has Cartiesian coordinates (x,y), its polar coordinates \((r,\theta)\) are given by, 
+$$ r^2 = x^2 + y^2,\ \ \tan \theta = \frac{y}{x}$$
+
+\section{Symmetry}
+if the polar equation is unchanged when 
+\begin{itemize}
+\item  \(\theta\) is replaced by \(-\theta\) : Then the equation is symmetric about polar axis
+\item \(\theta\) is replaced by \(\pi - \theta\) : Then the equation is symmetric about vertical line \(\theta = \frac{\pi}{2}\) 
+\end{itemize}
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

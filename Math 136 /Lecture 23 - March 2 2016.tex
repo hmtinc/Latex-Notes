@@ -1,0 +1,130 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{23}{March 2, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+\section{Coordinates continued}
+
+\textbf{Recall : }
+Let \(\beta = \{ \vec{v_1} \ldots \vec{v_n} \} \) be a basis for a vector space \(\mathbb{V}\)\\
+if \(\vec{v} = b_1 \vec{v_1} + \ldots + b_n \vec{v_n}\), then \(b_1 \ldots b_1\) are called \(\beta\)-coordinates of \(\vec{v}\), and we define the \(\beta\)-coordinate vector by 
+$$ \mid \vec{v}\mid _\beta = \begin{bmatrix} b_1 \\ \vdots \\ b_n\end{bmatrix} $$
+
+\begin{theorem}
+if  \(\mathbb{V}\) is s vector space with basis \(\beta = \{\vec{v_1}, \ldots, \vec{v_n}\}\), then for any \(\vec{v}, \vec{w} \in \mathbb{V} \) and \(s, t \in \mathbb{R}\) we have 
+$$ [s\vec{v} + t \vec{w}]_\beta = s[\vec{v}]_\beta + t[\vec{w}]_\beta $$
+\end{theorem}
+
+\begin{corollary}
+if \(\mathbb{S}\) is a subspace of a finite dimensional  vector space \(\mathbb{V}\), then \(dim \mathbb{S} \neq dim \mathbb{V}\)
+\end{corollary}
+
+\section{Change of Coordinates}
+We might want to change which basis we are using for a vector space. To acheive this, we start by converting to and from the standard basis in \( \mathbb{R}^3\) \\
+Let \(\beta\) be a basis for \(\mathbb{R}^3\) and \(\vec{x} \in \mathbb{R}^3\). Since 
+$$ \vec{x} = x_1\vec{e_1} + x_2\vec{e_2} + x_3\vec{e_3}$$
+we find the coordinates of the standard basis vectors respect to the basis \(\beta\), to make calculating \([\vec{x}]_\beta\) easier 
+$$ \begin{aligned} \begin{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}\end{bmatrix}_\beta  & = x_1[\vec{e_1}]_\beta + x_2[\vec{e_2}]_\beta + x_3[\vec{e_3}]_\beta \\
+& = \begin{bmatrix}\vec[{e_1}]_\beta [\vec{e_2}]_\beta [\vec{e_3}]_\beta \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3\end{bmatrix} \end{aligned}$$
+
+\(\beta P_s = \begin{bmatrix}\vec[{e_1}]_\beta [\vec{e_2}]_\beta [\vec{e_3}]_\beta \end{bmatrix} \) is called the change of coordinates matrix from the standard basis S to the basis \(\beta\) 
+
+
+\newpage
+
+\textbf{In general : }
+Let \(\beta = \{\vec{v_1}, \ldots, \vec{v_n}\}\) and \(\zeta\) both be basis of a vector space \(\mathbb{V}\). We want to change coordinates from \(\beta\)-coordinates to \(\zeta\)-coordinates.\\
+\(\vec{x} = b_1\vec{v_1} + \ldots + b_n\vec{v_n}\), we want to find \([\vec{x}]_\zeta\)
+$$ [\vec{x}]_\zeta = \begin{bmatrix} [\vec{v_1}]_\zeta \ldots [\vec{v_n}]_\zeta \end{bmatrix} \begin{bmatrix} \vec{x}\end{bmatrix}_\beta $$
+
+\begin{definition}
+Let \(\beta = \{ \vec{v_1} \ldots \vec{v_n} \} \)  and \(\zeta\) be bases for a vector space \(\mathbb{V}\)\\
+The Change of Coordinates Matrix from \(\beta\)-coordinates to \(\zeta\)-coordinates is defined by 
+$$ \zeta P_\beta = \begin{bmatrix} [\vec{v_1}]_\zeta \ldots [\vec{v_n}]_\zeta \end{bmatrix}  $$
+and for any \(\vec{x}\) in \(\mathbb{V}\) we have 
+$$ [\vec{x}]_\zeta = \zeta P_\beta [\vec{x}]_\beta $$
+\end{definition}
+
+
+\begin{center}
+\textbf{End of Lecture Notes}\\
+\textbf{Notes by : Harsh Mistry}
+\end{center}
+\end{document}

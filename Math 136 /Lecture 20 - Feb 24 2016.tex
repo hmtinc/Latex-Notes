@@ -1,0 +1,153 @@
+%Notes by Harsh Mistry 
+%Math 136 
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 136 - Linear Algebra 
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{20}{February 24, 2016}{Yongqiang Zhao}{Harsh Mistry}
+
+\section{Vector Spaces Continued}
+$$C(\mathbb{R}) = \{ f : \mathbb{R} \rightarrow \mathbb{R} \mid \text{ f is continuous } \}$$
+\begin{definition}
+Let V and W be 2 vector spaces we define the cartesian product of V and W as :
+$$ V \times W = \{(\vec{v}, \vec{w}) \mid \vec{v} \in V, \vec{w} \in W \} $$
+\end{definition}
+
+If we define addition and scaler multiplication as following \\
+$$(\vec{v_1},\vec{w_1}) + (\vec{v_2},\vec{w_2}) = (\vec{v_1} + \vec{v_2} , \vec{w_1}  + \vec{w_2}) $$
+$$ c(\vec{v_1},\vec{w_1}) = (c\vec{v_1},c\vec{w_1}) $$
+then V x W is a vector space 
+
+\begin{theorem}
+In any vector in Span V, \( 0 \vec{v} = \vec{0}, \forall \vec{v} \in V \), Also, -\(\vec{v} = (-1)\vec{v} \)
+\end{theorem}
+
+\begin{proof}
+\[0\vec{v} = (0  + 0) \vec{v} = 0\vec{v} + 0\vec{v} \]
+\[0\vec{v} + (-0\vec{v}) = 0\vec{v} + 0\vec{v} + (-0\vec{v})\]
+\[\vec{0} = 0\vec{v} + \vec{0} = \vec{0\vec{v}}\]
+\[\therefore \vec{0} = 0\vec{v}\]
+\end{proof}
+
+\begin{definition}
+A non=empty subset of a vector space V is called a subaspce if :
+\begin{itemize}
+\item \(\forall \vec{x}, \vec{y} \in S , \vec{x} + \vec{y} \in S \)
+\item \(\forall \vec{x} \in S, \forall c \in \mathbb{R}, c\vec{x} \in S \)
+\end{itemize}
+\end{definition}
+
+\textbf{Trivial Examples : } V and \(\{\vec{0}\}\) are subspaces
+\newpage
+\begin{ex}
+Prove S is subsapce of \(M_{m\times n}\) 
+$$ S = \left\{ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \mid a + b - c - d = 0 \right\} $$
+Clearly S is non-empty as \( \begin{bmatrix} 0 &  0 \\ 0 & 0 \end{bmatrix} \in S \)
+ \[ \begin{aligned} A_1 + A_2 & = \begin{bmatrix} a_1 + a_2 & b_1 + b_2 \\ c_1 + c_2 & d_1 + d_2\end{bmatrix} \\ 
+& = (a_1 + a_2) + (b_1 + b_2) - (c_1 + c_2) - (d_1 + d_2) \\
+& = (a_1 + b_1 - c_2 - d_1) + (a_2 + b_2 - c_2 - d_2) = 0\\
+& \implies A_1 + A_2 \in S \\
+ tA & = \begin{bmatrix} ta & tb \\ tc & td \end{bmatrix} \\
+ & = ta + tb - tc - td = 0  \\
+ & \implies tA \in S \end{aligned} \]
+\(\therefore\) S is a subspace of \(M_{m\times n}\)
+\end{ex}
+
+\begin{definition}
+A square matrix A is called symmetric if \(A = A^T\) 
+$$ Sym_n(\mathbb{R}) = \{ A \in M_{m\times n} (\mathbb{R}) \mid A = A^T \} $$
+\end{definition}
+
+\textbf{Check to see if its a subspace}
+\begin{itemize}
+\item \( 0 \in Sym_n(\mathbb{R}) \rightarrow 0T = 0 \)
+\item \(\forall AB \in Sym_n(\mathbb{R}), (A + B)^T = A^T + B^T = A + B \implies A + B \in Sym_n(\mathbb{R}) \)
+\item \(tA \in Sym_n(\mathbb{R})\)
+\end{itemize}
+
+\textbf{Note : }\(Sym_n(\mathbb{R}) = \{ ((a_{ij}) \mid a_{ij} = a_{ji} \} \)
+
+\begin{definition}
+A square matrix M is called Skew-symmetric if \(A = -A^T\)
+$$ S_n = \{ A \in M_{m\times n} (\mathbb{R}) \mid A = -A^T \} $$
+\end{definition}
+
+\begin{center}
+\textbf{End of Lecture Notes}\\
+\textbf{Notes by : Harsh Mistry}
+\end{center}
+\end{document}

@@ -1,0 +1,116 @@
+%Notes by Harsh Mistry 
+%Math 128
+%Based on template from: https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{blindtext}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 128 :  Calculus 2 for the Sciences
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{27}{March 11, 2016}{Jen Nelson}{Harsh Mistry}
+
+%
+\section{Alternating Series Test (AST)}
+\begin{theorem}
+If the alternating series 
+\[\sum_{n=1}^{\infty} (-1)^{n-1}b_n = b_1 - b_ 2 + b_3 - b_4 + b_5 - b_6 + \ldots \]
+where \(b_n > 0\) satisfies 
+\begin{enumerate}
+\item \(b_{n+1} \leq b_n\)
+\item \(\lim_{n \to \infty} b_n = 0\)
+\end{enumerate}
+Then the series is convergent 
+\end{theorem}
+
+\section{Alternating Series Estimation}
+Let \(S\) be the sum of a series we know converges  
+\[S = \sum_{n = 1}^{\infty} a_n = a_1 + a_2 + \ldots + a_N + \sum_{n = N + 1}^{\infty} a_n = S_N + \sum_{n = N + 1}^{\infty} a_n,\]
+Where \(S_N = a_1 + a_2 + \ldots + a_N\) is the Nth partial sum \\
+\(S_N\) can be used as an approximation for the sum of the series 
+
+\begin{theorem}
+If the alternating series \(\sum_{n = 1}^{\infty} (-1)^{n-1} b_n\), where each \(b_i > 0\), converges by AST, then the error in \(\sum_{n = 1}^{\infty} (-1)^{n-1} b_n \approx S_N\) satisfies 
+\[\begin{bmatrix} R_n \end{bmatrix} = \begin{bmatrix} S - S_N\end{bmatrix} \leq b_{N+1}\]
+
+In order words, the max error is the absolute value of the next term 
+
+\end{theorem}
+
+
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}

@@ -1,0 +1,119 @@
+%Notes by Harsh Mistry 
+%Math 128
+%Based on template from: https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{enumerate}
+\usepackage{blindtext}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 128 :  Calculus 2 for the Sciences
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{28}{March 14, 2016}{Jen Nelson}{Harsh Mistry}
+
+%
+\section{Absolute/Conditional Convergence}
+\begin{definition}
+A series \(\sum_{n=1}^{\infty}\) is 
+\begin{itemize}
+\item Convergent if \(\sum a_n = a_1 + a_2 + \ldots \) is finite 
+\item Absolutely convergent if the series of absolute values \(\sum \mid a_n \mid \) is convergent 
+\item Conditionally convergent if it is convergent but not absolutely convergent : \(\sum a_n\) converges, but \(\sum \mid a_n \mid \) does not 
+\end{itemize}
+\end{definition}
+
+\begin{theorem}
+Absolute Convergence \(\implies\) Convergence 
+\end{theorem}
+
+Why? 
+\begin{itemize}
+\item If an alternating series converges absolutely, there is no need for AST 
+\item Any rearrangements of the series results in the same sum
+\item Gives us a way to test convergence of a series that has negative terms, but is not alternating 
+\end{itemize}
+
+\section{Ratio Test}
+\begin{theorem}- \\
+\begin{enumerate} [(a)]
+\item If \(\lim_{n \to \infty} |\frac{a_n+1}{a_n}| = L < 1\), then \(\sum a_n\) is absolutely convergent 
+\item If \(\lim_{n \to \infty} |\frac{a_n+1}{a_n}| = L > 1\) or  \(\lim_{n \to \infty} |\frac{a_n+1}{a_n}| = \infty\), then \(\sum a_n\) diverges 
+\item If \(\lim_{n \to \infty} |\frac{a_n+1}{a_n}| = 1\), then \textbf{NO CONCLUSION} about the convergence or divergence of \(\sum a_n\) can be made 
+\end{enumerate}
+\end{theorem}
+
+\begin{center}
+\textbf{End of Lecture Notes} \\
+\textbf{Notes By : Harsh Mistry}
+\end{center}
+\end{document}
