@@ -1,0 +1,291 @@
+%Notes by Harsh Mistry 
+%CS 245
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 246 - Logic and Computation 
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{1}{September 1, 2016}{Kevin Lanctot}{Harsh Mistry}
+
+
+\section{Administrative Information}
+\begin{center}
+Lecturer : \textbf{Kevin Lanctot} \\
+Office : \textbf{DC 2131} \\
+Office Hours :  \textcolor{red}{\textbf{Monday 1:00pm - 2:00pm}} \\
+Assignments : \textbf{Due on Wednesdays}
+\end{center}
+
+\section{Discussion Topics} 
+\subsection{What are we doing?}
+\textbf{Humans vs Computers}
+\begin{itemize}
+\item What areas do computers out perform humans?
+\begin{itemize}
+\item Repeated, Complicated tasks
+\item Precision Tasks
+\item Predictability 
+\item Speed of completion 
+\item Making Unbiased decisions
+\item Retaining accurate memory.
+\item Concentrating 
+\end{itemize}
+
+\item What areas do humans out perform computers?
+\begin{itemize}
+\item Problem Solving 
+\item Learning New Concepts 
+\item Extrapolation 
+\item Creating unique creations 
+\item Judgement
+\item Pattern Recognition 
+\item Emotions 
+\item Vague instructions 
+\end{itemize}
+\end{itemize}
+
+\subsection{Computer Programming and Mathematics}
+\textbf{How is computer programming related to mathematics?}
+\begin{itemize}
+\item Both have logical sequence of steps 
+\item Both consist of multiple different solutions
+\item Both consist of elegant solutions
+\item Given a input, both return an output. 
+\item Both can be robust and limited
+\end{itemize}
+
+\subsection{Problem Solving}
+\begin{itemize}
+\item Breakdown problem into smaller pieces 
+\item Read the problem carefully 
+\item Focus
+\item Relate to known problems
+\item Brainstorm 
+\item Try a different approach 
+\item Try simpler versions of the problem 
+\item Take a break 
+\item Solve special cases
+\end{itemize}
+
+\section{Course Description}
+\begin{ablock}{As noted on Kevin's Slides} 
+Propositional       and       predicate       logic.         Soundness       and       completeness       and       their implications.         Unprovability       of       formulae       in       certain       systems.  Undecidability       of       problems       in       computation,       including       the       halting problem.         Reasoning       about       programs.         Correctness       proofs       for       both recursive       and       iterative       program       constructions \\
+
+Consider       the       C       co de       for       selection       sort       on       the       next       slide.         C       has
+
+\begin{itemize}
+\item Logic Operators : \& \& , \(\mid \mid\) , !
+\item Control       Structures: if,          else,          for,          while,          do \(\hdots\) while
+\end{itemize}
+
+Typically       functions       would       have       preconditions       and       postconditions       (or       a contract)       to       specify       behaviour
+\end{ablock}
+
+\section{Chapter 1 : Proportional Logic }
+
+\subsection{Logic: What and Why}
+\begin{ablock}{As noted on Kevin's Slides}
+\textbf{Logic} is the systematic study of the principles of reasoning and inference.
+We use logic throughout computer science,
+
+\begin{itemize}
+\item To model the computer hardware, software and embedded systems
+we create or encounter, in order to reason about those objects in a
+mathematically precise and rigorous manner.
+
+\item To understand how to develop systems that can themselves apply
+reason and make inferences ("artificial intelligence").
+\end{itemize}
+
+Historically, logic and CS are closely linked.
+
+\begin{itemize}
+\item To define and build a "computer" required deep ideas from logic.
+
+\item Computer science gave the first real defnition of "rigorous
+argument" : an argument that may be checked by a machine.
+\end{itemize}
+\end{ablock}
+
+\subsection{The Essential Argument}
+\begin{itemize}
+\item \(\text{If } p \text{ and not } q \text{, then } r. \text{ Not } r. \ p. \text{ Therefore } q.\)
+\end{itemize}
+
+\subsection{What is Logic?}
+
+\begin{exblock}{In the essential argument}
+\begin{itemize}
+\item The factual content of the statements doesn't matter.
+\item The relationships among the statements govern the argument.
+\end{itemize}
+\end{exblock}
+
+Logic concerns careful reasoning about the process of reasoning.
+
+\begin{exblock}{So we need to know}
+\begin{itemize}
+\item What, exactly, constitutes a "statement"?
+\item What, precisely, do the logical relationships mean?
+\end{itemize}
+\end{exblock}
+
+\begin{center}
+\textbf{End of Lecture Notes}\\
+\textbf{Notes by : Harsh Mistry}
+\end{center}
+\end{document}
