@@ -1,5 +1,5 @@
 %Notes by Harsh Mistry 
-%CS 245
+%Stat230
 %based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
 
 \documentclass{article}
@@ -14,7 +14,6 @@
 \usepackage{amsfonts,graphicx, amssymb}
 \usepackage[fleqn]{amsmath}
 \usepackage{fixltx2e}
-\usepackage{xcolor}
 \usepackage{color}
 \usepackage{tcolorbox}
 \usepackage{lipsum}
@@ -40,7 +39,7 @@
    \begin{center}
    \framebox{
       \vbox{\vspace{2mm}
-    \hbox to 6.28in { {\bf CS 245 - Logic and Computation 
+    \hbox to 6.28in { {\bf Stat 230 - Probability  
 	\hfill Fall 2016} }
        \vspace{4mm}
        \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
@@ -71,6 +70,9 @@
 			Figure \thelecnum.#1:~#3
 			\end{center}
 	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
 
 \newtheorem{theorem}{Theorem}[lecnum]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -159,133 +161,47 @@
 %Start of Document 
 \begin{document}
 
-\lecture{1}{September 1, 2016}{Kevin Lanctot}{Harsh Mistry}
+\lecture{1}{September 9, 2016}{Nagham Mohammad}{Harsh Mistry}
 
 
 \section{Administrative Information}
 \begin{center}
-Lecturer : \textbf{Kevin Lanctot} \\
-Office : \textbf{DC 2131} \\
-Office Hours :  \textcolor{red}{\textbf{Monday 1:00pm - 2:00pm}} \\
-Assignments : \textbf{Due on Wednesdays}
+Lecturer : \textbf{Nagham Mohammad} \\
+Office : \textbf{M3 3112 } \\
+Office Hours : \textbf{3:30pm  - 5:30pm Monday} \\
+Email : \textbf{n37mohammad@uwaterloo.ca} 
 \end{center}
 
-\section{Discussion Topics} 
-\subsection{What are we doing?}
-\textbf{Humans vs Computers}
+\section{Introduction to Probability}
+
+\begin{exblock}{Thought Questions}
 \begin{itemize}
-\item What areas do computers out perform humans?
+\item If you flip a fair coin and do it once, what is the probability that it will land heads up?
 \begin{itemize}
-\item Repeated, Complicated tasks
-\item Precision Tasks
-\item Predictability 
-\item Speed of completion 
-\item Making Unbiased decisions
-\item Retaining accurate memory.
-\item Concentrating 
+\item 50%
 \end{itemize}
-
-\item What areas do humans out perform computers?
+\item What is the probability that you will eventually own a home?
 \begin{itemize}
-\item Problem Solving 
-\item Learning New Concepts 
-\item Extrapolation 
-\item Creating unique creations 
-\item Judgement
-\item Pattern Recognition 
-\item Emotions 
-\item Vague instructions 
+\item Unknown
 \end{itemize}
-\end{itemize}
-
-\subsection{Computer Programming and Mathematics}
-\textbf{How is computer programming related to mathematics?}
-\begin{itemize}
-\item Both have logical sequence of steps 
-\item Both consist of multiple different solutions
-\item Both consist of elegant solutions
-\item Given a input, both return an output. 
-\item Both can be robust and limited
-\end{itemize}
-
-\subsection{Problem Solving}
-\begin{itemize}
-\item Breakdown problem into smaller pieces 
-\item Read the problem carefully 
-\item Focus
-\item Relate to known problems
-\item Brainstorm 
-\item Try a different approach 
-\item Try simpler versions of the problem 
-\item Take a break 
-\item Solve special cases
-\end{itemize}
-
-\section{Course Description}
-\begin{ablock}{As noted on Kevin's Slides} 
-Propositional       and       predicate       logic.         Soundness       and       completeness       and       their implications.         Unprovability       of       formulae       in       certain       systems.  Undecidability       of       problems       in       computation,       including       the       halting problem.         Reasoning       about       programs.         Correctness       proofs       for       both recursive       and       iterative       program       constructions \\
-
-Consider       the       C       co de       for       selection       sort       on       the       next       slide.         C       has
-
-\begin{itemize}
-\item Logic Operators : \& \& , \(\mid \mid\) , !
-\item Control       Structures: if,          else,          for,          while,          do \(\hdots\) while
-\end{itemize}
-
-Typically       functions       would       have       preconditions       and       postconditions       (or       a contract)       to       specify       behaviour
-\end{ablock}
-
-\section{Chapter 1 : Proportional Logic }
-
-\subsection{Logic: What and Why}
-\begin{ablock}{As noted on Kevin's Slides}
-\textbf{Logic} is the systematic study of the principles of reasoning and inference.
-We use logic throughout computer science,
-
-\begin{itemize}
-\item To model the computer hardware, software and embedded systems
-we create or encounter, in order to reason about those objects in a
-mathematically precise and rigorous manner.
-
-\item To understand how to develop systems that can themselves apply
-reason and make inferences ("artificial intelligence").
-\end{itemize}
-
-Historically, logic and CS are closely linked.
-
-\begin{itemize}
-\item To define and build a "computer" required deep ideas from logic.
-
-\item Computer science gave the first real defnition of "rigorous
-argument" : an argument that may be checked by a machine.
-\end{itemize}
-\end{ablock}
-
-\subsection{The Essential Argument}
-\begin{itemize}
-\item \(\text{If } p \text{ and not } q \text{, then } r. \text{ Not } r. \ p. \text{ Therefore } q.\)
-\end{itemize}
-
-\subsection{What is Logic?}
-
-\begin{exblock}{In the essential argument}
-\begin{itemize}
-\item The factual content of the statements doesn't matter.
-\item The relationships among the statements govern the argument.
 \end{itemize}
 \end{exblock}
 
-Logic concerns careful reasoning about the process of reasoning.
+\subsection{What does probability mean?}
 
-\begin{exblock}{So we need to know}
 \begin{itemize}
-\item What, exactly, constitutes a "statement"?
-\item What, precisely, do the logical relationships mean?
+\item The term \textbf{probability} refers to the study of randomness (variability of results).
+
+\item Probability is used to quantify the likelihood, or chance, that an outcome of random experiment will occur.
+
+ \item By variability, we mean successive observations of a system or phenomenon do \textbf{not} produce exactly the same result.
 \end{itemize}
-\end{exblock}
 
 \begin{center}
-\textbf{End of Lecture Notes}\\
-\textbf{Notes by : Harsh Mistry}
+\textbf{In addition to what is above, nothing else was discussed in class. Majority of the time was used to go over administrative information.}
 \end{center}
+
+
+
+
 \end{document}
