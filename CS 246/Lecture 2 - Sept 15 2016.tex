@@ -1,0 +1,583 @@
+%Notes by Harsh Mistry 
+%CS 246
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 246 - Object Oriented Programming  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{2}{September 15, 2016}{Brad Lushman}{Harsh Mistry}
+
+\section{Shell Scripts}
+Shell scripts are files containing sequences of commands, executed as programs. 
+
+\begin{ex}-\\
+\begin{lstlisting}
+#!/bin/bash|
+date 
+whoami
+pwd
+\end{lstlisting}
+\end{ex}
+
+\begin{itemize}
+\item \verb|#!/bin/bash| : is the shebang line and tells the shell to execute this as a bash script
+\end{itemize}
+
+\begin{ablock}{Note}
+In order to execute the shell scripts, you must have execute permissions on the file.
+Execute the following the assign execute permissions on the file : chmod utx myscript\\
+
+In addition, to ensure bash can execute the application, a \verb|./| must be placed before the program name
+\end{ablock}
+
+\subsection{Variables}
+\begin{itemize}
+\item Variable Declaration : \verb|x=1| (No Spaces)
+\item Fetching Variable : \verb|$x|  or \verb|${x}|
+\item All variables contain strings
+\end{itemize}
+
+\subsubsection{Global Variables}
+By using the command \verb|env|, a list of global variables can be viewed.
+
+Most importantly, the \verb|PATH| global variable is critical, as it stores a list of directories searched by bash inorder to determine commands that it can execute. 
+
+\begin{cblock}{Special vars for scripts}
+Special Vars allow for input to be received from parameters included on the original command call. \\
+Special vars are : \verb| $1, $2, $3, $3, etc|
+\end{cblock}
+
+
+\subsection{If Statements}
+\begin{ex}
+Check whether a word is in a dictionary
+\begin{lstlisting}
+#!/bin/bash 
+egrep "^$1$" /usr/shar/dict/words
+\end{lstlisting}
+\end{ex}
+
+\begin{ex} A good password should not be in the dictionary. Answer if a word is a good  password. 
+\begin{lstlisting}
+#!/bin/bash 
+egrep "^$1$" /usr/shar/dict/words > /dev/null 
+if [ $? -eq 0 ]; then 
+		echo Bad Password
+else 
+		echo Maybe  a Good Password
+fi
+\end{lstlisting}
+
+
+\end{ex}
+
+\begin{ex}
+Verify \# of args, print error msg, if wrong number of arguments is provided
+\begin{lstlisting}
+#!/bin/bash 
+usage() {
+		echo "Usage: $0 password " >&2 
+}
+if [ $# -ne 1 ]; then 
+		usage
+		exit 1
+fi
+\end{lstlisting}
+\end{ex}
+
+\begin{ablock}{Note}
+\textbf{Status Codes :}\\
+Every program returns a status code when finished.
+\begin{itemize}
+\item egrep returns 0 if found, 1 if not found.
+\end{itemize}
+(In linux : 0 = success, non-zero = failure)\\
+
+\textbf{Notable Commands and Variables :}
+\begin{itemize}
+\item \verb|/dev/null| : Suppresses Output
+\item \verb|$?| : Status of most recently executed command
+\item \verb|if[... ... ...]; then| : Runs a program and returns 0 if program passed based on input parameters
+\end{itemize}
+\end{ablock}
+
+\subsection{If Statement General Form}
+\begin{lstlisting}
+if [ cond ]; then
+		... 
+elif [ cond ]; then
+		...
+else
+		...
+fi
+\end{lstlisting}
+
+\subsection{Loops}
+\begin{ex}
+Print \# 's from 1 to \$ 1
+\begin{lstlisting}
+x=1
+while [ x -le $1 ]; do
+		echo $x
+		x=$((x+1))
+done 00
+\end{lstlisting}
+\end{ex}
+
+\begin{ex}
+Rename all .cpp files to .cc
+\begin{lstlisting}
+#!/bin/bash
+for name in *.cpp; do
+		mv ${name} ${name%cpp}cc
+done
+\end{lstlisting}
+\end{ex}
+
+\begin{ex}
+How many times does word \$1 occur in file \$2?
+\begin{lstlisting}
+#!/bin/bash
+x=0
+for word in $(cat $2); do
+		if [ "$word" = "$1" ]; then 
+				x = $((x+1))
+		fi 
+done
+echo  $x
+\end{lstlisting}
+\end{ex}
+
+\begin{ex}
+Payday is the last friday of the month. When is the first payday? 
+\begin{itemize}
+\item Compute payday 
+\item Report answer
+\end{itemize}
+\begin{lstlisting}
+#!/bin/bash
+answer(){
+		if [ $1 -eq 31 ]; then 
+				echo "This month is the 31st" 
+		else
+				echo "This month : the ${1}th"
+		fi
+}
+answer $(cal | awk '{print $6}' | egrep "[0-9]" | tail -1)
+\end{lstlisting}
+\end{ex}
+
+\begin{ex}
+Generate payday to any month
+\begin{lstlisting}
+#!/bin/bash
+answer(){
+		if [ $2 ]; then 
+				preamble=$2
+		else
+				preamble="This Month"
+		fi
+		
+		if [ $1 -eq $1]; then 
+				echo "${preamble}: the 31st"
+		else
+				echo "${preamble}: the ${1}th"
+		fi
+}
+answer $(cal $1 $2 | awk '{print $6}' | egrep "[0-9]" | tail -1) $1
+\end{lstlisting}
+\end{ex}
+
+
+\begin{ablock}{Notable Commands and Practices}
+\begin{itemize}
+\item \verb|___ $((___))| : Enables Arithmetic 
+\item \verb|mv| : Rename
+\item \verb|${name%cpp}| : Removes all trailing characters that match
+\item \verb|"$1"| : Quotes around variables not set by you is good practice to ensure the variable value does not conflict with formatting 
+\item \verb|cal month year|: Prints a calender 
+\end{itemize}
+\end{ablock}
+
+\section{Software Engineering Topic : Testing}
+\begin{itemize}
+\item Essential part of program development 
+\item ongoing and not just at the end 
+\begin{itemize}
+\item Testing begins before you start coding 
+\item Test suites will assess the expected behaviour 
+\end{itemize}
+\item Testing is not debugging. Testing simply just informs you of the bugs within your program.
+\item Testing cannot guarantee correctness, as it only proves "wrongness"
+\item Ideally, developer and tester should be different people, unfortunately this is \textbf{CS246} where the \textcolor{red}{profs and ISAs don't care for your well being}
+\end{itemize}
+
+\subsection{Types of testing}
+\begin{itemize}
+\item Human testing 
+\begin{itemize}
+\item humans look over code and find flaws
+\item Consists of code inspections and walkthroughs 
+\end{itemize}
+\item Machine testing 
+\begin{itemize}
+\item Runs the program on selected input and check against specifications
+\item Can not check everything , so you must choose test cases carefully  
+\end{itemize}
+\item Black/White/Grey Box testing - no/full/Some knowledge of program implementation
+\begin{itemize}
+\item Black Box Testing 
+\begin{itemize}
+\item Various classes of input (i.e numeric ranges, positive v.s input, etc)
+\item Boundaries of valid data ranges (Edge Cases)
+\item Multiple simultaneous boundaries (Corner Cases)
+\item Intuition is often helpful with guessing likely errors
+\item Extreme cases 
+\end{itemize}
+\item White Box Testing 
+\begin{itemize}
+\item Execute all logical paths through the program 
+\item Make sure every function runs 
+\end{itemize}
+\end{itemize}
+\item Performance testing - Allows for the tester to check if the program efficient enough for the desired application
+\item Regression testing - Ensures new changes to the program do not break old test cases 
+\end{itemize}
+
+\section{Module 2 : C++}
+
+Hello World is \textbf{Cool}, so why not do a quick comparison between the two languages .
+
+\begin{ex} In C : 
+\begin{lstlisting}
+#include <stdio.h>
+int main(){
+	printf("Hello world!");
+	return 0;
+}
+\end{lstlisting}
+\end{ex}
+
+\begin{ex} In C ++
+\begin{lstlisting}
+#include <instream>
+using namespace std;
+int main(){
+	cout << "Hello world" << endl;
+	return 0;
+}
+\end{lstlisting}
+\end{ex}
+
+\begin{ablock}{Notes}
+\begin{itemize}
+\item Main must return int in C++ (If return 0 is left out, C++ returns 0)
+\item stdio.h and printf are still available in c++
+\item In C++ using the header \verb|<iostream>| is preferred for I/O 
+\item 
+\end{itemize}
+\end{ablock}
+
+\subsection{Compiling C++ Code}
+
+\textbf{Compile a program file : }\\
+ \verb|g++ -5 -std=c++14 program.cc -o programexecutablename| \\
+ 
+\textbf{Compile  a program file with defined parameters in /.profile : }\\
+ \verb|G++14 program.cc -o programexecutablename|
+ 
+ \subsection{Input/Output}
+ 
+ C++ has 3 I/O streams :
+ \begin{itemize}
+ \item \textbf{cin} : for reading from stdin
+ \item \textbf{cout, cerr} : for printing to stdout, stderr
+ \end{itemize}
+ 
+ In addition, C++ has 2 I/O operators :
+ \begin{itemize}
+ \item \verb|<<| : "Put to"  (Output)
+ \item \verb|>>| : "Get from" (Input)
+ \end{itemize}
+
+\begin{center}
+\textbf{\textcolor{red}{All examples after this point will omit default headers}}
+\end{center} 
+ 
+ \begin{ex}
+ Adding 2 numbers and outputting result
+ \begin{lstlisting}
+ int main(){
+ 		int x,y;
+ 		cin >> x >> y;
+ 		cout << x + y << endl;
+ }
+ \end{lstlisting}
+ \end{ex}
+ 
+ \begin{ablock}{Notes on cin}
+\begin{itemize}
+\item \verb|cin| Ignores all white spaces. 
+\item If input for a integer is not a int, then variable is undefined.
+\item If the read fails, then \verb|cin.fail()| will be true.
+\item If EOF is reached, then \verb|cin.eof(), cin.fail()| will both be true
+\begin{itemize}
+\item Both will not return true until the attempted read fails!
+\end{itemize}
+\end{itemize}
+ \end{ablock}
+ 
+ \begin{ex}
+ Read all ints from stdin and echo them one per line to stdout. In addition the program will stop on bad input or EOF.
+ \begin{lstlisting}
+ int main(){
+ 		int i;
+ 		while (true){
+ 				 cin >> i; 
+				 if (cin.fail()) break; 
+				 cout << i << endl
+ 		}
+ }
+ \end{lstlisting}
+ \end{ex}
+
+\begin{ablock}{Note}
+\begin{itemize}
+\item There is an implicit conversion from cin to bool 
+\begin{itemize}
+\item Lets cin be used as a condition 
+\end{itemize}
+\end{itemize}
+\end{ablock}
+
+\begin{ex}
+ Read all ints from stdin and echo them one per line to stdout. In addition the program will stop on bad input or EOF using the implicit conversion
+ \begin{lstlisting}
+ int main(){
+ 		int i;
+ 		while (true){
+ 				 cin >> i; 
+				 if (!cin) break; 
+				 cout << i << endl
+ 		}
+ }
+ \end{lstlisting}
+ \end{ex}
+ 
+ \begin{cblock}{Bitshifting in C and its relation to C++}
+ \begin{itemize}
+ \item \verb|>>| is C's right "bitshift" operator 
+ \begin{itemize}
+ \item a \verb|>>| b : Shifts a's  bits b spots to the right
+ \end{itemize}
+ \item When left-hand operand is cin, \verb|>>| is the "get from" operator
+ \item Operator \verb|>>| 
+ \begin{itemize}
+ \item Inputs : \verb|cin| (istream and \verb|data| (Variety of types)
+ \item Output : returns cin (istream)
+ \item This is why we can write \verb| cin >> x >> y >> z;|
+ \end{itemize}
+ \end{itemize}
+ \end{cblock}
+ 
+ \begin{ex}
+ Read all ints from stdin and echo them one per line to stdout. In addition the program will stop on bad input or EOF using implicit conversion and output of \verb|cin|
+ \begin{lstlisting}
+ int main(){
+ 		int i;
+ 		while (true){
+ 				 cin >> i; 
+				 if (!(cin >> i)) break;
+				 cout << i << endl;
+ 		}
+ }
+ \end{lstlisting}
+ \end{ex}
+ 
+ \begin{ex}
+ Read all ints from stdin and echo them one per line to stdout. In addition the program will stop on bad input or EOF using  implicit conversion and output of \verb|cin| without while(true)
+ \begin{lstlisting}
+ int main(){
+ 		int i;
+ 		while (cin >> i){
+				 if (cin >> i) break;
+				 cout << i << endl;
+ 		}
+ }
+ \end{lstlisting}
+ \end{ex}
+ 
+ \begin{ex}
+ Read all ints and echo to stdout until EOF. Also Skip all non-integer input.
+ \begin{lstlisting}
+ int main(){
+ 		while(true){
+ 				if(!(cin >> i)){
+ 						if(cin.eof())break;
+ 						cin.clear(); // clears the fail bit
+ 						cin.ignore(); // ignore and throwaway current input character 
+ 				}
+ 		}
+ 		else cout << i << endl; // read was ok
+ }
+ \end{lstlisting}
+ 
+ \end{ex}
+
+\end{document}
