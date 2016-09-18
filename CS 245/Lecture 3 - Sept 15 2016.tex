@@ -1,0 +1,298 @@
+%Notes by Harsh Mistry 
+%CS 245
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{enumerate}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 245 - Logic and Computation 
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{3}{September 15, 2016}{Kevin Lanctot}{Harsh Mistry}
+
+\section{Review}
+\begin{itemize}
+\item Propositions : True / False
+\item Syntax : Format 
+\item Symbols :
+\begin{itemize}
+\item p, q, r
+\item \(\wedge, \vee, \neg, \implies, \iff\)
+\item () 
+\end{itemize}
+\item Expression : \(((P \wedge Q) \implies R)\)
+\end{itemize}
+
+\section{Unique Readability of Formulas}
+\begin{theorem}
+Every well-formed formula has a unique derivation as a well-formed formula. So, each well-formed formula has exactly one the following forms: 
+\begin{enumerate}
+\item An atom 
+\item (\(\neg \alpha\))
+\item \((\alpha \wedge \beta)\)
+\item \((\alpha \vee \beta)\)
+\item \((\alpha \implies \beta)\)
+\item \((\alpha \iff \beta)\)
+\end{enumerate}
+\end{theorem}
+
+In each case, it is of that form in exactly one way. In essence, there is only one way of reading the formula and breaking it down.
+
+\begin{ablock}{Simple and Strong Induction Review}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline 
+• & Simple Induction & Strong Induction (Course of value) \\ 
+\hline 
+Basis  & Show P(0) & Show P(0) \\ 
+\hline 
+Ind. Hypothesis & P(k) holds & \textbf{ P(m) holds for every M \(\leq\) k } \\ 
+\hline 
+Ind. Step & Show P(k+1) holds & Show P(k+1) Holds \\ 
+\hline 
+Conclusion  & P(k) holds for every k  & P(k) holds for every k \\ 
+\hline 
+\end{tabular} 
+\end{center}
+\end{ablock}
+
+\subsection{Structural Induction}
+
+A formula is not a natural number, but it suffices to prove any one of the following
+
+\begin{itemize}
+\item For every natural number n, every formula with n or fewer
+symbols has property P.
+\item For every natural number n, every formula with n or fewer
+connectives has property P.
+\item For every natural number n, every formula whose parse tree
+has height n or less has property P.
+\item or , For every natural number n, every formula whose parse tree
+has height n or less has property P.
+\end{itemize}
+
+Induction applied tp any of the formulations above, requires steps that show: \\
+If \(P(\alpha)\) and \(P(\beta)\) then \(P((\neg \alpha))\) and \(P(\alpha * \beta)\). \\  
+
+Formulas \(\alpha\) and \(\beta\) have smaller n values that \(\neg \alpha\) and \(\alpha * \beta\) do. Where * represents a connective operator , 
+
+\subsection{Principal of Structural Induction}
+\begin{theorem}
+Let R be a property. Suppose that 
+\begin{enumerate}
+\item for each atomic formula p, we have R(p); and
+\item for each formula \(\alpha\), if \(R(\alpha)\)  then \(R((\neg \alpha))\) ; and 
+\item for each pair of formulas \(\alpha\) and \(\beta\) and each binary connective *, if \(R(\alpha)\) and \(R(\beta)\) then \(R(\alpha * \beta)\) 
+\end{enumerate}
+
+Then \(R(\alpha)\) for every formula \(\alpha\) 
+
+Use of this principle is called \textbf{\textcolor{red}{Structural Induction}}, which is a special case of mathematical induction
+\end{theorem}  
+
+
+
+\subsection{Proof of Unique Readability}
+\begin{proof}
+Property P(n) : 
+
+Every Formula \(\varphi\) contain at most n connectives satisfies all there of the following. 
+
+\begin{enumerate}[A:]
+\item The first symbol of \(\varphi\) is either '(' or variable 
+\item \(\varphi\) has an equal number of '(' and ')' and each proper prefix of \(\varphi\) has more '(' than  ')'.
+\item \(\varphi\) has a unique construction as a formula 
+\end{enumerate}
+
+Note : A \textbf{Proper Prefix} of \(\varphi\) is a non-empty expression x such that \(\varphi\) is xy for some non-empty expression y.
+
+\begin{center}
+We can prove property P for all n by induction 
+\end{center}
+
+\textbf{Inductive Hypothesis : } P(k) holds for some natural number k 
+
+\textbf{We Must Prove :} P(k+1) holds, to do this we let formula \(\alpha\) have k+1 connectives 
+
+\textbf{A key case : } \(\alpha\) is \(\beta * \gamma\). For property C, we must show that \(\alpha\) is  \(\beta^{\prime} *^{\prime} \gamma^{\prime} \) for \textbf{Formulas} \(\beta^{\prime}\) and \(\gamma^{\prime}\), then \(\beta = \beta^{\prime}\), \(* = *^{\prime}\), and \(\gamma = \gamma^{\prime}\), 
+
+If \(\beta^{\prime}\) has the same length as \(\beta\), then they must be the same string
+
+Otherwise, either \(\beta^{\prime}\) is a proper prefix of \(\beta\)  or \(\beta\) is a proper prefix of \(\beta^{\prime}\) . But since \(\beta\) and \(\beta^{\prime}\)  are formulas with at most k
+connectives, the inductive hypothesis applies to them.
+In particular, each has property B, and thus neither can be a
+proper prefix of the other.
+
+
+Thus \(\beta\) has a unique derivation, as required by property C.
+
+\end{proof}
+\subsection{Options for a Proof}
+
+\begin{enumerate}
+\item Prove A, B and C simultaneously, as a single “compound”
+property. (Section 3.2.2)
+\item Prove them separately: first A, then B, and finally C.
+\end{enumerate}
+
+\section{Truth Tables}
+Columns: List all the propositional variables on left and all the
+subformulas (in increasing order of the number of connectives) on
+the right.
+
+Rows: Create a row for every possible combination of truth
+valuations for the propositional variables.
+
+\end{document}

@@ -1,0 +1,207 @@
+%Notes by Harsh Mistry 
+%Stat230
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Stat 230 - Probability  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{4}{September 16, 2016}{Nagham Mohammad}{Harsh Mistry}
+
+
+\section{Probability-Counting Techniques}
+\subsection{Events in Uniform Probability Model}
+In a a uniform model, where all the outcomes have the same chance of occurring the. The probability of event A is :
+$$ P(A) = \frac{\text{Number of outcomes in A}}{\text{Total Number of outcomes in S}} $$
+
+\subsection{The Basic Principal of Counting}
+\begin{itemize}
+\item Addition Rule 
+\begin{itemize}
+\item If there are two tasks to be performed; Then if task 1 can be completed with \(p\) possible outcomes and there \(q\) possible outcomes for task 2. \textcolor{red}{Then, either task 1 or task 2 (but not both), can be completed in p + q ways}.
+\end{itemize}
+\item Multiplication Rule
+\begin{itemize}
+\item   If there are two tasks to be performed; Then if task 1 can be completed with \(p\) possible outcomes and if, for each outcome of task 1, there are q possible outcomes of task 2, \textcolor{red}{Then, together (AND) there are \textbf{pq} possible outcomes of two tasks.}.
+\item \(S = \left\lbrace\begin{matrix} (1,1) & (1,2) & \ldots & (1,q) \\ 
+                                    (2,1) & (2,2) & \ldots & (2,q) \\
+                                    \vdots & \vdots  &\vdots & \vdots \\
+                                    (p,1) & (p, 2) & \ldots & (p,q) \end{matrix}\right\rbrace\)
+\end{itemize}
+\end{itemize}
+
+\subsection{Generalized Principal of Counting}
+If r experiments that are to be performed are such that the first one may result in any of \(n_1\) possible outcomes; and if, for each of these \(n_1\) possible outcomes, there are \(n_2\) possible outcomes of the second experiment; and if, for each of the possible outcomes of the first two experiments, there are \(n_3\) possible outcomes of the third experiment; and if . . . , then there is a total of \(n_1, n_2, \ldots, n_r\) possible outcomes of the r experiments.
+
+\begin{ablock}{Note}
+“With replacement” means that after the first number is picked it is “replaced” in the set of numbers, so it could be picked again as the second number.
+\end{ablock}
+
+\subsection{Permutations}
+A permutation ("arrangement number" or "order") is an arrangement of the elements of an ordered list.
+
+\begin{cblock}{Factorial Notation}
+\(x! = x \times \ldots \times 1\) :  represents  cases where each event may only occur once, so the number of possible of choices decreases each time. \\
+
+
+\(n^{(k)} = \frac{n!}{(n-k)!}\) : represents cases where only a certain number of events can be chosen from the initial options. \\
+
+\textbf{Note : } Order is important!
+\end{cblock}
+
+\end{document}
