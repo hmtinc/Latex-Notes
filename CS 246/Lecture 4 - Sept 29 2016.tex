@@ -1,0 +1,605 @@
+%Notes by Harsh Mistry 
+%CS 246
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 246 - Object Oriented Programming  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break, const},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this, struct},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{4}{September 29, 2016}{Brad Lushman}{Harsh Mistry}
+
+\section{Overloading \(<<\) and \(>>\)}
+
+\begin{ex} - Formatting Output Using \(>> \text{and} <<\) Operators
+\begin{lstlisting}
+#include <iostream>
+using namespace std;
+
+struct Grade {
+  int theGrade;
+};
+
+ostream &operator<<(ostream &out, const Grade &g) {
+  out << g.theGrade << "%";
+  return out;
+}
+
+istream &operator>>(istream &in, Grade &g) {
+  in >> g.theGrade;
+  if (g.theGrade < 0) g.theGrade = 0;
+  if (g.theGrade > 100) g.theGrade = 100;
+  return in;
+}
+
+int main () {
+  Grade g;
+  while (cin >> g) cout << g << endl;
+}
+\end{lstlisting}
+\end{ex}
+
+\section{The Preprocessor}
+Transforms the code before the compiler sees it. \# \underline{\hspace{2cm}} is the prepocessor directive. e.g \verb|#include|
+
+\subsection{Define}
+
+Defined constants are useful for conditional compilation
+
+\begin{ex} Using define to make programming from multiple operating systems simpler
+\begin{lstlisting}
+#define IOS 1
+#define BBOS 2
+#define OS IOS (or BBOS)
+
+#if OS == IOS 
+		short int publickey 
+#elif OS == BBOS 
+		long long int public key 
+#end if
+\end{lstlisting}
+\end{ex}
+
+\textbf{Special Case : }
+\begin{lstlisting}
+#if 0 
+		...
+#endif
+\end{lstlisting}
+
+\begin{itemize}
+\item Never true and all inner text is suppressed before it gets to teh compiler
+\item Useful as a heavy-duty "comment out" to comment out anything including other comments
+\end{itemize}
+
+\begin{ex} Define symbols via compiler arguments 
+
+\textbf{Bash : }
+\begin{lstlisting}
+g++14 -DX=15 define.cc -0 define 
+./define
+\end{lstlisting}
+\textbf{Define.cc : }
+\begin{lstlisting}
+int main(){
+		cout << x << endl
+}
+\end{lstlisting}
+\end{ex}
+
+
+\begin{itemize}
+\item \# ifdef NAME : True is Name has been defined
+\item \# ifndef Name : True if Name has not been defined 
+\end{itemize}
+
+\begin{ex} Using ifdef and ifndef to define a debug mode
+
+\textbf{debug.cc :}
+\begin{lstlisting}
+int main(){
+		#ifdef DEBUG
+				cout << "setting x=1" << endl;
+		#endif 
+		x=1;
+		while (x < 10) {
+				++x;
+				#ifdef DEBUG 
+						cout << "x = " << x << endl;
+				#endif 
+		}
+		cout << x << endl;
+}
+\end{lstlisting}
+
+\textbf{Enabling Debugging :}
+\begin{lstlisting}
+g++14 -DDEBUG debug.cc -o debig 
+\end{lstlisting}
+\end{ex}
+
+\section{Separate Compilation}
+
+Split programs into composable modules, with : 
+\begin{itemize}
+\item Interface (.h) : type definitions. function prototypes 
+\item implementation - full definitions  for all provided functions 
+\end{itemize}
+
+\begin{cblock} {Recall}
+\begin{itemize}
+\item declaration - asserts existence
+\item definition - full details and allocates space 
+\end{itemize}
+\end{cblock}
+
+\begin{ex} Simple example of compilation 
+
+\textbf{vec.h :}
+\begin{lstlisting}
+struct vec{
+		int x, y;
+}
+
+Vec operator+(const vec &v1, const vec &v2);
+\end{lstlisting}
+
+\textbf{main.cc :}
+\begin{lstlisting}
+#include "vec.h"
+
+int main(){
+		Vec v{1,2}'
+		v = v + v:
+}
+\end{lstlisting}
+
+\textbf{vec.cc}
+\begin{lstlisting}
+
+#include "vec.h"
+
+Vec operator+(const vec &v1, const vec &v2){
+		// definition goes here 
+}
+
+\end{lstlisting}
+\end{ex}
+
+\begin{cblock}{Recall :}
+An entity can be declared many times, but defined at most once.
+\end{cblock}
+
+\subsection{Compiling a binary from multiple source files}
+Adding a \verb| -c | to \verb|g++14| compiles the files only and does not generate a executable. By doing this, the compiler will produce an object file(.o). 
+
+Once object files are generated for each source file, you can link the object files to generate a executable. 
+
+\begin{itemize}
+\item Compile only : \verb| g++14 -c filename.cc|
+\item Link Object Files : \verb| g++14 filename.o filename.o -o binary name|
+\end{itemize}
+
+\newpage
+
+\begin{ex} Including Header Files
+
+\textbf{linalg.h :}
+\begin{lstlisting}
+#include "vec.h"
+\end{lstlisting}
+
+\textbf{linalg.cc :}
+\begin{lstlisting}
+#include "linalg.h"
+#include "vec.h"
+\end{lstlisting}
+
+\textbf{main.cc :}
+\begin{lstlisting}
+#include "linalg.h"
+#include "vec.h"
+\end{lstlisting}
+
+\textbf{\textcolor{red}{This Example will not compile}}
+\begin{itemize}
+\item main.cc and linalg.cc include vec.h, linalg.h. In addition, linalg.h includes vec.h 
+\item This causes 2 copies vec.h to be included, thus struct Vec gets defined twice 
+\end{itemize}
+\end{ex}
+
+\subsection{Include Guard}
+To prevent issues when a header file is included multiple times, format header files to check for previous definition.
+\begin{lstlisting}
+#ifndef VEC.H
+#define VEC.H
+		// File Contents
+#endif 
+\end{lstlisting}
+
+The example above will only define vec.h if it has not previously been defined. After the first definition, the rest of the file is suppressed. 
+\textbf{Always ensure your header files have include guards.}
+
+\subsection{Stuff to Never Do !!!!}
+\begin{enumerate}
+\item \textbf{Never} ever \textbf{\textcolor{red}{EVER}} compile header files \textbf{\textcolor{red}{EVER}}
+\item \textbf{Never} include .cc files 
+\item \textbf{Never} put \verb|using namespace std;|  in header files 
+\begin{itemize}
+\item the using directive will be forced upon any client that includes the file
+\item Always say \verb|std::cin, std::string, std::istream,| etc in headers
+\end{itemize}
+
+\end{enumerate}
+
+\section{Classes}
+A big idea of OOP is that you can put objects instead structures
+\newpage 
+\begin{ex} Function instead of a Structure 
+\begin{lstlisting}
+struct Student {
+		int a, b , c;
+		float grade(){
+				return a * 0.4 + b * 0.2 + c * 0.4
+		}
+};
+
+Student s {60,70,80}
+
+cou << s.grade() << endl;
+\end{lstlisting}
+\end{ex}
+
+\begin{itemize}
+\item Class - essentially a structure type that can contain functions. 
+\begin{itemize}
+\item C++ has a class keyword. \textit{Since this is CS246, we will use it later}
+\end{itemize}
+\item Object - an instance of a class
+\item Function grade - called a member function 
+\item Methods take a hidden extra parameter called \textbf{this}
+\begin{itemize}
+\item pointer to the object on which the method was involved
+\item \verb|billy.grade()| is a pointer to the object billy 
+\end{itemize}
+\end{itemize}
+
+\section{Initializing Objects}
+
+\textbf{In C : } \verb| Student billy {60,70,80};|
+
+The c way is OK, but a better way would be to write a method that does initialization. This method is called a constructor. To create a constructor, simply create a method within the object that shares the same name.
+
+\begin{ex} Basic Constructor Example 
+\begin{lstlisting}
+struct Student{
+		int a, b, c;
+		float grade (){ ... }
+		Student (int a, int b, int c){
+				this->a = a
+				this->b = b
+				this->c = c
+		}
+}
+
+Student billy {60, 70, 80}; //better 
+Student billy = Student {60, 70, 80} // Also works
+\end{lstlisting}
+
+\begin{itemize}
+\item If a constructor is defined the values are passed as arguments 
+\item If no constructor is defined, the values are used to initialize the individual fields of student.
+\end{itemize}
+\end{ex}
+
+\textbf{Heap allocation :} \verb|Student *Billy = new student {60,70,80}|
+
+\textbf{Advantages of Constructors :} Default parameters, overloading, and sanity checks
+
+\begin{ex} Constructor Example With Default Values
+\begin{lstlisting}
+struct Student{
+		int a, b, c;
+		float grade (){ ... }
+		Student (int a = 0, int b = 0, int c = 0){
+				this->a = a
+				this->b = b
+				this->c = c
+		}
+}
+
+\end{lstlisting}
+\end{ex}
+
+\begin{ablock}{Note}
+Every class comes with a default constructor, which just default constructs any fields that are objects
+\end{ablock}
+
+\begin{ex} Default Constructor Example
+\begin{lstlisting}
+Vec v; //default constructor (Does nothing in this case)
+\end{lstlisting}
+\begin{itemize}
+\item The default constructor goes away if you define your own
+\end{itemize}
+\end{ex}
+
+\begin{ex} Proof of Default Constructor 
+\begin{lstlisting}
+struct v {
+		int x, y;
+		Vec (int x, int y) { 
+				this->x = x;
+				this->y = y;
+		}
+}
+
+Vec v {1,2}; // Works
+Vec v; .. // Error , thus there must have been a default constructor in ex 4.9
+\end{lstlisting}
+\end{ex}
+
+\begin{ex} Constants and References in Structures
+\begin{lstlisting}
+int z;
+Struct MyStruct(){
+		const int myConst = 6;
+		int &myref = z;
+}
+\end{lstlisting}
+\end{ex}
+
+\begin{exblock}{What happens when a object is created?}
+\begin{enumerate}
+\item Space is allocated 
+\item Fields are constructed 
+\item Constructor Body Runs 
+\end{enumerate}
+\end{exblock}
+\newpage
+\begin{ex} Initializing Constants using the Member Initialization List (MIL)
+\begin{lstlisting}
+int z;
+Struct MyStruct(){
+		const int myConst;
+		int a, b, c;
+		MyStruct(int a, int b, int c):
+			myConst{myConst}, a{a}, b{b}. c{c} {}
+}
+\end{lstlisting}
+\begin{itemize}
+\item You can initialize any field using MIL, not just constants and references
+\item Fields are initialized in the order in which they are declared in the class, even if the MIL orders them differently. 
+\item MIL is sometimes more efficient then setting fields in the body 
+\item \textbf{\textcolor{red}{Embrace MIL, or else!!. It is your friend.}}
+\end{itemize}
+\end{ex}
+
+\begin{ex} Field Initialized Inline and MIL
+\begin{lstlisting}
+struct Vec{
+		int x=0, y=0;
+		vec(int x):x{x} {}
+};
+\end{lstlisting}
+\begin{itemize}
+\item In the example, MIL always takes precedence 
+\end{itemize}
+\end{ex}
+
+\subsection{Every Class Comes With}
+\begin{enumerate}
+\item Default Constructor : Default constructs all fields, but is lost if you define your own
+\item Copy Constructor : Just copies all fields
+\item Copy Assignment Operator 
+\item Destructor 
+\item Move Constructor 
+\item Move Assignment Operator 
+\end{enumerate}
+
+\begin{ex} Writing your own copy constructor 
+\begin{lstlisting}
+struct Student{
+		student (const Student &char):
+			a{other, a}, b{other, b}, c{other, c}{}	// Same as Default
+};
+\end{lstlisting}
+\end{ex}
+
+\begin{ex} Example case where default copy constructor does not work
+\begin{lstlisting}
+struct Node{
+		int data
+		Node *next;
+		Node (int data, Node *next) : data {data}, next{}{}
+};
+Node *n = node Node{1, New Node {2, new Node {3, nullptr}}};
+Node m = *n;
+Node *p = new Node(*n)
+\end{lstlisting}
+\begin{itemize}
+\item Since pointers are used, the copy constructor only copies the first node, this is called a shallow copy.
+\end{itemize}
+\end{ex}
+
+\begin{ex} Deepcopy Copy Constructor 
+\begin{lstlisting}
+struct Student{
+		int data
+		Node *next;
+		Node (const Node &other) : data {other, data}, next{other.next?new Node(*other.next):nullptr}{}
+};
+\end{lstlisting}
+
+\end{ex}
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+

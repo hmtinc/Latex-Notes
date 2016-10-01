@@ -1,0 +1,299 @@
+%Notes by Harsh Mistry 
+%CS 245
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{enumerate}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 245 - Logic and Computation 
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{4}{September 20, 2016}{Kevin Lanctot}{Harsh Mistry}
+
+\section{Classifying Formulas}
+\begin{itemize}
+\item A formula \(\alpha\) is a tautology if any only if for every truth valuation t, \(\alpha^{t} = T\) 
+\begin{itemize}
+\item \((p \vee (\neg p))\) is a tautology 
+\end{itemize}
+
+\item A formula \(\alpha\) is a contradiction if and only if for every truth valuation t, \(\alpha^{t} = T\)
+\begin{itemize}
+\item \((p \wedge (\neg P)\) is a contradiction
+\end{itemize}
+
+\item A formula \(\alpha\) is satisfiable if and only if there is some truth valuation t such that \(\alpha^t = T\) 
+\begin{itemize}
+\item \((p \implies q)\) is satisfiable if you set both variables to T.
+\end{itemize}
+\end{itemize}
+
+\textbf{Note : } A formula is satisfiable if and only if it is not a contradiction
+
+\section{"Short-Cutting" a Truth Table}
+Instead of filling an entire truth table, we can observer what happens if we set a variable to T or F in order to simply the formula. We can use this to evaluate formulas, be creating a valuation tree
+
+\section{Equivalence of Formulas}
+Two formulas \(\alpha \textbf{And} \beta\) are said to be equivalent if they share the same final column in their respective truth tables. To indicate this we use teh following notion :
+
+\begin{center}
+\( \alpha \equiv \beta\)
+\end{center}
+
+\begin{lemma} Suppose that \( \alpha \equiv \beta\). Then for any formula \(\gamma\) and any connective *, the formulas \((\alpha * \gamma)\) and \((\beta * \gamma)\) are equivalent : \((\alpha * \gamma) \equiv (\beta * \gamma)\)
+\end{lemma}
+
+\subsection{Algebra of Formulas}
+Many equivalences of formulas look much like rules of ordinary
+arithmetic.
+\begin{itemize}
+\item Commutativity 
+\begin{itemize}
+\item \((\alpha \wedge \beta) \equiv (\beta \wedge \alpha)\)
+\item \((\alpha \vee \beta) \equiv (\beta \vee \alpha)\)
+\end{itemize}
+
+\item Associativity
+\begin{itemize}
+\item \((\alpha \wedge (\beta \wedge \gamma)) \equiv ((\alpha \wedge \beta) \wedge \gamma)\)
+\item \((\alpha \vee (\beta \vee \gamma)) \equiv ((\alpha \vee \beta) \vee \gamma)\)
+\end{itemize}
+
+\item Distributivity
+\begin{itemize}
+\item \((\alpha \vee (\beta \wedge \gamma) \equiv ((\alpha \vee \beta) \wedge (\alpha \vee \gamma)\) 
+\item \((\alpha \wedge (\beta \vee \gamma) \equiv ((\alpha \wedge \beta) \vee (\alpha \wedge \gamma)\) 
+\end{itemize}
+
+\item Idempotence 
+\begin{itemize}
+\item \((\alpha \vee \alpha) \equiv \alpha\)
+\item \((\alpha \wedge \alpha) \equiv \alpha\)
+\end{itemize}
+
+\item Double Negation 
+\begin{itemize}
+\item \((\neg (\neg \alpha)) \equiv \alpha\)
+\end{itemize}
+
+\item De Morgan's Laws 
+\begin{itemize}
+\item \(\neg (\alpha \wedge \beta) \equiv (\neg \alpha \vee \neg \beta)\)
+\item \(\neg (\alpha \vee \beta) \equiv (\neg \alpha \wedge \neg \beta)\)
+\end{itemize}
+
+\item Simplification I
+\begin{itemize}
+\item \((\alpha \wedge T) \equiv \alpha\)
+\item \((\alpha \vee T) \equiv T\)
+\item \((\alpha \wedge F) \equiv F\)
+\item \((\alpha \vee F) \equiv \alpha\)
+\end{itemize}
+
+\item Simplification II
+\begin{itemize}
+\item \((\alpha \vee (\alpha \wedge \beta)) \equiv \alpha\)
+\item \((\alpha \wedge (\alpha \vee \beta)) \equiv \alpha\)
+\end{itemize}
+
+\item Implication 
+\begin{itemize}
+\item \((\alpha \implies \beta) \equiv ((\neg \alpha) \vee \beta)\)
+\end{itemize}
+
+\item Contrapositive 
+\begin{itemize}
+\item \((\alpha \implies \beta) \equiv ((\neg \beta) \implies (\neg \alpha))\)
+\end{itemize}
+
+\item Equivalence
+\begin{itemize}
+\item \((\alpha \iff \beta) \equiv ((\alpha \implies \beta) \wedge (\beta \implies \alpha))\)
+\end{itemize}
+
+\item Excluded Middle 
+\begin{itemize}
+\item \((\alpha \vee (\neg \alpha)) \equiv T\)
+\end{itemize}
+
+\item Contradiction 
+\begin{itemize}
+\item \((\alpha \wedge (\neg \alpha)) \equiv F \)
+\end{itemize}
+\end{itemize}
+
+\section{Satisfiability of Sets of Formulas}
+Let \(\sum\) denote a set of formulas and t a valuation define : \(\sum^t = \begin{cases} T    \text{     if for each } \beta \in \sum, \beta^t = T \\F \text{     otherwise }\end{cases}\)
+
+When \(\sum^t = T\), we say that t \textbf{satisfies} \(sum\)
+
+A Set \(\sum\) is \textbf{Satisfiable} iff there is some valuation t such that \(\sum^t = T\)
+
+\section{Logical Consequence (Entailment)}
+Let \(sum\) be a set of formulas and let \(\alpha\) be a formula. We say that 
+\begin{itemize}
+\item \(\alpha\) is a logical consequence of \(sum\), or 
+\item \(\sum\) entails \(\alpha\), or 
+\item \(sum \models \alpha\) 
+\end{itemize}
+
+if and only if for any truth valuation t, if \(\sum^t = T \text{ then also } \alpha^t = T\)
+
+\subsection{Equivalence and Entailment}
+Equivalence can be expressed using the notion of entailment.
+
+\begin{lemma} \(\alpha \equiv \beta\) if and only if both\(\{ \alpha \} \models \beta\) and \(\{\beta\} \models \alpha \)
+\end{lemma}
+\end{document}

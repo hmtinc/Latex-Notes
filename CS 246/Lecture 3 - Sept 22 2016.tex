@@ -1,0 +1,582 @@
+%Notes by Harsh Mistry 
+%CS 246
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 246 - Object Oriented Programming  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{3}{September 22, 2016}{Brad Lushman}{Harsh Mistry}
+
+
+ \begin{ex}
+ Read all ints and echo to stdout until EOF. Also Skip all non-integer input.
+ \begin{lstlisting}
+ int main(){
+ 		while(true){
+ 				if(!(cin >> i)){
+ 						if(cin.eof())break;
+ 						cin.clear(); // clears the fail bit
+ 						cin.ignore(); // ignore and throwaway current input character 
+ 				}
+ 		}
+ 		else cout << i << endl; // read was ok
+ }
+ \end{lstlisting}
+ 
+ \end{ex}
+ 
+ \section{Reading Strings}
+ In C there is a type std::string which is included (\verb|#include <string>|)
+ 
+ 
+ \begin{ex} Basic Read Example 
+ \begin{lstlisting}
+ int main(){
+ 		string s;
+ 		cin >> s;
+ 		cout << s << endl;
+ }
+ \end{lstlisting}
+ \end{ex}
+ 
+ \begin{itemize}
+ \item \verb|cin| skips leading white space 
+ \item In addition, cin stops reading at white space (reads one word)
+ \item \verb|getline(cin,s)| can be used to read from new line to next new line into s
+ \end{itemize}
+ 
+ \begin{ex} Printing a value out as hex decimal 
+ \begin{lstlisting}
+ cout << hex << 95 << endl; //Prints 5f
+ \end{lstlisting}
+ \end{ex}
+ \begin{itemize}
+ \item \verb|hex| is a I/O manipulator, so all subsequent ints will be printed in hex 
+ \item \verb|cout << dec| can be used to go back to basic decimal 
+ \item There are multiple I/O manipulators, refer to official site for full list. \verb|#include<iomanip>| may be required. 
+ \end{itemize}
+ 
+ \section{Stream Abstraction}
+ The  concepts covered can be applied to other sources of data 
+ \subsection{Files} 
+ \begin{itemize}
+ \item \verb|std::ifstream| - read file from a file
+ \item \verb|std::ofstream| - write to an file 
+ \end{itemize}
+ 
+ \begin{ex}File Access in C 
+ \begin{lstlisting}
+ int main(){
+ 		char s[256];
+ 		FILE *file=fopen("myfile.txt"; "r");
+ 		
+ 		while(true){
+ 				fscanf(file, "%255", s);
+ 				if (feof(file)) break;
+ 				printf("%s\n",s);
+ 		}
+ 		fclose(file);
+ }
+ \end{lstlisting}
+ \end{ex}
+ 
+ \begin{ex}File Access in C++ 
+ \begin{lstlisting}
+ #include <iostream>
+ #include <fstream>
+ #include <string>
+ using namespace std;
+ 
+ int main(){
+ 		ifstream file {"myfile.txt"};
+ 		string s;
+ 		while(file >> s){
+ 				cout << s << endl;
+ 		}
+ }
+ \end{lstlisting}
+ 
+  \begin{itemize}
+ \item Declaring and Initializing the variable on line 7, opens the file
+ \item File is closed when the ifstream variable goes out of scope 
+ \item \textbf{Anything} you can do with \verb|cin|/\verb|cout|, you can do with \verb|ifstream|/\verb|ofstream|
+ \end{itemize}
+ \end{ex}
+ 
+ \subsection{Strings}
+ You can attached a stream to a string and read from or write to it. 
+ 
+ \begin{itemize}
+ \item You must include \verb|#include<sstream>|
+ \item \verb|std::istringstream| - Read from string
+ \item \verb|std::ostringstream| - Write to string
+ \end{itemize}
+
+\newpage
+
+ \begin{ex} Reading a value into a string using string streams
+ \begin{lstlisting}
+ int main(){
+ 		int to = ??, hi = ??;
+ 		ostring stream ss;
+ 		ss << "Enter a number between" << 10 << "and" << hi;
+ 		string s = ss.str();
+ }
+ \end{lstlisting}
+ \end{ex}
+ \begin{ex} Reading a value into a string and confirming it is a number using string streams 
+ \begin{lstlisting}
+ int n;
+ while(true){
+ 		cout << "Enter a number" << endl 
+ 		string s;
+ 		cin > s;
+ 		istringstream ss {s};
+ 		if (ss >> n) break;
+ 		cout << "I said " ;
+ }
+ cout << "You entered" << n << endl;
+ \end{lstlisting}
+ \end{ex}
+ 
+ \begin{ex} Example 3.1 Revjsted using String Streams
+ \begin{lstlisting}
+ int main(){
+ 		string s;
+ 		while(cin >> s){
+ 				istringstream ss{s};
+ 				int n;
+ 				if (ss >> n) cout << n << endl;
+ 		}
+ }
+ \end{lstlisting}
+ \end{ex}
+ 
+ \section{Strings}
+ \subsection{C vs C++ Strings}
+ \textbf{In C : }
+ \begin{itemize}
+ \item array of characters (char * or char []) are terminated by a null terminator. 
+ \item In addition you must manage memory 
+ \item You must also get more memory as strings grow. 
+ \item Null terminators are also easy to overwrite
+ \end{itemize}
+ 
+ \textbf{In C++ :}
+ \begin{itemize}
+ \item Strings Grow as needed and no memory management is required
+ \item Strings are safer to manipulate
+ \item \textcolor{red}{During Initialization, the value is a C string which is used to initialize a C++ string.} 
+ \end{itemize}
+ 
+ \subsection{String operations}
+ \begin{itemize}
+ \item Equality : \verb| s1 == s2| or \verb| s1 != s2|
+ \item Comparison (Lexicographic Order) : \verb|s1 <= s2|
+ \item Length : \verb|s.length|
+ \item Get individual chars : \verb|s[0], s[1], s[2]|
+ \item Concatenate : \verb|s3 = s1 + s2| or \verb|s3 += s4|
+ \end{itemize}
+ 
+ \section{Default Function Parameters}
+ 
+ \begin{ex} Read file function with default file 
+ \begin{lstlisting}
+ void printWordsInFile (string name = "suite.txt"){
+ 		ifstream file {name};
+ 		string s;
+ 		while (file >> s) cout << s << endl;
+ }
+ 
+ int main (){
+ 		printWordsInFile("Suite2.txt");
+ 		printWordsInfile(); //suite.txt
+ }
+ \end{lstlisting}
+ \end{ex}
+ 
+ 
+\textbf{\textcolor{red}{Note : Default Parameters must be last}}
+
+\section{Overloading}
+\begin{ex} Functions to process different parameters in C
+\begin{lstlisting} 
+int negInt(int m) {return n;}
+bool negBool (bool b) {return b;)
+\end{lstlisting}
+\end{ex}
+
+\begin{ex} Functions to process different parameters in C++
+\begin{itemize}
+\item Functions with different parameters lists can share the same name 
+\end{itemize}
+
+\begin{lstlisting} 
+int neg(int m) {return n;}
+bool neg(bool b) {return b;)
+\end{lstlisting}
+
+\begin{itemize}
+\item Compiler uses the  number of types of arguments to decide which neg is called 
+\item Overloads must differ in number or types of arguments. Functions cannot just differ on just return type
+\end{itemize}
+\end{ex}
+
+Overloading explains how many functions are able to function. Functions such as \verb|for #s, string, >>, <<, etc| rely on overloading
+
+\section{Structures}
+\begin{ex} Structures in C++
+\begin{itemize}
+\item Structures are the same as C, except the struct keyword is not necessary
+\end{itemize}
+\begin{lstlisting}
+struct Node{
+		int data;
+	    Node *next; //Struct key word is not required
+};
+\end{lstlisting}
+\end{ex}
+
+
+\section{Constants}
+\begin{lstlisting}
+Const int maxGrade = 100; // must be initialized
+\end{lstlisting}
+
+\textbf{Null Pointers in C++} : (\verb|nullptr|) is the syntax for null pointer
+\begin{lstlisting}
+Node n1={5,nullptr}; // Syntax for null pointer
+//DO NOT SAY NULL or 0 !
+\end{lstlisting}
+
+\textbf{Immutable Copies} :
+\begin{lstlisting}
+Const Node n2=n2}; // Can not change field
+\end{lstlisting}
+
+
+\section{Parameter Passing}
+
+\subsection{Review}
+\begin{lstlisting}
+void inc (int n) {++n}
+
+int main (){
+		int x = 5;
+		inc (x)
+		cout << x << endl; // prints 5 
+}
+\end{lstlisting}
+
+\begin{itemize}
+\item Call by value : inc gets a copy of x, and increments the copy, so the original is unchanged.
+\item If a function need to modify a parameter, pass a pointer
+\end{itemize}
+
+\subsection{References}
+C++ has another pointer like type, which is called a reference. Its why \verb|cin >> x | is able to function without a address.
+
+
+\begin{ex} - Important
+\begin{lstlisting}
+int y = 10;
+int &z = y; // z is an l value reference to int 
+            // like a const point 
+            // similar to int * const z = &y
+\end{lstlisting}
+
+\begin{itemize}
+\item References are like constant pointers with automatic dereferencing 
+\end{itemize}
+
+\begin{lstlisting}
+z=12; // (NOT *z = 12)
+	  // y is now equal to 12
+\end{lstlisting}
+
+\begin{lstlisting}
+int *p = &z; // gives the address of y
+\end{lstlisting}
+\begin{itemize}
+\item In all cases, z behaves exactly like y. Z is an alias for y 
+\end{itemize}
+\end{ex}
+
+\subsubsection{Things You Can't Do}
+\begin{enumerate}
+\item Leave them uninitialized : \verb|int &x;|
+\begin{itemize}
+\item must be initialized to something that has an address (an lvalue), since refs are pointers.
+\item In short, values assigned to a reference MUST have an address
+\end{itemize}
+
+\item Create a pointer to a reference : \verb| int &* x;|
+\begin{itemize}
+\item References to pointers are OK : \verb| int *&x = ______|
+\end{itemize}
+
+\item Create a reference to a reference : \verb|int &&r; | (Means something different)
+\item Create an array of references : \verb|int &r[3] = {n, n , n};|
+\end{enumerate}
+
+\subsubsection{Things You Can Do}
+\begin{enumerate}
+\item Pass references as function parameters : \verb|void inc (int &n) {++n}|
+\begin{itemize}
+\item This is why cin >> x works, as it takes in a reference 
+\item \verb|istream &operator >> (istream &in, int&data);|
+\end{itemize}
+
+\item Pass-by-value : \verb|int f(int n) {...} copies the argument|
+\begin{itemize}
+\item If the argument is big, copying is expensive 
+\item \verb|int f(reallyBig rb){...}| - Slow
+\item \verb|int g(ReallyBig &rb){...}| Fast, but you can't be sure that rb changes in the caller 
+\item \verb|int h(const ReallyBig &rb){...}| Fast, no copy, and the parameter cannot be changed
+\end{itemize}
+\end{enumerate}
+
+\begin{ablock}{Advice}
+\begin{itemize}
+\item Prefer pass-by-constant-reference over pass-by-value for anything larger than a pointer.
+\item Unless the function needs to make a copy anyway, then ,maybe use pass-by-value
+\item Using pass-by-constant-reference can allow you to pass literal values to a reference, as the compiler has already been promised that the value will never change.
+\begin{itemize}
+\item The compiler achieves this by creating a temporary location to hold the literal value, so a reference has somethings to point at.
+\end{itemize}
+\end{itemize}
+\end{ablock}
+
+\section{Dynamic Memory Allocation}
+
+\textbf{\textcolor{red}{DO NOT USE malloc AND free IN C++}}
+
+\textbf{Instead use : } \verb|new| and \verb|delete|, as they are type aware and less error prone. 
+
+\begin{ex} Creating a heap object and deleting it with new/delete
+\begin{lstlisting}
+struct Node{
+	int data;
+	Node *next
+}
+
+Node *np = new Node;
+
+...
+
+delete np;
+\end{lstlisting}
+\end{ex}
+\begin{itemize}
+\item All local variables reside on the stack 
+\item Variables deallocated when they go out of scope (Stack is popped)
+\item Allocated memory resides on the heap 
+\item Remains allocated until delete is called, if not deleted, memory leaks will occur.
+\end{itemize}
+
+\begin{ex} Creating a array and deleting an array. 
+\begin{lstlisting}
+Node *nArr = new Node[10];
+...
+delete [] nArr; //Special form of delete for arrays
+\end{lstlisting}
+\end{ex}
+
+\begin{ex} Passing a pointer to heap data
+\begin{lstlisting}
+Node *getMeANode(){ //Returns a pointer to a heap data
+		return new node;
+}
+\end{lstlisting}
+\end{ex}
+
+\section{Operation Overloading}
+Give meanings to c++ operators for our own types 
+
+\begin{ex} Vector Operations using Operation Overloading
+\begin{lstlisting}
+struct vec{
+		int x,y;
+};
+
+vec operator+(const Vec &v1, const vec &v2){
+		vec v {v1.x + v2.x, x1.y + v2.y};
+		return v;
+}
+
+vec operator*(const int k, const vec &v1){
+		return {k * v1.x, k * v1.y} // ok because compiler knows its a vec based on return type
+		//Handles 2*v, but not v*2
+}
+
+vec operator*(const vec &v1, const int k){ //different order tells compiler to use secondary function
+		return k*v1;
+}
+\end{lstlisting}
+\end{ex}
+
+
+\end{document}
+
+
+
+
+
+
+
