@@ -1,0 +1,544 @@
+%Notes by Harsh Mistry 
+%CS 246
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 246 - Object Oriented Programming  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break, const},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this, struct},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{5}{October 6, 2016}{Brad Lushman}{Harsh Mistry}
+
+\begin{center}
+\textcolor{red}{\textbf{Note: \textit{(E)} Indicates topics Brad has emphasized and should receive more attention}}
+\end{center}
+
+\begin{ex} Deepcopy Copy Constructor 
+\begin{lstlisting}
+struct Student{
+		int data
+		Node *next;
+		Node (const Node &other) : data {other, data}, next{other.next?new Node(*other.next):nullptr}{}
+};
+\end{lstlisting}
+\end{ex}
+
+\section{Copy Constructor Use Cases \textit{(E)}}
+\begin{enumerate}
+\item When an object initializes another object 
+\item When an object is passed by value
+\item When an object is returned by value 
+\end{enumerate}
+
+\section{Uniform Initialization}
+\begin{ex} In C++ 03
+\begin{lstlisting}
+int x = 5; 
+string s = "Hello";
+Student  billy (70,80,90);
+int x(5);
+string s ("Hello");
+\end{lstlisting}
+\end{ex}
+
+\begin{ex} C++14 Brace Bracket Syntax 
+\begin{lstlisting}
+int x{5};
+string s{"Hello"}
+Student billy {70, 80, 90};
+\end{lstlisting}
+\begin{itemize}
+\item Brace brackets eliminate the need to know which initialization syntax need to be used.
+\item Brace bracket syntax works in most cases, but some cases still requires initialization using = or ()
+\end{itemize}
+\end{ex}
+
+
+\begin{ablock}{Note:}
+\begin{itemize}
+\item Avoid single argument constructors, as they will cause the compiler to undergo implicit conversion.
+\begin{itemize}
+\item For example, you could accidentally provide an integer into a function requiring a node, which the compiler will allow
+\end{itemize}
+\item To resolve these issues, disable the implicit conversion by making the constructor explicit. 
+\begin{itemize}
+\item Add \verb|explicit| in front of the constructor definition \textit{(E)}
+\end{itemize}
+\end{itemize}
+\end{ablock}
+
+\section{Destructors}
+
+When a object is destroyed there is a a method called the destructor that runs. 
+
+\subsection{Sequence of Destructor}
+\begin{enumerate}
+\item Destructor runs
+\item Fields destructors are invoked (if there are objects) in reverse declaration order
+\item Space deallocated 
+\end{enumerate}
+
+\subsection{Custom Destructor}
+
+Classes come with a destructor, but only does step 2, which is fine for most cases. Despite this, there may be cases such as, linked lists, where you may need to write your own destructor.
+
+\begin{ex} Standard Destructor on pointer based Linked-List
+\begin{lstlisting}
+Node *np= new Node{1, new Node{2, new Node {3, nullptr}}}
+\end{lstlisting}
+\begin{itemize}
+\item If \verb|np| goes out of scope : the pointer (\verb|np|) is reclaimed and the entire list is leaked 
+\item If delete is called : only the second node is deleted and the remained list is still leaked. 
+\end{itemize}
+\end{ex}
+
+
+\begin{ex} Custom Deep Delete Destructor for Linked Lists \textit{(E)}
+\begin{lstlisting}
+struct Node{
+		...
+		~ Node () {delete next;} 		
+}
+
+delete np;
+\end{lstlisting}
+\begin{itemize}
+\item The \verb|~| (Tilde) before a function name that matches the structure name is treated as the destructor. 
+\end{itemize}
+\end{ex}
+
+
+\section{Copy Assignment Operator}
+\begin{lstlisting}
+Student billy {60,70,80};
+Student jane = billy; // Copy Constructor 
+Student anne ; // Default constructor 
+anne = billy ; // Copy Assignment not Constructor 
+\end{lstlisting}
+
+Assigning a value after a structure has been defined utilizes a copy assignment constructor. 
+
+\subsection{Custom Assignment Operator}
+Once again, you may need to occasionally write your own assignment operator. A good example of when this may happen, is when you are dealing with pointers.
+
+\begin{ex} Custom Assignment Operator for Linked-Lists \\
+\textbf{Incorrect Implementation :}
+\begin{lstlisting}
+struct Node {
+		Node &operator=(const Node &other){
+				data = other.data;
+				delete next; //delete existing nodes to prevent leaks
+				next = other.next ? Node {* other.next} : nullptr;
+				return *this;
+		}
+}; //Dangerous 
+\end{lstlisting} 
+
+The implementation fails because self assignment \verb|n=n| results in original values being deleted before copy can take place, thus you may get undefined behavior. 
+
+\textbf{Somewhat Correct Implementation :}
+
+\begin{lstlisting}
+struct Node {
+		Node &operator=(const Node &other){
+				if (this == &other) return *this;
+				data = other.data;
+				delete next; //delete existing nodes to prevent leaks
+				next = other.next ? Node {* other.next} : nullptr;
+				return *this;
+		}
+}; //Ok
+\end{lstlisting} 
+
+This implementation is incorrect because of new node. If new node fails, then the function will stop and result in a corrupted structure. 
+
+\textbf{Correct Implementation :}
+\begin{lstlisting}
+struct Node {
+		Node &operator=(const Node &other){
+				if (this == &other) return *this; // Not needed 
+				Node *temp = next;
+				next = other.next ? Node {* other.next} : nullptr;
+				data = other.data;
+				delete tmp;
+				return *this;
+		}
+}; //Correct
+\end{lstlisting} 
+
+The correct implementation makes a temporary copy, so if new fails, the resulting structure will simply be the starting structure instead of a corrupted structure. This also eliminates the need for a self assignment check, unless you which to improve efficiency in rare cases.
+\begin{itemize}
+\item The custom operator returns a Node, so the user can cascade if he/she wishes to. 
+\item \textbf{Important : } The Assignment operator is not a \textbf{Constructor}, so there is no initialization list.
+\end{itemize}
+\end{ex}
+
+\begin{ex} (Copy and Swap idiom) Alternative Solution to Custom Assignment Operator \textit{(E)}
+\begin{lstlisting}
+#include <utility>
+
+struct Node {
+		...
+		void swap (Node &other){
+				using std::swap;
+				swap(data, other.data);
+				swap(next, other.next);
+		}
+		Node &operator= (const Node &other){
+				Node tmp = other
+				swap (tmp);
+				return *this;
+		}
+}; // Alot Cleaner
+\end{lstlisting}
+\begin{itemize}
+\item This works because a copy of old data is created and the new data is swapped in, but since temp is on the stack, temps destructor runs and destroys old data. 
+\end{itemize}
+\end{ex}
+
+\section{Rvalues and Rvalue reference}
+
+\begin{exblock}{Recall:}
+\begin{itemize}
+\item An lvalue is anything with an address
+\item lvalue references is like a constant pointer with auto dereferencing which is always initialized to an lvalue
+\end{itemize}
+\end{exblock}
+
+\textbf{Consider:}
+\begin{lstlisting}
+Node n {1, new Node { 2, nullptr}};
+Node m = n; // Copy Constructor
+Node m2;
+m2 = n; // copy assignment 
+\end{lstlisting}
+
+
+\begin{ex} Deepcopy from Temporary Linked List.
+\begin{lstlisting}
+Node plusOne (Node n){
+		for (Node *p = &n; p ; p = n->next){
+				++p->data;
+		}
+		return n;
+}
+
+Node m3 = plusOne(n); //Copy Constructor 
+\end{lstlisting}
+\begin{itemize}
+\item The Compiler creates a temporary object to hold the result of plusone.
+\item other is a reference to this temporary
+\begin{itemize}
+\item Copy constructor copies data from this temporary. 
+\end{itemize}
+\item The temporary is just going to be discarded anyway, as soon as the statement is evaluated completed. 
+\item This is wasteful copying from a temporary, why not just \textbf{steal} it?
+\end{itemize}
+\end{ex}
+
+\textbf{Rvalue, and Move Constructors to the rescue!!! : \textit{(E)}}\\
+In order to "steal" data from a temporary object instead of simply copying the values and deleting the temporary, you need to be able to differentiate between live and temporary object. C++ 11 introduces rvalues to resolve this. 
+
+C++ rvalue reference \verb|Node &&| is a reference to a temporary object (An Rvalue) of type node. 
+
+In order to achieve this, a secondary constructor called a \textbf{Move} Constructor;
+
+
+\begin{ex} Move Constructor for Linked Lists. \textit{(E)}
+\begin{lstlisting}
+struct {
+		...
+		Node(Node &&other) : data{other.data}, next{other.next}{
+				other.next = nullptr; // Takes away other value and assigns null
+		}
+};
+
+Node m3 = plusOne(n);
+\end{lstlisting}
+\begin{itemize}
+\item The other next value must be set to null to prevent the "stolen" data from being deleted once the initial statement is evaluated
+\item This is efficient because if a initialization is done on a temporary object. Assignment can be done is constant time by "stealing" data.  
+\end{itemize}
+\end{ex}
+
+\begin{ex} Move Assignment Operator Example \textit{(E)}
+\begin{lstlisting}
+struct Node{
+		...
+		Node &operator=(Node &&other){
+		//Steal Others Data and Destroy My Data
+		swap(other);
+		return &this;
+		
+		}
+}
+\end{lstlisting}
+\begin{itemize}
+\item The current objects data will be swapped with the temporary object. The temporary object will then be destroyed once the evaluation is completed, thus deleting the old data
+\end{itemize} 
+\end{ex}
+
+\begin{ablock} {Note : \textit{(E)}}
+If you don't define a move constructor or assignment, the original copy versions will be used instead. 
+
+If the move operations are defined, they replace all calls to the copy constructor/assignment operator when the argument is a temporary rvalue 
+\end{ablock}
+ 
+\newpage
+\section{Copy/Move Elision \textit{(E)}}
+
+\textbf{Consider:}
+\begin{lstlisting}
+Vec makeAvec(){
+		return {0,0}; // Invokes basic constructor
+}
+
+Vec v = makeAvec();
+\end{lstlisting} 
+
+The above snippet does not use the Move/Copy constructor. This happens because in certain circumstances the compiler is allowed to skip calling copy/move constructors \textbf{(But does not have to)}
+
+In the snippet above, makeAvec writes its result \verb|{0,0}| directly into the space accepted by v  in the caller, rather than copy it after 
+
+\begin{ex} Additional Example 
+\begin{lstlisting}
+void doSomething(Vec v){ // Pass By Value
+		...
+}
+doSomething(makeAVec());
+\end{lstlisting}
+\begin{itemize}
+\item Result of makeAVec is written directly into the parameter and not copied
+\item This is allowed, even if dropping the constructor calls would change change the behavior of the program (i.e Printing something)
+\end{itemize}
+\end{ex}
+
+\begin{ablock}{Note :}
+You are not expected to know exactly when copy/move elison is allowed - just that they are possible 
+\end{ablock}
+
+If you need all of the constructors to run, compile with the \verb|-fno-elide-constructors| flag.  Keep in mind, that this could considerably, slow down your program. 
+
+\section{In Summary: Rule of 5 \textit{(E)}}
+
+\begin{itemize}
+\item If you need a custom version of any of the following
+\begin{itemize}
+\item Copy Constructor 
+\item Copy Assignment Operator 
+\item Destructor
+\item Move Constructor 
+\item Move Assignment Operator
+\end{itemize}
+Then you usually, need a custom version of all 5. 
+\end{itemize}
+
+\begin{ablock}{Note}
+\begin{itemize}
+\item Operator= is a member function not a standalone function 
+\item When an operator is declared as a member functions, THIS plays the role of the first argument
+\item Always define \(>>\) and \(<<\) operators as standalone functions 
+\end{itemize}
+
+\textbf{The following operators should be members : \textit{(E)}}
+\begin{itemize}
+\item operator *
+\item operator []
+\item operator \(\rightarrow\)
+\item operator ()
+\item operator T (Where T is a type)
+\end{itemize}
+\end{ablock}
+
+
+\section{Separate Compilation with Classes}
+\textbf{Node.h} : 
+
+\begin{lstlisting}
+...
+struct Node {
+		int data;
+		Node *next;
+		explict Node (int data, Node * next = nullptr);
+		bool barNext ();
+};
+...
+\end{lstlisting}
+
+\textbf{Node.cc}
+\begin{lstlisting}
+#include "node.h"
+
+Node::Node(int data, Node * next) data{data}, next{next} {}
+Node::barNext () { ...}
+\end{lstlisting}
+
+
+\textbf{Note : }\verb| :: | is called the scope scope resolution operator 
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+

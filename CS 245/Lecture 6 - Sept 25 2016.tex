@@ -1,0 +1,236 @@
+%Notes by Harsh Mistry 
+%CS 245
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{enumerate}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 245 - Logic and Computation 
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{6 and 7}{September 25, 29, 2016}{Kevin Lanctot}{Harsh Mistry}
+
+\section{Proofs and Entailment}
+We want show : 
+\begin{enumerate}
+\item Soundness : \(\sum \vdash_{Res} \varphi \) implies that \(\sum \models \varphi\), that is, if we prove something using Resolution then it is true 
+\item Completeness : \(Sum \models \varphi\) implies that \(\sum \vdash \varphi\), that is, every entailment has a proof 
+\end{enumerate}
+
+\subsection{Resolution is Sound}
+For resolution to be meaningful, we need the following.
+
+\begin{theorem}
+Suppose that \(\{\alpha_1, \ldots, \alpha_2\} \vdash_{Res} \perp \); that is, there is a resolution refutation with premises \(\alpha_1, \ldots, \alpha_n\) ans conclusion \(\perp\). Then the set \(\{\alpha1, \ldots, \alpha_n\}\) is unsatisfiable (Contradictory)
+
+That is, \(\sum \cup \{\neg \varphi\} \vdash_{Res} \perp, \text{ then } \sum \cup \{\neg \varphi\} \)is a contradiction. Therefore, \(\sum \models \varphi\). 
+\end{theorem}
+
+In essence, the solution proof system is sound. 
+
+\subsection{Resolution Can Fail}
+\begin{definition}
+A proof system S is complete if every entailment has a proof; that is, if every entailment has a proof; that is, if 
+$$ \sum \models \alpha \textbf{ Implies } \sum \vdash_{S} \alpha $$
+\end{definition}
+
+\begin{theorem}
+Resolution is complete refutation system for CNF formulas. That is, if there is no proof of \(\perp\) from a set of premises in CNF, then \(\sum\) satisfiable. 
+\end{theorem}
+
+\begin{claim}
+Suppose that a resolution proof “reaches a dead end”—that
+is, no new clause can be obtained, and yet \(\perp\) has not been derived. Then the entire set of formulas (including the premises!) is satisfiable. 
+\end{claim}
+
+The resolution method yields an algorithm to determine whether a
+given formula, or set of formulas, is satisfiable or contradictory.
+
+\begin{itemize}
+\item Convert to CNF
+\item Form resolvents (the result of applying resolution’s inference
+rule) until either \(\perp\) is derived, or no more derivations are
+possible.
+\end{itemize}
+
+If \(\perp\)  is derived, the original formula/set is contradictory. Otherwise,
+the preceding proof describes how to find a satisfying valuation.
+
+\section{Proofs in Propositional Logic : Natural Deduction}
+
+\begin{itemize}
+\item \(\wedge\)-Introduction Rule : If \(\sum \vdash \varphi\) and \(\sum \vdash \alpha\), then \(\sum \vdash \varphi \wedge \alpha\)
+\begin{itemize}
+\item $$ \frac{\varphi \text{    } \alpha }{\varphi \wedge 
+\alpha}$$
+\end{itemize}
+
+\item \(\wedge\)- Elimination Rule : If \(\sum \vdash \varphi \wedge \alpha. \text{ then } \sum \vdash \varphi \text{ and } \sum \vdash \alpha \)
+\begin{itemize}
+\item $$\frac{\varphi \wedge \alpha}{\varphi}  \frac{\varphi \wedge \alpha}{\alpha}$$
+\end{itemize}
+
+\item \(\rightarrow\)-elimination rule : If \(sum \vdash \varphi \rightarrow \alpha \) and \( \sum \vdash \varphi\),then \(\sum \vdash a\)
+\begin{itemize}
+\item $$\frac{\varphi \rightarrow \alpha \text{    } \varphi}{\alpha}$$
+\end{itemize}
+
+\item \(\rightarrow\)-Introduction rule : If \(\sum \cup \{ \varphi \} \vdash \alpha\), then \(\sum \vdash \varphi \rightarrow \alpha\)
+\begin{itemize}
+\item $$ \frac{\begin{matrix} \varphi \\ \vdots \\ \alpha \end{matrix}}{\varphi \rightarrow \alpha}$$
+\end{itemize}
+\end{itemize}
+
+\end{document}

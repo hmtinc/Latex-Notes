@@ -1,0 +1,232 @@
+%Notes by Harsh Mistry 
+%Stat230
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Stat 230 - Probability  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{11, 12, 13}{October 3, 5, 7, 2016}{Nagham Mohammad}{Harsh Mistry}
+
+\section{Conditional Independence}
+Two events A and B are \textbf{Conditionally independent} given a third event Y if the occurrence or non-occurrence of A and the occurrence or non-occurrence of B are independent in their conditional probability given Y.
+
+$$ P(A \cap B \mid Y ) = P(A \mid Y) P (B \mid Y) $$
+
+\section{Discrete Random Variables and Probability Models}
+
+\subsection{Random Variable}
+\begin{itemize}
+\item When an experiment is performed we are interested mainly in some function of the outcome as opposed to the actual outcome itself 
+\item Random Variable : is a function that assigns a real number to each point in a sample space \(S\).
+\item In essence, a random variable is a function whose domain is the sample space and whose range is the set of possible values of the variable. 
+\end{itemize}
+
+\textbf{Two Types of Random Variables}
+\begin{itemize}
+\item Discrete random variable is a r.v whose possible values either integer or countable set om which there is a first element, second element, and so on. 
+\item Continuous random variable is a r.v whose set of possible values consists of an entire interval on the number line. 
+\end{itemize}
+
+\subsection{Probability Function}
+\begin{itemize}
+\item Probability function of a random variable, X, is a function
+$$ f(x) = P(X = x) \text{  Defined for all } x \in A $$
+\end{itemize}
+
+\subsection{Probability Distributions for Discrete Random Variables}
+\begin{itemize}
+\item A probability distributions of a random variable X is a description of the probabilities associated with the possible values of X
+\item The set of pairs \(\{ (x, f(x)) : x \in A \}\) is called the probability distribution of X
+\item A probability distribution says how the total probability of 1 is distributed among the various value of X
+\end{itemize}
+
+\textbf{Properties}
+\begin{itemize}
+\item \(f(x) \geq 0 \text{ for all } x \in A \)
+\item \(\sum_{x \in A} f(x) = 1 \)
+\item The p.f can be presented nicely in tabular form
+\item The p.f can also be displayed in a line graph
+\item The p.f can also be displayed using histogram which is called a probability histogram 
+\begin{itemize}
+\item The height of each rectangle is proportional to \(f(x)\) 
+\item The base is the same for all rectangle 
+\end{itemize}
+\item A p.f may be specified as a formula
+\end{itemize}
+
+\textbf{Note : Its not always possible to find a simple formula}
+
+\subsection{The Cumulative Distributive Function. }
+
+F(x) for discrete r.v for variable X with p.f. f(x) is defined for every number \(x \in R\) by 
+
+$$ F(x) = P(X \leq x) = \sum_{u : u \leq x} f(u) $$
+
+\textbf{Properties :} Let F(X) denote the probability that the random variable X takes on a value that is less than or equal to x
+\begin{itemize}
+\item F is a non decreasing function; that is, if \(a < b\), then \(F(a) \leq F(b)\).
+\item \( 0 \leq F(X) \leq 1 \), for all \(x \in R\) 
+\item \(\lim_{x \to \infty} F(x) = 1, \lim_{x \to -\infty} = F(x) = 0 \)
+\end{itemize}
+\textbf{Proposition:} For any numbers a and b with \(a \leq b\)
+$$ P ( a \leq X \leq b) = F(b) = F(a -) $$
+Where \((a -)\) is the largest x value that is strictly less than a
+
+
+\end{document}

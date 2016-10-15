@@ -1,0 +1,576 @@
+%Notes by Harsh Mistry 
+%CS 246
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 246 - Object Oriented Programming  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break, const},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this, struct},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{6}{October 13, 2016}{Brad Lushman}{Harsh Mistry}
+
+\section{Arrays of Objects}
+
+
+\begin{ex} Example of Incorrect implementation of object arrays
+\begin{lstlisting}
+Struct Vec {
+		int x, y;
+		Vec (int x, int y);
+};
+
+Vec *vp = new Vec [10];
+Vec moreVecs [10];
+\end{lstlisting}
+\begin{itemize}
+\item This example will fail, as structures must be initialized. This happens because there is default constructor. So, 
+\begin{itemize}
+\item Option 1 : Provide a default constructor 
+\item Option 2 : For stack arrays , you can do this \verb| Vec moreVecs[3] = { {0,0} , {0,0}, {0,0}}|
+\item Option 3 : For heap arrays 
+\begin{lstlisting}
+Vec **vp = new Vec*[2];
+vp[0] = {0,0};
+vp[1] = {0,0};
+
+...
+
+for (int i = 0; i < 5; ++i){ 
+		delete vp[i];
+}
+delete [] vp;
+\end{lstlisting}
+\end{itemize}
+\end{itemize}
+\end{ex}
+
+\section{Constant Objects}
+\verb| int f (const Vec & v) { ... } |
+\begin{itemize}
+\item Constant objects arise often, especially as function parameters. 
+\item Constant objects are objects where fields can not be modified
+\end{itemize}
+
+\textbf{Can we call methods on a constant object? } \\
+Yes, we can call methods on constant objects that promise not to modify any fields. This can be achieved by including \verb|const| after the function declaration. 
+
+\begin{ex} Function that promises not change fields
+\begin{lstlisting}
+struct Student {
+		...
+		float grade() const; // This method doesn't modify fields
+};
+\end{lstlisting}
+\begin{itemize}
+\item Note : only constant methods can be called on constant objects
+\end{itemize}
+\end{ex}
+
+\textbf{Now Consider}, you want to collect usage statistics on student objects
+
+\begin{lstlisting}
+struct Student{
+		...
+		int numMethodCalls = 0;
+		float grade () const {
+				++numMethodCalls;
+				return ... ;
+		}
+};
+\end{lstlisting}
+
+In the current case, numMethodCalls can't be changed because its a constant object. But , mutating numMethodCalls affects only the \underline{Physical Constantness} if student objects, not the \underline{Logical Constantness}.
+
+To ensure the field can be mutated, you can declare the field to be \verb|mutable| .  Mutable fields can be changed even if the object is constant
+
+\begin{lstlisting}
+struct Student{
+		...
+		mutable int numMethodCalls = 0;
+		float grade () const {
+				++numMethodCalls;
+				return ... ;
+		}
+};
+\end{lstlisting}
+
+\section{Static Fields and Methods}
+
+\verb|numMethodCalls| tracked the number of times a method was called on a particular object. If we wanted to implement tracking on all objects. You can use static members.
+
+\subsection{Static Members}
+Static Members are associated with the class itself and not with any specific instance or object. So one member is created for the class in general instead of one version for each individual object.
+
+\begin{ex} Example usage of static integer
+\begin{lstlisting}
+struct Student{
+		...
+		static int numInstances; 
+		Student (int assns, int mt, int final): assns{assns} .... {
+				++numInstances;
+		}
+};
+\end{lstlisting}
+\begin{itemize}
+\item The static members must be declarations, so for each static member you must define the variable in the .cc file 
+\begin{itemize}
+\item In .cc : \verb| int Student::numInstances = 0;|
+\end{itemize}
+\item In essence, static fields, must be defined external to the class. 
+\end{itemize}
+\end{ex}
+
+\subsection{Static Member Functions}
+Static member functions are functions whose operations don't depend on the specific instance. So references can't be made to individual objects, as a result they don't have \verb|this|. 
+Given this, static member functions can only call other static functions and other static fields. 
+
+\begin{ex} Example usage of static member functions. 
+\begin{lstlisting}
+struct Student {
+		...
+		static int numInstance;
+		...
+		static void printNumInstances(){
+				cout << numInstances << endl;
+		}
+};
+
+Student billy {60, 70, 80};
+Student jane {70, 80, 90};
+Student::printNumInstances(); // 2
+\end{lstlisting}
+\end{ex}
+
+\section{Invariants and Encapsulation}
+\textbf{Consider:}
+\begin{lstlisting}
+struct Node {
+		int data;
+		Node *next 
+		Node (int  data, Node * next) : data{data}, next{next} {}
+		...
+		~Node () { delete next; }
+};
+Node n1{1, new Node{n , nullptr}};
+Node n2 {3, null ptr};
+Node n3 {4, &n2}; 
+\end{lstlisting}
+
+When n2 and n3 go out of scope, n3's constructor will attempt to delete n2, but n2 is stack allocated. This will result in undefined behaviour. 
+
+The Class Node relies on an assumption for its proper operation. Next is supposed to be either a nullptr or was allocated by new.  This is an \textbf{Invariant}, which is a statement that holds true. Despite this, we can't trust the user to use node properly. 
+
+Right now we can't enforce any invariants because the user can interfere with out data 
+
+\begin{ex} A invariant in a stack is the fact that last item pushed is the  first thing popped. This invarient doesn't hold if the client can rearrange the underlying data. 
+\end{ex}
+
+It is hard to reason about programs, if we can't rely on invariants, so to enforce them we can introduce \textbf{Encapsulation}.
+
+\begin{itemize}
+\item Encapsulation forces clients to treat object as black boxes 
+\begin{itemize}
+\item Implementation details sealed away 
+\item Can only interact via provided functions 
+\item Creates an abstraction and re-establishes control over objects. 
+\end{itemize}
+\item To implement this you can use the keywords \verb|private| and \verb|public|
+\end{itemize}
+
+\begin{ex} Using Remove to encapsulate data.
+\begin{lstlisting}
+struct vec {
+		Vec (int x, int y);
+		private :
+				int x, y;
+		public :
+				Vec operator+(const Vec &other);
+				...
+};
+\end{lstlisting}
+\end{ex}
+
+\textbf{In general : } Fields should be private and only methods should be public. \\
+\textbf{Better :} Its Better to have a visibility set to private by default, but this would break C programs. To resolve this we introduce a second construction called \verb|class|
+
+\begin{ex} Example usage of \verb|class|
+\begin{lstlisting}
+class Vec {
+				int x,y;
+		public:
+				Vec (int x, int y);
+				Vec Operator+(const Vec &other);
+};
+\end{lstlisting}
+\begin{itemize}
+\item The only difference between \verb|struct| and \verb|class| is that default visibility is set to private.
+\end{itemize}
+\end{ex}
+
+\begin{ex} Fixing the linked list class to enforce the invariant
+
+\textbf{list.h}
+\begin{lstlisting}
+class List{
+				struct Node; //Private Nested class and only accessible from within class
+				Node * theList = nullptr;
+		public:
+				void addToFront(int n);
+				int ith (int i) const;
+				~List();
+				...
+};
+\end{lstlisting}
+
+\textbf{list.cc}
+\begin{lstlisting}
+#include "list.h"
+
+struct List::Node { //Nested class 
+		int data;
+		Node *next;
+		Node (int data, Node *next) : ... {}
+		~Node() {delete next;}
+		...
+};
+
+void List::addToFront (int n) {
+		theList = new Node {n, theList};
+}
+
+int List::ith (int i) const {
+		Node *cur = theList;
+		for (int n = 0; n < i && cur; ++n, cur = cur ->next);
+		return cur->data
+}
+\end{lstlisting}
+\begin{itemize}
+\item Only list can create/manipulate Node Objects. Therefore we can guarantee the invariant that next is always either nullptr or allocated by new.
+\item But :
+\begin{itemize}
+\item Now we can't traverse the list from node to node, as we would a linked list 
+\item Repeatedly calling ith to access the whole list is not ideal, as its a \(O(n^2)\) traversal. 
+\item We can't expose the nodes or we loose encapsulation
+\end{itemize}
+\end{itemize}
+\end{ex}
+
+\begin{ablock}{Software Engineering Topic : Design Patterns}
+Certain programming problems arise frequently, so we keep track of good solutions to these problems. Then we use them to solve similar problems. 
+
+\textbf{Design Pattern : } If you have this situation, this technique might solve it. 
+\end{ablock}
+
+The solution to the problem that arose in Example 6.8, can be solved using the iterator pattern. It works by creating a class that manages access to nodes. This allows abstraction of a pointer and list traversal without exposing the actual pointers
+
+\begin{ex} Iterator Pattern solution to example 6.8 \textit{(E)}
+\begin{lstlisting}
+class List{
+				struct Node;
+				Node * theList::nullptr
+	   public :
+	   			class Iterator {
+	   					explicit Iterator (Node *p):p{p}{}
+	   					int &operator *() {return p->data}
+	   					Iterator &operator ++() {p = p->next ; return *this}
+	   					bool operator== (const Iterator &other) {return p=other.p;}
+	   					bool operator!= (const Iteratir &other) {return !(p ==other);}
+	   			};
+	   			Iterator begin() {return Iterator {theList};}
+	   			Iterator end(){return iterator {nullptr};}
+	   			...
+};
+
+//Client 
+
+int main () {
+		List l;
+		l.addToFront(1);
+		l.addToFront(2);
+		l.addToFront(3);
+		for (List::Iterator it = l.begin(); it != l.end(); ++it){
+				cout << *it << endl;
+		}
+}					
+\end{lstlisting}
+\end{ex}
+
+\textbf{Short Cut - Automatic Type Definition : } the \verb|auto| keyword assigns the same type of one variable to another and initializes the variable to match the second variable.  
+\begin{lstlisting}
+auto x = y; 
+\end{lstlisting}
+
+
+\textbf{Shorter Short Cut: Range Based For Loop}
+\begin{lstlisting}
+for (auto n : l){
+		cout << n << endl;
+}
+\end{lstlisting}
+\begin{itemize}
+\item Class must have methods begin and end that produce iterator 
+\item Class iterator must support !=,  *, prefix++
+\end{itemize}
+
+N is a copy of an item, to be able to modify the item or to simply save on copying, you can pass by reference.
+\begin{lstlisting}
+for (auto &n : l){
+		++n;
+}
+\end{lstlisting}
+
+List client can create iterators directly : \verb|auto it = List::Iterator {nullptr};| \\
+This violates encapsulation, as client should be using begin/end. To resolve this, we could make Iterators constructor private, then client can't call \verb|List::Iterator{ ... }|. But then neither can list. 
+
+To resolve this we can give list privileged access to Iterator by using the keyword \verb|friend|
+\begin{lstlisting}
+class {
+		...
+		public: 
+				class Iterator {
+								Node *p;
+								explicit Iterator (Node *p);
+						public :
+								...
+								friend class List; //List has access to everything
+				};
+				...
+};						
+\end{lstlisting}
+
+Now List can still create iterators, but client can only create iterators by calling begin/end. 
+
+\begin{cblock} {Some Useful Advice}
+\begin{itemize}
+\item Give classes as few friends as possible, as it weakens encapsulation. 
+\item Once again, keep your fields private 
+\begin{itemize}
+\item If you wish to provide access, use accessors methods which obtain the value of a fields
+\end{itemize}
+\end{itemize}
+\end{cblock}
+
+
+\subsection{Friend Functions}
+As we established earlier we can have friend classes, but we can also use the keyword \verb|friend| to establish a friend function.
+
+\begin{ex} Friend Function Example 
+\begin{lstlisting}
+class Vec {
+		...
+		public :
+		...
+		friend std::ostream &operator<< (std::ostream &out, const Vec &v);
+};
+
+//.cc
+
+ostream &operator<< (ostream &our, const Vec & v){
+		return out << v.x << ' ' << v.y;
+}
+\end{lstlisting}
+\end{ex}
+
+\section{Tools Topic : make }
+
+Currently we have to individually compile each c++ file and then we link each individual object file to form a binary. We do this to avoid having recompile sections that haven't change. 
+
+In order for us to apply this principle to larger programs without having to memorize files change, we can let Linux help us with \verb|make|. To utilize a make, we must create a Makefile which lists files that depend on which other files. 
+
+\begin{ex} Basic Make File Example 
+\begin{lstlisting}
+myprogram : main.o lst.o node.o iter.o 
+		g++-5 -std=c++14 main .o list.o node.o iter.o myprogram 
+list.o : list.cc list.h node.h 
+	    g++-5 -std=c++14 -c node.cc
+..
+\end{lstlisting}
+\end{ex}
+
+Once you have a make file, you can then type \verb|make| from command line to build the whole project. Every subsequent time you run make, it will only compile files that have modified and relinks the program with the new compiled portion.  Make achieves this by creating a dependency graph which allows make to recursively loop through all the dependencies and rebuild the files that have a newer modified date compared to the corresponding object file.  
+
+In addition, you can rebuild certain targets by indicating the target file. : \verb|make node.o| \\
+Another common practice is to include a clean target at the end of a Makefile 
+
+\begin{ex} Basic Make File Example 
+\begin{lstlisting}
+myprogram : main.o lst.o node.o iter.o 
+.PHONY : clean 
+
+clean : 
+		rm *.o myprogram 
+\end{lstlisting}
+\begin{itemize}
+\item To do a full rebuild you can do 
+\begin{itemize}
+\item make clean 
+\item make 
+\end{itemize}
+\end{itemize}
+\end{ex}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
