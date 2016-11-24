@@ -504,6 +504,57 @@ Now List can still create iterators, but client can only create iterators by cal
 \end{itemize}
 \end{cblock}
 
+ \textbf{Note : }\textcolor{red}{Following example was derived from the course material and official course notes, but relates to our content and I thought it would be useful}
+\begin{ex} Traversing trees composed of nested classes \\
+
+
+
+In essence, if presented with a problem which involves using nested classes to mimic the concept of linked lists, we can use a pattern that utilizes multiple pointers and traversal through loops to achieve the desired result.
+
+Consider : 
+\begin{lstlisting}
+class ExampleNodeClass{
+
+   void traverse();
+
+	class NextClassOnLevel{
+		public :
+			…
+		private :
+			NextClassOnLevel *nextNodeOnLevel; 
+	};
+}
+\end{lstlisting}
+
+Now to traverse we can implement a solution which utilizes recursion or for loops
+
+\begin{lstlisting}
+//With For loops 
+void ExampleNodeClass::traverse () {
+    ExampleNodeClass *temp = this->nextNodeOnLevel;
+
+    //Ensure you check for null before proceeding 
+
+    //Traverse 
+    for (;;){
+        if (!(temp->nextNodeOnLevel)) break; //Stop if we reach the end
+        else temp = temp->nextNodeOnlevel; 
+    }
+}
+
+//With recursion 
+void ExampleNodeClass::traverse () {
+    //Ensure you check for null before proceeding 
+    //Insert any additional checks heres 
+
+    //Traverse 
+    this->nextNodeOnLevel->traverse(); 
+}
+\end{lstlisting}
+
+In addition, if you wish to print, you will have add the output operators as friends or create public functions. Refer to section 6.4.1 for more info. 
+
+\end{ex}
 
 \subsection{Friend Functions}
 As we established earlier we can have friend classes, but we can also use the keyword \verb|friend| to establish a friend function.
@@ -524,6 +575,7 @@ ostream &operator<< (ostream &our, const Vec & v){
 }
 \end{lstlisting}
 \end{ex}
+
 
 \section{Tools Topic : make }
 

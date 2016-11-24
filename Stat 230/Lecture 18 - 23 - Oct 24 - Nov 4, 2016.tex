@@ -1,0 +1,378 @@
+%Notes by Harsh Mistry 
+%Stat230
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Stat 230 - Probability  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{18 - 23}{October 24 - November 4, 2016}{Nagham Mohammad}{Harsh Mistry}
+
+\section{Expected Value and Variance}
+
+\subsection{Summarizing Data on Random Variables}
+
+\subsubsection{Types of Descriptive statistics}
+
+\begin{itemize}
+\item Representing data using visual techniques 
+\begin{itemize}
+\item Tables
+\item Graphs
+\end{itemize}
+\item Numerical summary measures for data sets 
+\begin{itemize}
+\item Central Tendency 
+\item Variation 
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Pictorial Methods : Histogram}
+\begin{itemize}
+\item The purpose of a histogram is to put numerical information into graphic form so it is easier to understand 
+\item Histograms are good summaries of data because they show the variability in observed outcomes
+\end{itemize}
+
+\textbf{Constructing a Histogram :}
+\begin{enumerate}
+\item Determine the frequency and relative frequency of each  x.
+$$ \text{Frequency of a value} = \text{number of times the value occurs}$$
+$$ \text{Relative frequency of a value} = \frac{\text{number of times the value occurs}}{\text{number of observations in teh data set}}$$
+\item Mark possible x values on horizontal scale 
+\item Above each value of x, draw a rectangle whose height is the relative frequency or the frequency of that value. 
+\end{enumerate}
+
+\textbf{Describing the shape of a Histogram :}
+\begin{itemize}
+\item Symmetry : If one half is a mirror image of the other
+\item Unimodal : Single prominent peak (A local maximum in a chart)
+\item Bimodal : Two prominent peaks 
+\item Multimodal : more than two prominent peaks
+\item Skewness : weather or not the data is pulled to one side
+\end{itemize}
+
+\subsection{Measures of Location}
+\begin{enumerate}
+\item Arithmetic Mean : The arithmetic average value of observations 
+\item Median : The middle value 
+\begin{itemize}
+\item[a)] Can be found by arranging all the observations from lowest value to highest value and picking the middle one.
+\item[b)] If there are two middle numbers, then take their mean for the orders values 
+$$ \widetilde{x} = \begin{cases} \text{ The single middle value if n is odd} = (n+1) / 2 \\ \text{The average of the two middle values of n is even = averge of } \{n/2\} \text{ and } \{(n/2) + 1\}\end{cases}$$
+\end{itemize} 
+\end{enumerate}
+
+\subsubsection{The Sample Mode}
+The mode is the value that appears most often in a set of data.
+
+\begin{itemize}
+\item If there is 2 modes, then the data set may be said to be \textbf{bimodal}
+\item if there is more than 2 modes, then set may be described as  \textbf{multimodal} 
+\item If all items in the set equally repeat the same amount of times, then the set is not unique and said to be \textbf{uniform} 
+\end{itemize}
+
+\subsection{Variability}
+ 
+\subsubsection{Sample Standard Deviation}
+\begin{itemize}
+\item The standard deviation is used to describe the variation (measure of dispersion) around the mean 
+\item To get the standard deviation of a sample of data : 
+\begin{itemize}
+\item Calculate the variance of \(S^2\)
+\item Take the square root to get the standard deviation S
+\end{itemize}
+\item The larger the S, the further the individual cases are from the mean 
+\item The smaller the S, the closer the individual scores are to the mean.
+\end{itemize}
+
+\textbf{Note:}
+\begin{itemize}
+\item Although variance is a useful measure of spread, its units are units squared 
+\item The standard deviation is more intuitive, because it has the same units as the raw data and the mean 
+\item Like the mean, the s.d will be inflated by an outlier 
+\end{itemize}
+
+\subsubsection{Mean and Variance of Discrete Random Variables}
+\begin{itemize}
+\item Used to summarize the probability distribution of a random variable X
+\item The expectation (also called the mean or the expected value) of a discrete random variable X with probability function \(f(x)\)
+\item The mean is a measure of the center of the probability distribution. 
+\item the expectation of X is also often denoted by the Greek letter \(\mu\) 
+\item The mean of the discrete random variable X is weighted average of the possible values of X, with weights equal to the probabilities 
+\end{itemize}
+
+\textbf{If X is a discrete Random Value, then}
+\begin{itemize}
+\item The expected value or mean of X is 
+$$ \mu_x = E(X) = \sum_x x f(x)$$
+\item The variance of X, denoted as \(\sigma^2\) or \(V(x)\), is 
+$$\begin{aligned} \sigma^2 = V(X) = E(X - \mu)^2 & = \sum_x (x - \mu)^2 f(x) = \sum x^2 f(x) - \mu^2 \\ & = E(X^2) - [E(X)]^2 \end{aligned} $$
+\item The standard deviation of X is \(\sqrt{\sigma^2} = \sigma\)
+\item Note : \(Var(X) = E(X^2) - \mu^2\)
+\end{itemize}
+
+\subsubsection{The Expected Value of a Function}
+If x is a discrete random value with set of possible values D and probability function f(x) then the expected value of any function g(x), denoted by E[g(x)] or \(\mu_{g(x)}\), is computed as
+$$ E[g(X)] = \sum_{\text{all x}} g(x) f(x) $$
+
+\textbf{Rule of Expected Value : } $$(E(a X + b) = aE(X) + b$$
+\textbf{Properties of Expectation :}
+\begin{enumerate}
+\item For constants a and b, 
+$$E[a g(X) + b] = a E[g(x)] + b$$
+\item For constants a and b and functions \(g_1\) and \(g_2\), it is also easy to 
+$$E[a g_1(X) + b g_2(X)] = a E[g_1(X)] + b E[g_2(X)]$$
+\end{enumerate}
+
+\subsubsection{Rule of Variance}
+$$V(a X + b) = a^2 \sigma^2_x $$
+$$\sigma_{ax+b} = \mid a \mid \sigma_x $$
+
+\subsection{The mean and variance of X}
+\subsubsection{Binomial Distribution}
+If x follows a Binomial distribution with parameters n and p: X~Binomial(n,p), then 
+$$ \mu_x = E(X) = np$$
+$$ \sigma_x^2 = Var(X) = np(1 -p)$$
+$$ \sigma_x = SD(X) = \sqrt{np(1-p)}$$
+
+\subsubsection{Hyper geometric Distribution}
+$$ E(X) = n (r/N) = np $$
+$$ V(X) = \frac{N-n}{N-1}\cdot n \cdot p \cdot (1 -p) $$
+
+\subsubsection{Poisson Distribution}
+\begin{itemize}
+\item Mean : \(\mu = \lambda t\)
+\item Variance : \(\sigma^2 = \lambda t\)
+\item Standard Deviation : \(\sigma = \sqrt{\lambda t}\)
+\end{itemize}
+
+\subsubsection{Uniform Distribution}
+$$ E(X) = \frac{a+b}{2}$$
+$$Var(X) = \frac{(b-a+1)^2 -1}{12}$$
+
+\section{Continuous Probability Distributions}
+
+\subsection{Continuous Random Variables and Probability Density Functions}
+
+A random variable that can assume any value in an entire interval of real numbers is said to be continuous, that is for some \(a <b\), any number x between a and b is possible, and P(X = x) = 0 for each x.\
+
+A probability density function (p.d.f) of a continuous random variable X is a function f(x), such that for any two numbers \(a \leq b\)
+$$ p[a \leq X \leq b] = \int_{a}^{b} f(x) dx $$ 
+which has the following properties : 
+\begin{enumerate}
+\item It is non-negative 
+\item \(\int_{-\infty}^{\infty} f(x) dx = 1 \)
+\end{enumerate}
+
+\subsection{The Cumulative Distribution Function (c.d.f)}
+The cumulative distribution function, F(x) for a continuous r.v. X is defined for every number \(x \in R\) by 
+$$ F(x) = P(X \leq x) = \int_{-\infty}^{x} f(y) dy $$
+For each, F(x) is the area under the density curve to the left of x.
+
+\subsubsection{Properties}
+\begin{itemize}
+\item The function F is non-negative : \(F(x) \geq  0 \) 
+\item The function F is non-decreasing : If \(b \geq a\), then \(F(b) \geq F(a)\)
+\item The function F is continuous for all \(x \in R\)
+$$ \lim_{x \to -\infty} F(x) = 0, \hspace{1.3cm} \lim_{x \to +\infty} F(X) = 1 $$
+\end{itemize}
+
+\begin{itemize}
+\item If X is a purely discrete random variable,
+then it attains values\(x_1, \ldots, \) with probability \(p_i = P(x_i)\) and the CDF of X will be discontinuous at the points \(x_i\) and constant in between 
+\item The cumulative distribution function of a continuous probability distribution 
+\item The cumulative distribution function which has both a continuous part and discrete part. 
+\end{itemize}
+
+\subsubsection{Using F(x) to Compute Probabilities}
+\begin{itemize}
+\item Let X be a continuous r.v with p.d.f, f(x) and c.d.f. F(x). Then for any number a 
+\item \(P(X > a) = 1 - P(X \leq a) = 1 - F(a) \)
+\item \(P(a \leq x \leq b) = F(b) = F(a) \)
+\end{itemize}
+
+\subsubsection{Obtaining f(x) from F(x)}
+\begin{itemize}
+\item Suppose X is a continuous random variable with cumulative
+distribution function F(x).
+\item The \textbf{probability density function (p.d.f)} of X is defined as
+$$F^\prime(x) = f(x)$$
+$$f(x) = \frac{d}{dx} F(x) $$
+\end{itemize}
+
+\subsection{Defined Variables or Change of Variable}
+When we know the p.d.f. or c.d.f. for a continuous random variable X we sometimes want to find the p.d.f. or c.d.f. for some other random variable Y which is a function of X
+
+\begin{enumerate}
+\item Write the c.d.f of Y as a function of X
+\item Use \(F_X(x)\) to find \(F_Y(y)\). Then if you want the p.d.f. \(f_Y (y)\) you can differentiate the expression \(F_Y(y)\)
+\item Find the range of values of y
+\end{enumerate}
+
+\subsection{Expected value for the Continuous Random Variables}
+The expected or mean of continuous r.v. X with p.d.ff(x) is
+$$ \mu_x = E(X) $$
+$$ E(X) = \int_{-\infty}^{+\infty} x f(x) dx $$
+
+\subsection{The Variance of a Continuous Random Variable}
+If the random variable X is continuous with probability density function f(x), then the variance is given by
+$$ Var(X) = E((X-\mu)^2)$$
+$$ Var(X) = \sigma^2 = \int_{-\infty}^{+\infty} (x - \mu)^2 f(x) dx = \int_{-\infty}^{+\infty} x^2 f(x) dx - \mu^2 $$
+where \(\mu\) is the expected value.  
+
+\end{document}

@@ -1,0 +1,242 @@
+%Notes by Harsh Mistry 
+%CS 245
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{enumerate}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 245 - Logic and Computation 
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{15 - 18}{November 1 - 10, 2016}{Kevin Lanctot}{Harsh Mistry}
+\section{Axioms}
+\begin{definition}
+A \textbf{Axiom} is a formula that is assumed as a premise in any proof. An \textbf{Axiom Schema} is a set of axioms defined by a pattern or rule.
+Axioms Often behave like additional inference rules 
+\end{definition}
+
+\subsection{Peano Axioms}
+Fix the domain as \(\mathbb{N}\), the natural numbers. Interpret the constant symbol 0 as zerp and the unary function symbol s as success. \(s(x) \rightarrow x + 1\)
+
+Thus each number in \(\mathbb{N}\) has a term : \(0, s(0), s(s(0)) , \ldots \)
+
+Zero and successor satisfy the following axioms 
+\begin{itemize}
+\item PA1 : \(\forall x s(x) \neq 0 \), "zero is not a successor"
+\item PA2 : \(\forall x \forall y ((s(x) = s(y) \rightarrow x = y ).\), "nothing has two predecessors 
+\end{itemize}
+
+\textbf{Addition and Multiplication Axioms : }
+\begin{itemize}
+\item PA3 : \(\forall x (x + 0 = x) \), Adding zero to any number yields the same number
+\item PA4 : \(\forall x \forall y (x + s(y) = s(x + y))\), Adding a successor yields the successor of adding the number 
+\item PA5 : \(\forall (x \times 0) = 0\), multiplying by zero yields zero
+\item PA6 : \(\forall x \forall y ( x \times s(y) = x \times y + x) \)
+\end{itemize}
+
+\textbf{Induction Axiom :}
+\begin{itemize}
+\item PA7 : For each formula \(\varphi\) and variable x 
+\[ \varphi[0/x] \rightarrow (\forall x (\varphi \rightarrow \varphi[s(x)/x]) \rightarrow \forall x \varphi) \]
+\end{itemize}
+\subsection{Properties of Peano Axioms}
+\textit{The Peano Axioms imply all of the familiar properties of the natural numbers}
+
+\begin{theorem} \(\vdash_{PA} \forall x \forall y ( x + y = y + x ) \)
+\end{theorem}
+
+\begin{lemma} \(\forall y (x + y = y + x) \vdash_{PA} \forall y ( s(x) + y = y + s(x))\)
+\end{lemma}
+
+\subsection{Definability}
+Let the formula \(\varphi\) have free variables \(x_1 \ldots x_k\).
+
+Given an interpretation I, a formula \(\varphi\) defined the k-ary relation of tuples that make \(\varphi\) true - that is, the relation 
+$$\{ \langle a_1 \ldots a_k \rangle \in dom(I) \mid \varphi^{(I, \theta [x_1 \rightarrow a_1] \ldots [x_k \rightarrow a_k]))} = T$$
+
+A relation R is definable (In I) if and only if \(R = R_\varphi\) for some formula \(\varphi\)
+
+\subsubsection{Properties of Defined Relations}
+The PA axioms allow one to show that the defined relation \(\leq\) has the usual properties 
+\begin{itemize}
+\item \(x \leq y\) and \(y \leq z\) imply \(x \leq z\) (Transitivity)
+\item If \(x \leq y \) and \(y \leq x \) then \(x = y\) 
+\end{itemize}
+
+\section{Lists}
+
+\textbf{Vocabulary for Lists :}
+\begin{itemize}
+\item a constant symbol \textbf{e}, represents empty list 
+\item a binary function symbol \textbf{cons}, connects two lists
+\end{itemize}
+
+\textbf{Short-hand Notation :}
+\begin{itemize}
+\item \(\langle \rangle\) denotes the empty list e 
+\item \(\langle a \rangle \) denotes a list with a single item a
+\item If \(\langle \gamma \rangle\) denotes a non-empty list. Then \(\langle a, \gamma \rangle\) denotes a list with a and the rest of the items in \(\gamma\). 
+\end{itemize}
+
+\subsection{Axioms of Basic Lists}
+\begin{itemize}
+\item List 1 : \(\forall x \forall y cons (x, y) \neq e \)
+\item List 2 : \(\forall x \forall y \forall z \forall w (cons(x,y) = cons(z, w) \rightarrow (x = z \wedge y = w ))\)
+\item List 3 : For each formula \(\varphi (x) \) and each variable y not free in \(\varphi\)
+\[\varphi[e/x] \rightarrow (\forall x (\varphi \rightarrow \forall y \varphi [cons (y,x) / x ] ) \rightarrow \forall x \varphi) \]
+\end{itemize}
+
+
+\end{document}

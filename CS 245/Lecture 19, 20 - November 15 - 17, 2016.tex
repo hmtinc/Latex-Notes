@@ -1,0 +1,276 @@
+%Notes by Harsh Mistry 
+%CS 245
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{enumerate}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 245 - Logic and Computation 
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{19, 20}{November 15 - 17, 2016}{Kevin Lanctot}{Harsh Mistry}
+
+\section{Program Verification}
+Formal Verification is when you state a specification and prove a program satisfies the specification for all inputs. We formally specify and verify programs to : 
+\begin{itemize}
+\item Reduce Bugs
+\item To test safety critical software or important components 
+\item To document individual component. 
+\item To adopt a better development and verification process .
+\end{itemize}
+
+\subsection{Framework for Software Verification}
+The steps of formal verification: 
+\begin{enumerate}
+\item Convert teh informal description R of requirements for an application domain into an "equivalent" formula \(\phi_R\) of some symbolic logic. 
+\item Write a program P which is meant to realise \(\phi_R\) in some given programming environment, and
+\item Prove that the program P satisfies the formula \(\phi_R\)
+\end{enumerate}
+
+
+\textbf{Note :} Only part 3 is covered in CS245
+
+\subsection{Hoare Triples}
+Our assertions about programs will have the form 
+\begin{itemize}
+\item (P) - Precondition 
+\item C - Program or code
+\item (Q) - Postcondition
+\end{itemize}
+
+The meaning of the triple (P) C (Q) is : 
+If program C is run starting in a state that satisfies P, then the resulting state after execution of C will satisfy Q. 
+
+An assertion (P) C (Q) is called a Hoare Triple. 
+
+\subsubsection{Specification of a Program}
+
+A specification of a program C is a Hoare triple with C as the second component. 
+
+\textbf{Note : } Specification is not behaviour. 
+
+\subsection{Partial Correctness}
+A triple (P) C (Q) is satisfied under partial correctness, denoted 
+$$ \models_{par} (P) C (Q), $$
+
+if and only if , for every state s that satisfies condition P, if execution of C starting from state s terminates then the resulting state s' satisfies condition Q
+
+\textbf{Note : } Partial correctness \textbf{does not imply termination.}
+
+\subsection{Total correctness}
+A triple (P) C (Q) is satisfied under total correctness denoted 
+$$ \models_{par} (P) C (Q) $$
+if and only if, for every state S that satisfies condition P, execution of C starting from state S terminates, and the resulting state s' satisfies Q.
+
+$$\text{Total Correctness  = Partial Correctness + Termination}$$
+
+\subsection{Logical variables}
+
+Sometimes the preconditions and postconditions require additional
+variables that do not appear in the program.
+These are called logical variables.
+
+The logical variable allows the postcondition to be expressed in
+terms of the value of  at the beginning of the code.
+
+\subsection{Proving Correctness}
+
+Our Goal: Prove total correctness
+
+Our Approach: We usually prove it by proving partial correctness
+and termination separately.
+
+\begin{itemize}
+\item For partial correctness: we shall introduce sound inference rules.
+\item For total correctness: we shall use ad hoc reasoning, which
+suffices for our examples.
+\item In general, total correctness is undecidable. i.e. it cannot be
+decided in an automated fashion that always classifiies
+programs correctly.
+\end{itemize}
+
+\subsection{Inference Rules}
+\begin{itemize}
+\item Rule for Assignment
+$$ \frac{}{(Q [E/x])\hspace{0.5cm} X = E \hspace{0.5cm} (Q)} $$
+\item Inference Rule of Precondition Strengthening 
+$$ \frac{P \rightarrow P^\prime \hspace{0.5cm} (P^\prime) C (Q)}{(P) C (Q)}$$
+\item Inference Rule of Postcondition Weakening
+$$ \frac{(P)C(Q^\prime) \hspace{0.5cm} Q^\prime \rightarrow Q}{(P) C (Q)}$$
+\item Inference Rule of Composition 
+$$ \frac{(P)C_1 (Q), \hspace{0.5cm} (Q) C_2 (R) }{(P) C_1 ; C_2 (R)}$$
+\item Inference Rule for if-then-else : 
+$$ \frac{(P \wedge B) C_1 (Q) \hspace{0.5cm} (P \wedge \neg B) C_2 (Q)}{(P) \textit{ if \{B\} } C_1 \textit{ else } C_2 (Q)}$$
+\item Inference Rule for if-then (without else) 
+$$ \frac{(P \wedge B) C (Q) \hspace{0.5cm} (P \wedge \neg B) \rightarrow Q }{(P) \textit{ if \{B\} C } (Q)}$$
+\end{itemize}
+
+\subsection{The Steps of Creating a Proof}
+\begin{enumerate}
+\item First \textbf{annotate the code} using the appropriate inference rules.
+\item Then \textbf{move bottom-up in the proof} : adding an assertion before
+each assignment statement, based on the assertion after the
+assignment (as we have always done for assignments).
+\item Finally prove any justifications labelled “implied”:
+\begin{itemize}
+\item Annotations from (1) above containing implications
+\item Adjacent assertions created in step (2).
+\end{itemize}
+\end{enumerate}
+
+Proofs here can use predicate logic, basic arithmetic, or other
+appropriate reasoning
+
+\end{document}

@@ -1,0 +1,417 @@
+%Notes by Harsh Mistry 
+%CS 245
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{enumerate}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 245 - Logic and Computation 
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{8, 9, 10, 11, and 12}{October 4 - 20, 2016}{Kevin Lanctot}{Harsh Mistry}
+
+\section{Natural Deduction Basic Rules Continued}
+\begin{itemize}
+\item \(\neg\)-Elimination Rule : \(\sum, \varphi, \neg \varphi \vdash \perp\)
+\begin{itemize}
+\item $$ \frac{\varphi \hspace{0.5cm} \neg \varphi}{\perp}$$
+\end{itemize}
+
+\item \(\neg\)-Introduction Rule : If \(\sum\), \(\varphi \vdash \perp\), then \(\sum \vdash \neg \varphi\)
+\begin{itemize}
+\item $$\frac{\begin{matrix}
+\varphi \\ \vdots \\ \perp
+\end{matrix}}{\neg \varphi}$$
+\end{itemize}
+
+\item \(\neg \neg\)-Elimination Rule : If \(\sum \vdash \neg \neg \varphi\), then \(\sum \vdash \varphi\)
+\begin{itemize}
+\item $$ \frac{\neg \neg \varphi}{\varphi}$$
+\end{itemize}
+
+\item \(\perp\)-Elimination Rule : If \(\sum \vdash \perp\), then \(\sum \vdash \varphi\)
+\begin{itemize}
+\item $$\frac{\perp}{\varphi}$$
+\end{itemize}
+\end{itemize}
+
+\section{Natural Deduction Derived rules}
+\begin{itemize}
+\item Modus tollens
+$$ \frac{\varphi \rightarrow \alpha \hspace{0.5cm} \neg \alpha}{\neg \varphi}$$
+\item Proof by contradiction (Reductio ad absurdum)
+$$\text{if } \sum, \neg \varphi \vdash \perp, \text{    then } \sum \vdash \varphi$$
+\item Law of Excluded Middle 
+$$ \vdash \varphi \vee \neg \varphi$$
+\item Double-Negation Introduction 
+$$ \text{if } \sum \vdash \varphi, \text{ then } \sum \neg \neg \varphi$$
+\end{itemize}
+
+\section{Soundness and Completeness of Natural Deduction}
+\subsection{Soundness}
+Soundness of natural deduction means that the conclusion of the proof is always a logical consequence of the premises. That is, 
+$$ \text{ if } \sum \vdash_{ND} \varphi, \text{ then } \sum \models \varphi$$
+\subsection{Completeness}
+Completeness of natural deduction means that all logical consequences in propositional logic are provable in Natural Deduction. That is, 
+$$ \text{ if } \sum \models \varphi, \text{ then } \sum \vdash_{ND} \varphi $$
+
+
+\section{First Order Predicate Logic}
+
+\subsection{Ingredients for Predicate Logic}
+\begin{itemize}
+\item Domains : The set of objects; also called the universe 
+\begin{itemize}
+\item A domain is a non-empty set. In principle, any non empty set can be a domain.
+\end{itemize}
+\item Constants : objects with specific names
+\begin{itemize}
+\item A constant symbol refers to an object in the domain
+\end{itemize}
+\item Relations : properties of objects, alone or in combination
+\begin{itemize}
+\item A predicate, or relation, represents a property that an individual, or collection of individuals, may or may not have
+\item In English we might express a predicate as "\underline{\hspace{2cm}} is a student"
+\item In symbolic logic we write "S(x)" to mean "x has property S"
+\end{itemize}
+\item Functions : Association of objects to others 
+\end{itemize}
+
+\subsection{Quantifiers}
+\begin{itemize}
+\item "For All" is denoted by \(\forall\), the universal quantifier symbol 
+\item "There exists" is denoted by \(\exists\), the existential quantifier symbol. 
+\end{itemize}
+
+\section{Syntax of Predicate Logic}
+There are 7 kinds of symbols 
+\begin{enumerate}
+\item Constant Symbols : \(c, d, c_1, c_2, \hdots\)
+\item Variables : \(x, y, z, \hdots\)
+\item Function Symbols : \(f, g, h, \ldots\)
+\item Predicate Symbols : \(P, Q, \ldots\)
+\item Connectives : \(\neg, \wedge, \vee, \rightarrow\)
+\item Quantifiers : \(\forall\) and \(\exists\)
+\item Punctuation :  "(" , ")" , "." and ","
+\end{enumerate}
+
+\subsection{Terms}
+The set of terms is defined inductively as follows 
+\begin{enumerate}
+\item Each constant symbol is a term, and each variable is a term. Such terms are called atomic terms
+\item If \(t_1, \ldots, t_n\) are terms and f is an n-ary function symbol, then \(f(t_1, \ldots, t_n)\) is a term. If n =2, we may write  (\(t_1 f t_2)\) instead of \(f(t_1, t_2)\)
+\item Nothing else is a term
+\end{enumerate}
+
+\subsection{Atomic Formulas}
+An atomic formula (or atom) is an expression of the form 
+$$P(t_1, \ldots, t_n)$$
+where P is an n-ary relation symbol and each \(t_i\) is a term \(1 \leq i \leq n\).
+
+\subsection{General Formulas}
+We define the set of well formed formulas of first-order logic inductively as follows 
+\begin{enumerate}
+\item An atomic formula is a formula
+\item If \(\alpha\) is a formula, then (\(\neg \alpha\)) is a formula
+\item If \(\alpha\) and \(\beta\) are formulas, and \(\star\) is a binary connective symbol, then \(\alpha \star \beta\) is a formula.
+\item If \(\alpha\) is a formula and x is a variable, then each of \((\forall x \alpha)\) and \((\exists x \alpha)\) is a formula 
+\item Nothing else is a formula 
+\end{enumerate}
+
+\textbf{Note : } Case 4 is referred to as the scope of the quantifier. 
+
+\subsection{Parse Trees}
+Parse trees for FOL formulas are similar to parse trees for propositional formulas
+\begin{itemize}
+\item Quantifiers \(\forall x\) and \(\exists x\) form nodes in the same way as negation 
+\item A predicate \(P(t_1, \ldots, t_n)\) has a node labelled P with a sub-tree for each of the terms \(t_1, \ldots, t_n\)
+\end{itemize}
+
+\section{Interpretations}
+
+Fix a set \(\gamma\) of constants, functions symbols, and relation symbols. 
+
+An interpretation  \(I\) (for the set \(\gamma\)) consists of 
+\begin{itemize}
+\item A non-empty set \(dom(I)\), called the domain (or universe) of \(I\)
+\item For each constant symbol c, a member \(c^I\) of \(dom(I)\) 
+\item For each function symbol \(f^{(i)}\), an i-ary function \(f^{I}\)
+\item For each relation symbol \(R^{(i)}\), an i-ary relation \(R^I\)
+\end{itemize}
+
+\subsection{Values of Variables-Free Terms}
+for terms and formulas that contain no variables or quantifiers, an interpretation suffices to specify their meaning. The meaning arises in the obvious(?) fashion from the syntax of the term or formula.
+
+\begin{definition}
+Fix an interpretation \(I\). For each term t containing no variables, the value of t under interpretation \(I\), denoted \(t^I\), is as follows 
+\begin{itemize}
+\item If t is s constant c, the value \(t^I\) is \(c^I\)
+\item If t is \(f(t_1, \ldots, t_n)\), the value \(t^I\) is \(f^I(t_1^I, \ldots, t_n^I)\)
+\end{itemize}
+\end{definition}
+
+\subsection{Formulas with Variable-Free Terms}
+Formulas get values in much the same fashion as terms, except that values of formulas lie \verb|{F,T}|
+
+\begin{definition}
+Fix an interpretation \(I\). For each term \(\alpha\) containing no variables, the value of \(\alpha\) under interpretation \(I\), denoted \(\alpha^I\), is as follows 
+
+\begin{itemize}
+\item If \(\alpha\) is \(R(t_1, \ldots, t_n)\) then 
+$$ \alpha^I = \begin{cases}
+T \\ F \end{cases} \begin{matrix}
+\text{ if } (t_q^I, \ldots, t_n^I) \in R^I \\ \text{ otherwise } 
+\end{matrix}$$
+\item If \(\alpha\) is \(\neg \beta\) or \(\beta \star \gamma\), then \(\alpha^I\) is determined by \(\beta^I\) and \(Y^I\) in the same way as for propositional logic. 
+\end{itemize}
+\end{definition}
+
+\subsection{Overlooked Points}
+\begin{enumerate}
+\item There is NO default meaning for relations, function, or constant symbols
+\item Functions must be defined at every point in the domain 
+\end{enumerate}
+
+\section{Variables}
+An occurrence of a variable in a formula is bound if it lies in the scope of some quantifier of the same variable; otherwise it is free. In other words, a quantifier binds its variable within its scope.
+
+Formally, a variable occurs free in a formula \(\alpha\) if and only if it is a member of FV(\(\alpha\)). Free variables in \(\alpha\) are defined as follows 
+\begin{enumerate}
+\item If \(\alpha\) is \(P(t_1, \ldots, t_k)\), then FV(\(\alpha\)) = \(\{x \mid x \text{ appears in some } t_i \}\) 
+\item If \(\alpha\) is \( \neg \beta\) , then FV(\(\alpha\)) = FV(\(\beta\))
+\item if \(\alpha\) is \(\beta \star \gamma\), then FV(\(\alpha\)) = \(FV(\beta) \cup FV(\gamma)\)
+\item If \(\alpha\) is Q x B (for Q \(\in \{\forall, \exists\}\)) then FV(\(\alpha\)) = \(FV(\beta) - \{x\}\)
+\end{enumerate}
+
+In summary: a formula has the same free variables as its parts, except that a quantified variable becomes bound.
+A formula with no free variables is called a closed formula, or a sentence.
+
+\subsection{Substitutions}
+The notation \(\alpha \begin{bmatrix}
+t / x
+\end{bmatrix}\), for a variable x, a term t, and formula \(\alpha\), denotes the formula obtained from \(\alpha\) by replacing each free occurrence of x with t. 
+
+\section{Semantics of Predicate Logic}
+
+
+\begin{cblock}{From Kevin's Slides}
+FOL includes more ingredients (i.e., predicates, functions, variables, terms, constants, etc.) and, hence, the semantics for FOL must account for all of the ingredients.
+We already saw the concept of an interpretation, which specifies the domain and the identities of the constants, relations and functions.
+Formulas that include variables, and perhaps quantifiers, require additional information, known as an environment (or assignment).
+\end{cblock}
+
+\textbf{Environment} : A first order environment is a function that assigns values in the domain to each variable. 
+
+\subsection{Meaning of terms}
+The combination of an interpretation and an environment supplies a value for every term.
+
+\begin{definition} Fix an interpretation \(I\) an environment \(E\). for each term t, the value of t under \(I\) and \(E\), denoted \(t^{(I,E)}\), is as follows
+\begin{itemize}
+\item If t is a constant c, the value is \(c^I\)
+\item if t is a variable x, the value is \(x^E\)
+\item if t is \(f(t_1, \ldots, t_n)\), the value is \(F^I(t_1^{(I,E)} , \ldots, t_n^{(I,E)})\)
+\end{itemize}
+\end{definition}
+
+\subsection{Quantified Formulas}
+For any environment E and domain element d, the environment “E with x re-assigned to d”, denoted \\ E[x \(\rightarrow\) d], is given by
+
+$$ E\begin{bmatrix}
+x \rightarrow d
+\end{bmatrix} (y) \begin{cases}
+d \\ E(y) \end{cases} \begin{matrix}
+\text{ if y is x} \\ \text{ if y is not x} 
+\end{matrix} $$
+
+\subsubsection{Values of Quantified Formulas}
+\begin{itemize}
+\item $$ (\forall x \alpha) ^{(I, E)} = \begin{cases} T \\ F \end{cases} \begin{matrix}
+\text{ if } \alpha^{(I,E\begin{bmatrix} x \rightarrow d \end{bmatrix})} = T \text { for every d } \in dom(I) \\ otherwise \end{matrix}$$
+\item $$ (\exists x \alpha) ^{(I, E)} = \begin{cases} T \\ F \end{cases} \begin{matrix}
+\text{ if } \alpha^{(I,E\begin{bmatrix} x \rightarrow d \end{bmatrix})} = T \text { for every d } \in dom(I) \\ otherwise \end{matrix}$$
+\end{itemize}
+
+\subsection{Satisfaction}
+\textbf{Note : } Refer to Course Resources for full condition chart 
+
+In general, If \(I \models_E \alpha\) for every E, then \(I\) satisfies \(alpha\), denoted \(I \models \alpha\)
+
+\subsection{Validity and Satisfiability}
+Validity and Satisfiability of FOL formulas have definitions analogous to tautology for propositional logic 
+
+\begin{definition}
+A formula \(\alpha\) is 
+\begin{itemize}
+\item Valid : if every interpretation and environment satisfy \(\alpha\); that is if \(I \models_E \alpha\) for every I and E 
+\item Satisfiable : if some interpretation and environment satisfy \(\alpha\); that is, if \(I \models_E \alpha\) for some I and E
+\item Unsatisfiable : is no interpretation and environment satisfy \(\alpha\); that is if \( I \nVdash_E \alpha\) for every I and E 
+\end{itemize}
+
+\textbf{Note :} The term tautology is not used in predicate logic. 
+\end{definition}
+
+\subsection{Relevance Lemma}
+\begin{lemma} Let \(\alpha\) be a first-order formula, I be an interpretation, and \(E_2\) and \(E_2\) be two environments such that 
+$$ E_1 (x) = E_2 (x) \text{ for every x that occurs free in } \alpha $$
+Then 
+$$ I \models_{E_1} \alpha \text{ if and only if  } I \models_{E_2} \alpha$$
+\end{lemma}
+
+\subsection{Logical Consequence}
+Suppose \(\sum\) is a set of formulas and \(\alpha\) is a formula. We say that \(\alpha\) is a \textit{logical consequence} of \(sum\), written as \(\sum \models \alpha\), iff for any interpretation I and environment E, we have \(I \models_E \sum\) implies \(I \models_E \alpha\)
+
+\textbf{Note : } \(\models \alpha\) means \(\alpha\) is valid. 
+
+\end{document}

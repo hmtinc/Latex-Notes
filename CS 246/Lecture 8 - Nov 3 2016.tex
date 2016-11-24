@@ -1,0 +1,492 @@
+%Notes by Harsh Mistry 
+%CS 246
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage[T1]{fontenc} 
+\usepackage[applemac]{inputenc}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{pst-uml}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 246 - Object Oriented Programming  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break, const},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this, struct},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+\newcommand{\drawsub}{%
+    \umlClass{Subject}{%
+    + notifyobserver \\ 
+    + attach (Observer) \\ 
+    + detach (Observer) \\ 
+}}
+
+\newcommand{\drawcsub}{%
+    \umlClass{Concrete Subject}{%
+    + getState \\
+	+ setState (?)
+}}
+
+\newcommand{\drawob}{%
+    \umlClass{Observer}{%
+    + notify
+
+}}
+
+\newcommand{\drawcob}{%
+    \umlClass{Concrete Observer}{%
+    + notify
+}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{8}{November 3rd, 2016}{Brad Lushman}{Harsh Mistry}
+
+
+\section{Destructor Revisted}
+Consider : 
+\begin{lstlisting}
+class x {
+		int * x;
+	public :
+		X (int n): x{new int {n}} {}
+		~X() {delete x}
+};
+
+class y : public X {
+		int *y;
+	public :
+		Y(int m, int n) : X{n}, y{new int [m];}
+		~Y() {delete [] y;}
+};
+
+x *p = new Y{10,20};
+delete p;
+\end{lstlisting}
+
+\begin{ablock}{What Happens when object is destructed}
+\begin{itemize}
+\item Destructor runs
+\item Fields destructed 
+\item Base class destructor runs 
+\item Space deallocated.
+\end{itemize}
+\end{ablock}
+
+Given the example above, variable x does not need to be deleted from the class y and cannot be deleted as its private. Since the base class destructor is run after fields are destructed.
+
+In addition, when P is deleted, memory will be leaked, as only the x constructor runs. To fix this we can set the destructor to be \verb|Virtual| . It is recommend that destructors are always \verb|virtual| in classes that are supposed to have subclasses, even if the destructor does not do anything because it helps ensure that subclass destructor is called.  
+
+If a class is not meant to have any subclasses declare it \verb|final|. 
+\begin{lstlisting}
+Class y final : public x { ... };
+\end{lstlisting}
+
+\section{Pure Virtual Methods and Abstract Classes}
+Consider :
+\begin{lstlisting}
+Class Student {
+		...
+	public :
+		virtual int fees();
+};
+
+Class Regular : public Student {
+		...
+	public :
+		int fees() override;
+};
+
+Class Coop : public Student {
+		...
+	public :
+		int fees() override;
+};
+\end{lstlisting}
+
+In the example above, there is nothing to put in \verb|student::fees| as a student is either regular or coop. So to avoid having to define it, we can explicitly give \verb|student::fees| no implementation by setting the function to equal 0, which means the method has no implementation.
+
+\begin{lstlisting}
+class Student {
+		...
+	public :
+		virtual int fees() = 0;
+};
+\end{lstlisting} 
+
+This is refereed to as a \textbf{pure virtual method}. When a class has a pure virtual method, it cannot be instantiated. Such as class is called an \textbf{abstract class}. 
+
+Subclasses of an abstract class are also abstract unless you fully implement all the pure virtual methods. Additionally, non abstract classes are refereed to as \textbf{concrete}.
+
+\textbf{In UML} : Abstract class names are italicized and anything static is underlined
+
+\section{Templates}
+Consider :
+\begin{lstlisting}
+class List{
+		struct node;
+		...
+};
+
+Struct List::node {
+		int data;
+		Node *next;
+};
+\end{lstlisting}
+
+The above example allows you to create a list of integers, but if you want a list of any other type, you must redefine the class. Fortunately, C++ has a feature called templates.
+
+C++ templates are classes parameterized by a type. 
+
+\begin{lstlisting}
+template <typename T> class Stack{
+		int size; cap;
+		T *contents;
+	public :
+		void push(T x) { ... }
+		T top() {...}
+		void pop() {...};
+};
+
+//Client Code 
+Stack <int> l1;
+Stacl <string> l2;
+\end{lstlisting}
+
+\subsection{The Standard Template Library (STL) and Vectors}
+
+A large number of templates are included within this library. A example of a useful template is \verb|Vector| which allows for dynamic length arrays. 
+
+\begin{lstlisting}
+#include <vector>
+
+std::vector<int> v {4,5}; // Vector with 4,5 as {} is type std::initializer_list <int>
+std::vector<int> q {4,5}; // Vector with 5,5,5,5
+
+v.emplace_back(8) //Adds 8 to the back 
+
+//Looping through vectors 
+for (int i =0; i < v.size(); ++i){
+	cout << v[i] << endl;
+}
+
+//Iterator 
+for (vector<int>::iterator it=v.begin; it!=v.end(); ++i{
+	cout << *it << endl;
+}
+
+for (auto n : v){
+	cout << n << endl;
+}
+
+//Reverse Iterator 
+for (vector<int>::reverse.iterator it = v.begin (); it != v.rend(); ++it) {
+	cout << *it << endl;
+}
+
+//Removing an item 
+v.pop.back() - removes last element 
+
+//Use Iterator to remove items from inside a vector 
+auto it = v.erase(v.begin()); // Erases item 0
+it = v.erase(v.begin()+3); //Erases item 3
+it = v.erase(it); 
+it - v.erase(v.end() - 1); // Erase last item 
+
+//Getting values 
+int i = v[j]; // Unchecked values 
+int u = v.at(j); //Checked for references outside bounds
+
+\end{lstlisting}
+
+\section{Exceptions}
+\textbf{Problem:} Vector can detect errors, but doesn't know what to do with it. Client knows what to do, but can't detect it.
+
+\textbf{C solution :} Functions return a status code or set the global variable error.  But this leads to awkward programming and discourages error checking. 
+
+\textbf{C ++ solution :} Use a try catch block \verb|try{...} catch {...}|
+
+\begin{lstlisting}
+#include <stdexcept>
+
+try{
+	cout << v.at(3) << endl; // out of range
+}
+catch (out_of_range r) {
+	cerr << "Bad range" << r.what() << endl;
+	throw; //Calls error out_of_range because of inheritance 
+}
+
+void f() { throw out-of-range {"f"};} // f is the what value
+\end{lstlisting}
+
+If you want to catch any generic error you can use "..." in place of the exception in catch.
+\begin{lstlisting}
+try {}
+catch (...) {}
+\end{lstlisting}
+
+In addition, in c++ you can throw anything and the actual item thrown, does not need to be an object 
+
+\begin{lstlisting}
+void f() {throw 5)
+try {}
+catch (int m ) {cout << m << endl;}
+\end{lstlisting}
+
+If you want to define your own exceptions, you can create an object (struct/class) that represents the exception and then proceed to throw that upon an exceptional situation. 
+
+\begin{lstlisting}
+class BadInput {};
+
+try {
+	...
+}
+catch (BadInput &b){
+}
+\end{lstlisting}
+
+The class is caught by reference in the catch block, to avoid slicing in cases of inheritance. So, its good practice to always catch by reference if you aren't throwing integers. 
+
+\begin{ex} \verb|std::bad.alloc| is raised when \verb|new| fails\end{ex}
+
+\section{Design Patterns Continued}
+
+\textbf{Guiding Principal} : Program to the interface, not the implementation. 
+
+\begin{itemize}
+\item Abstract base classes define the interface
+\begin{itemize}
+\item work with pointers to the abstract class and their methods
+\item Concrete subclasses can be swapped in and out. 
+\end{itemize}
+\end{itemize}
+
+\subsection{Observer Pattern}
+Publish-subscribe model 
+\begin{itemize}
+\item One class:publisher/subject - generates data
+\item One or more subscribers/observers classes 
+\end{itemize}
+
+\begin{ex} - 
+\begin{itemize}
+\item Publisher = Spreadsheet cells
+\item Observers = Graphs
+\begin{itemize}
+\item When cells change, graphs update.
+\end{itemize}
+\end{itemize}
+\end{ex}
+
+The idea of the observer pattern is that that a subject should not need to know all the details.
+\begin{center}
+\begin{pspicture}(12,8)\psgrid 
+\rput(3,6){\rnode{Class1}{\drawsub}} 
+\pnode(5,6){pnode1} 
+\pnode(7.8,6){pnode6} 
+\pnode(9,3.5){pnode2} 
+\pnode(5,3){pnode3} 
+\pnode(6.5,3){pnode5} 
+\pnode(3,3.7){pnode4} 
+\rput(3,3){\rnode{Class2}{\drawcsub}} 
+\rput(9,6){\rnode{Class3}{\drawob}} 
+\rput(9,3){\rnode{Class4}{\drawcob}} 
+\end{pspicture}
+\ncSE{pnode1}{pnode6}
+\ncputicon{umlAgreg}
+\ncSE{Class3}{pnode2}
+\ncSE{pnode5}{pnode3}
+\ncputicon{umlAgreg}
+\ncSE{Class1}{pnode4}
+\end{center}
+
+\textbf{Sequence of Method Calls}
+\begin{enumerate}
+\item Subject state changes
+\item Subject::notifyobservers() - calls each observer's notify 
+\item Each observer calls concrete ConcreteSubject::getState to query the state and react accordingly 
+\end{enumerate}
+
+\begin{ex} Horse Race
+\begin{itemize}
+\item Subject : Publishes winners
+\item Observers : Bettors - declare victory if they win 
+\end{itemize}
+
+\begin{lstlisting}
+Class Subject{
+		vector <observer *> observers;
+	public : 
+		void attach (observer *o){ observer.emplace_back(0);}
+		void detach (observer *o);
+		void notify Observers (){
+			for (auto &ob:observers) ob->notify(); 
+		}
+		virtual ~Subject() = 0;
+};
+
+Subject::~subject() {} // Must be defined, even though its pure virtual.
+\end{lstlisting}
+\end{ex}
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+

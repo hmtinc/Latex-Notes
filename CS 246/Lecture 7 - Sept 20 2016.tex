@@ -1,0 +1,534 @@
+%Notes by Harsh Mistry 
+%CS 246
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 246 - Object Oriented Programming  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break, const},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this, struct},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+ \tikzstyle{blockred} = [rectangle, draw, fill=red!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+    
+
+\lecture{7}{October 20, 2016}{Brad Lushman}{Harsh Mistry}
+
+\section{Abstraction of make files} 
+\subsection{Variables}
+We can abstract make files by introducing variables. These variables can be used to define common values such as compiler name and execution flags.
+
+\begin{itemize}
+\item CXX = g++-5
+\item CXXFLAGS = -std=c++14 -Wall
+\end{itemize}
+
+Variables must be their own line and to use them you must reference them within \verb|${ ... } |
+
+\subsection{Shortcut}
+In addition, to variables, we can abstract the make file further by excluding the build line for any rule that follows the pattern : \verb| x.o : x.cc a.h b.h .... |. So, \verb|${CXX} ${CXXFLAG} -c -o x.0| does not have to be included. 
+
+\subsection{Tracking dependencies}
+One of the biggest problems with writing make files is tracking dependencies and maintain them if they change. To achieve this, we can utilize the compilers ability to determine the dependencies  by including the \verb|-MMD| flag. \verb|g++14 --MMD -c inter.cc| will then generate a compiled object file and a .d file which contains the dependencies needed by the make file. In principle, we now only have to include the .d files within the makeFile
+
+\begin{ex} makeFile with dependency tracking 
+\begin{lstlisting}
+CXX = g++-5
+CXXFLAGS -std=c++14 -Wall -MMD
+OBJECTS = main.o list.o inter.o node.o 
+DEPENDS = ${OBJECTS: .o = .d}
+Exec = myprogam 
+${EXEC} : ${OBJECTS}
+		${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
+- include ${DEPENDS}
+\end{lstlisting}
+\end{ex}
+
+With dependency tracking, we only have to add the .o (object files) to the makeFIle as the project expands.
+
+\section{Software Engineering : System Modelling }
+
+Developing Object Oriented Systems  involves identifying abstractions and analysing the related steps among them. So, it is helpful outline the implementation and design using a diagram. A popular standard for this is referred to as UML - (Unified Modelling Language)  
+
+\textbf{Modelling a Class : }
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline 
+Name & -Vec \\ 
+\hline 
+Fields  & -x : Integer \\ 
+\hline 
+• & - y : Integer  \\ 
+\hline 
+Methods (Optional) & + getX : Integer \\ 
+\hline 
+• & +getY : Integer \\ 
+\hline 
+\end{tabular} 
+"+" Indicates Public and "-" indicates private
+\end{center}
+
+
+\subsection{Relationships}
+
+\textbf{Composition of Classes :}
+\begin{lstlisting}
+Class Vec {
+				int x, y; 
+		public : 
+				Vec (int x, int y); 
+};
+Class Basis {
+				Vec v1, v2;
+		public :
+				Basis() : v1 {1, 0}, v2{0, 1} {}
+};	
+\end{lstlisting}
+Embedding one object (e.g Vec) inside another (Basis) is called \textbf{composition}. The Relationship between Basis and Vec is called "owns-a", A basis object "owns" a Vec object.
+
+If A "owns a" B, then typically :
+\begin{itemize}
+\item B has no identity outside A (no independent existence) 
+\item If A is destroyed, B is destroyed 
+\item If A is copied, B is copied (Deep copies)
+\end{itemize}
+
+\begin{ex} Physical Example of Ownership \\
+A car owns 4 wheels and a wheel is part of a car 
+\begin{itemize}
+\item If you destroy the car, you destroy the wheels
+\item If you copy the car, you copy the wheels 
+\end{itemize}
+\end{ex}
+
+To illustrate this, we draw a arrow from one class to another with a filled diamond at the end.
+$$ \begin{bmatrix}
+Basis 
+\end{bmatrix} \blacklozenge \longrightarrow {}_2\begin{bmatrix}
+Vec
+\end{bmatrix}$$
+\newpage
+\textbf{Aggregation : } \\
+
+If you compare car parts in a var ("owns a") to car parts in a catalogue.
+
+The catalogue contains the parts, but the parts are an independent existence. 
+This is a "has -a" relationship
+
+If  A "has a" B, then typically 
+\begin{itemize}
+\item B has an existence, apart from its association with A
+\item If A is destroyed, B lives on
+\item If A is copied, B is not (Shallow Copy) 
+\begin{itemize}
+\item Copies of A share the same B 
+\end{itemize}
+\end{itemize}
+
+To illustrate this, we draw a arrow from one class to another with a empty diamond at the end.
+$$ \begin{bmatrix}
+Pond
+\end{bmatrix} \diamond \longrightarrow \begin{bmatrix}
+Ducks
+\end{bmatrix}$$
+
+\textbf{Specialization/Generalization (Inheritance) : }\\
+
+Suppose you want to track your collection of books. 
+
+\begin{lstlisting}
+Class Book{
+				string title, author;
+				int numPages;
+		public :
+				Book ( ---- ) ;
+				...
+};
+
+//For textbooks, also want to know the topic 
+Class Text {
+				string title, author;
+				int numPages;
+				string topic;
+		public :
+				Text ( --- );
+				...
+};
+
+//For Comic Books with name of hero 
+Class Comic {
+				string title, author;
+				int numPages;
+				String hero; 
+		public :
+				comic ( --- ) ; 
+				...
+};
+\end{lstlisting}
+
+\newpage
+ 
+Despite being separate classes, there is a relationship. They all represent books. Now, if we wanted to represent all of the types in one array we can : 
+
+\begin{enumerate}
+\item One solution is to use \verb|union|, but this is not recommended as this type from C does not provide a predicate for checking what each value points to 
+\begin{lstlisting}
+union BookType {Book *b, Text *t, Comic *c};
+Booktype myBooks[20]; //Declares array of 20 items 
+\end{lstlisting}
+\item An alternate solution is to use void pointers to point to different classes, but this also requires us to know the type each pointer is pointing to. 
+\end{enumerate}
+
+The highlighted solutions from C are very inconvenient and not ideal. So to improve the implementation, we can use C++ inheritance, which will allow us to explicitly tell the compiler that a text/comic is a type of book
+
+\begin{lstlisting} 
+//Base Class (Superclass)
+Class Book {
+				string title, author; 
+				int numPages
+		public 
+				Book ( --- ); 
+				...
+};
+
+//Derived Classes (Subclasses)
+Class Text: public Book {
+				string topic;
+		public :
+				Text ( --- ); 
+				...
+};
+
+Class Comic : public Book {
+				string hero;
+		public : 
+				Comic ( --- ) ; 
+			    ..
+};
+\end{lstlisting}
+ 
+ The derived classes inherit fields from the base class, so in the provided example, title, author, and numpages are inherited. Given this, any function that can be called on book, can be called on Text and Comic. 
+ 
+ Despite being apart of Book as a derived classes, subclasses can not access fields that it inherits, so requests must be made using the public functions provided by book. 
+ 
+ \begin{ablock} {What Happens when a object is constructed with derived classes}
+ \begin{enumerate}
+ \item Space is allocated 
+ \item Superclass part is constructed  (New) 
+ \item Fields are constructed 
+ \item Constructor Body Runs 
+ \end{enumerate}
+ \end{ablock}
+   
+  \newpage 
+  
+ Now that we have derived classes, initialization is now a concern. Since derived classes are sub classes of a superclass, standard initializations do not work because 
+
+ \begin{enumerate}
+ \item The derived classes do not have access to the inherited variables 
+ \item Book does not have a default constructor 
+ \end{enumerate}
+ 
+ To resolve this issue, we can invoke Book's constructor in Text's MIL.
+ 
+ \begin{lstlisting}
+ Class Text:public Book {
+ 				..
+ 		public : 
+ 				Text (string title, string author, int numpages, string topic) :
+ 						Book{title, author, numPages}, topic{topic} {}
+ };
+ \end{lstlisting}
+ 
+ In general, if superclass has no default constructor, the subclass must call a superclass constructor in the derived class MIL. 
+ 
+ This all stems out of the fact that subclasses do not have access to superclass fields. There are some good reason for this, but if you wish, you may grant access to certain fields by using \verb|protected| visibility
+ 
+ \begin{lstlisting}
+ Class Book {
+ 			protected : 
+ 					string title, author; 
+ 					int numpages; 
+ 			public : 
+ 					...
+ }; 
+ \end{lstlisting}
+ 
+ The use of protected is ill advised, as it gives unlimited access to the fields. A better solution would be to make fields private, but provide protected accessor/mutator methods 
+ 
+ \begin{lstlisting}
+ Class Book {
+ 					string title, author; 
+ 					int numpages; 
+ 			protected :
+ 					string getTitle() const;
+ 					void setAuthor (string newAuthor);
+ 			public : 
+					Book ( --- ) ; 
+					bool isItHeavy () const; 					
+ 					...
+ }; 
+ \end{lstlisting}
+ 
+ The sub classes have a "is-a" relationship with the superclass.
+ In UML this is noted using a flowchart style graph which has subclasses pointing to a superclass. 
+ 
+ \begin{center}
+\begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+    \node [block] (init) {Book};
+    \node [blockred, left of=init, below of =init, node distance=3cm] (expert) {Text};
+    \node [blockred, right of=init, below of=init, node distance=3cm] (system) {Comic};
+
+    % Draw edges
+    \path [line,dashed] (expert) -- (init);
+    \path [line,dashed] (system) -- (init);
+\end{tikzpicture}
+\end{center}
+
+ 
+ \section{Virtual Methods and Polymorphism}
+ Going back to inheritance, if we want to initialize a super class, we can use the subclass
+ \begin{lstlisting}
+ Book b  = Comic {"A big Comic", "_____" , 40, "_____"};
+ \end{lstlisting} 
+ Unfortunately, because of this, any functions called will call the Book version of function. This happens as Book only has enough space for its fields, slicing occurs and the fields from comic are used to initialize the fields of book. Thus, a book is created.  This issue does apply to pointers of a superclass. So depending on the pointer type, the object will behave differently, as the compiler uses the type of the pointer to decide which function to run.  
+
+ \begin{lstlisting}
+Comic c {"A big Comic", "_____" , 40, "_____"};
+Book *pb = &c; //Book functions are executed not Comic
+Book *pc = &c; //Comic functions are executed. 
+ \end{lstlisting} 
+ 
+ Therefore a subclass is only its self, when a pointer or reference of a matching type points to it. This is not what we want. We can ensure the correct version of functions are called by declaring the function \verb|virtual| within the superclass with an \verb|override| parameter in the subclass.
+ \begin{lstlisting}
+ Class Book {
+ 					string title, author; 
+ 					int numpages; 
+ 			protected :
+ 					string getTitle() const;
+ 					void setAuthor (string newAuthor);
+ 			public : 
+					Book ( --- ) ; 
+					virtual bool isItHeavy () const; 					
+ 					...
+ }; 
+ 
+ Class Comic : public Book {
+ 					...
+ 			pubic 
+ 					...
+ 					bool isItheavy() const override; 
+ 	
+ };
+ 
+Comic c {"A big Comic", "_____" , 40, "_____"};
+Book *pb = &c; //Comic functions are executed 
+Book *rb =  c; //Comic functions are executed 
+Book *pc = &c; //Comic functions are executed. 
+ \end{lstlisting}
+ 
+In essence, virtual methods choose which class method to run based on the actual type of the object at runtime. 
+
+This also helps us resolve our initial problem of storing multiple different types in an array, as we can declare an array of pointers with a type that matches the superclass. Then when the functions for the class are called, the virtual function will determine the type on run time. This results in a implementation that allows for different behaviour based on the type. This is called \textbf{\textcolor{red}{Polymorphism}}.
+ \newpage
+\section{"Dangerous" Situation}
+Consider : 
+\begin{lstlisting}
+Class One{
+				int x, y; 
+		public : 
+				One (int x = 0, int y = 0) : x{x}, y{y}{}
+};
+
+Class Two : public One {
+				int z; 
+		public : 
+				Two (int x = 0, int y = 0, int z = 0) : One{x, y}, z {z} {}
+}
+
+void f(One *a){
+		a[0] = {6,7};
+		a[1] = {8,9};
+}
+
+Two myArray[2] = {{1,2,3} , {4,5,6}}
+f(myArray}
+\end{lstlisting}
+
+The code above will compile, but since f thinks its working with one objects, the data will end up being misaligned. The resulting array will be \(\begin{bmatrix}  6, 7, 8 \mid 9, 5, 6\end{bmatrix}\).
+
+So never use arrays of objects, polymorphically. If you want a polymorphic array, use array of pointers. 
+\end{document}
+
+
+
+
+
+
+
+
+
