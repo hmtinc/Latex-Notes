@@ -1,0 +1,387 @@
+%Notes by Harsh Mistry 
+%CS 246
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 246 - Object Oriented Programming  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break, const},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this, struct},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{12}{December 1,  2016}{Brad Lushman}{Harsh Mistry}
+Recall : 
+\begin{lstlisting}
+Text t {...}'
+Book &b = t;
+
+Text &t2 = dynamic_cast<Text &> (b); 
+//If B "points to " a Text, then t2 is a reference to the same text.
+//If not, then a exception bad_cast is raised
+\end{lstlisting}
+
+With dynamic casting, we can solve the polymorphic assignment problem. 
+\begin{lstlisting}
+Text &Text::operator=(const Book &other) { // Virtual 
+	Text &textother = dynamic_cast<Text &> (other); //Throws an exception if other is not a text, which can be solved. Thus solving the polymorphic assignment problem.
+	if (this == &textother) return *this;
+	Book::operator=(other);
+	topic = textother.topic;
+	return *this;
+}
+\end{lstlisting}
+
+\section{How Virtual Methods Work}
+Consider : 
+\begin{lstlisting}
+class Vec {
+	int x, y;
+	int doSomething();
+	...
+};
+
+class Vec2{
+	int x, y;
+	virtual int doSomething();
+	...
+}
+
+//Client 
+Vec v {1,2};
+Vec w {1,2}'
+
+cout << sizeof(v) << " " << sizeof(w) << endl; //Returns 8 for v and 16 for w 
+\end{lstlisting}
+
+\textbf{Note :} 8 is the size of two integers, so there is no space for functions. Therefore the compiler turns methods into regular functions and stores them outside the object with other functions. 
+
+Now Recall : 
+\begin{lstlisting}
+Book *pb = new (Book/Text/or Comic)
+pb->isItHeavy();
+\end{lstlisting}
+Since the function is virtual, the compiler bases what function to call based on the type of thw actual object, which the compiler can not know in advance. So, the correct version of the function must be chosen at runtime. 
+
+To achieve the selection of the correct virtual function, the compiler creates a table of function pointers \textbf{(The vtable)} for each class with virtual methods. Then a pointer called the \textbf{vpointer} , which points to the \textbf{vtable},  is added to each virtual class. It also worth noting that the vtable is only created once, then included in each version of the class. In addition, each different type of class will have its own \textbf{vtable}. 
+
+Lastly, each \textbf{vtable} also starts with some type of value to help indicate what class the table for. This is done to allow for dynamic casting, which is a very expensive operation.  
+
+To determine the correct function, the compiler fetches the \textbf{vpointer} and continually follows the path till the correct function is found.
+
+
+
+\begin{ablock}{Steps that occur when calling a virtual method}
+\begin{enumerate}
+\item Program follows \textbf{vpointer} to \textbf{vtable}
+\item Program fetches pointer to the actual method from the table 
+\item Program follows the function pointer to call the function.
+\end{enumerate}
+
+Therefore, virtual function calls incur a small overhead cost in addition to the increased memory requirements. 
+\end{ablock}
+
+Going back to the first example regarding the 8 byte difference, its evident that the addition of the \textbf{vpointer} adds an extra 8 bytes to enable the selection of the correct function. 
+
+
+\subsection{How is an object concretely laid out }
+Concretely, in most compilers, objects are laid out in a way such that the \textbf{vpointer} is always at the top to ensure subclass objects are similar to the superclass if you trim the new values. In addition, having the \textbf{vpointer} at the top makes its easier to locate, thus avoiding any issues. 
+ 
+\section{Multiple Inheritance}
+A class can inherit from more than one class 
+\begin{lstlisting}
+class A {
+	public :
+		int a;
+};
+
+class B {
+	public : 
+		int b;
+};
+
+class C : public A, public B{
+	void f() { cout << a << b << endl;} //F can access A and B fields. 
+};
+\end{lstlisting}
+
+Now consider : 
+\begin{lstlisting}
+Class D : public B, public C { //Both B and C have a variable A inherited from A
+	public :
+		int d;
+};
+
+D d;
+cout << d.a;;
+\end{lstlisting}
+
+This will not compile as there is ambiguity to which variable a should be called. To fix this we can explicitly state which a variable you want use the scope operator.
+\begin{lstlisting}
+cout << d.B::a << " " << d.C::a << endl; 
+\end{lstlisting}
+
+Now, since B and C inherit from another class A and you want only one copy A, you can utilize the pattern called the \textbf{deadly diamond pattern}. To achieve this you make the base class virtual, so in essence you invoke virtual inheritance. 
+
+\begin{lstlisting}
+class B : virtual public A { ... };
+class C : virtual public A { ... };
+\end{lstlisting}
+
+\textbf{Note : } A good example of virtual inheritance within C++ is the iostream class. 
+
+Unlike regular inheritence, the distance between the actual objects and their superclass in the model of object is not consistent. So, to find the base classes, the program will go to one of the  intermediate classes such as B, and obtain the super class information from there.  In addition, the diagram for layout does not look like A,B,C,D, simultaneously. It looks like slices of the classes instead.  
+
+So, 
+
+\begin{itemize}
+\item pointer assignment amoung A, B, C, D changes the address in the pointer.
+\item static/dynamic/const cast under multi inheritance also changes the value of the pointer 
+\item reinterpret cast does not work. 
+\end{itemize}
+
+\section{Template Functions}
+Consider :
+\begin{lstlisting}
+template <typename T> T min (T x, T y) {
+	return x < y ? x : y;
+}
+
+int x = 1, y = 2;
+int z = min(x, y);
+\end{lstlisting}
+
+As noted in the example, explicitly stating the type of x and y when using the function template is not necessary, as the compiler is smart enough to realize the type automatically. 
+This does not work for certain types, thus a explicit type may be needed. 
+
+Recall : the following works as long as AbstractIterator supports *,!,=,++ and can be called as a function
+\begin{lstlisting}
+void for_each(AbstractIterator start, abstractIterator finish, void (*f) (int)){
+	while (start != finish){
+		f(*start);
+		++start; 
+	}
+}
+\end{lstlisting}
+
+We can achieve the same result using functions templates while ensuring it can work with any types that does not inherit from abtractiterator, thus resulting in more generality. 
+
+\begin{lstlisting}
+template <typename Iterm typename Func> 
+	void for_each(Iter start, Iter finish, Func f) {
+		while (start != finish) {
+			f(*start);
+			++start
+		}
+	}
+\end{lstlisting}
+
+\subsection{STL \(\langle \text{algorithm} \rangle\)}
+
+\verb|<algorithm>| is a suite of template functions, many of which work over iterators
+
+\begin{ex} foreach (as given above) is included in the algorithm library. \end{ex}
+\begin{ex} Find is also included in the algorithm, which eliminates the need for loops to find values. Find returns iterator to the first item that matches val and if not found returns last.
+\begin{lstlisting}
+template <typename Iter, typename T> 
+	Iter find (Iter first , Iter last, const T &val) {
+		...
+	}
+\end{lstlisting}
+\end{ex}
+
+\begin{ex} Count is much like find, but returns the number of occurrences of the given value.
+\end{ex}
+
+\begin{ex} Copy is another common template included within algorithm which copies one container range to another starting at result . It may be worth noting that copy does not allocate memory. 
+\begin{lstlisting}
+template <typename InIter, typename OutIter>
+	OutIter copy (Initer first, Initer last, outIter result) {
+		...
+	}
+\end{lstlisting}
+\end{ex}
+
+\begin{ex} Transform is another template which works alot like copy but also applies a function 
+\begin{lstlisting}
+template <typename InIter, typename OutIter, typename Func>
+	OutIter copy (Initer first, Initer last, outIter result, func f) {
+		while (first != last){
+			*result = f(*first);
+			++first;
+			++result;
+		}
+	}
+\end{lstlisting}
+\begin{itemize}
+\item func could be regular objects with an overloaded () operator , which will allow for state to be maintained. 
+\item func could also be a lambda which is indicated used open/close brackets 
+\verb|[](int n) {return n % 2 == 0;} |
+\item You can also avoid having to manage memory by utilizing \verb|back_inserter(w)|,
+\end{itemize} 
+\end{ex}
+
+\begin{center}
+\textbf{\textcolor{red}{That is all for Fall 2016. Hope these notes helped!}}
+\end{center}
+\end{document}
+
+
+
+
+
+
+
+
+

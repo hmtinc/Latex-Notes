@@ -1,0 +1,451 @@
+%Notes by Harsh Mistry 
+%CS 246
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 246 - Object Oriented Programming  
+	\hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break, const},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this, struct},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{11}{November 24, 2016}{Brad Lushman}{Harsh Mistry}
+Recall :
+\begin{lstlisting}
+void f() { 
+	auto p = std::make_unique<MyClass> ();
+	MyClass mc;
+	g();
+}	
+\end{lstlisting}
+
+Now Consider : 
+\begin{lstlisting}
+class c { ... }; 
+
+unique_ptr<c> p { new C {...}};
+unique_ptr<c> q = p
+\end{lstlisting}
+
+When a unique pointer is copied and then subsequently deleted, you will have a double free. To prevent such a incident, copying of pointers is disabled and prohibited by the compiler. But moving is allowed. 
+
+\textbf{Sample Implementation of unique pointer :}
+\begin{lstlisting}
+template <typename T> class unique_ptr {
+		T *ptr;
+	public : 
+		unique_ptr( T *p) : ptr {p} {}
+		
+		~unique_ptr() {delete ptr;}
+		
+		unique_ptr(const unique_ptr <T> &other ) = delete; //disables copying 
+		
+		unique_ptr<T> &operator=(const unique_ptr<T> &other) = delete; //disables copying
+		
+		unique_ptr(const uniquie_ptr <t> &&other) : ptr{other.ptr} {
+			//Set other to null to prevent loss of data
+			other.ptr = nullptr;
+		}
+		
+		unique_ptr<T> &operator=(const unique_ptr<T> &&other){
+			std::swap(ptr, other.ptr);
+			return *this;
+		}
+		
+		// 
+		T &operator*() {return *ptr;}
+}
+\end{lstlisting}
+
+If you need to able to copy smart pointers use \verb|std::shared_ptr|. Shared pointer will ensure when both smart pointers go out of scope, only the last one will be deleted. This happens because shared pointers maintain a \textbf{reference count}. In essence, the pointer keeps track of how many pointers point the same object. Then memory is only freed when the internal count reaches 0.
+
+With all this in mind, it is recommended that you use smart pointers, as it dramatically decreases chances of memory leaks. 
+
+\section{3 levels of Exception Safety for a function f}
+\begin{enumerate}
+\item Basic Guarantee - If an exception occurs, the program will still remain in valid state
+\item Strong Guarantee - If an exception is raised while executing f, the state of the program will be as it was before f was called.
+\item No throw guarantee - f will never throw an exception, and always accomplishes its task.
+\end{enumerate}
+
+Now Consider : 
+\begin{lstlisting}
+Class A {...}
+Class B {...}
+Class C {...}
+
+A a;
+B b;
+
+void f() {
+	a.method1();  // Might Throw (Strong Guarantee)
+	b.method2();  // Might Throw
+}
+\end{lstlisting}
+
+If method one throws nothing happens, but if method 2 throws, the effects of method 1 must be undone to offer the strong guarantee. This can be very difficult if method 1 has non-local side effects. Therefore, the function is not exception safe. 
+
+If method1 and method2 do not have non-local side-effects, we can use copy/swap idiom to make f() exception safe. 
+
+\begin{lstlisting}
+Class A {...}
+Class B {...}
+Class C {...}
+
+A a;
+B b;
+
+void f() {
+	A aTemp = a; //If this throw, its ok, as nothing has happened yet.
+	B bTemp = b;
+	
+	//If these throw, original version of A and B are still intact. 
+	aTemp.method1();
+	bTemp.method2();
+	
+	//Copy Temp back to orginal 
+	a = aTemp;
+	b = btemp;
+}
+\end{lstlisting}
+
+This works to a certain degree, but if copy throws during the last step, then the function would not be considered exception safe. To fix this we can utilize the pImpl idiom to ensure the sawp can not throw errors by using pointers.
+
+\begin{lstlisting}
+struct CImpl {
+	A a;
+	B b;
+};
+
+Class C {
+		...
+		unique_ptr<CImp>  (* pImpl);
+		...
+		void f() {
+			auto temp = make_unique<Cimpl> (*pImpl);
+			temp ->a.method1();
+			temp->b.method2();
+			std::swap(temp, pImpl); //Does not throw, thus strong guarantee.
+		}
+};
+\end{lstlisting}
+
+\textbf{Note : } If method1 or method2 offer no exception safety guarantee, then neither can f. 
+
+\begin{ablock}{Warning}
+\textbf{Never  let a destructor emit an exception}. \\
+If the destructor was executed during stack unwinding while dealing with another exception, you now have two active, unhandled exceptions, and the program will abort immediately. 
+\end{ablock}
+
+\section{Exception safety and the STL}
+Vector encapsulates a heap array and it follows RAII. Thus, the internal heap array is freed when the vector goes out of scope 
+
+\begin{ex} Example of straight forward memory management
+\begin{lstlisting}
+void f() {
+	vector <MyClass>  v; //All Classes are deleted when the vector goes out of scope and no exceptions are raised 
+}
+\end{lstlisting} 
+\end{ex}
+
+\begin{ex} Vectors with regular pointers. 
+\begin{lstlisting}
+void g() {
+	vector <MyClass *> v; //Pointers are not freed when the vector goes out of scope, as its not sure if the pointers own the data or if they point to the heap.
+	
+	//So, You must delete the pointers yourself
+	for (auto x : v) delete x; 
+}
+\end{lstlisting}
+\end{ex}
+
+\begin{ex} Vectors with shared pointers 
+\begin{lstlisting}
+void h() {
+	vector<shared_ptr<MyClass>> v; //Objects in vector are freed if no other shared pointer points at them, so there is no explicit deallocation. 
+}
+\end{lstlisting}
+\end{ex}
+ 
+
+\begin{ex} Vectors with emplace back 
+\begin{lstlisting}
+void h() {
+	v.emplace_back () ; //Offers the strong guarantee. 
+}
+\end{lstlisting}
+Emplace is a strong guarantee because if the copy assignment fails when vector makes a new array, it is simply deleted and the previous state is retained. 
+\end{ex}
+
+Example 11.4 is great, but copying is expensive and old data will be thrown away. Moving objects would be more efficient. Which is why if the move constructor offers no-throw guarantee, \verb|emplace_back| will use the move constructor, otherwise it will use the copy constructor, which is slower.
+
+So. your mover operations should provide a no throw guarantee. To do this, you need indicate they provide such a guarantee by using the keywords \verb|no except|
+
+\begin{lstlisting}
+class MyClass {
+	public : 
+		MyClass (MyClass &&other) no except {}
+		MyClass &operator=(Myclass &&other) no except;
+};
+\end{lstlisting}
+
+If you know that a function will never throw or propagate an exception, declare it no except as it facilitates optimization. At minimum, you should declare swaps and moves should be no except. 
+
+\section{Casting}
+
+In C : 
+\begin{lstlisting}
+Node n;
+int *x = (int *)(&n) //Forces compiler to treat node* as int 
+\end{lstlisting}
+
+The behaviour is undefined. If you must cast, you should use C++ style casts, of which there are 4. 
+\begin{enumerate}
+\item \verb|static_cast| - Used for what can be considered a sensible cast. So the casts have well defined meaning 
+\begin{itemize}
+\item Casting for overloaded function.
+\begin{lstlisting}
+double d;
+
+void f(int i);
+void f(double d);
+
+f(static_cast<int>(d));
+\end{lstlisting}
+\item Converting superclass pointer to subclass pointer
+\begin{lstlisting}
+Book *b = new Text{ ... };
+Text *t = static_cast<Text *> (b);
+\end{lstlisting}
+
+\end{itemize}
+
+\item \verb|reinterpret_cast| - Used for unsafe, implementation specific, "weird" casts
+\begin{itemize}
+\item Treat a student as a turtle 
+\begin{lstlisting}
+Student S;
+Turtle *t = reinterpret_cast<Turtle *> (&s);
+\end{lstlisting}
+\end{itemize}
+
+\item \verb|const_cast| - Used for converting const/non-const and is the only C++ cast that can "cast away const"
+\begin{itemize}
+\item Passing constant pointer to function without a const in its signature
+\begin{lstlisting}
+void g(int *p); // Given and supposed g doesn't change *p, but was left out of signature
+
+void f(const int *p) {
+	...
+	g(const.cast<int *>(p));
+	...
+}
+\end{lstlisting}
+\end{itemize}
+
+\item \verb|dynamic_cast| - Used to cast in cases where you want to proceed only if the cast succeeds 
+\begin{itemize}
+\item Casting Text to Book in cases where P is really a text or subclass of Text. If the cast fails, the pointer will be set to null. 
+\begin{lstlisting}
+Book *p;
+Text *pt = dynamic_cast<Text *>(pb);
+\end{lstlisting}
+\end{itemize}
+\end{enumerate}
+
+If you wish to cast upon smart pointers you must use the following which cast shared pointers to shared pointers :
+\begin{enumerate}
+\item \verb|static_pointer_cast|
+\item \verb|const_pointer_cast|
+\item \verb|dynamic_pointer_cast|
+\end{enumerate}
+
+Given dynamic casting, we can make decisions based on an object's \textbf{RTTI (run-time type information)}.
+
+\begin{lstlisting}
+void whatType (shared_ptr<Book> b){
+	if (dynamic_pointer_cast<comic>(b)) cout << "Comic";
+	else if (dynamic_pointer_cast<Text>(b) cout << "Text";
+	else cout << "A regular book" 
+}
+\end{lstlisting}
+
+Code like the example above is tightly coupled to the hierarchy of the classes and may indicate bad design, so before using dynamic cast consider using Virtual Methods or Visitors. 
+
+Additionally, dynamic casting also works with references : 
+
+\begin{lstlisting}
+Text t {...}'
+Book &b = t;
+
+Text &t2 = dynamic_cast<Text &> (b); 
+//If B "points to " a Text, then t2 is a reference to the same text.
+//If not, then a exception bad_cast is raised
+\end{lstlisting}
+
+\textbf{In general:} Dynamic casting only works on classes with at least one virtual method. 
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
