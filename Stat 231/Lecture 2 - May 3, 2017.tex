@@ -14,6 +14,7 @@
 \usepackage{amsfonts,graphicx, amssymb}
 \usepackage[fleqn]{amsmath}
 \usepackage{fixltx2e}
+\usepackage{tikz}
 \usepackage{color}
 \usepackage{tcolorbox}
 \usepackage{lipsum}
@@ -163,6 +164,81 @@
 
 \lecture{2}{May 3rd, 2017}{Suryapratim Banerjee}{Harsh Mistry}
 
+ \section{Terminology}
+ \begin{definition}
+  \underline{Population} is a collection of certain properties we are interested in. 
+ \end{definition}
 
+ \begin{definition}
+  \underline{Inductive} : Small \(\rightarrow\) Big  
+ \end{definition}
+ 
+  \begin{definition}
+  \underline{Deductive} : Big \(\rightarrow\) Small
+ \end{definition}
 
+  \begin{definition}
+  \underline{Empirical Studies} are studies where data is collected wither through observation or through experimentation. Repeated studies will often given different results
+ \end{definition}
+ 
+   \begin{definition}
+  \underline{Experimental Studies} are studies where some of the variables are controlled by the data collector. For example in a medical study you may control who receives actual treatment and who receives a placebo treatment. 
+ \end{definition}
+ 
+  \begin{definition}
+  \underline{Observational Studies } are studies where the data collector has no control the variables. For example, a study between alcohol consumed and GPA would have no variables that can be controlled. 
+ \end{definition}
+ 
+   \begin{definition}
+  \underline{Unit} : Each member of the population 
+ \end{definition}
+ 
+    \begin{definition}
+  A \underline{Variate} is the property of the units we are interested in
+ \end{definition}
+ 
+ \begin{definition}
+  A \underline{Attribute} is a function of the variables. 
+  \(f(y_1, \ldots, y_n)\)
+ \end{definition}
+ 
+ \section{Types of Data}
+\begin{center}
+\begin{tikzpicture}[sibling distance=15em,
+  every node/.style = {shape=rectangle, rounded corners,
+    draw, align=center,
+    top color=white, bottom color=blue!20}]]
+  \node {Data}
+    child { node {Numerical}
+    child {node {Data is expressed}
+    child {node {Discrete (Coutable)}} 
+    child {node {Continuous (Can be measured)}}}}
+        child { node {Categorical}};
+\end{tikzpicture}
+\end{center}
+
+\begin{definition}
+  \underline{Categorical Data} is non-numerical data. For example, Yes/No/Unsure are example of none numerical data.
+ \end{definition}
+ 
+ \begin{definition}
+  \underline{Binary Data} Two categories
+ \end{definition}
+ 
+  \begin{definition}
+  \underline{Ordinal Data} is Categorical data which has an underlying order. 
+ \end{definition}
+ 
+   \begin{definition}
+  \underline{Non-Ordinal Data} is Categorical data which has no underlying order. 
+ \end{definition}
+ 
+ \begin{definition}
+  \underline{Coding} is the process of converting categorical data into numerical data. For example  :
+  $$\begin{cases}
+  \textbf{No } \rightarrow 0 \\
+  \textbf{Maybe } \rightarrow 1\\
+  \textbf{Yes } \rightarrow 2  \\
+  \end{cases}$$
+ \end{definition}
 \end{document}

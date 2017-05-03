@@ -71,13 +71,20 @@
 			\end{center}
 	}
 	
+	\newcommand{\bs}{
+		\texttt{\char`\\ \hspace{0.1cm}} 
+	}
+	
+
+	
 \newcommand{\pipe}{\(\mid\)}
 \newcommand{\ctr}{\(\wedge\)}
 
 \newtheorem{theorem}{Theorem}[lecnum]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{ex}[theorem]{Example}
-\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{expx}[theorem]{Problem}
+\newtheorem{prop}[theorem]{Proposition}
 \newtheorem{claim}[theorem]{Claim}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{definition}[theorem]{Definition}
@@ -163,6 +170,104 @@
 
 \lecture{2}{May 3rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
 
+\section{Admin Info}
+\begin{center}
+Alan's office hours \\
+Mon, Fri : 12:30 - 13:30 \\
+Tue : 11:30 - 12:30
+\end{center}
+
+\section{Recap}
+
+\[{{n}\choose{k}} = \frac{n!}{k(n-k)!} = \# \text{ k-subsets of an n-element set = \# of ways we can choose k objects amoung n}\]
+
+\section{•}
+
+\begin{definition}
+A \underline{Bijection} is a function \(f : S \rightarrow T\) such that 
+
+\begin{itemize}
+\item f is 1-1 : for every \(x_1 , x_2 \in S, x_1 \neq x_2, f(x_1) \neq f(x_2)\)
+\item f is onto : for every \(y \in T \) there exists \(x \in S\) such that \(f(x) = y \) 
+\end{itemize}
+\end{definition} 
+
+\begin{definition}
+An inverse for f is a function \(f^{-1} : T \rightarrow S\) such that 
+\begin{itemize}
+\item \(f^{-1}(f(x)) = x \text{ ,  }\forall x \in S\) 
+\item \(f(f^{-1}(y)) = Y \text{ , }\forall y \in T\) 
+\end{itemize}
+\end{definition}
+
+\begin{lemma}
+f is a bijection \(\iff\) f has an inverse 
+\end{lemma}
+
+
+\begin{expx}
+Show that \({{n} \choose {k}} = {{n} \choose {n - k}}\) by showing that there is a bijection between \\
+\[S = \text{set of all k-subsets of } \{1, ..., n\}\]
+\[T = \text{set of all (n-k) subsets of } \{1, \ldots, n\}\]
+
+\textbf{Solution :}
+Define \(f : S \rightarrow T \) and \(f ^{-1} : T \rightarrow S\). \\
+\(f(A) = \{1, \ldots, n\} \bs A , \forall A \in S\) \\
+\(f^{-1}(B) = \{1, \ldots, n\} \bs B , \forall B \in T\)  
+\end{expx}
+
+\textbf{Note} : Note that f and \(f^{-1}\) are well defined because \\
+\(\{1, \ldots, n\}  \bs A\) has (n-k) elements \(\forall A \in S\)\\
+\(\{1, \ldots, n \}  \bs b \) has k elements \(\forall B \in T \)
+
+
+\(f^{-1}\) is the inverse of f because 
+\[\begin{aligned}
+f^{-1} (f(A)) & = f^{-1}( \{1, \ldots , n \} \bs A ) \\
+& = \{1 \ldots, n\} \ (\{1, \ldots, n\}) \bs  A \\
+& = A , \forall A \in S
+\end{aligned}\]
+
+
+\section{Binomial Theorem}
+\((1 + x )^2 = 1 + 2x + x^2\)
+\begin{theorem}
+\[(1 + x)^n = \sum_{k=0}^{n} {{n}\choose{k}}x^k = {n \choose 0} x^0 + {n \choose 1} x^1 + \ldots + {n \choose n } x^n\]
+\end{theorem}
+
+\begin{proof}
+\[\begin{aligned}
+(1 + x)^n   & = (1 + x) + (1 + x) + \ldots + (1 + x) \\
+			& = \underline{1} 1 +  \underline(n) x + \underline{{n \choose 2}} x^2 + \ldots + \underline{{n \choose k}}x^k + \ldots + \underline{{n \choose n}} x^n 
+\end{aligned}\]
+
+To get \(x^k\) among the n copies of (1 + x) we choose k. Thre are n choose k ways to do this
+\end{proof}
+
+\section{Combinatorial Proofs}
+\begin{prop}
+\(2^n = \sum_{k = 0}^{n} {n \choose k}\)
+\end{prop}
+
+\textbf{Algebraic Proof : } Plug x = 1 in to the binomial theorem
+
+\textbf{Combinatorial Proof : } \\
+The idea is to count a set in two differing ways such that one way gives you the 
+\underline{left hand side} f the identity you want to prove and the another way gives you the the \underline{right hand side}
+
+\begin{proof}Let S be the subset of all subsets \(\{1, \ldots, n\}\)
+\begin{itemize}
+\item[LHS : ] \(\mid S \mid = s^n \), since every element has two possibilities. Its either within a subset or not included within a subsets 
+\item[RHS : ] For every \(k \in \{0, \ldots, n\}\), let \(s_k\) = k-subsets of \(\{1, \ldots, n\}\) 
+\[\begin{aligned}
+ S & = S_0 \cup S_1 \cup S_2 \cup \ldots \cup S_n \\
+S_i \cap S_j  & =  \emptyset \text{\hspace{0.1cm} for  } i \neq j \\
+\mid S \mid \hspace{0.1cm} & = \hspace{0.1cm} \mid S_0  \mid + \ldots +  \mid S_n \mid  \\
+& = {n \choose 0} + {n \choose 1} + \ldots + {n \choose n}
+\end{aligned}\]
+
+\end{itemize}
+\end{proof}
 
 
 \end{document}
