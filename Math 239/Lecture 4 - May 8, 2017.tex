@@ -168,106 +168,118 @@
 %Start
 \begin{document}
 
-\lecture{2}{May 3rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
+\lecture{4}{May 8th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
 
-\section{Admin Info}
+
+\section{Generating Series}
+\textbf{\underline{General Counting Problem}} : \\ \newline Suppose S is a set, and for each element \(\sigma \in S\) has associated a non-negative weight \(w(\sigma)\). \\
+Given \(k \in \langle 0, 1, 2, \ldots\rangle\), how many elements in s have weight k? 
+
+\begin{ex} General Counting problem with S = all subsets of \(\langle 1, 2, 3, \rangle\).
+\[w(\sigma)  = \mid \sigma \mid \]
+\[S = \langle \emptyset , \{1\}, \{2\}, \{3\}, \{2, 1\}, \{2, 3\}
+, \{1 , 2, 3\} \rangle\]
+
 \begin{center}
-Alan's office hours \\
-Mon, Fri : 12:30 - 13:30 \\
-Tue : 11:30 - 12:30
+\begin{tabular}{|c|c|}
+\hline 
+k & Number of \(\sigma\) with \(w(\sigma) = k\) \\ 
+\hline 
+0 & 1 \\ 
+\hline 
+1 & 3 \\ 
+\hline 
+2 & 3 \\ 
+\hline 
+3 & 1 \\ 
+\hline 
+\end{tabular} 
 \end{center}
 
-\section{Recap}
-
-\[{{n}\choose{k}} = \frac{n!}{k(n-k)!} = \# \text{ k-subsets of an n-element set = \# of ways we can choose k objects amoung n}\]
-
-\section{•}
+Instead of using a table we encode this information as a coefficients of a polynomial
+\end{ex}
 
 \begin{definition}
-A \underline{Bijection} is a function \(f : S \rightarrow T\) such that 
-
-\begin{itemize}
-\item f is 1-1 : for every \(x_1 , x_2 \in S, x_1 \neq x_2, f(x_1) \neq f(x_2)\)
-\item f is onto : for every \(y \in T \) there exists \(x \in S\) such that \(f(x) = y \) 
-\end{itemize}
-\end{definition} 
-
-\begin{definition}
-An inverse for f is a function \(f^{-1} : T \rightarrow S\) such that 
-\begin{itemize}
-\item \(f^{-1}(f(x)) = x \text{ ,  }\forall x \in S\) 
-\item \(f(f^{-1}(y)) = Y \text{ , }\forall y \in T\) 
-\end{itemize}
+Let S be a set, suppose each \(\sigma \in S\) has a non-negative weight \(w(\sigma)\). The \underline{generating series} for S with respect to w is defined as : 
+\[\phi_s(x) = \sum_{\sigma in S}x^{w(\sigma)}\]
+Equivalently, this is equal to 
+\[\phi_s(x) = \sum_{n \geq 0} a_n x^n \]
+where \(a_n\) denotes the number of elements in S that have weight k 
 \end{definition}
 
-\begin{lemma}
-f is a bijection \(\iff\) f has an inverse 
-\end{lemma}
 
+\begin{expx} Find the generating series of the previous example \\
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline 
+\(\sigma\) & \(w(\sigma)\) & \(x^{w(\sigma)}\) \\ 
+\hline 
+$\emptyset$ & 0 & $x^0$ \\ 
+\hline 
+$ \{1\}$ & 1 & $x^1$ \\ 
+\hline 
+$ \{2\}$  & 1 & $x^1$ \\ 
+\hline 
+$ \{3\}$  & 1 & $x^1$ \\ 
+\hline 
+$ \{1, 2\}$  & 2 & $x^2$ \\ 
+\hline 
+$ \{1, 3\}$  & 2 & $x^2$ \\ 
+\hline 
+$ \{2, 3\}$  & 2 & $x^2$ \\ 
+\hline 
+$ \{1, 2, 3\}$  & 3 & $x^3$ \\ 
+\hline 
+\end{tabular} 
+\(\hspace{0.2cm}\phi_S(x) = x^0 + 3x^1 + 3x^2 + x^3\)
+\end{center}
 
-\begin{expx}
-Show that \({{n} \choose {k}} = {{n} \choose {n - k}}\) by showing that there is a bijection between \\
-\[S = \text{set of all k-subsets of } \{1, ..., n\}\]
-\[T = \text{set of all (n-k) subsets of } \{1, \ldots, n\}\]
-
-\textbf{Solution :}
-Define \(f : S \rightarrow T \) and \(f ^{-1} : T \rightarrow S\). \\
-\(f(A) = \{1, \ldots, n\} \bs A , \forall A \in S\) \\
-\(f^{-1}(B) = \{1, \ldots, n\} \bs B , \forall B \in T\)  
+In general, if S is the set of all subsets of \(\langle 1, \ldots, n \rangle\), \(w(\sigma) = \hspace{0.1cm} \mid \sigma \mid\) then,
+\[\phi_S(x) = \underline{{n \choose 0}} x^0 + \underline{{n \choose 1}} x^1 + \ldots + \underline{{n \choose n}} x^n = (1 + x)^n\]
 \end{expx}
 
-\textbf{Note} : Note that f and \(f^{-1}\) are well defined because \\
-\(\{1, \ldots, n\}  \bs A\) has (n-k) elements \(\forall A \in S\)\\
-\(\{1, \ldots, n \}  \bs b \) has k elements \(\forall B \in T \)
-
-
-\(f^{-1}\) is the inverse of f because 
-\[\begin{aligned}
-f^{-1} (f(A)) & = f^{-1}( \{1, \ldots , n \} \bs A ) \\
-& = \{1 \ldots, n\} \ (\{1, \ldots, n\}) \bs  A \\
-& = A , \forall A \in S
-\end{aligned}\]
-
-
-\section{Binomial Theorem}
-\((1 + x )^2 = 1 + 2x + x^2\)
 \begin{theorem}
-\[(1 + x)^n = \sum_{k=0}^{n} {{n}\choose{k}}x^k = {n \choose 0} x^0 + {n \choose 1} x^1 + \ldots + {n \choose n } x^n\]
+Let S be a finite set with a weight function w. 
+\begin{enumerate}
+\item[(a)] \(\phi_S(1) = \hspace{0.1cm}\mid S \mid\)
+\item[(b)] \(\phi^{\prime}_S(1) = \) sum of all weights = \(\sum_{\sigma \in S} w(\sigma)\)
+\item[(c)] \(\frac{\phi^{\prime}S(1)}{\phi_S(1)} =\) average weight = \( \frac{1}{\mid S \mid} \sum_{\sigma \in S} w (\sigma) \)
+\end{enumerate}
 \end{theorem}
 
+\begin{ex} S = all subsets  of \(\langle 1, \ldots, n \rangle\) \\
+\[ \begin{aligned}
+& w(\sigma) = \hspace{0.1cm} \mid \sigma \mid \\
+& \phi_S(x) = (1 + x)^n \\
+& \phi_S(1) = (1 + 1)^n = 2^n \\
+& \phi^{\prime}_S = ((1 + x)^n) = n ( 1 + x) ^{n -1} \\
+& \phi^{\prime}_S = n \cdot (1 + 1)^{n - 1} = n \cdot 2^{n - 1} = \text{sum of all weights}
+& \text{average} = \frac{n \cdot 2^{n -1}}{2^n} = \frac{n}{2}
+\end{aligned}\]
+\end{ex}
+
 \begin{proof}
-\[\begin{aligned}
-(1 + x)^n   & = (1 + x) + (1 + x) + \ldots + (1 + x) \\
-			& = \underline{1} 1 +  \underline(n) x + \underline{{n \choose 2}} x^2 + \ldots + \underline{{n \choose k}}x^k + \ldots + \underline{{n \choose n}} x^n 
-\end{aligned}\]
-
-To get \(x^k\) among the n copies of (1 + x) we choose k. Thre are n choose k ways to do this
-\end{proof}
-
-\section{Combinatorial Proofs}
-\begin{prop}
-\(2^n = \sum_{k = 0}^{n} {n \choose k}\)
-\end{prop}
-
-\textbf{Algebraic Proof : } Plug x = 1 in to the binomial theorem
-
-\textbf{Combinatorial Proof : } \\
-The idea is to count a set in two differing ways such that one way gives you the 
-\underline{left hand side} f the identity you want to prove and the another way gives you the the \underline{right hand side}
-
-\begin{proof}Let S be the subset of all subsets \(\{1, \ldots, n\}\)
 \begin{itemize}
-\item[LHS : ] \(\mid S \mid = s^n \), since every element has two possibilities. Its either within a subset or not included within a subsets 
-\item[RHS : ] For every \(k \in \{0, \ldots, n\}\), let \(s_k\) = k-subsets of \(\{1, \ldots, n\}\) 
-\[\begin{aligned}
- S & = S_0 \cup S_1 \cup S_2 \cup \ldots \cup S_n \\
-S_i \cap S_j  & =  \emptyset \text{\hspace{0.1cm} for  } i \neq j \\
-\mid S \mid \hspace{0.1cm} & = \hspace{0.1cm} \mid S_0  \mid + \ldots +  \mid S_n \mid  \\
-& = {n \choose 0} + {n \choose 1} + \ldots + {n \choose n}
-\end{aligned}\]
-
+\item[(a)] \[ \phi_S(1) = \sum_{\sigma \in S} (1)^{w(\sigma)} = \sum 1 = \mid S \mid  \]
+\item[(b)] \[\phi^{\prime}_S(x) = (\sum_{\sigma \in S} x^{w(\sigma)})\prime = \sum_{\sigma \in S} w(\sigma) \cdot x^{w(\sigma) - 1} \]
+\[\phi^{\prime}_S (1) = \sum_{\sigma \in S} w(\sigma) 1^{w(\sigma) -1 } = \sum_{\sigma \in S} w(\sigma)\]
+\item [(c)] Follows from (a) and (b)
 \end{itemize}
 \end{proof}
+
+\section{Formal Power Series}
+\begin{definition}
+Given a sequence \(a_n, a_1, a_3, \ldots\) of rational numbers (i.e \(\frac{2}{3}, 4,\) and not \(\pi\))
+\[A(x) = a_0 + a_1 x + a_2 x^2 + \ldots = \sum_{n \geq 0} a_n x^n = \sum_{n = 0} a_n X^n\]
+
+\begin{ex}
+\[(1, 1, \ldots, ) \rightarrow P(x) = 1 + x + x^2 + x^3 + \ldots = \sum_{n = 0}^{\infty} x^n\] 
+\[(0, 1, 2, 3, \ldots) \rightarrow Q(x) = 0 + x + 2x^2 + 3x^3 + \ldots = \sum_{n \geq 0 } n x^n\]
+\[P(x) + Q(x) = (1 + 0) + (1 + 1)x + (1 + 2)x^2 + \ldots \]
+\[
+\end{ex}
+\end{definition}
+
 
 
 \end{document}

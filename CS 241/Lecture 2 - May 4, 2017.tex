@@ -1,5 +1,5 @@
 %Notes by Harsh Mistry 
-%Math 239
+%CS 241
 %based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
 
 \documentclass{article}
@@ -39,7 +39,7 @@
    \begin{center}
    \framebox{
       \vbox{\vspace{2mm}
-    \hbox to 6.28in { {\bf Math 239 - Introduction to Combinatorics
+    \hbox to 6.28in { {\bf CS 241 - Foundations of Sequential Programs
 	\hfill Spring 2017} }
        \vspace{4mm}
        \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
@@ -70,12 +70,6 @@
 			Figure \thelecnum.#1:~#3
 			\end{center}
 	}
-	
-	\newcommand{\bs}{
-		\texttt{\char`\\ \hspace{0.1cm}} 
-	}
-	
-
 	
 \newcommand{\pipe}{\(\mid\)}
 \newcommand{\ctr}{\(\wedge\)}
@@ -168,106 +162,34 @@
 %Start
 \begin{document}
 
-\lecture{2}{May 3rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
+\lecture{2}{May 4th, 2017}{Kevin Lanctot}{Harsh Mistry}
 
-\section{Admin Info}
-\begin{center}
-Alan's office hours \\
-Mon, Fri : 12:30 - 13:30 \\
-Tue : 11:30 - 12:30
-\end{center}
 
-\section{Recap}
+\section{Data Representation}
 
-\[{{n}\choose{k}} = \frac{n!}{k(n-k)!} = \# \text{ k-subsets of an n-element set = \# of ways we can choose k objects amoung n}\]
+\subsection*{Hexadecimal}
 
-\section{•}
+Long strings of binary digits are hard to read an remember,so to make reading large binary strings readable we utilize hexadecimal which breaks the the long string into groups of 4 and represents each group with a numerical value from 0 - 15. 10 - 15 is represented using a, b, c, d, e, f. Resulting in the following series of decimal values :  
+$$ \langle 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, a, b, c, d, e, f \rangle $$
 
-\begin{definition}
-A \underline{Bijection} is a function \(f : S \rightarrow T\) such that 
 
-\begin{itemize}
-\item f is 1-1 : for every \(x_1 , x_2 \in S, x_1 \neq x_2, f(x_1) \neq f(x_2)\)
-\item f is onto : for every \(y \in T \) there exists \(x \in S\) such that \(f(x) = y \) 
-\end{itemize}
-\end{definition} 
+\subsection*{Terms}
 
-\begin{definition}
-An inverse for f is a function \(f^{-1} : T \rightarrow S\) such that 
-\begin{itemize}
-\item \(f^{-1}(f(x)) = x \text{ ,  }\forall x \in S\) 
-\item \(f(f^{-1}(y)) = Y \text{ , }\forall y \in T\) 
-\end{itemize}
+\begin{definition} Bit : a single 1 or 0 (voltage level or magnetic orientation 
 \end{definition}
 
-\begin{lemma}
-f is a bijection \(\iff\) f has an inverse 
-\end{lemma}
+\begin{definition} Nibble : 1 hexadecimal digits, which is 4 bits
+\end{definition}
 
+\begin{definition} Byte : 2 hexadecimal digits, which is 8 bits
+\end{definition}
 
-\begin{expx}
-Show that \({{n} \choose {k}} = {{n} \choose {n - k}}\) by showing that there is a bijection between \\
-\[S = \text{set of all k-subsets of } \{1, ..., n\}\]
-\[T = \text{set of all (n-k) subsets of } \{1, \ldots, n\}\]
+\begin{definition} Word : is a collection of 4 or 8 bytes depending on the platform architecture (32-bit or 64-bit)
+\end{definition}
 
-\textbf{Solution :}
-Define \(f : S \rightarrow T \) and \(f ^{-1} : T \rightarrow S\). \\
-\(f(A) = \{1, \ldots, n\} \bs A , \forall A \in S\) \\
-\(f^{-1}(B) = \{1, \ldots, n\} \bs B , \forall B \in T\)  
-\end{expx}
+\section{MIPS Assembly Language}
+Will start MIPS next lecture. We spent too much time talking about \textbf{\textcolor{red}{\underline{jellybeans}}}!
 
-\textbf{Note} : Note that f and \(f^{-1}\) are well defined because \\
-\(\{1, \ldots, n\}  \bs A\) has (n-k) elements \(\forall A \in S\)\\
-\(\{1, \ldots, n \}  \bs b \) has k elements \(\forall B \in T \)
-
-
-\(f^{-1}\) is the inverse of f because 
-\[\begin{aligned}
-f^{-1} (f(A)) & = f^{-1}( \{1, \ldots , n \} \bs A ) \\
-& = \{1 \ldots, n\} \ (\{1, \ldots, n\}) \bs  A \\
-& = A , \forall A \in S
-\end{aligned}\]
-
-
-\section{Binomial Theorem}
-\((1 + x )^2 = 1 + 2x + x^2\)
-\begin{theorem}
-\[(1 + x)^n = \sum_{k=0}^{n} {{n}\choose{k}}x^k = {n \choose 0} x^0 + {n \choose 1} x^1 + \ldots + {n \choose n } x^n\]
-\end{theorem}
-
-\begin{proof}
-\[\begin{aligned}
-(1 + x)^n   & = (1 + x) + (1 + x) + \ldots + (1 + x) \\
-			& = \underline{1} 1 +  \underline(n) x + \underline{{n \choose 2}} x^2 + \ldots + \underline{{n \choose k}}x^k + \ldots + \underline{{n \choose n}} x^n 
-\end{aligned}\]
-
-To get \(x^k\) among the n copies of (1 + x) we choose k. Thre are n choose k ways to do this
-\end{proof}
-
-\section{Combinatorial Proofs}
-\begin{prop}
-\(2^n = \sum_{k = 0}^{n} {n \choose k}\)
-\end{prop}
-
-\textbf{Algebraic Proof : } Plug x = 1 in to the binomial theorem
-
-\textbf{Combinatorial Proof : } \\
-The idea is to count a set in two differing ways such that one way gives you the 
-\underline{left hand side} f the identity you want to prove and the another way gives you the the \underline{right hand side}
-
-\begin{proof}Let S be the subset of all subsets \(\{1, \ldots, n\}\)
-\begin{itemize}
-\item[LHS : ] \(\mid S \mid = s^n \), since every element has two possibilities. Its either within a subset or not included within a subsets 
-\item[RHS : ] For every \(k \in \{0, \ldots, n\}\), let \(s_k\) = k-subsets of \(\{1, \ldots, n\}\) 
-\[\begin{aligned}
- S & = S_0 \cup S_1 \cup S_2 \cup \ldots \cup S_n \\
-S_i \cap S_j  & =  \emptyset \text{\hspace{0.1cm} for  } i \neq j \\
-\mid S \mid \hspace{0.1cm} & = \hspace{0.1cm} \mid S_0  \mid + \ldots +  \mid S_n \mid  \\
-& = {n \choose 0} + {n \choose 1} + \ldots + {n \choose n}
-\end{aligned}\]
-
-\end{itemize}
-\end{proof}
 
 
 \end{document}

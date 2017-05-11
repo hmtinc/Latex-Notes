@@ -1,5 +1,5 @@
 %Notes by Harsh Mistry 
-%Math 239
+%CS240
 %based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
 
 \documentclass{article}
@@ -14,6 +14,7 @@
 \usepackage{amsfonts,graphicx, amssymb}
 \usepackage[fleqn]{amsmath}
 \usepackage{fixltx2e}
+\usepackage{tikz}
 \usepackage{color}
 \usepackage{tcolorbox}
 \usepackage{lipsum}
@@ -39,7 +40,7 @@
    \begin{center}
    \framebox{
       \vbox{\vspace{2mm}
-    \hbox to 6.28in { {\bf Math 239 - Introduction to Combinatorics
+    \hbox to 6.28in { {\bf CS 240 - Data Structures and Data Management
 	\hfill Spring 2017} }
        \vspace{4mm}
        \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
@@ -71,20 +72,13 @@
 			\end{center}
 	}
 	
-	\newcommand{\bs}{
-		\texttt{\char`\\ \hspace{0.1cm}} 
-	}
-	
-
-	
 \newcommand{\pipe}{\(\mid\)}
 \newcommand{\ctr}{\(\wedge\)}
 
 \newtheorem{theorem}{Theorem}[lecnum]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{ex}[theorem]{Example}
-\newtheorem{expx}[theorem]{Problem}
-\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{claim}[theorem]{Claim}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{definition}[theorem]{Definition}
@@ -168,106 +162,83 @@
 %Start
 \begin{document}
 
-\lecture{2}{May 3rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
+\lecture{3}{May 9th, 2017}{Taylor Smith}{Harsh Mistry}
+ 
+\section{Growth Rate Affect on Running Time}
+\begin{itemize}
+\item Constant Complexity : \(T(n) = c , T(2n) = c\)
+\item Logarithmic Complexity : \(T(n) = c log n, T(2n) = c \)
+\item Linear complexity : \(T(n) = cn, T(2n) = 2T(n) \)
+\item \(\theta(n log n)\) : \(T(n) = c n log n, T(2n) = 2T(n) + 2cn\)
+\item Quadratic Complexity : \(T(n) = cn^2, T(2n) = 4T(n)\)
+\item Cubic Complexity : \(T(n) = cn^3, T(2n) = 8T(n)\)
+\item Exponential Complexity : \(T(n) = c2^n , T(2n) = (T(n))^2 / c \)
+\end{itemize}
 
-\section{Admin Info}
-\begin{center}
-Alan's office hours \\
-Mon, Fri : 12:30 - 13:30 \\
-Tue : 11:30 - 12:30
-\end{center}
+\section{Complexity v.s Running Time}
+\begin{itemize}
+\item Suppose that algorithms \(A_1\) and \(A_2\) both solve some specified problem
+\item Suppose that the complexity of algorithm \(A_1\) is lower than the complexity of algorithm \(A_2\). Then for sufficiently large problem instances, \(A_1\) will run faster \(A_2\). However, for small problem instances, \(A_1\) could be slower than \(A_2\)
+\item Now suppose that \(A_1\) and \(A_2\) have the same complexity. Then we cannot determine from this information which of \(A_1\) or \(A_2\) is faster; a more delicate analysis of the algorithm \(A_1\) and \(A_2\) is required.
+\end{itemize}
 
-\section{Recap}
+\textbf{Note : } It is important not to try and make comparisons between algorithms using O-notation
 
-\[{{n}\choose{k}} = \frac{n!}{k(n-k)!} = \# \text{ k-subsets of an n-element set = \# of ways we can choose k objects amoung n}\]
+\section{Techniques for Order Notation}
+Suppose that \(f(n) >  0 \) and \(g(n) > 0\) for all \(n \geq n_0\). Suppose that 
+$$L = \lim_{n \rightarrow \infty} \frac{f(n)}{g(n)}$$
+Then 
+$$f(n) \in \begin{cases}o(g(n)) \\ \theta(g(n))  \\ \omega(g(n))\end{cases}  \begin{matrix}
+& \text{ if } L = 0 \\ & \text{ if } 0 < L < \infty \\ & \text{ if } L = \infty 
+\end{matrix}$$
 
-\section{•}
-
-\begin{definition}
-A \underline{Bijection} is a function \(f : S \rightarrow T\) such that 
+\section{Relationships between Order Notations}
+\begin{itemize}
+\item \(f(n) \in \theta(g(n)) \iff g(n) \in \theta(f(n))\)
+\item \(f(n) \in  O(g(n)) \iff g(n) \in \Omega(f(n))\)
+\item \(f(n) \in o(g(n)) \iff g(n) \in \omega(f(n))\)
+\end{itemize}
 
 \begin{itemize}
-\item f is 1-1 : for every \(x_1 , x_2 \in S, x_1 \neq x_2, f(x_1) \neq f(x_2)\)
-\item f is onto : for every \(y \in T \) there exists \(x \in S\) such that \(f(x) = y \) 
+\item \(f(n) \in \theta(g(n)) \iff f(n) \in O(g(n)) \text{ and } f(n) \in \Omega(g(n))\)
+\item \(f(n) \in o(g(n)) \iff f(n) \in O(g(n)) \)
+\item \(f(n) \in o(g(n)) \iff f(n) \notin \Omega(g(n)) \)
+\item \(f(n) \in \omega(g(n)) \iff f(n) \in \Omega(g(n)) \)
+\item \(f(n) \in \omega(g(n)) \iff f(n) \notin O(g(n)) \)\\
 \end{itemize}
-\end{definition} 
 
-\begin{definition}
-An inverse for f is a function \(f^{-1} : T \rightarrow S\) such that 
+\section{Algebra of Order Notations}
+\textbf{"Maximum" Rules : } Suppose that \(f(n) > 0 \) and \(g(n) > 0 \) for all \(n \geq n_0\). Then : 
 \begin{itemize}
-\item \(f^{-1}(f(x)) = x \text{ ,  }\forall x \in S\) 
-\item \(f(f^{-1}(y)) = Y \text{ , }\forall y \in T\) 
+\item \(O(f(n) + g(n)) = O(max\{f(n), g(n)\})\)
+\item \(\theta(f(n) + g(n)) = \theta(max\{f(n), g(n)\})\)
+\item \(\Omega(f(n) + g(n)) = \Omega(max\{f(n), g(n)\})\)
 \end{itemize}
-\end{definition}
 
-\begin{lemma}
-f is a bijection \(\iff\) f has an inverse 
-\end{lemma}
+\textbf{Transitivity : } If \(f(n) \in O(g(n)) \text{ and } g(n) \in O(h(n))  \text{ then } f(n) \in O(h(n))\).
 
-
-\begin{expx}
-Show that \({{n} \choose {k}} = {{n} \choose {n - k}}\) by showing that there is a bijection between \\
-\[S = \text{set of all k-subsets of } \{1, ..., n\}\]
-\[T = \text{set of all (n-k) subsets of } \{1, \ldots, n\}\]
-
-\textbf{Solution :}
-Define \(f : S \rightarrow T \) and \(f ^{-1} : T \rightarrow S\). \\
-\(f(A) = \{1, \ldots, n\} \bs A , \forall A \in S\) \\
-\(f^{-1}(B) = \{1, \ldots, n\} \bs B , \forall B \in T\)  
-\end{expx}
-
-\textbf{Note} : Note that f and \(f^{-1}\) are well defined because \\
-\(\{1, \ldots, n\}  \bs A\) has (n-k) elements \(\forall A \in S\)\\
-\(\{1, \ldots, n \}  \bs b \) has k elements \(\forall B \in T \)
-
-
-\(f^{-1}\) is the inverse of f because 
-\[\begin{aligned}
-f^{-1} (f(A)) & = f^{-1}( \{1, \ldots , n \} \bs A ) \\
-& = \{1 \ldots, n\} \ (\{1, \ldots, n\}) \bs  A \\
-& = A , \forall A \in S
-\end{aligned}\]
-
-
-\section{Binomial Theorem}
-\((1 + x )^2 = 1 + 2x + x^2\)
-\begin{theorem}
-\[(1 + x)^n = \sum_{k=0}^{n} {{n}\choose{k}}x^k = {n \choose 0} x^0 + {n \choose 1} x^1 + \ldots + {n \choose n } x^n\]
-\end{theorem}
-
-\begin{proof}
-\[\begin{aligned}
-(1 + x)^n   & = (1 + x) + (1 + x) + \ldots + (1 + x) \\
-			& = \underline{1} 1 +  \underline(n) x + \underline{{n \choose 2}} x^2 + \ldots + \underline{{n \choose k}}x^k + \ldots + \underline{{n \choose n}} x^n 
-\end{aligned}\]
-
-To get \(x^k\) among the n copies of (1 + x) we choose k. Thre are n choose k ways to do this
-\end{proof}
-
-\section{Combinatorial Proofs}
-\begin{prop}
-\(2^n = \sum_{k = 0}^{n} {n \choose k}\)
-\end{prop}
-
-\textbf{Algebraic Proof : } Plug x = 1 in to the binomial theorem
-
-\textbf{Combinatorial Proof : } \\
-The idea is to count a set in two differing ways such that one way gives you the 
-\underline{left hand side} f the identity you want to prove and the another way gives you the the \underline{right hand side}
-
-\begin{proof}Let S be the subset of all subsets \(\{1, \ldots, n\}\)
+\section{Summation Formulae}
 \begin{itemize}
-\item[LHS : ] \(\mid S \mid = s^n \), since every element has two possibilities. Its either within a subset or not included within a subsets 
-\item[RHS : ] For every \(k \in \{0, \ldots, n\}\), let \(s_k\) = k-subsets of \(\{1, \ldots, n\}\) 
-\[\begin{aligned}
- S & = S_0 \cup S_1 \cup S_2 \cup \ldots \cup S_n \\
-S_i \cap S_j  & =  \emptyset \text{\hspace{0.1cm} for  } i \neq j \\
-\mid S \mid \hspace{0.1cm} & = \hspace{0.1cm} \mid S_0  \mid + \ldots +  \mid S_n \mid  \\
-& = {n \choose 0} + {n \choose 1} + \ldots + {n \choose n}
-\end{aligned}\]
-
+\item Arithmetic Sequence 
+\[\sum_{i=0}^{n-1} (a + di) = na + \frac{dn(n-1)}{2} \in \theta (n^2) \text{ for } d \neq 0\]
+\item Geometric Sequence 
+\[\sum_{i=0}^{n-1} a r^i = \begin{cases}a \frac{r^n -1}{r -1} \in \theta(r^n) \\ na \in \theta(n) \\ a \frac{1 - r^n}{1 -r} \in \theta(1)\end{cases} \begin{matrix}
+\text { if } r > 1 \\ \text{ if } r = 1 \\ \text{ if } 0 < r < 1 \end{matrix}\]
+\item Harmonic Sequence 
+\[H_n = \sum_{i = 1}^{n} \frac{1}{i} \in \theta (log n)\]
 \end{itemize}
-\end{proof}
+\section{Techniques for Algorithm Analysis }
+\begin{itemize}
+\item Use \(\theta\)-bounds throughout the analysis and obtain a \(\theta\)-bound for the complexity of the algorithm
+\item Prove a O-bound and a matching \(\omega\)-bound separately to get a \(\theta\)-bound.   
+\end{itemize}
 
+\section{Techniques for Loop Analysis}
+\begin{itemize}
+\item Identify elementary operations that require constant time. Denoted \( \theta (1) \) time
+\item The complexity of a loop is expressed as the sum of complexities of each iteration of the loop.
+\item Analyse independent loops separately, and then add the results (use "maximum rules" and simplify whenever possible).
+\item If loops are nested, start with the inner most loop and proceed outwards. In general, this kind of analysis requires evaluation of nested summations.
+\end{itemize}
 
 \end{document}
