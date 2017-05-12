@@ -1,0 +1,207 @@
+%Notes by Harsh Mistry 
+%CS 241
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 241 - Foundations of Sequential Programs
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+	\newcommand{\bs}{
+		\texttt{\char`\\ \hspace{0.1cm}} 
+	}
+	
+
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{expx}[theorem]{Problem}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{4}{May 11th, 2017}{Kevin Lanctot}{Harsh Mistry}
+
+
+\section*{Conditional Branches}
+In order to check conditions, conditional branches are needed. Conditional branches check if two registers are equal and then jump a specified number of lines. 
+
+\begin{itemize}
+\item \verb|beq $s $t 2| - Checks if \verb|$s| and \verb|$t| are el and jumps 2 lines (Address = PC + (2 x 4)) 
+\item \verb|bne $s $t 2| - Checks if \verb|$s| and \verb|$t| are not equal and jumps 2 lines (Address = PC + (2 x 4)) 
+\end{itemize}
+
+\section*{Comparison Operators}
+To check is values are less than or greater than a value, \verb|slt| or \verb|sltu| are required.
+
+\begin{itemize}
+\item \verb|slt $d $s $t| - Checks if \verb|$s| is less than \verb|$t| and sets \verb|$d| to either 0 or 1 depending on the result
+\item \verb|sltu $d $s $t| - Functions the same as \verb|slt|, but works on the assumption that \verb|$s| and \verb|$t| are unsigned
+\end{itemize}
+
+After using the \verb|slt| and \verb|sltu| commands, you need to use \verb|bne| or \verb|beq| to test if the result of \verb|$d| is 0 or not.
+
+
+\section*{Multiplication and Division}
+In order to multiply two values, you must use \verb|mult| and \verb|div|. Both commands don't have a destination register, as the result is stored in the low and high register, as the result could exceed the capacity of 1 register. 
+
+\begin{itemize}
+\item \verb|mult $s $t| - Multiplies \verb|$s| and \verb|$t| and stores the least significant digits into \verb|low| and the most significant digits into \verb|hi|
+\item \verb|div $s $t| - Divides \verb|$s| by \verb|$t| 
+\item \verb|multu| and \verb|divu| function the same as \verb|mult| and \verb|div|, but assume all given values are unsigned. 
+\end{itemize}
+
+Once the operation has been completed, you must move the values from the hi and lo registers using the \verb|mfhi| and \verb|mflo| commands. 
+
+\section*{Labels}
+Instead of utilizing addresses, we can place a label in the first column followed by a column. Then we can reference the label instead of the address when jumping around within the program. 
+
+\end{document}
