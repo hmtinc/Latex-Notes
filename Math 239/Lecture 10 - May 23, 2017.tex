@@ -1,0 +1,240 @@
+%Notes by Harsh Mistry 
+%Math 239
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 239 - Introduction to Combinatorics
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+	\newcommand{\bs}{
+		\texttt{\char`\\ \hspace{0.1cm}} 
+	}
+	
+
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{expx}[theorem]{Problem}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{10}{May 23rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
+ 
+\section{Binary Strings}
+
+\begin{definition}
+The empty string \(\epsilon\) is a string of length 0 with the property that for every other string a 
+$$\epsilon a  = a = a \epsilon$$
+\end{definition}
+
+
+\begin{definition}(String Product) Let A,B be sets of string, then 
+$$ A B = \{ ab \mid a \in A, b \in B\} $$
+\end{definition}
+
+\begin{ex}
+\(A = \{1, 01\}\), \(B = \{1, 10\}\) 
+\[AB = \{11, 110, 011, 0110\}\]
+\[BA = \{11, 101, 101, 1001\} = \{11, 101, 1001\}\]
+\end{ex}
+
+\begin{definition}
+We say AB is unambiguous if for every string \(S \in AB\) there is a unique \(a \in A\) and unique \(b \in B\) such that \(S = ab\)  
+\end{definition}
+
+\begin{definition}
+\(A \cup B \) is unambiguous \(\iff\) \(A \cap B = \emptyset\)
+\end{definition} 
+
+\begin{definition}
+(String Power) 
+$$ A^k := A A \ldots A $$
+$$ A^0 := \{\epsilon\} ^k $$
+\end{definition}
+
+\begin{ex}
+\(\{0,1\}^k = all \{0,1\} of length k\)\\
+\(A^k\) is \underline{Unambiguous} if for every \(s \in A^k\), there are unique \(a_1, a_2, a_3 , \ldots, a_k \in A\) such that \(s = a_1 a_2 \ldots a_k\)
+\end{ex}
+
+\begin{ex}
+\(A = \{\epsilon, 1\}\), is \(A^3\) ambiguous?\\
+\textbf{Yes,} because \(1 = (1)(\epsilon)(\epsilon) = (\epsilon) (1) (\epsilon) = (\epsilon)(\epsilon)(1) \)
+\end{ex}
+
+\begin{definition}(Star)
+$$ A^* := \{\epsilon\} \cup A \cup A^2 \cup \ldots $$
+\(A^k\) is unambiguous if 
+\begin{itemize}
+\item Each \(A^k\) is unambiguous \((k = 0, 1,\ldots)\)
+\item \(A^k  \cap A^j = \emptyset, \hspace{0.1cm} k \neq j\)
+\end{itemize}
+\end{definition}
+
+\begin{definition}
+Given a string s, a block is a maximal non-empty substring of 0's and 1's  
+\end{definition}
+
+\begin{expx}
+Describe in words the following set of strings
+\begin{itemize}
+\item \(\{0,1\}^*\) = All binary strings
+\item \(\{\epsilon, 0, 1\}^*\) = All binary strings, but this is ambiguous
+\item \(\{11\}\) = all even length binary strings with only 1's
+\item \(\{0\}\{0\}^*\{11\}^* = \) strings starting with a block of zeros, and followed by an even number of 1's
+\item \(\left(\{0\}\{0\}^0\{11\}^*\right)^* =\) strings starting with a block of 0's in which every 0 is followed by an even number of 1s 
+\end{itemize} 
+\end{expx}
+\end{document}
+
+

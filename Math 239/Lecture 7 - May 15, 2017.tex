@@ -1,0 +1,259 @@
+%Notes by Harsh Mistry 
+%Math 239
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 239 - Introduction to Combinatorics
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+	\newcommand{\bs}{
+		\texttt{\char`\\ \hspace{0.1cm}} 
+	}
+	
+
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{expx}[theorem]{Problem}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{7}{May 15th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
+ 
+\section{Product and Sum Lemmas} 
+ 
+\textbf{Recall : } Given a set S and a weight function w 
+\[ \phi_s(x) = \sum^{w(\sigma)} = \sum_{n \geq 0} a_n x^n \] 
+
+\begin{lemma} Sum Lemma \\
+Let S be a set with a weight function w. Suppose \(S_0, S_1, \ldots, S_k\) is a partition of S. Then, 
+\[ \phi_S(x) = \phi_{S_0}(x) + \phi_{S_1}(x) + \ldots + \phi_{S_k}(x)\]
+\end{lemma}
+
+\begin{proof}
+\[\begin{aligned}
+\phi_S(x) = \sum_{\sigma \in S} X^{w(\sigma)} 
+& = \sum_{\sigma \in S_0} X^{w(\sigma)} + 
+\sum_{\sigma \in S_1} 
+X^{w(\sigma)} + \ldots + \sum_{\sigma \in S_k} X^{w(\sigma)} \\
+& = \phi_{S_0} (x) + \phi_{S_1}(x) + \ldots + \phi_{S_k} (x)
+\end{aligned}\]
+\end{proof}
+
+\begin{ex}
+Let \(S = \mathbb{N}_0 = \langle 0, 1, 2, 3, \ldots \rangle \)
+\[w(\sigma) = \begin{cases} \frac{\sigma}{2} \hspace{0.3cm} \sigma \text{ is even}  \\ \sigma \hspace{0.3cm} \text{ is odd} \end{cases}\]
+\(w(2) = 1, w(3) = 3\), now find \(\phi_S(x)\)
+
+\textbf{Solution :} \(S = E \cup O\)
+\[E = \langle 0, 2, 4, \ldots \rangle \hspace{0.4cm} O = \langle 1, 3, 5, 7, \rangle \] 
+\[\begin{aligned}
+\phi_E(x) & = x^0 + x^1 + x^2 + \ldots = \frac{1}{1-x} \\
+\phi_O(x) & = x^1 + x^3 + x^5 + x^7 + \ldots  \\ & = x (x^0 + x^2 + x + x^4+ \ldots) \\ & = x \cdot \left(\frac{1}{1 - x^2}\right)
+\end{aligned}\]
+By Sum Lemma 
+\[\phi_S(x) = \phi_E(x) + \phi_O(x) = \frac{1}{1-x} + \frac{x}{1-x^2}\]
+\end{ex}
+
+\begin{lemma}
+Product Lemma \\
+Let A, B be sets.\\
+Suppose A has weight function \(\alpha\) \\
+Suppose B has weight function \(\beta\) \\
+Let S = A \(\times\) B and suppose that for every (a, b) \(\in S\), 
+\[\phi ((a,b)) = \alpha(a) + \beta(b) \implies \phi_S(x) = \phi_A(x) \cdot \phi)_B(x)\] 
+\end{lemma}
+
+\begin{proof}
+\[ \begin{aligned} \phi_A(x) \cdot \phi_B(x)  & = \left( \sum_{a \in A} X^{\alpha(a)} \right) \left(\sum_{b \in B} X^{\beta(b)}\right) \\ 
+& = \sum_{a \in A , b \in B} X^{\alpha(a)} \cdot X^{\beta(b)} \\ & = \sum_{(a, b) \in A \times B} X^{\alpha(a) + \beta(b)} \\& = \sum_{(a,b) \in S} X^{w((a, b))} \\ & = \phi_S (x) \end{aligned}\]
+\end{proof}
+
+\begin{expx}
+We throw a die (with values 1, 2, 3, 4, 5, 6) and a 4-sided die (With values 1 , 2, 3, 4). Given \(k \in \langle 2, 3, \ldots, 10\rangle\). In how many ways can we get k, as the subset of the dice. \\ \newline 
+\textbf{Equivalent Problem :} Let A = \(\langle 1, \ldots, 6 \rangle\), \(S = \langle 1, 2, 3, 4\rangle\), \(S = A \times B\), and w((a,b)) = a + b. \\
+Find \([x^k] \phi_s(x)\).  \\ \newline
+\textbf{Brute Force Solution : } \\ 
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+6 sided / 4 sided & 1 & 2 & 3 & 4 \\ 
+\hline 
+1 & $ x^2$ & $ x^3 $ & $x^4 $ & $ x^5 $  \\ 
+\hline 
+2 & $ x^3 $ & $x^4 $ & $ x^5 $  & $ x^6 $  \\ 
+\hline 
+3 & $x^4 $ & $ x^5 $  & $ x^6 $  & $x^7 $ \\ 
+\hline 
+4 & $ x^5 $  & $ x^6 $  & $x^7 $ & $x^8$ \\ 
+\hline 
+5 & $ x^6 $  & $x^7 $ & $x^8$ & $x^9$ \\ 
+\hline 
+6 & $x^7 $ & $x^8$ & $x^9$ & $ x^{10} $  \\ 
+\hline 
+\end{tabular} 
+$$\phi_S(x) = x^2 + 2x^3 + 3x^4 + 4x^5 + 4x^6 + 4x^7 + 3x^9 + x^10$$
+\end{center}
+\textbf{Using the Product Lemma : } \\
+A = \(\langle 1, 2, \ldots, 6 \rangle\) and 
+B = \(\langle 1, 2, 3, 4 \rangle \) \\
+\[ \begin{aligned}
+\phi_S(x) & = \phi_A(x) \cdot \phi_B(x) \\
+& = (x^1 + x^2 + \ldots + x^6 ) (x^1 + x^2 + x^3 + x^4) 
+\end{aligned}\]
+\end{expx} 
+
+
+
+
+\end{document}

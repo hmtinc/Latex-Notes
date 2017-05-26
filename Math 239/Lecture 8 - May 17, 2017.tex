@@ -1,0 +1,239 @@
+%Notes by Harsh Mistry 
+%Math 239
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 239 - Introduction to Combinatorics
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+	\newcommand{\bs}{
+		\texttt{\char`\\ \hspace{0.1cm}} 
+	}
+	
+
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{expx}[theorem]{Problem}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{8}{May 17th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
+ 
+\begin{ablock}{Remark}
+The sum lemma generalizes when \(S_0, S_1, S_2, \ldots\) is a partition of S. $$\phi_S = \sum_{n \geq 0} \phi_{S_n}(x)$$ 
+\end{ablock}
+
+
+\section{Compositions of an Integer}
+\begin{definition}
+For integer \(n \geq 0, k \geq 0\), a \underline{composition} of n is a k-tuple of positive integers \(c_1, c_2, \ldots, c_k\) such that \(c_1 + c_2 + \ldots + c_k = n\)
+\end{definition}
+
+\begin{ablock}{Remark}
+\begin{itemize}
+\item The \(c_i\)'s are called the parts of the composition 
+\item There is one composition of 0, The empty composition
+\end{itemize}
+\end{ablock}
+
+\subsection*{Tackling a Composition Problem}
+\textbf{Notation :} \(\mathbb{N} = \langle 1, 2, 3, \ldots\rangle , \mathbb{N}_0 = \langle 0 , 1, 2, 3, \ldots \rangle\)
+
+\textbf{Goal :} Craft a set S and weight function w, such that the number of compositions of n we are counting is \([x^n] \phi_S(x) \)
+
+\textbf{Steps :}
+\begin{enumerate}
+\item Find a set S that fits your problem 
+\begin{itemize}
+\item If your compositions have k parts, let S be a product of k sets.
+\item w usually is the sum of the parts
+\item If the number of parts is unrestricted then
+\[S = S_0 \cup S_1 \cup S_2 \cup \ldots \]
+each \(S_k\) is the number of compositions with k parts that we are considering.
+\end{itemize}
+\item Find \(\phi_S(x)\) by applying Sum and Product Lemmas 
+\item Find \([x^n] \phi_S(x)\), Using the tricks provided by the Inverse Bin. Series) 
+\end{enumerate}
+
+\newpage
+\begin{expx}
+Let K, \(n \in \mathbb{N}, n \geq k\). \
+How many compositions of n with k parts are there?\\
+\newline
+\textbf{Solution : }
+\begin{enumerate}
+\item \(S= \frac{\mathbb{N} \times \ldots \times \mathbb{N}}{k} = \mathbb{N}^k\) \\
+For \((C_1, C_2, \ldots, C_k) \in S\), let w\((C_1, \ldots, C_k)\) = \(C_1 + C_2 + \ldots + C_k\) 
+\item By Product Lemma, 
+\[\begin{aligned}\phi_S(x) & = \phi_{\mathbb{N} \times \ldots \times \mathbb{N} }(x)\\
+ & = \phi_{\mathbb{N}} (x) \cdot \phi_{\mathbb{N}} (x) \cdot \ldots \cdot \phi_{\mathbb{N}} (x) \\
+ & = \left(\phi_{\mathbb{N}} (x)\right)^k \\
+ & = (x^1 + x^2 + x^3 1 \ldots)^k \\
+ & = (x(x^0 + x^1 + x^2 + \ldots))^k
+ & = \left(\frac{x}{1-x}\right)^k \end{aligned}\]
+ \item \[\begin{aligned}
+ [x^n]\left(\frac{1}{1-x}\right)^k & = [x^n](x^k)(1-k)^{-k} \\
+ & = [x^{n-k}](1-x)^{-k} \\
+ & = [x^{n-k}] \sum_{j = 0} {{j + k - 1} \choose {k-1}} x^j \\
+ & = {{n-k+k-1} \choose {k-1}} \\
+ & = {{n - 1} \choose {k-1}}
+ \end{aligned}\]
+ \end{enumerate}
+\end{expx}
+
+\begin{expx} How many compositions of n are there? \\
+\textbf{Solution : } Next lecture 
+\end{expx}
+
+\end{document}

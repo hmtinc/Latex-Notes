@@ -1,0 +1,227 @@
+%Notes by Harsh Mistry 
+%Math 239
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 239 - Introduction to Combinatorics
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+	\newcommand{\bs}{
+		\texttt{\char`\\ \hspace{0.1cm}} 
+	}
+	
+
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{expx}[theorem]{Problem}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{9}{May 19th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
+ 
+
+\begin{expx} How many compositions of n are there? \\
+\textbf{Solution : } 
+\begin{enumerate}
+\item \(\mathbb{N} = \{ 1, 2, \ldots\}\)\\
+For k = \(0, 1, 2, \ldots\) , Let \(S_k = \mathbb{N}^k\) and \(S = \cup_{k \geq 0} S_k\)
+\[\begin{aligned}
+w(C_1, \ldots, C_k) & = C_1 + \ldots + c_k, \hspace{0.2cm} \forall (C_1, \ldots, C_k) \in S \\
+w(c) & = c , \forall C \in \mathbb{N}
+]
+\end{aligned}\]
+\item 
+\[\begin{aligned}
+\phi_{\mathbb{R}} (x) & = x^1 + x^2 + \ldots \\
+& = x (x^0 + x^1 + \ldots) \\ 
+& = \frac{x}{1-x}\\
+\phi_{S_k} (x) & = \phi_{N^k} (x) \\&  = (\phi_{N}(x))^k \\  & = \left(\frac{x}{1-x}\right)^k \\
+\phi_{S}(x) & = \phi_{\cup s_k} (x) = \sum \phi_{S_k}(x) = \sum (\frac{x}{1-x})^k = \frac{1-x}{1-2x}
+\end{aligned}\]
+\item \[\begin{aligned}
+[x^n] \phi_S(x) & = [x^n] \frac{1-x}{1-2x} \\
+& = [x^n] \frac{1-x-x+x}{1-2x}\left[\frac{1-2x}{1-2x} + \frac{x}{1-2x}\right] \\
+& = [x^n] \left(1 + \frac{x}{1-2x} \right) \\
+& = [x^n] \left(1 + x\sum_{l \geq 0 } (2x)^l \right)\\
+& = [x^n] \left(1 + \sum_{l \geq 0} 2^l x^{l + 1} \right) 
+& = \begin{cases} 1 \text{ , } n = 0\\ 2^{n - 1} \text{ , } n \geq 1  
+\end{cases}
+\end{aligned}\]
+\end{enumerate}
+\end{expx}
+
+\newpage 
+\begin{expx} How many compositions of n are there with k parts, each part being at most 5. \\
+\textbf{Solution:}
+\begin{enumerate}
+\item \(A = \{1, 2, 3, 4, 5\} \), \(S = A^k\) 
+\[w(C_1, \ldots, C_k) = C_1 + \ldots + C_k\] 
+\[w(c) = c \forall c \in A \] 
+\item \[\begin{aligned}
+\phi_A(x) & = x^1 + x^2 + x^3 + x^4 + x^5 \\
+& = x(1 + x^2 + x^3 + x^4) \\
+& = x\left(\frac{1-x^5}{1-x}\right) \\
+\phi_S(x)& = \phi_{A^k} (x) = (\phi_A(x))^k = x^k (1-x^5)^k (1-x)^{-k}
+\end{aligned}\]
+\item 
+\[\begin{aligned}
+[x^n] x^k (1-5)^k (1-x)^{-k} & = [x^{n-k}] (1-x^5)^k - (1-x)^{-k} \\
+& = [x^{n-k}] \left(\sum_{l = 0} {k \choose l} (-x^5)^l\right)\left(\sum_{m \geq 0} {{m+k-1} \choose {k-1}} x^m \right) \\
+[x^{n-k}] \sum_{t \geq 0} \left(\sum_{S=0}^t a_S b_{t - S} \right) x^t & = \sum_{s =c }^{n -k} a_S b_{n-k-S}
+\end{aligned}
+\]
+\end{enumerate}
+\end{expx}
+
+\end{document}
