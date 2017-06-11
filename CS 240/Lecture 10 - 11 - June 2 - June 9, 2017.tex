@@ -1,0 +1,254 @@
+%Notes by Harsh Mistry 
+%CS240
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 240 - Data Structures and Data Management
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{10, 11}{June 2 - June 9, 2017}{Taylor Smith}{Harsh Mistry}
+
+\section{Optimal Static Ordering}
+A list of elements ordered by non-increasing probability of access has minimum expected access cost.
+\begin{itemize}
+\item \(L = \langle x_1, \ldots, x_n\rangle\)\\
+Expected access cost in L is \\
+\(E(L) = \sum_{i =1}^n P(x_i) T(x_i) = \sum_{i =1}^n P(x_i) \cdot i \)
+\(P(X_i)\) - access probability for \(x_i\)\\
+\(T(x_i)\) - position of \(x_i\) in L
+\item Example :
+P(a) = 0.3 , P(b) = 0.5, P(c) = 0.2 \\
+\( L = \langle a, b, c \rangle \implies E(L) = 0.3 + 0.5 \times 2 + 0.2 \times 3 = 1.9\)
+\end{itemize} 
+
+\begin{proof}
+Proof by contradiction
+\begin{itemize}
+\item \(L = \langle x_1, \ldots, x_k , x_{k+1}, \ldots, x_n \rangle \)\\
+Suppose the access cost of L is optimal and there is k such that \(P(x_k) < P(x_{k+1})\) 
+$$ E(L) = P(x_k) \cdot k  + P(x_{k+1}) \cdot (k +1) + \sum_{i \neq k, k+1} P(x_i) \cdot i$$
+\item Create another list \(L^\prime\) by swapping \(x_k\) and \(x_{k+1}\)\\
+\(L^\prime = \langle x_1, \ldots, x_{k+1}, x_k , \ldots, x_n \rangle \) 
+$$ E(L^\prime) = P(x_{k+1}) \cdot k + P(x_k) \cdot (k+1) + \sum_{i \neq k, k+1} P(x_i) \cdot i $$ 
+\item \(E(L^\prime) - E(L) = P(x_k) - P(x_{k+1}) < 0 \implies E(L^\prime) < E(L) \) 
+\end{itemize} 
+\end{proof}
+
+\section{Dynamic Ordering}
+If you don't know the probabilities ahead of time, you can 
+\begin{itemize}
+\item Move-To-Front(MTF): Upon a successful search, move the accessed item to the front of the list
+\item Transpose: Upon a successful search, swap the accessed item with the item immediately preceding it
+\end{itemize} 
+
+\subsection{Performance of dynamic ordering}
+\begin{itemize}
+\item Both can be implemented in arrays or linked lists.
+\item Transpose does not adapt quickly to changing access patterns.
+\item MTF Works well in practice.
+\item Theoretically MTF is “competitive”:
+\item No more than twice as bad as the optimal “offline” ordering.
+\end{itemize}
+
+\section{Skip Lists}
+\begin{itemize}
+\item Randomized data structure for dictionary ADT 
+\item A hierarchy of ordered linked lists
+\item A skip list for a set S of items is a series of lists \(S_0,S_1, \ldots ,S_h\) such that:
+\begin{itemize}
+\item Each list \(S_i\) contains the special keys \(-\infty\) and \(+\infty\)
+\item List \(S_0\) contains the keys of S in non-decreasing order 
+\item Each list is a subsequence of the previous one, basically each list is a subset of previous list.
+\item List \(S_h\) contains only two special keys 
+\end{itemize}
+\item A two-dimensional collection of positions: levels and towers
+\end{itemize}
+
+\subsection*{Search In Skip Lists}
+\begin{lstlisting}
+skip-search(L,k)
+L : A skip list, k : a key 
+	p = topmost left position of L
+	S = stack of positions initially containing p 
+	while below(p) != null do 
+		p = below(p)
+		while key(after(p)) < k do
+			p = after(p)
+		end while 
+		S.push(p)
+	end while
+	return S 
+\end{lstlisting}
+\begin{itemize}
+\item S contains positions of the largest key less than k at each level 
+\item after(top(s)) will have key k, iff k is in L
+\end{itemize}
+
+\subsection*{Sumamry of Skip List}
+\begin{itemize}
+\item Expected space usage \(O(n)\)
+\item Expected height : \(O(\log n)\)\\
+A skip list with n items has height at most 3 log n with probability at least \(1 = 1 / n^2\)
+\item Skip-Search \(O(\log n)\)
+\item Skip-Insert \(O(\log n)\)
+\item Skip-Delete \(O(\log n)\)
+\item Skip lists are fast and simple to implement in practice
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,236 @@
+%Notes by Harsh Mistry 
+%Math 239
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\graphicspath{ {images/} }
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 239 - Introduction to Combinatorics
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+	\newcommand{\bs}{
+		\texttt{\char`\\ \hspace{0.1cm}} 
+	}
+	
+
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{expx}[theorem]{Problem}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{18}{June 9th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
+\begin{definition} Given an integer \(k \geq 0\). a k regular graph is a graph in which every vertex has degree k. 
+\end{definition}
+
+\begin{ex}3-Regular Graph 
+\begin{center}
+\includegraphics[scale=0.5]{9}
+\end{center}
+\end{ex}
+
+\begin{ex}
+Let \(n \in \mathbb{N}\). The complete graph \(K_n\) is the graph with n vertices such that the graph with n vertices such that every two vertices are adjacent 
+\begin{center}
+\includegraphics[scale=0.6]{10}
+\end{center}
+\end{ex}
+
+\begin{expx}
+Let \(Q_k = (V, E)\), \(V = \{0, 1\}^k\) and \(E = \{S_1 S_2 : S_1 S_2 \in \{0, 1\}^k, S_1 \text{ and  } S_2  \text{ differ in exactly one digit}\}\)\\
+Show \(Q_k\) is regular and find \(\mid E(Q_k)\mid \)\\
+\begin{center}
+\includegraphics[scale=0.6]{11}
+\end{center}
+\textbf{Solution :}
+Let \(s \in \{0, 1\}^k.\) Every neighbour \(s^\prime\) of s is obtained by changing one digit S, do s has k neighbours \(\implies Q_k\) is k-regular
+
+\[
+\begin{aligned}
+2 \cdot \mid E(Q) \mid & =  \sum_{s \in V(G_k)} deg(s) \\
+& = \sum_{s \in V(G_k)} k \\
+& = k \cdot \mid V(Q_k) \mid \\
+& = k \cdot 2^k \\
+\implies & \mid E(Q_k) \mid = k \cdot 2^{k -1}   
+\end{aligned}
+\]
+\end{expx}
+
+
+\begin{definition}
+The \textbf{degree sequence} of a graph is the sequence of degree in decreasing order
+\end{definition}
+
+\begin{exblock}{Exercise}
+\begin{itemize}
+\item Prove that if two graphs have distinct degree sequences \(\implies \) they are not isomorphic
+\item Find two non-isomorphic graphs with the same degree sequence. 
+\end{itemize}
+\end{exblock}
+
+\section{Bipartite Graphs}
+\begin{center}
+\includegraphics[scale=0.7]{12}
+\end{center}
+\begin{definition}
+A \textbf{bipartite} graph is a graph where the set of vertices can be partitioned into two sets A,B such that every edge joins a vertex in A to a vertex in B 
+\end{definition}
+
+\begin{expx}
+Show the k-cube \(Q_k\) is bipartite\\
+\textbf{Solution :}\\
+Set \(A = \{s  \in \{0, 1\}^k : \text{s has an even number of 1's} \}\)\\ and \(b = \{s  \in \{0, 1\}^k : \text{s has an odd number of 1's} \}\)\\
+Since for every \(s_1 s_2 \in E(Q_k)\) , \(s_1\) and \(s_2\) differ in one digit. So either \(s_1\) has an even number of 1's and \(s_0\) has an odd number of 1's or viceversa 
+\end{expx}
+
+\end{document}

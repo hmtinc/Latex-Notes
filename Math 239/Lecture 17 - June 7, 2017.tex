@@ -1,0 +1,247 @@
+%Notes by Harsh Mistry 
+%Math 239
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\graphicspath{ {images/} }
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 239 - Introduction to Combinatorics
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+	\newcommand{\bs}{
+		\texttt{\char`\\ \hspace{0.1cm}} 
+	}
+	
+
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{expx}[theorem]{Problem}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{17}{June 7th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
+
+\begin{expx}
+Are the following Isomorphic? \\
+\begin{center}
+\includegraphics[scale=0.99]{7}\\
+-\\ 
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline 
+v & a & b & c & d & e & f \\ 
+\hline 
+f(v) & 1 & 3 & 5 & 2 & 4 & 6 \\ 
+\hline 
+\end{tabular}
+\end{center}
+So, yes they are isomorphic. 
+\end{expx}
+
+
+\begin{cblock}{Tip}
+Isomorphism between \(G_1\) and \(G_2\) is the same as "drag and move" vertices of \(G_1\) to get \(G_2\)\\
+To display this, download \textbf{yEd graph editor}. 
+\end{cblock}
+
+\begin{expx}
+Are the following isomorphic?
+\begin{center}
+\includegraphics[scale=0.7]{8}
+\end{center}
+\textbf{Solution : } No, vertices 1, 2, 3, are pairwise adjacent in \(F_1\). If there is an isomorphism \(f : v(F_1) \rightarrow V(F_2)\) then f(1), f(2), f(3) would also be pairwise adjacent in \(F_2\), but no such triple exists in \(F_2\). So they are not isomorphic. 
+\end{expx}
+
+\begin{cblock}{Tip}
+To show two graphs are not isomorphic, find a property in one of them, that you can't find in the other
+\end{cblock}
+
+\section{Degrees of Vertices}
+\begin{definition}
+Given \(v \in V(G)\), the \textbf{degree} of v, denoted as \(deg(v)\), is the number of neighbours of v in G. 
+\end{definition}
+
+\begin{lemma} Handshaking Lemma:
+For any graph G 
+$$\sum_{v\in V(G)} deg(v) = 2 \cdot \mid E(G) \mid $$
+\end{lemma}
+
+\begin{proof} Let \(S = \{ (v,e) : v \in V(G), e \in E(G)  \text{ e is incident to v}\}\)\\
+Every \(v \in V(G)\) is in deg(v) pairs in S. 
+$$\mid S \mid \hspace{0.1cm} = \sum_{v \in V(G)} deg(v) $$
+Every \(e \in E(G)\) is in 2 pairs, then 
+$$\mid S \mid \hspace{0.1cm} = 2 \cdot \mid E(G) \mid $$
+\end{proof}
+
+\begin{corollary}
+In a graph, there is an even number of vertices with an odd degree.
+\end{corollary}
+
+\begin{proof}
+Let G be a graph and Let \(V(G) = V_e \cup V_o\) where 
+$$ v_e = \text { even degree vertices} $$
+$$ v_o = \text { odd degree vertices} $$
+By the Handshake Lemma, 
+$$\begin{aligned}
+2 \cdot \mid E(G) \mid & = \sum_{v \in V(G)} deg(v) \\
+& = \sum_{v \in V_e} deg (v) + \sum_{v \in V_o} deg(v) \\
+& \implies \sum_{v \in V_0} deg(v) = 2 \cdot \mid E(G) \mid \sum_{v \in V_e} deg(v)\\
+& \implies \sum_{v \in V_o} \text { deg(v) is even }\\
+& \implies \mid V_o \mid  \text{ is even because the sum of odd numbers is even only when } \mid V_o \mid  \text{ is even} 
+\end{aligned}$$
+
+\end{proof}
+
+\begin{definition} Given an integer \(k \geq 0\). a k regular graph is a graph in which every vertex has degree k. 
+\end{definition}
+
+\end{document}

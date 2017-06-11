@@ -1,0 +1,292 @@
+%Notes by Harsh Mistry 
+%CS240
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 240 - Data Structures and Data Management
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{8,9 }{May 30 - June 1, 2017}{Taylor Smith}{Harsh Mistry}
+
+
+\section{Dictionary ADT}
+A dictionary is a collection of items, each of which contains 
+\begin{itemize}
+\item A key
+\item Some data
+\end{itemize}
+and is called a key-value pair (KVP). Keys can be compared and are typically unique
+
+\subsection{Operations}
+\begin{itemize}
+\item Search(k)
+\item Insert(k,v)
+\item Delete(k)
+\item optional : join, isEmpty, size, etc,
+\end{itemize}
+
+\subsection{Common Assumptions:}
+\begin{itemize}
+\item Dictionary has n KVPs
+\item Each KVP uses constant space
+\item Comparing keys takes constant space
+\end{itemize}
+
+\textbf{Unordered array of linked list}
+\begin{itemize}
+\item Search \(\theta(n)\)
+\item Insert \(\theta(1)\)
+\item Delete \(\theta(n)\) (need to search)
+\end{itemize}
+
+\textbf{Ordered array}
+\begin{itemize}
+\item Search \(\theta(log n)\)
+\item Insert \(\theta(n)\)
+\item Delete \(\theta(n)\) 
+\end{itemize}
+
+\section{AVL Trees}
+Introduced by Adel’son-Vel’ski ̆ı and Landis in 1962, an AVL Tree is a BST with additional structural property : The heights of the left and right subtree differ by at most 1 and the height of an empty tree is defined to be -1.
+
+At each non-empty node we store \(height(R) - height(L) \in \{-1, 0, 1\} \) : 
+\begin{itemize}
+\item -1 means the tree is left heavy 
+\item  0 means the tree is balanced
+\item 1 means the tree is right heavy 
+\end{itemize}
+
+\section{AVL Insertion}
+To perform insert(T,k,v) 
+\begin{itemize}
+\item First, insert (k,v) into T using usual BST insertion
+\item Then, move up the tree from the new leaf, updating balance factors.
+\item If the balance factor is −1, 0, or 1, then keep going.
+\item If the balance factor is  +2 or -2, then call the fix algorithm to “rebalance” at that node. We are done.
+\end{itemize}
+
+\subsection{Rotations}
+\begin{lstlisting}
+rotate-right(T)
+	T: AVL tree
+	newroot <- T.left
+	T.left <- newroot.right
+	newroot.right <- T
+	return newroot
+\end{lstlisting}
+
+\begin{lstlisting}
+rotate-left(T)
+	T: AVL tree
+	newroot <- T.right
+	T.right <- newroot.left
+	newroot.left <- T
+	return newroot
+\end{lstlisting}
+
+\subsection{Fixing a Slightly-Unbalanced AVL Tree}
+\textbf{Idea : } Identify one of the previous 4 situations apply rotations
+\begin{lstlisting}
+Fix(T):
+	T: AVL tree with T.balance = 2 || T.balance = -2
+	if T.balance = -2 then 
+		if T.left.balance = 1 then 
+			T.left <- rotate-left(T.left)
+		return rotate-right(T)
+	else if T.balance = 2 then 
+		if T.right.balance = -1 then 
+			T.right <- rotate-right(T.right)
+		return rotate-left(T)
+\end{lstlisting}
+
+\subsection{AVL Tree Operations}
+\begin{itemize}
+\item Search : costs \(\theta(height)\)
+\item Insert : Shown already, total cost \(\theta(height)\) 
+\begin{itemize}
+\item fix restores the height of the tree  it fixes to what it was
+\item so fix will be called at most once.
+\end{itemize}
+\item Delete : First search, then swap with successor, then move the tree and apply fix (as with insert)
+\begin{itemize}
+\item fix may be called \(\theta(height)\) times 
+\end{itemize}
+Total cost is \(\theta(height)\)
+\end{itemize}
+
+\subsection{Height of an AVL tree}
+Define N(h) to be the least number of nodes in a height-h AVL tree.
+
+One subtree must have height at least \(h -1\), the other at least \(h -2\) : 
+$$N(h) = \begin{cases}
+1 + N(h -1) + N(h-2),  & h \geq 1\\
+1, & h = 0\\
+0, & h = -1 \\
+\end{cases}$$
+
+\subsection{AVL Tree Analysis}
+Easier lower bound on N(h);
+$$N(h) > 2N(h-2) > 4N(h-4) > 8N(h-6) > \ldots > 2^i N(h-2i) \geq 2^{[h/2]}$$
+Since \(n > 2^{h/2}, h \leq 2 \log n\), 
+and thus an AVL tree with n nodes has height \(O(\log n)\). 
+Also, \(n \leq 2^{h+1} - 1\), so the hight height is \(\theta(\log n)\)
+
+\(\implies\) search, insert, delete all cost \(\theta(\log n)\)
+
+\end{document}

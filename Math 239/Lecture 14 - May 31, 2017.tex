@@ -1,0 +1,237 @@
+%Notes by Harsh Mistry 
+%Math 239
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Math 239 - Introduction to Combinatorics
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+	\newcommand{\bs}{
+		\texttt{\char`\\ \hspace{0.1cm}} 
+	}
+	
+
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{expx}[theorem]{Problem}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{14}{May 31st, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
+\section{Homogeneous Linear Recurrences}
+\begin{definition}
+A sequence \(\{a_n\}_{n \geq 0}\) is defined by a linear homogeneous recurrence, if for some integer \(n \geq k\), 
+$$a_n + q_1 a_{n-1} + \ldots + q_k a_{n-k} = 0 $$
+and initial conditions \(a_0, a_1, a_2, \ldots, a_{k -1}\) are given. The characteristic polynomial of this recurrence is :
+$$C(x) = x^k + q_1 x^{k+1} + q_2 x^{k+2} + \ldots + q_k $$
+\end{definition}
+
+\begin{theorem}
+Let \(\beta_1, \ldots, \beta_j\) be distinct roots of C(x) and suppose \(m_1, m_2, \ldots, m_j\) are such that 
+$$ C(x) = (x - \beta_1)^m (x - \beta_2)^m \ldots (x - \beta_j)^m $$
+Then, 
+$$a_n = P_1(n) \beta^n_1 + P_2(n) \beta^n_2 + \ldots + P_j(n) \beta_j^n $$
+Where for each i, \(P_i(n)\) is a polynomial on n of degree less than \(m_1\), whose coefficients are determined by the initial values \(a_0, a_1, \ldots, a_{k-1}\)
+\end{theorem}
+
+
+\begin{expx}
+Find \(a_n\) explicitly where
+$$ a_n - 4a_{n-1} - 5a_{n -2} + 2 a_{n -3} \hspace{0.5cm} (n\geq3) $$
+$$ a_0 = 4, a_1 = 9, a_2 = 17$$
+\textbf{Solution:}
+\begin{enumerate}
+\item Find C(x) 
+\[a_n - 4 a_{n-1}  + 5 a_{n -2} - 2a_{n-3} = 0\]
+\[C(x) = x^3 - 4x^2 + 5x - 2\]
+\item Factor C(x)
+\[ C(1) = 0, \text{ so 1 is a root } \]
+\[ \begin{aligned}
+C(x) & = (x-1)(x^2 - 3x + 2) \\
+& = (x-1) (x-2) (x -1) \\
+& = (x-1)^2 (x-2)\\
+\text{Roots Are : } & \beta_1 = 1, \beta_2 = 2, m_1 = 2, m_2 = 1 
+\end{aligned}\]
+\item Apply the Theorem that solves L.H.R 
+\[a_n = A+Bn (1)^m + C (2)^n = A+Bn + C (2)^n\]
+\item Obtain unknowns by using initial conditions
+\begin{itemize}
+\item \(4 = a_0 = A + B(0) + C \cdot 2^0 = A + C\)
+\item \(9 = a_1 = A + B(1) + C \cdot 2^1 = A + B + 2C\)
+\item \(17 = a_2 = A + B(2) + C \cdot 2^2 = A + 2B + 4C\)
+\end{itemize}
+Solve the linear system A = 1, B = 2, C = 3. So, 
+$$ a_n = 1 + 2n + 3(2^n) $$
+\end{enumerate}
+\end{expx}
+
+\section{From Recurrences to Coefficients}
+\begin{expx}
+Find the formal power series \(\sum_{n\geq j} a_nx^n\)  so that \(\langle a_n \rangle_{n \geq 0}\) satisfy
+$$ a_n - a_{n-1} - a_{n-2} + a_{n-3} = 0 \hspace{0.5cm} (n \geq 4)$$
+$$ a_0 = 8, a_1 = 2, a_2 = 10, a_3 = 6 $$
+\textbf{ Solution : }
+\begin{enumerate}
+\item \(q(x) = 1 - x - x^2 + x^3\) \\
+Complete q(x) that has same coefficients as C(x) but in reverse direction. 
+\item Let \(p(x) = q(x) \sum_{n \geq 0} a_n x^n\)
+\[\begin{aligned}
+P(x) & = (1 - x - x^2 + x^3) (a_0 + a_1x + a_2x^2 + \ldots) \\
+& = a_0 + (a_1 - a_0)x (a_2 - a_1 - a_0) x^2 + (a_3 - a_2 - a_1 + a_0)x^3  + \strikethrough{(a_2 - a_3 - a_2 + a_1)} x^4 + x^5 \\
+\end{aligned}\]
+\end{enumerate}
+\end{expx}
+\end{document}
+
+

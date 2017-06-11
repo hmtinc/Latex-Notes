@@ -1,0 +1,256 @@
+%Notes by Harsh Mistry 
+%CS240
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 240 - Data Structures and Data Management
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{5-7}{May 15 - 25, 2017}{Taylor Smith}{Harsh Mistry}
+
+\section{Sorting and Randomized Algorithms}
+ 
+ \subsection*{Selection vs. Sorting}
+The selection problem is: Given an array A of n numbers, and 0 ≤ k < n, find the element in position k of the sorted array.
+
+\textbf{Observation} : the kth largest element is the element at position n − k. Best heap-based algorithm had time cost \(\theta(n _ k \log n)\)\\
+For median selection, k =   n  , giving cost \(\theta(n \log n)\). 
+This is the same cost as our best sorting algorithms.
+ 
+\subsubsection*{Crucial Subroutines}
+quick-select and the related algorithm quick-sort rely on two subroutines:
+\begin{itemize}
+\item choose-pivot(A): Choose an index i such that A[i] will make a
+good pivot (hopefully near the middle of the order).
+\begin{lstlisting}
+choose-pivot1(A) 
+return 0
+\end{lstlisting}
+\item partition(A, p): Using pivot A[p], rearrange A so that all items \(\leq\) the pivot come first,
+followed by the pivot,
+followed by all items greater than the pivot.
+\begin{lstlisting}
+partition(A, p)
+A: array of size n, p: integer s.t. 0 <= p <= n
+	swap(A[0], A[p])
+	i <- 1, j < -n−1 
+	 loop
+		while i < n and A[i] <= A[0] do
+			i <- 1 + 1
+		while j >= and A[j] > A[0] do
+			j <- j -1
+		if j < i then break
+		else swap(A[i], A[j])
+	end loop
+	swap(A[0], A[j])
+    return j
+\end{lstlisting}
+\end{itemize}
+\newpage
+\subsubsection*{Quick Select Algorithm}
+\begin{lstlisting}
+quick-select1(A, k )
+A: array of size n, k: integers.t. 0 < = k< n
+	p <-  choose-pivot1(A) 
+	i <- partition(A, p) 
+	if i=k then
+		return A[i]
+	 else if i >k then
+		return quick-select1(A[0, 1, . . . , i − 1], k) 
+	else if i <k then
+		return quick-select1(A[i + 1, i + 2, . . . , n -1 ], k - i -1)
+\end{lstlisting}
+
+\subsubsection*{Analysis}
+\textbf{Worst-case analysis:} Recursive call could always have size n-1
+$$ T(n) = cn + c(n -1) + c(n -2) + \ldots + c \cdot 2 + d \in \theta(n^2) $$
+\textbf{Best-case analysis:} First chosen pivot could be the kth element. No recursive calls; total cost is \(\theta(n)\) \\
+\newline
+\textbf{Average case analysis : } Assume all n! permutations are likely. Average cost of sum for all permutations, divided by n!\\
+Define T(n, k) as average cost for selecting kth item from size-n array : 
+$$T(n) = {max}_{0 \leq k \leq n} T(n,k) $$
+The cost is determined by i, the position of the pivot A[0].\\
+For more than half of the n! permutations, \(\frac{n}{4} \leq i \leq \frac{3n}{4}\) . \\
+In this case, the recursive call will have length at most \(\frac{3n}{4}\) , for any k.
+ The average cost is then given by:
+ $$ T(n) \leq \begin{cases} cn + \frac{1}{2} (T(n) + T(3n/4)) \text{ } & n \geq 2 \\
+ d, &  n = 1\end{cases}$$
+ Rearranging displays that \(T(n) \in O(n)\)
+
+\subsection{Randomized Algorithms}
+A randomized algorithm is one which relies on some random numbers in addition to the input.
+The cost will depend on the input and the random numbers used.
+
+\subsubsection*{Expected Running Time}
+Define T(I,R) as the running time of the randomized algorithm for a particular input I and the sequence of random numbers R.\\
+The expected running \(T^{(exp)}(I)\) of a randomized algorithm for a particular input I is the “expected” value for T(I,R):
+$$ T^{(exp)}(I) = E[T(I, R)] = \sum_R T(I,R) \cdot Pr[R] $$
+The worst case running time is then 
+$$ T^{(exp)}(n) = \text{max}_{size(i) = n} T^{(exp)}(I) $$
+
+\subsubsection*{Randomized Quick Select }
+\begin{lstlisting}
+shuffle(A)
+A: array of size n
+	for i <- 0 to n − 2 do
+		swap ( A[i], A[i + random(n-i)] )
+\end{lstlisting}
+Expected cost becomes the same as the average cost, which is \(\theta(n)\)
+
+\end{document}
