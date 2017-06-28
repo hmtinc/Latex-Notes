@@ -1,0 +1,227 @@
+%Notes by Harsh Mistry 
+%Stat231
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Stat 231 - Statistics 
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{16, 17, 18}{May 29th - June 2nd, 2017}{Suryapratim Banerjee}{Harsh Mistry}
+
+\section{Interval Estimation}
+\subsection*{Interpretation}
+\begin{itemize}
+\item The confidence Interval is an Estimate of the r.v.s \(L, U\) where \([L, U]\) contains \(\theta\) with \(95 \%\) confidence 
+\item If the experiment was repeated many times, approximately \(95\%\) of the intervals constructed would contain \(\theta\)
+\subsection*{Distribution}
+\textbf{Sampling Distribution of the Sample Mean}
+$$ \bar{Y} \sim G(\gamma, \frac{\sigma}{\sqrt{n}}) $$ 
+\end{itemize}
+
+\begin{enumerate}
+\item Find the estimate for the unknown parameter. \\
+MLE for \(\gamma = \bar{y} = \frac{1}{n} \sum y_i \)\\
+\(\hat{\gamma} = \bar{y}\)
+\item Identify the estimator and its distribution\\
+\(\bar{y} = \)r.v. from which \(\bar{y}\) is an outcome \\
+\(\bar{y} = \) Estimator
+\item Construct the pivotal quantity from the sampling distribution
+\[\frac{\bar{y} - \gamma}{\frac{\sigma}{\sqrt{n}}} = z = G(0,1) \]
+\item Find the extreme points of your pivotal distribution
+\item Use step 4 to construct the coverage  Interval 
+\item Use the coverage interval to construct your confidence interval. \\
+Confidence Interval = \([\bar{y}  \pm z^* \frac{\sigma}{\sqrt{n}}]\)
+\end{enumerate}
+
+\section{Distribution Theory}
+\subsection{The Chi-Squared Distribution}
+\begin{definition} Let W be a random variable such that 
+$$ W  = Z_1 ^2 + Z_2^2 + \ldots + Z_n^2 $$
+Where \(Z_i \sim G(0,1)\) and \(Z_i\)'s are independent, Then \(W\) is said to follow a chi-squared distribution with n degrees of freedom 
+$$ W \sim X^2_n $$ 
+\end{definition}
+
+\subsubsection*{Properties of Chi-Squared Distibutions}
+\begin{itemize}
+\item n - degrees of freedom parameter of the chi-squared distribution
+\item As n changes the shape changes 
+\item W can take values between 0 and \(\infty\)
+\item E(W) = n and Var(W)= 2n
+\item Suppose \(W_1 \sim X^2_n\) and \(W_2 \sim X^2_n\),  where \(W_1\) and \(W_2\) are independent 
+$$ W_1 + W_2 \sim X^2_{n_1 + n_2} $$ 
+\end{itemize}
+
+\subsection{Students T-distribution}
+\begin{definition}
+A random variable T is said to follow a student's T distribution with n degrees of freedom if
+$$ T = \frac{z}{W}$$
+Where \(Z \sim G(0,1)\) , \(W = \sqrt{x^2_n / n}\), and Z/W are independent 
+\end{definition}
+
+\subsubsection*{Properties}
+\begin{itemize}
+\item T can take all values \((-\infty, \infty)\) 
+\item T is symmetric around zero for any n 
+\item For "small" n, T looks like the z distribution, but fatter tails \(K > 3\)
+\item As n becomes larger \(T \longrightarrow Z\) and the \(pdf\) converges for \(n \longrightarrow \infty\)
+\end{itemize}
+
+\end{document}
+
+
