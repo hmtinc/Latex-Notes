@@ -1,5 +1,5 @@
 %Notes by Harsh Mistry 
-%Math 239
+%Stat231
 %based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
 
 \documentclass{article}
@@ -14,6 +14,7 @@
 \usepackage{amsfonts,graphicx, amssymb}
 \usepackage[fleqn]{amsmath}
 \usepackage{fixltx2e}
+\usepackage{tikz}
 \usepackage{color}
 \usepackage{tcolorbox}
 \usepackage{lipsum}
@@ -21,8 +22,6 @@
 \usepackage{scrextend}
 \tcbuselibrary{skins,breakable}
 \usetikzlibrary{shadings,shadows}
-\usepackage{graphicx}
-\graphicspath{ {images/} }
 \newcounter{lecnum}
 \renewcommand{\thepage}{\thelecnum-\arabic{page}}
 \renewcommand{\thesection}{\thelecnum.\arabic{section}}
@@ -41,7 +40,7 @@
    \begin{center}
    \framebox{
       \vbox{\vspace{2mm}
-    \hbox to 6.28in { {\bf Math 239 - Introduction to Combinatorics
+    \hbox to 6.28in { {\bf Stat 231 - Statistics 
 	\hfill Spring 2017} }
        \vspace{4mm}
        \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
@@ -73,20 +72,13 @@
 			\end{center}
 	}
 	
-	\newcommand{\bs}{
-		\texttt{\char`\\ \hspace{0.1cm}} 
-	}
-	
-
-	
 \newcommand{\pipe}{\(\mid\)}
 \newcommand{\ctr}{\(\wedge\)}
 
 \newtheorem{theorem}{Theorem}[lecnum]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{ex}[theorem]{Example}
-\newtheorem{expx}[theorem]{Problem}
-\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{claim}[theorem]{Claim}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{definition}[theorem]{Definition}
@@ -170,84 +162,96 @@
 %Start
 \begin{document}
 
-\lecture{24}{June 23rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
-\begin{center}
-\textcolor{red}{Missed This Lecture, Notes Taken By Xyan Bhatnagar}
-\end{center}
-\begin{theorem}
-If T is a spanning tree of G and \(e \in E(G) \bs E(T) \) then T + e has a unique cycle c. Moreover for every \(e^\prime \in E(C) \bs \{e\}, T^\prime : = (T + e) - e^\prime \) is a spanning tree 
-\end{theorem}
+\lecture{25, 26, 27, 28, 29, 30}{June 26 - July 10, 2017}{Suryapratim Banerjee}{Harsh Mistry}
 
-\textbf{Notation : \(T + e = (V(T), E(T) \cup \{e\})\)}
+\section{Measurement Bias Testing}
+\textbf{Objective : } To test whether a scale is biased
 
-\begin{proof}
-Let e = xy and Let P be a unique xy-path in T.\\ As every cycle in \(T + e\) contains e. 
-\(C = P + e\) is the unique cycle in \(T + e\) \\
-\newline 
-Let \(e^\prime \in E(P) \subseteq E(C)\). As \(e^\prime\) is not a bridge in \(T + e\). Then \(T^\prime = (T+e) - e^\prime \) is connected 
-$$ \mid E(T^\prime) \mid = \mid E(T) \mid = \mid V(T) \mid - 1 = \mid V(T^\prime) \mid -1 $$
-By previous theorem, \(T^\prime\) is a tree and \(\mid V(T^\prime) \mid = \mid V(T) \mid = \mid V(G) \mid.\) So it is a spanning tree 
-\end{proof}
 
-\section{Characterizing Bipartite Graphs}
-\begin{center}
-\includegraphics[scale=0.5]{12}
-\end{center}
-G is bipartite \(\iff\) V(G) can be coloured using 2 colours so that no 2 adjacent vertices have the same color
+\textbf{Experiment :} We take an object of a known weight (10) and measure of using the scale n times. 
+$$Y_i = \text{ith reading of the scale}$$
+Let \(S\) = bias of our scale and \(R_i\) error on the ith measurement
+$$ Y_i = \text{true weight} + S + R_i$$
 
-\begin{exblock}{Observations}
+\textbf{Conventions : }
 \begin{itemize}
-\item A graph that contains a cycle of off length (odd cycle) as a sub graph is \textbf{not bipartite}.
-\item Trees are bipartite
+\item If d is to the right of the median of the \(x^2\) \\
+\(p-value = 2P(D \geq d)\)
+\item If d is to the left of the median 
+\(p-value = 2P(D \leq d)\)
 \end{itemize}
-\end{exblock}
 
-\begin{theorem}
-A graph is bipartite if and only if it has no odd cycles as a sub-graph 
-\end{theorem}
-\newpage
-\begin{proof}
-\begin{itemize}
-\item[\(\rightarrow\)] Use previous observations
-\item[\(\leftarrow\)] Suppose G has no odd cycles. Assume that G is connect (or we treat components separately). \\
-Let T be a spanning tree of G and Let \(A \cup V = V(T)\) be a bipartition of T. \\ \newline 
-We claim that \(A \cup B\) is also a bipartition of G. Suppose not, then there exists \(e = uv \in E(G) \bs E(T)\) where u and v both belong to A or B. \\ \newline 
-Let \(u,v \in A\) and Let P be the uv-path in T.\\
-Length(P) is even because \(u,v \in A \implies p+e\) is an odd cycle. \textbf{Contradiction}  
-\end{itemize}
-\end{proof}
+\section{Testing Using The Likelihood}
+Suppose we are not able to find D fro some problem. 
+Assume n is large. We can then use the likelihood ratio test statistic as our discrepancy measure. 
+$$ \bigtriangleup (\theta) = -2log\frac{L(\theta)}{L(\tilde{\theta}}$$
 
-\section{Breadth-First Search Trees (BFS)}
 
-\begin{definition}
-A queue is an ordered list 
-$$ Q : q_1, q_2, q_3, \ldots, q_n $$
-where every new element added to Q is added at the end. The first element in Q is the \textbf{active element}
-\end{definition}
-
-\subsection*{BFS Algorithm}
-\begin{itemize}
-\item[\textbf{Input:}] Graph G and \(r \in V(G)\)
-\item[\textbf{Output:}] Spanning Tree T or that G is not connected
-\item[\textbf{Process:}]
+$$ D = \mid \frac{\tilde{\theta} - \theta_o}{\sqrt{\frac{\theta  ( 1- \theta)}{n}}}\mid$$
 \begin{enumerate}
-\item Initialization \\
-\(T = (\{r\}, \phi)\)  r = vertices and \(\phi\) = edges\\
-\(P:V(G) \rightarrow V(G) \cup \{null\} \)\\
-\(P(v) \rightarrow null \)\\
-\(Q = r\)
-\item Operations
-\begin{lstlisting}
-While Q != phi 
-	Let u be the active vertex in Q
-	While u has a neighbour not in V(T) 
-		Add v and uv to T 
-		Let P(v) = u
-		Add v to Q 
-	Remove u from Q
-\end{lstlisting}
-\item Output (T,P)
+\item Find \(L(\theta)\) and calculate \(\hat{\theta}\)
+\item Calculate \(\bigtriangleup(\theta_o\)
+\item Calculate the p-value where \( d = \bigtriangleup\)
 \end{enumerate}
+
+\section{Introduction To Regression Models}
+A linear regression model assumes that E(y) is a linear function of x 
+$$ E(Y) = \alpha + \beta X$$
+
+\section{Simple Linear Regression Model}
+\textbf{Assumptions}
+\begin{itemize}
+\item Given \(x_i\)'s, \(Y_i\)'s have a Normal distribution. 
+\item The mean of the \(Y_i\)'s are a linear function of the \(x_i\)'s
+\item The variance of the \(Y_I\)'s are constant \(\sigma^2\) (unknown) \\
+\(\sigma^2\) is independent of x 
+\item \( \sigma^2\) is not a function of x and \(Y_i\)'s are independent
 \end{itemize}
 
-\end{document} 
+\subsection{Model}
+$$ Y_i \sim G(\alpha + \beta x_i , \sigma) $$
+$$ \text{Alternate Form : } Y_i = \alpha + \beta x_i + R_i $$
+
+\subsection{Gauss-Markov Assumptions}
+\begin{itemize}
+\item \(Y_i\)'s independent
+\item \(Y_i\)'s are Gaussian 
+\item \(E(Y_i = \alpha + \beta x_i\) 
+\item \(Var(Y_i) = \sigma^2 \forall x\) 
+\item \(E(Y_i)\) is not linear \(\longrightarrow\) Non-linear regression models
+\item \(V(Y_i) \neq \sigma^2 \longrightarrow \) Hetroscedastic  Models
+\item More than one explanatory variable \(\longrightarrow\) Multivariable Regression
+\end{itemize}
+
+\subsection{Questions }
+\begin{itemize}
+\item Interpretation of \(\alpha, \beta, \sigma\) ? \\
+\(\beta\) is the increase in the mean of Y if x goes by 1 unit \\
+\(\alpha = E(Y) \) when x = 0
+\item MLE for \(\alpha, \beta, \sigma\)\\
+\begin{itemize}
+\item \(\hat{\alpha} = \bar{y} - \hat{\beta} \bar{x}\) where \(\hat{\beta} = \frac{S_{xy}}{S_{xx}} \)\\
+\item \(\hat{\sigma}^2 = \frac{1}{n}[X_{yy} - \hat{\beta} S_{xy}] \)
+\item \(S_{yy} = \sum (y_i - \bar{y})^2\)
+\item \(S_{xx}  = \sum ( x_i - \bar{x})^2\)
+\item \(S_{xy}  = \sum (x_i - \bar{x}) (y_i  - \bar{y}) \)
+\end{itemize}
+$$ S^2 = \frac{1}{n-2} [S_{yy} - \beta S_{xy} $$
+\end{itemize}
+
+Let \(a_i = \frac{1}{S_{xx}} \cdot (x_i - \bar{x}) \)
+$$ \hat{p} = \sum a_i y_i $$
+
+\subsection{Confidence interval for p}
+\begin{itemize}
+\item \(E(\tilde{p}) = \alpha \sigma + \beta = \beta \)
+\item \(V(\beta) = \frac{\sigma^2}{S_{xx}}\)
+\item \[ \frac{\tilde{\beta} - \beta}{\frac{S}{\sqrt{S_{xx}}}} \sim T_{n-2}\]
+\item Coverage Interval 
+\[\tilde{\beta} \pm t^* \frac{S}{\sqrt{S_{ss}}}\]
+\item D value for hypothesis testing 
+\[D = \mid \frac{\tilde{\beta} - \beta_0}{\frac{S}{\sqrt{S_{xx}}}} \mid \] 
+\end{itemize}
+
+\end{document}
+

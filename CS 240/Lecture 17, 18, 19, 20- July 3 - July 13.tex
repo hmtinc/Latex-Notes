@@ -1,0 +1,455 @@
+%Notes by Harsh Mistry 
+%CS240
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 240 - Data Structures and Data Management
+	\hfill Spring 2017} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%Start
+\begin{document}
+
+\lecture{17,18,19,20}{July 3  - 13, 2017}{Taylor Smith}{Harsh Mistry}
+
+\section{Multi-Dimensional Data}
+\begin{itemize}
+\item Each item has d aspects 
+\item Aspect values (\(x_i\)i ) are numbers
+\item Each item corresponds to a point in d-dimensional space
+\item We concentrate on d = 2, i.e., points in Euclidean plane
+\end{itemize}
+
+\subsection*{One-Dimension Range Search}
+\begin{itemize}
+\item First Solution : Ordered Arrays \\
+Running Time : \(O(\log n + k\), k is then number of reported items 
+\item Balanced BST
+\begin{itemize}
+\item Nodes visited during search \\
+\(O(\log n)\) Boundary nodes\\
+\(O(k)\) inside nodes\\
+No outside notes
+\item Running Time : \(O(\log n + k)\) 
+\end{itemize}
+\begin{lstlisting}
+BST-RangeSearch(T, k1, k2) {
+	If T = null then return 
+	if key(T) < k1 then 
+		BST-RangeSearch(T.right, k1, k2)
+	if key(T) > k2 then 
+		BST-RangeSearch(T.left, k1, k2)
+	if k1 <= key(T) && k2 >= key(T) then 
+		BST-RangeSearch(T.left, k1, k2)
+		report key(T)
+		BST-RangeSearch(T.right, k1, k2)
+}
+\end{lstlisting}
+\end{itemize}
+
+\subsection*{2-Dimensional Search}
+\begin{itemize}
+\item Each item has 2 aspects
+\item Each item corresponds to a point in Euclidean plan
+\end{itemize}
+
+\subsection*{Quadtrees}
+\begin{itemize}
+\item Find a square R that contains all the points of P (We can compute
+minimum and maximum x and y values among n points)
+\item  Root of the quadtree corresponds to R
+\item Split: Partition R into four equal subsquares (quadrants), each
+correspond to a child of R
+\item Recursively repeat this process for any node that contains more than one point
+\item Points on split lines belong to left/bottom side
+\item Each leaf stores (at most) one point
+\item We can delete a leaf that does not contain any point
+\end{itemize}
+
+\subsubsection*{Operations}
+\begin{itemize}
+\item Insert \\
+- Search for the point \\
+- Split the leaf if there a two points
+\item Delete \\
+- Search for the point \\
+- Remove the point \\
+If its parent has only one child left, delete that child and continue the process towards the root
+\item Range Search 
+\begin{lstlisting}
+RSearch(T,R)
+	if (T is a leaf) then 
+		if (T.point is in R) then 
+			report T.point 
+	for each child C of T do 
+		if C.region interest R is not empty then 
+			RSearch(C,R)
+\end{lstlisting}
+\begin{itemize}
+\item Spread factor \( P : \beta(P) = \frac{d_{max}}{d_{min}}\)
+\item \(d_{max}\) is the maximum distance between two points
+\item Height : \(h \in \theta(\log_2 \frac{d_{max}}{d_{min}})\)
+\item Complexity to build : \(\theta (nh)\)
+\item Complexity of range search: \(\theta(nh\) even if the answer is \(\emptyset\)
+\end{itemize}
+\end{itemize}
+
+Quad trees are very easy to compute and handle and require no complicated arithmetic, butare very wasteful of space. One major drawback is that they can have very large heights for non-uniform distributions.
+
+\subsection*{kd-trees}
+kd-trees split trees into two Split the points into two (roughly) equal subsets
+\begin{itemize}
+\item Building a kd-tree
+\begin{itemize}
+\item Split P into two equal subsets using a vertical line
+\item Split each of the two subsets into two equal pieces using horizontal lines
+\item Continue splitting, alternating vertical and horizontal lines, until every
+point is in a separate region
+\end{itemize}
+\item Complexity : \(\theta(n \log n)\)
+\item Height of tree : \(\theta(\log n)\)
+\end{itemize}
+
+\subsubsection*{Operations}
+\begin{lstlisting}
+RSearch(T,R)
+	if (T is a leaf) then 
+		if (T.point is in R) then 
+			report T.point 
+	for each child C of T do 
+		if C.region interest R is not empty then 
+			RSearch(C,R)
+\end{lstlisting}
+
+\begin{itemize}
+\item The complexity is \(O(k+u)\) where k is the number of keys reported and U is the number of regions we go to but unsuccessfully
+\item U corresponds to the number of regions which intersect but are not fully in R
+\item Q(n) : Maximum number of regions in a kd-tree with n points that intersect a vertical line
+\item Q(n) satisfies the following recurrence relation 
+$$ Q(n) = 2 Q(n/4 ) + O(1) $$
+\item Q(n) = \(O(\sqrt{n})\)
+\item Thus the complexity of range search in kd-trees is \(O(k + \sqrt{n})\)
+\end{itemize}
+
+\subsubsection*{kd-tree : Higher Dimensions }
+\begin{itemize}
+\item Storage : \(O(n)\)
+\item Construction : \(O(n \log n)\)
+\item Range query time : \(O(n^{1-1/d} + k)\), where d is constant 
+\end{itemize}
+
+\subsection*{Range Trees}
+A range tree is a tree of trees (a multi-level data structure). To build one follow the following steps
+\begin{itemize}
+\item Build a balanced BST \(\tau\) determined by the x-coordinates of the n points
+\item For every node \(v \in \tau\) build a balanced binary search tree \(T_{assoc}(V)\) determined by the y-coordinates of the nodes in the subtree of \(\tau\) with root node v
+\end{itemize}
+
+\subsubsection*{Range Tree - Range Search}
+Running Time is \(O(k + \log^2 n \) and Space Tree usage is \(O(n \log n)\)
+\begin{itemize}
+\item Perform a range search (on the x-coordinates) for the interval [x1; x2]
+in (BST-RangeSearch(\(\tau\); x1; x2))
+\item For every outside node, do nothing.
+\item For every "top" inside node v, perform a range search (on the
+y-coordinates) for the interval [y1; y2] in \(T_{assoc} (v)\). During the range
+search of \(T_{assoc} (v)\), do not check any x-coordinates (they are all within
+range).
+\item For every boundary test to see if the corresponding point is
+within the region R.
+
+\subsubsection*{Range Tree : Higher Dimensions}
+\begin{itemize}
+\item Storage : \(O(n (\log n)^{d-1})\)
+\item Construction time : \(O(n (\log n)^{d -1})\)
+\item Range query  : \(O((\log n)^d + k) \) 
+\end{itemize}
+\end{itemize}
+
+\section{Pattern Matching}
+\begin{definition}
+\begin{itemize}
+\item \textbf{Substring} is a string that is within a string 
+\item \textbf{Prefix} is a string of characters that precedes a specified 
+\item \textbf{Suffix} is a string of characters that follows a specified value
+\end{itemize}
+\end{definition}
+
+Pattern matching algorithms consists of guesses and checks:
+\begin{itemize}
+\item A guess is a position i such that P might start T[i].
+\item A check of a guess is a single position j with \(0 \leq j \leq m\) where we compare T[i +j] to P[j]. We must perform m checks of a single correct guess, but may make many fewer checks of an incorrect guess
+\end{itemize} 
+
+\subsubsection*{Brute Force Algorithm }
+\begin{itemize}
+\item Worst case performance \(\theta((n - m + 1) m )\)
+\item \(m \leq n/2 \implies \theta(mn)\)
+\end{itemize}
+
+\subsubsection*{Strign matching with finite automata}
+Utilize a finite automata and use characters as input to determine which state to proceed to. 
+
+\begin{itemize}
+\item Matching time on a text string of length n is \(\theta(n)\)
+\item This does not include the preprocessing time required to compute the transition function. 
+\end{itemize}
+
+\subsubsection*{KMP Algorithm}
+\begin{itemize}
+\item Knuth-Morris-Pratt algorithm (1997)
+\item Compares teh pattern to the text in left-to-right 
+\item shifts the pattern more intelligently 
+\item A failure table is calculated and used to determine how far we should shift the pattern
+\end{itemize}
+
+\begin{lstlisting}
+KMP(T,P) {
+	F = failureArray(P)
+	i = 0;
+	j = 0;
+	while i <n  do 
+		if T[i] = p[j] then 
+			if j = m -1 then 
+				return i -j //Match 
+			else 
+				i = i + 1
+				j = j +1
+		else 
+			if j > 0 then 
+				j = F[j-1]
+			else 
+				i = i + 1
+	return -1 // No match.  
+}
+\end{lstlisting}
+
+\begin{itemize}
+\item failureArray running time : \(\theta(m)\), there are no more than 2m iterations 
+\item KMP running time \(\theta(n)\), there a re no more than 2n iterations. 
+\end{itemize}
+
+\subsubsection*{Boyer-Moore Algorithm}
+Based on 3 key ideas 
+\begin{itemize}
+\item Reverse-order searching : Compare P with a subsequence of T moving backwards
+\item Bad character jumps : When mismatch occurs at T[i] = c
+\begin{itemize}
+\item if P contains c, we can shift P to align the last occurrence of c in P with T[i]
+\item Otherwise, we can shift P to align P[0] with T[i+1]
+\end{itemize}
+\item Good suffix jumps : If we have already matched a suffix of P, then get a mismatch, we can shift P forward to align with the previous occurrence of that suffix. If none exists, look for the longest prefix of P that is a suffix of what we read. 
+\item Can skip large parts of T. 
+\end{itemize}
+
+\subsubsection*{Last-Occurrence Function}
+\begin{itemize}
+\item Pre-process the pattern P and the alphabet \(\sum\)
+\item Build the last-occurrence function L mapping \(\sum\) to integers 
+\item L(c) is defined as the largest index i such that P[i] = c or -1 
+\item The last occurrence function can be computed in time \(O(m + \mid \sum \mid ) \)
+\end{itemize}
+
+\begin{lstlisting}
+Boyer-moore(T,P)
+	L = last occurrence array computed
+	S = good suffix array computed from P
+	i = m -1
+	j - m -1
+	while i < n and j >= 0 do
+		if T[i] = P[j] then 
+			i = i - 1
+			j = j - 1
+		else 
+			i = i + m - 1 - min(L[T[i]], S[j])
+			j = m -1
+	if j == -1 return i + 1
+	else return FAIL 
+\end{lstlisting}
+
+\begin{itemize}
+\item Worst-case running time \(\in O(n +  \mid \sum \mid )\)
+\item This complexity is difficult to prove
+\item Worst-case running time \(O(nm)\) if we want to report all occurrences. 
+\end{itemize}
+
+\subsubsection*{Rabin-Karp Fingerprint Algorithm}
+\begin{itemize}
+\item Compute hash function for each text position
+\item No explicit hash table: just compare with pattern hash
+\item If a match of the hash value of the pattern and a text position found,
+then compares the pattern with the substring by naive approach
+\item Expected running time is \(\theta(m + n)\)
+\item Worst case is \(\theta(mn)\)
+\end{itemize}
+
+\subsubsection*{Suffix Tries and Suffix Trees}
+If we want to search for multiple patterns in a fixed text, we can produce a suffix trie consisting of all suffixes of the string and then search for the pattern normally   
+
+\subsubsection*{Running Time Overview}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline 
+• & Brute Force & DFA & KMP & BM & RK & Suffix trees \\ 
+\hline 
+Preproc. & - & \(O(m \mid  \sum \mid)\) & O(m) & \(O(m + \mid \sum \mid)\) & O(m) & \(O(n^2)\) \\ 
+\hline 
+Search  & \(O(nm)\) & O(n) & O(n) & O(n) & O(n + m) & O(m) \\ 
+\hline 
+Extra Space & -- & \(O(m \mid \sum \mid)\) & O(m) & \(O(m + \mid \sum \mid)\) & O(1) & O(n) \\ 
+\hline 
+\end{tabular} 
+
+
+\end{document}

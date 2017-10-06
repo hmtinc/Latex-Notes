@@ -21,8 +21,6 @@
 \usepackage{scrextend}
 \tcbuselibrary{skins,breakable}
 \usetikzlibrary{shadings,shadows}
-\usepackage{graphicx}
-\graphicspath{ {images/} }
 \newcounter{lecnum}
 \renewcommand{\thepage}{\thelecnum-\arabic{page}}
 \renewcommand{\thesection}{\thelecnum.\arabic{section}}
@@ -170,84 +168,47 @@
 %Start
 \begin{document}
 
-\lecture{24}{June 23rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
-\begin{center}
-\textcolor{red}{Missed This Lecture, Notes Taken By Xyan Bhatnagar}
-\end{center}
+\lecture{26}{June 28th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
+
+\section{Euler's Formula}
+$$\mid U\mid  - \mid E \mid + \mid F \mid $$
 \begin{theorem}
-If T is a spanning tree of G and \(e \in E(G) \bs E(T) \) then T + e has a unique cycle c. Moreover for every \(e^\prime \in E(C) \bs \{e\}, T^\prime : = (T + e) - e^\prime \) is a spanning tree 
+Let f be the set of faces of a planar embedding of a connected graph \(G = (V, E)\) Then \(\mid U\mid  - \mid E \mid + \mid F \mid  = 2\)
 \end{theorem}
 
-\textbf{Notation : \(T + e = (V(T), E(T) \cup \{e\})\)}
-
 \begin{proof}
-Let e = xy and Let P be a unique xy-path in T.\\ As every cycle in \(T + e\) contains e. 
-\(C = P + e\) is the unique cycle in \(T + e\) \\
-\newline 
-Let \(e^\prime \in E(P) \subseteq E(C)\). As \(e^\prime\) is not a bridge in \(T + e\). Then \(T^\prime = (T+e) - e^\prime \) is connected 
-$$ \mid E(T^\prime) \mid = \mid E(T) \mid = \mid V(T) \mid - 1 = \mid V(T^\prime) \mid -1 $$
-By previous theorem, \(T^\prime\) is a tree and \(\mid V(T^\prime) \mid = \mid V(T) \mid = \mid V(G) \mid.\) So it is a spanning tree 
-\end{proof}
-
-\section{Characterizing Bipartite Graphs}
-\begin{center}
-\includegraphics[scale=0.5]{12}
-\end{center}
-G is bipartite \(\iff\) V(G) can be coloured using 2 colours so that no 2 adjacent vertices have the same color
-
-\begin{exblock}{Observations}
+Induction on \(M = \mid E\mid\)
 \begin{itemize}
-\item A graph that contains a cycle of off length (odd cycle) as a sub graph is \textbf{not bipartite}.
-\item Trees are bipartite
+\item Base : m = 1 :  \(2 - 1 + 1 = 2\)
+\item IH : Suppose all planar embedding of graphs with m-2 edges satisfy Euler's Formula. 
+\item IS : Consider a planar embedding of a connected graph \(G = (V, E)\) and with m edges 
+\begin{itemize}
+\item Case 1 : G is a tree \(\mid V \mid - \mid E \mid + \mid F \mid = 2\)
+\item Case 2 : G is not a tree. Then G has a cycle C. Pick \(e \in E(C)\). \\
+Consider \(G -e\) and Let \(f_1\) and \(f_e\) be the faces incident to e in G. \\
+
+After e is removed \(f_1\) and \(f_e\) merge into one face \(f\) and the rest stay in the same place. Let \(F^\prime\) be the set of faces in the embedding of \(G-e\). Since \(G - e\) is planar embedding connected and has \(m -1\) edges, By IH $$\mid V \mid - \mid E \mid + \mid F \mid = 
+\mid V(G-e) \mid  - ( \mid E(G -e) \mid + 1) + (\mid F^\prime \mid + 1) = \mid V(G-e) \mid  - \mid E(G -e) \mid + \mid F^\prime \mid = 2$$
 \end{itemize}
-\end{exblock}
-
-\begin{theorem}
-A graph is bipartite if and only if it has no odd cycles as a sub-graph 
-\end{theorem}
-\newpage
-\begin{proof}
-\begin{itemize}
-\item[\(\rightarrow\)] Use previous observations
-\item[\(\leftarrow\)] Suppose G has no odd cycles. Assume that G is connect (or we treat components separately). \\
-Let T be a spanning tree of G and Let \(A \cup V = V(T)\) be a bipartition of T. \\ \newline 
-We claim that \(A \cup B\) is also a bipartition of G. Suppose not, then there exists \(e = uv \in E(G) \bs E(T)\) where u and v both belong to A or B. \\ \newline 
-Let \(u,v \in A\) and Let P be the uv-path in T.\\
-Length(P) is even because \(u,v \in A \implies p+e\) is an odd cycle. \textbf{Contradiction}  
 \end{itemize}
 \end{proof}
 
-\section{Breadth-First Search Trees (BFS)}
+\begin{ablock}{Remark}
+If G is not connected, \(\mid V \mid - \mid E \mid + \mid F \mid = 1 + C\) where C is the number of components
+\end{ablock}
 
-\begin{definition}
-A queue is an ordered list 
-$$ Q : q_1, q_2, q_3, \ldots, q_n $$
-where every new element added to Q is added at the end. The first element in Q is the \textbf{active element}
-\end{definition}
+\section{Non-Planar Graphs}
+\begin{theorem}
+Let \(\ell\) be the smallest degree of a face in a planar embedding of a graph \(G = (V, E)\). Then \(\mid E \mid \leq  \frac{\ell}{\ell - 2} (\mid V \mid - 2 ) \)
+\end{theorem}
 
-\subsection*{BFS Algorithm}
+\begin{proof}
+Let F be the faces. \\
 \begin{itemize}
-\item[\textbf{Input:}] Graph G and \(r \in V(G)\)
-\item[\textbf{Output:}] Spanning Tree T or that G is not connected
-\item[\textbf{Process:}]
-\begin{enumerate}
-\item Initialization \\
-\(T = (\{r\}, \phi)\)  r = vertices and \(\phi\) = edges\\
-\(P:V(G) \rightarrow V(G) \cup \{null\} \)\\
-\(P(v) \rightarrow null \)\\
-\(Q = r\)
-\item Operations
-\begin{lstlisting}
-While Q != phi 
-	Let u be the active vertex in Q
-	While u has a neighbour not in V(T) 
-		Add v and uv to T 
-		Let P(v) = u
-		Add v to Q 
-	Remove u from Q
-\end{lstlisting}
-\item Output (T,P)
-\end{enumerate}
+\item Faceshaking : \(2 \mid E \mid = \sum_{f \in F} deg(f) \geq \sum_{f \in F} \ell = \mid F \mid \cdot \ell\)
+\item Euler's Formula : \(\mid V \mid - \mid E \mid + \mid F \mid = 2 \implies \mid F \mid = 2 + \mid E \mid - \mid V \mid \)
 \end{itemize}
+So, \(2 \mid E \mid \geq \mid F \mid \cdot \ell = \ell \cdot (2 + \mid E \mid - \mid V \mid ) \implies \ell (\mid V \mid - 2) \geq (\ell - 2) \mid E\mid \implies \mid E \mid \leq \frac{\ell}{\ell - 2} ( \mid V \mid  - 2) \)
+\end{proof}
 
 \end{document} 

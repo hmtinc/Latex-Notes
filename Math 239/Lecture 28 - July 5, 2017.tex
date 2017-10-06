@@ -21,8 +21,6 @@
 \usepackage{scrextend}
 \tcbuselibrary{skins,breakable}
 \usetikzlibrary{shadings,shadows}
-\usepackage{graphicx}
-\graphicspath{ {images/} }
 \newcounter{lecnum}
 \renewcommand{\thepage}{\thelecnum-\arabic{page}}
 \renewcommand{\thesection}{\thelecnum.\arabic{section}}
@@ -170,84 +168,54 @@
 %Start
 \begin{document}
 
-\lecture{24}{June 23rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
-\begin{center}
-\textcolor{red}{Missed This Lecture, Notes Taken By Xyan Bhatnagar}
-\end{center}
-\begin{theorem}
-If T is a spanning tree of G and \(e \in E(G) \bs E(T) \) then T + e has a unique cycle c. Moreover for every \(e^\prime \in E(C) \bs \{e\}, T^\prime : = (T + e) - e^\prime \) is a spanning tree 
-\end{theorem}
+\lecture{28}{July 5th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
 
-\textbf{Notation : \(T + e = (V(T), E(T) \cup \{e\})\)}
+\section{BFS Properties}
+Let (T,p) be a BFS tree with roots and let Level u be the vertices x such that the xr-path in T has length i.
+\begin{enumerate}
+\item G is connected \(\iff\) V(T) = V(G)
+\item P is a shortest xr-path in G 
+\item G has an odd cycle \(\iff\) exists \(x y \in E(G) \bs E(T)\) with level(x)=level(y)
+\end{enumerate}
 
-\begin{proof}
-Let e = xy and Let P be a unique xy-path in T.\\ As every cycle in \(T + e\) contains e. 
-\(C = P + e\) is the unique cycle in \(T + e\) \\
-\newline 
-Let \(e^\prime \in E(P) \subseteq E(C)\). As \(e^\prime\) is not a bridge in \(T + e\). Then \(T^\prime = (T+e) - e^\prime \) is connected 
-$$ \mid E(T^\prime) \mid = \mid E(T) \mid = \mid V(T) \mid - 1 = \mid V(T^\prime) \mid -1 $$
-By previous theorem, \(T^\prime\) is a tree and \(\mid V(T^\prime) \mid = \mid V(T) \mid = \mid V(G) \mid.\) So it is a spanning tree 
-\end{proof}
-
-\section{Characterizing Bipartite Graphs}
-\begin{center}
-\includegraphics[scale=0.5]{12}
-\end{center}
-G is bipartite \(\iff\) V(G) can be coloured using 2 colours so that no 2 adjacent vertices have the same color
-
-\begin{exblock}{Observations}
-\begin{itemize}
-\item A graph that contains a cycle of off length (odd cycle) as a sub graph is \textbf{not bipartite}.
-\item Trees are bipartite
-\end{itemize}
-\end{exblock}
-
-\begin{theorem}
-A graph is bipartite if and only if it has no odd cycles as a sub-graph 
-\end{theorem}
-\newpage
-\begin{proof}
-\begin{itemize}
-\item[\(\rightarrow\)] Use previous observations
-\item[\(\leftarrow\)] Suppose G has no odd cycles. Assume that G is connect (or we treat components separately). \\
-Let T be a spanning tree of G and Let \(A \cup V = V(T)\) be a bipartition of T. \\ \newline 
-We claim that \(A \cup B\) is also a bipartition of G. Suppose not, then there exists \(e = uv \in E(G) \bs E(T)\) where u and v both belong to A or B. \\ \newline 
-Let \(u,v \in A\) and Let P be the uv-path in T.\\
-Length(P) is even because \(u,v \in A \implies p+e\) is an odd cycle. \textbf{Contradiction}  
-\end{itemize}
-\end{proof}
-
-\section{Breadth-First Search Trees (BFS)}
+\section{Planar Graphs}
 
 \begin{definition}
-A queue is an ordered list 
-$$ Q : q_1, q_2, q_3, \ldots, q_n $$
-where every new element added to Q is added at the end. The first element in Q is the \textbf{active element}
+A graph is \textbf{Planar} if it has a drawing in the plane in which every two edges intersect only at their ends.
+
+Any such drawings (without crossings) is a planar embedding
 \end{definition}
 
-\subsection*{BFS Algorithm}
-\begin{itemize}
-\item[\textbf{Input:}] Graph G and \(r \in V(G)\)
-\item[\textbf{Output:}] Spanning Tree T or that G is not connected
-\item[\textbf{Process:}]
-\begin{enumerate}
-\item Initialization \\
-\(T = (\{r\}, \phi)\)  r = vertices and \(\phi\) = edges\\
-\(P:V(G) \rightarrow V(G) \cup \{null\} \)\\
-\(P(v) \rightarrow null \)\\
-\(Q = r\)
-\item Operations
-\begin{lstlisting}
-While Q != phi 
-	Let u be the active vertex in Q
-	While u has a neighbour not in V(T) 
-		Add v and uv to T 
-		Let P(v) = u
-		Add v to Q 
-	Remove u from Q
-\end{lstlisting}
-\item Output (T,P)
-\end{enumerate}
-\end{itemize}
+\begin{definition}
+A \textbf{face} is a region of a drawing
+\end{definition}
+
+
+\begin{definition}
+Given a face of a planar embedding, a \textbf{Boundary walk}.
+\(W_f = v_0, e_1v_1, \ldots, v_{n-1}e_n v_n\) is obtained by following the perimeter of a boundary of f.
+\end{definition}
+
+\textbf{Note : } The degree of f (denoted deg(f)) is the length of f. 
+
+\begin{lemma}
+\textbf{Faceshaking Lemma :} Let F be the set of faces in a planar embedding of a connected graph. Then, 
+$$\sum_{f \in F} deg(f) = 2 \mid E(G) \mid $$
+\end{lemma}
+
+\begin{proof}
+Each edge e has two sides (left and right side) 
+
+\begin{exblock}{Fact}
+Both sides of an edge e belong to the same face \(\iff\) e is a bridge
+\end{exblock}
+
+
+If both sides of e are on the same face, e contributes in 2 to the degree of such face\\
+If the sides are on distinct faces, then e contributes in 1 to the degree of these faces.
+
+Then, \(\sum deg(f) = 2 \mid E(G) \mid \)
+
+\end{proof}
 
 \end{document} 

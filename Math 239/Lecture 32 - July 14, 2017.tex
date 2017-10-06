@@ -21,8 +21,6 @@
 \usepackage{scrextend}
 \tcbuselibrary{skins,breakable}
 \usetikzlibrary{shadings,shadows}
-\usepackage{graphicx}
-\graphicspath{ {images/} }
 \newcounter{lecnum}
 \renewcommand{\thepage}{\thelecnum-\arabic{page}}
 \renewcommand{\thesection}{\thelecnum.\arabic{section}}
@@ -170,84 +168,44 @@
 %Start
 \begin{document}
 
-\lecture{24}{June 23rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
-\begin{center}
-\textcolor{red}{Missed This Lecture, Notes Taken By Xyan Bhatnagar}
-\end{center}
-\begin{theorem}
-If T is a spanning tree of G and \(e \in E(G) \bs E(T) \) then T + e has a unique cycle c. Moreover for every \(e^\prime \in E(C) \bs \{e\}, T^\prime : = (T + e) - e^\prime \) is a spanning tree 
-\end{theorem}
+\lecture{32}{July 14th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
 
-\textbf{Notation : \(T + e = (V(T), E(T) \cup \{e\})\)}
+\begin{lemma}
+If a matching M has an augmenting path, then M is not maximum
+\end{lemma}
 
-\begin{proof}
-Let e = xy and Let P be a unique xy-path in T.\\ As every cycle in \(T + e\) contains e. 
-\(C = P + e\) is the unique cycle in \(T + e\) \\
-\newline 
-Let \(e^\prime \in E(P) \subseteq E(C)\). As \(e^\prime\) is not a bridge in \(T + e\). Then \(T^\prime = (T+e) - e^\prime \) is connected 
-$$ \mid E(T^\prime) \mid = \mid E(T) \mid = \mid V(T) \mid - 1 = \mid V(T^\prime) \mid -1 $$
-By previous theorem, \(T^\prime\) is a tree and \(\mid V(T^\prime) \mid = \mid V(T) \mid = \mid V(G) \mid.\) So it is a spanning tree 
-\end{proof}
+\textbf{Note :} Given M and an augmenting path P, the notation for swapping edges of P is 
+$$ M^\prime = M \triangle E(P) $$
 
-\section{Characterizing Bipartite Graphs}
-\begin{center}
-\includegraphics[scale=0.5]{12}
-\end{center}
-G is bipartite \(\iff\) V(G) can be coloured using 2 colours so that no 2 adjacent vertices have the same color
-
-\begin{exblock}{Observations}
-\begin{itemize}
-\item A graph that contains a cycle of off length (odd cycle) as a sub graph is \textbf{not bipartite}.
-\item Trees are bipartite
-\end{itemize}
-\end{exblock}
-
-\begin{theorem}
-A graph is bipartite if and only if it has no odd cycles as a sub-graph 
-\end{theorem}
-\newpage
-\begin{proof}
-\begin{itemize}
-\item[\(\rightarrow\)] Use previous observations
-\item[\(\leftarrow\)] Suppose G has no odd cycles. Assume that G is connect (or we treat components separately). \\
-Let T be a spanning tree of G and Let \(A \cup V = V(T)\) be a bipartition of T. \\ \newline 
-We claim that \(A \cup B\) is also a bipartition of G. Suppose not, then there exists \(e = uv \in E(G) \bs E(T)\) where u and v both belong to A or B. \\ \newline 
-Let \(u,v \in A\) and Let P be the uv-path in T.\\
-Length(P) is even because \(u,v \in A \implies p+e\) is an odd cycle. \textbf{Contradiction}  
-\end{itemize}
-\end{proof}
-
-\section{Breadth-First Search Trees (BFS)}
-
+\section{Covers}
 \begin{definition}
-A queue is an ordered list 
-$$ Q : q_1, q_2, q_3, \ldots, q_n $$
-where every new element added to Q is added at the end. The first element in Q is the \textbf{active element}
+A \textbf{cover} is a set C of vertices such that every edge is incident with atleast one vertex in C.  
 \end{definition}
 
-\subsection*{BFS Algorithm}
+\begin{definition}
+A cover C is \textbf{minimum} if for every other cover \(C^\prime\), \(\mid C \mid \leq \mid C^\prime \mid \)
+\end{definition}
+
+\begin{lemma}
+If M is a matching and C is a cover of G, then 
+$$ \mid M \mid \leq \mid C \mid $$ 
+\end{lemma}
+
+\begin{proof}
 \begin{itemize}
-\item[\textbf{Input:}] Graph G and \(r \in V(G)\)
-\item[\textbf{Output:}] Spanning Tree T or that G is not connected
-\item[\textbf{Process:}]
-\begin{enumerate}
-\item Initialization \\
-\(T = (\{r\}, \phi)\)  r = vertices and \(\phi\) = edges\\
-\(P:V(G) \rightarrow V(G) \cup \{null\} \)\\
-\(P(v) \rightarrow null \)\\
-\(Q = r\)
-\item Operations
-\begin{lstlisting}
-While Q != phi 
-	Let u be the active vertex in Q
-	While u has a neighbour not in V(T) 
-		Add v and uv to T 
-		Let P(v) = u
-		Add v to Q 
-	Remove u from Q
-\end{lstlisting}
-\item Output (T,P)
-\end{enumerate}
+\item Since C is a cover, every edge \(m \in M \) has at least one end \(Vm \in C\).
+\item Since  M is a matching \(Vm neq Vm^\prime\) for \(m, m^\prime \in M (m \neq m^\prime\)
 \end{itemize}
+Combining these two observations we find that 
+$$ \mid M \mid \leq \mid C \mid$$
+\end{proof}
+\section{Konig's Theorem}
+\begin{theorem}
+In  a bipartite graph, if M is a max matching and C is a min cover then
+$$ \mid M \mid = \mid C \mid $$
+\end{theorem}
+
+We will prove this theorem, using an algorithm that terminates with a max matching M and a min cover C. \\
+
 
 \end{document} 

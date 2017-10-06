@@ -170,84 +170,34 @@
 %Start
 \begin{document}
 
-\lecture{24}{June 23rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
-\begin{center}
-\textcolor{red}{Missed This Lecture, Notes Taken By Xyan Bhatnagar}
-\end{center}
-\begin{theorem}
-If T is a spanning tree of G and \(e \in E(G) \bs E(T) \) then T + e has a unique cycle c. Moreover for every \(e^\prime \in E(C) \bs \{e\}, T^\prime : = (T + e) - e^\prime \) is a spanning tree 
-\end{theorem}
+\lecture{30}{July 10th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
 
-\textbf{Notation : \(T + e = (V(T), E(T) \cup \{e\})\)}
+\textbf{Goal : } Prove 5-Colour Theorem
 
-\begin{proof}
-Let e = xy and Let P be a unique xy-path in T.\\ As every cycle in \(T + e\) contains e. 
-\(C = P + e\) is the unique cycle in \(T + e\) \\
-\newline 
-Let \(e^\prime \in E(P) \subseteq E(C)\). As \(e^\prime\) is not a bridge in \(T + e\). Then \(T^\prime = (T+e) - e^\prime \) is connected 
-$$ \mid E(T^\prime) \mid = \mid E(T) \mid = \mid V(T) \mid - 1 = \mid V(T^\prime) \mid -1 $$
-By previous theorem, \(T^\prime\) is a tree and \(\mid V(T^\prime) \mid = \mid V(T) \mid = \mid V(G) \mid.\) So it is a spanning tree 
-\end{proof}
-
-\section{Characterizing Bipartite Graphs}
-\begin{center}
-\includegraphics[scale=0.5]{12}
-\end{center}
-G is bipartite \(\iff\) V(G) can be coloured using 2 colours so that no 2 adjacent vertices have the same color
-
-\begin{exblock}{Observations}
-\begin{itemize}
-\item A graph that contains a cycle of off length (odd cycle) as a sub graph is \textbf{not bipartite}.
-\item Trees are bipartite
-\end{itemize}
-\end{exblock}
-
-\begin{theorem}
-A graph is bipartite if and only if it has no odd cycles as a sub-graph 
-\end{theorem}
-\newpage
-\begin{proof}
-\begin{itemize}
-\item[\(\rightarrow\)] Use previous observations
-\item[\(\leftarrow\)] Suppose G has no odd cycles. Assume that G is connect (or we treat components separately). \\
-Let T be a spanning tree of G and Let \(A \cup V = V(T)\) be a bipartition of T. \\ \newline 
-We claim that \(A \cup B\) is also a bipartition of G. Suppose not, then there exists \(e = uv \in E(G) \bs E(T)\) where u and v both belong to A or B. \\ \newline 
-Let \(u,v \in A\) and Let P be the uv-path in T.\\
-Length(P) is even because \(u,v \in A \implies p+e\) is an odd cycle. \textbf{Contradiction}  
-\end{itemize}
-\end{proof}
-
-\section{Breadth-First Search Trees (BFS)}
+\textbf{Observation 1 : } If we consider a k-colouring of G and permute the colours, then such new colouring is a k-colouring of G.
 
 \begin{definition}
-A queue is an ordered list 
-$$ Q : q_1, q_2, q_3, \ldots, q_n $$
-where every new element added to Q is added at the end. The first element in Q is the \textbf{active element}
+Let G be a k-coloured graph using colours in 6. For \(t, j \in 6 , (i \neq j)\), the subgraph \(G(i,j)\) consists of all vertices in G that are coloured i or j, and all the edges that have ends coloured i and j
 \end{definition}
 
-\subsection*{BFS Algorithm}
-\begin{itemize}
-\item[\textbf{Input:}] Graph G and \(r \in V(G)\)
-\item[\textbf{Output:}] Spanning Tree T or that G is not connected
-\item[\textbf{Process:}]
+\textbf{Observation 2 : } Let G be a k-coloured graph using colours in \(\zeta\). Suppose u, v are vertices coloured i and j, respectively \( i \neq j\). If u and v are on different components of \(G(i, j)\), then there exists a k-colouring of G for which u and v have coloured t. 
 \begin{enumerate}
-\item Initialization \\
-\(T = (\{r\}, \phi)\)  r = vertices and \(\phi\) = edges\\
-\(P:V(G) \rightarrow V(G) \cup \{null\} \)\\
-\(P(v) \rightarrow null \)\\
-\(Q = r\)
-\item Operations
-\begin{lstlisting}
-While Q != phi 
-	Let u be the active vertex in Q
-	While u has a neighbour not in V(T) 
-		Add v and uv to T 
-		Let P(v) = u
-		Add v to Q 
-	Remove u from Q
-\end{lstlisting}
-\item Output (T,P)
+\item Consider a k-colouring of G
+\item Look at \(G(i,j)\)
+\item Swap colours in component containing v
+\item Restore other colours / vertices of G
 \end{enumerate}
-\end{itemize}
 
+\begin{theorem}
+\textbf{5-colour Theorem : } Every planar graph is 5-colourable
+\end{theorem}
+
+\begin{proof}
+\begin{itemize}
+\item[\textbf{Base :}] 0  vertices
+\item[\textbf{I.H. :}] Every planar graph with at most n-1 vertices has  a 5-colouring using \(\zeta = \langle 1, \ldots, 6\rangle\)
+\item[\textbf{I.C. :}] Let G be a planar graph with n vertices and let v be a vertex of degree of at most 5. Consider a 5-colouring of \(G-v\). We may assume that \(deg(v) = 5\) and that the 5 colours are used to colour the neighbours of v (otherwise, we are down). \\
+By permuting colours (if necessary), we may assume that colours 1, 2,3,4,5 occurs in a cyclic order at \(v_j\) in this planar embedding of G. Label neighbours of v as \(u_1, u_2, u_3, u_4, u_4\) where \(u_i\) is coloured i 
+\end{itemize}
+\end{proof}
 \end{document} 

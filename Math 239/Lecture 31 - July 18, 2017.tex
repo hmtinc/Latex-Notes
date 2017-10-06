@@ -21,8 +21,6 @@
 \usepackage{scrextend}
 \tcbuselibrary{skins,breakable}
 \usetikzlibrary{shadings,shadows}
-\usepackage{graphicx}
-\graphicspath{ {images/} }
 \newcounter{lecnum}
 \renewcommand{\thepage}{\thelecnum-\arabic{page}}
 \renewcommand{\thesection}{\thelecnum.\arabic{section}}
@@ -170,84 +168,44 @@
 %Start
 \begin{document}
 
-\lecture{24}{June 23rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
-\begin{center}
-\textcolor{red}{Missed This Lecture, Notes Taken By Xyan Bhatnagar}
-\end{center}
-\begin{theorem}
-If T is a spanning tree of G and \(e \in E(G) \bs E(T) \) then T + e has a unique cycle c. Moreover for every \(e^\prime \in E(C) \bs \{e\}, T^\prime : = (T + e) - e^\prime \) is a spanning tree 
-\end{theorem}
+\lecture{31}{July 12th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
 
-\textbf{Notation : \(T + e = (V(T), E(T) \cup \{e\})\)}
-
-\begin{proof}
-Let e = xy and Let P be a unique xy-path in T.\\ As every cycle in \(T + e\) contains e. 
-\(C = P + e\) is the unique cycle in \(T + e\) \\
-\newline 
-Let \(e^\prime \in E(P) \subseteq E(C)\). As \(e^\prime\) is not a bridge in \(T + e\). Then \(T^\prime = (T+e) - e^\prime \) is connected 
-$$ \mid E(T^\prime) \mid = \mid E(T) \mid = \mid V(T) \mid - 1 = \mid V(T^\prime) \mid -1 $$
-By previous theorem, \(T^\prime\) is a tree and \(\mid V(T^\prime) \mid = \mid V(T) \mid = \mid V(G) \mid.\) So it is a spanning tree 
-\end{proof}
-
-\section{Characterizing Bipartite Graphs}
-\begin{center}
-\includegraphics[scale=0.5]{12}
-\end{center}
-G is bipartite \(\iff\) V(G) can be coloured using 2 colours so that no 2 adjacent vertices have the same color
-
-\begin{exblock}{Observations}
-\begin{itemize}
-\item A graph that contains a cycle of off length (odd cycle) as a sub graph is \textbf{not bipartite}.
-\item Trees are bipartite
-\end{itemize}
-\end{exblock}
-
-\begin{theorem}
-A graph is bipartite if and only if it has no odd cycles as a sub-graph 
-\end{theorem}
-\newpage
-\begin{proof}
-\begin{itemize}
-\item[\(\rightarrow\)] Use previous observations
-\item[\(\leftarrow\)] Suppose G has no odd cycles. Assume that G is connect (or we treat components separately). \\
-Let T be a spanning tree of G and Let \(A \cup V = V(T)\) be a bipartition of T. \\ \newline 
-We claim that \(A \cup B\) is also a bipartition of G. Suppose not, then there exists \(e = uv \in E(G) \bs E(T)\) where u and v both belong to A or B. \\ \newline 
-Let \(u,v \in A\) and Let P be the uv-path in T.\\
-Length(P) is even because \(u,v \in A \implies p+e\) is an odd cycle. \textbf{Contradiction}  
-\end{itemize}
-\end{proof}
-
-\section{Breadth-First Search Trees (BFS)}
+\section{Matchings}
+Image goes here 
 
 \begin{definition}
-A queue is an ordered list 
-$$ Q : q_1, q_2, q_3, \ldots, q_n $$
-where every new element added to Q is added at the end. The first element in Q is the \textbf{active element}
+Given a graph G a matching is  set M of edges of G such that every vertex in G is incident to at most one edge in M
 \end{definition}
 
-\subsection*{BFS Algorithm}
-\begin{itemize}
-\item[\textbf{Input:}] Graph G and \(r \in V(G)\)
-\item[\textbf{Output:}] Spanning Tree T or that G is not connected
-\item[\textbf{Process:}]
+\begin{definition}
+Let M be a matching of G 
 \begin{enumerate}
-\item Initialization \\
-\(T = (\{r\}, \phi)\)  r = vertices and \(\phi\) = edges\\
-\(P:V(G) \rightarrow V(G) \cup \{null\} \)\\
-\(P(v) \rightarrow null \)\\
-\(Q = r\)
-\item Operations
-\begin{lstlisting}
-While Q != phi 
-	Let u be the active vertex in Q
-	While u has a neighbour not in V(T) 
-		Add v and uv to T 
-		Let P(v) = u
-		Add v to Q 
-	Remove u from Q
-\end{lstlisting}
-\item Output (T,P)
+\item M is \textbf{Maximum} if every other matching \(M^\prime\) has \(\mid M^\prime \mid \in \mid M \mid \)\\
+(\textcolor{red}{Red edges} form a maximum matching in \(G_1\) and \(G_2\) but not in \(G_3\))
+\item A matching is \textbf{perfect} if \(\mid M \mid = \frac{1}{2} \mid V(G) \mid \)\\
+(\textcolor{red}{Red edges} form a perfect matching just for \(G_1\))
+\item A vertex \(v \in V(G)\) is \textbf{saturated} by M if it is incident to an edge in M. 
 \end{enumerate}
+\end{definition}
+
+\section{Augmenting paths}
+\textbf{Goal:} Given a graph, find a maximum matching. 
+
+\begin{itemize}
+\item How to tell that a matching is not maximum? \textcolor{red}{Use Augmenting paths} 
+\item How to tell a graph is not connected? \textcolor{red}{There exists a cut}
+\item How to tell a graph is bipartite? \textcolor{red}{Check for Odd cycles}
+\item How to tell that a matching is not planar \textcolor{red}{Check for \(K_{3,3}\) or \(K_5\) subdivisions}
 \end{itemize}
+
+\begin{definition}
+Given a graph G and a matching M a path P is \textbf{alternating} if when we traverse \(P\), the edges alternate between \(M\) and \(E(G) \bs M\)
+
+
+If in addition the ends of \(P\) are unsaturated, then \(P\) is \textbf{Augmenting}
+\end{definition}
+
+
+
 
 \end{document} 

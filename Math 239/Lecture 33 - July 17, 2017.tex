@@ -21,8 +21,6 @@
 \usepackage{scrextend}
 \tcbuselibrary{skins,breakable}
 \usetikzlibrary{shadings,shadows}
-\usepackage{graphicx}
-\graphicspath{ {images/} }
 \newcounter{lecnum}
 \renewcommand{\thepage}{\thelecnum-\arabic{page}}
 \renewcommand{\thesection}{\thelecnum.\arabic{section}}
@@ -170,84 +168,45 @@
 %Start
 \begin{document}
 
-\lecture{24}{June 23rd, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
-\begin{center}
-\textcolor{red}{Missed This Lecture, Notes Taken By Xyan Bhatnagar}
-\end{center}
-\begin{theorem}
-If T is a spanning tree of G and \(e \in E(G) \bs E(T) \) then T + e has a unique cycle c. Moreover for every \(e^\prime \in E(C) \bs \{e\}, T^\prime : = (T + e) - e^\prime \) is a spanning tree 
-\end{theorem}
-
-\textbf{Notation : \(T + e = (V(T), E(T) \cup \{e\})\)}
-
-\begin{proof}
-Let e = xy and Let P be a unique xy-path in T.\\ As every cycle in \(T + e\) contains e. 
-\(C = P + e\) is the unique cycle in \(T + e\) \\
-\newline 
-Let \(e^\prime \in E(P) \subseteq E(C)\). As \(e^\prime\) is not a bridge in \(T + e\). Then \(T^\prime = (T+e) - e^\prime \) is connected 
-$$ \mid E(T^\prime) \mid = \mid E(T) \mid = \mid V(T) \mid - 1 = \mid V(T^\prime) \mid -1 $$
-By previous theorem, \(T^\prime\) is a tree and \(\mid V(T^\prime) \mid = \mid V(T) \mid = \mid V(G) \mid.\) So it is a spanning tree 
-\end{proof}
-
-\section{Characterizing Bipartite Graphs}
-\begin{center}
-\includegraphics[scale=0.5]{12}
-\end{center}
-G is bipartite \(\iff\) V(G) can be coloured using 2 colours so that no 2 adjacent vertices have the same color
-
-\begin{exblock}{Observations}
-\begin{itemize}
-\item A graph that contains a cycle of off length (odd cycle) as a sub graph is \textbf{not bipartite}.
-\item Trees are bipartite
-\end{itemize}
-\end{exblock}
-
-\begin{theorem}
-A graph is bipartite if and only if it has no odd cycles as a sub-graph 
-\end{theorem}
-\newpage
-\begin{proof}
-\begin{itemize}
-\item[\(\rightarrow\)] Use previous observations
-\item[\(\leftarrow\)] Suppose G has no odd cycles. Assume that G is connect (or we treat components separately). \\
-Let T be a spanning tree of G and Let \(A \cup V = V(T)\) be a bipartition of T. \\ \newline 
-We claim that \(A \cup B\) is also a bipartition of G. Suppose not, then there exists \(e = uv \in E(G) \bs E(T)\) where u and v both belong to A or B. \\ \newline 
-Let \(u,v \in A\) and Let P be the uv-path in T.\\
-Length(P) is even because \(u,v \in A \implies p+e\) is an odd cycle. \textbf{Contradiction}  
-\end{itemize}
-\end{proof}
-
-\section{Breadth-First Search Trees (BFS)}
+\lecture{33}{July 17th, 2017}{Alan Arroyo Guevara}{Harsh Mistry}
 
 \begin{definition}
-A queue is an ordered list 
-$$ Q : q_1, q_2, q_3, \ldots, q_n $$
-where every new element added to Q is added at the end. The first element in Q is the \textbf{active element}
+Consider a matching M. Given a unsaturated vertex \(a \in A\) and \(x \in A \cup B \), then x is \textbf{M-Reachable} or just \textbf{Reachable} from \(a\), if there is a alternating path connecting \(a\) to \(x\)
 \end{definition}
 
-\subsection*{BFS Algorithm}
+\textbf{Notation:}
 \begin{itemize}
-\item[\textbf{Input:}] Graph G and \(r \in V(G)\)
-\item[\textbf{Output:}] Spanning Tree T or that G is not connected
-\item[\textbf{Process:}]
-\begin{enumerate}
-\item Initialization \\
-\(T = (\{r\}, \phi)\)  r = vertices and \(\phi\) = edges\\
-\(P:V(G) \rightarrow V(G) \cup \{null\} \)\\
-\(P(v) \rightarrow null \)\\
-\(Q = r\)
-\item Operations
-\begin{lstlisting}
-While Q != phi 
-	Let u be the active vertex in Q
-	While u has a neighbour not in V(T) 
-		Add v and uv to T 
-		Let P(v) = u
-		Add v to Q 
-	Remove u from Q
-\end{lstlisting}
-\item Output (T,P)
-\end{enumerate}
+\item \(x_o\) = vertices in A that are unsaturated
+\item \(x\) = vertices in A that are M-Reachable for some \(a \in x_o\)
+\item y = vertices in B that are M-Reachable for some \(a \in x_o\)
 \end{itemize}
 
+\section{Algorithm For Finding M-Reachable Vertices}
+\textbf{Input} : Bipartite \(g\) and matching \(M\)
+\textbf{Output} : \(X, Y\) and for every \(v \in X \cup Y\) an alternating path \(P_x\)
+
+\textbf{Initialize:} \(x_0 \leftarrow \emptyset\) and \(P_v \leftarrow \emptyset\)
+\textbf{Input} : Bipartite \(g\) and matching \(M\)\\
+\textbf{Output} : \(X, Y\) and for every \(v \in X \cup Y\) an alternating path \(P_x\)
+
+\textbf{Initialize:} \(x_0 \leftarrow \emptyset\) and \(P_v \leftarrow \emptyset\)
+
+
+\begin{itemize}
+\item For each unsaturated \(v_0 \in A\)
+\begin{itemize}
+\item \(x_0 \leftarrow x_0 \cup \{ V_0\}\)
+\item \(P_x \leftarrow V_0\)
+\end{itemize}
+\item For \(i  = 1, 2, 3, \ldots\)
+\begin{itemize}
+\item For each vertex \(v_i \in \cup X_j \) for which \(\exists V_{i-1} \in X_{i-1}\) 
+\begin{itemize}
+\item \(X_i \leftarrow X_i \cup \{V_i\}\)
+\item \(P_{vi} \leftarrow P_{vi -1}, V_i\)
+\end{itemize}
+\end{itemize}
+\item \(X \leftarrow X_0 \cup X_2 \cup X_4 \cup \ldots\)
+\item \(Y \leftarrow X_1 \cup X_3 \cup X_5 \cup \ldots \)
+\end{itemize}
 \end{document} 
