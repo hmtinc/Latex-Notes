@@ -1,0 +1,148 @@
+%Notes by Harsh Mistry 
+%Econ 301
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Econ 301 - Microeconomic Theory 2
+	\hfill Winter 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{1}{January 3, 2018}{Jean Guillaume Forand}{Harsh Mistry}
+
+\section{Admin Info}
+Jean Guillaume Forand – HH 131 \\
+Office Hours : Tuesday 3:30 – 5:00\\
+Midterm 1 (Jan 31st)  - 20 \% \\
+Midterm 2 - 20 \% \\
+Final - 50\% \\
+Assignments - 10 \%  \\
+
+\subsection{Topics}
+\begin{enumerate}
+\item Consumer Choice
+\item  General Equilibrium
+\item Welfare 
+\item Market Failure
+\begin{itemize}
+\item Externality
+\item Public goods
+\end{itemize}
+\end{enumerate}
+
+\section{Consumer Choice}
+\begin{itemize}
+\item Econ 201 with calculus
+\item basic model of economic theory 
+\end{itemize}
+
+Economics is the study pf decision-making in social environments
+
+\begin{itemize}
+	\item Classics : micro, macro
+	\item Also : Family economics, economics of crime, etc
+	\item Economists construct models : abstract representation   
+	\begin{itemize}
+		\item Build stylized version of reality (I.e market for cars) 
+		\item Deduct logically necessary features of the model (I.e what determines the price of cars) 
+		\item Test whether a models predictions are consistent with empirical evidence. 
+		\end{itemize}
+\item Economic models are mathematical 
+\end{itemize}
+
+\subsection{A unifying model of decision-making}
+\begin{enumerate}
+	 \item A \underline{decision-maker}
+      \item  Possible \underline{outcome} DM may face 
+	\item \underline{Actions} available to DM, which affect outcomes.
+\item \underline{Preferences} of DM over outcomes, which describe the motivations 
+\end{enumerate}
+
+Using Mathematics 
+\begin{enumerate}
+	 \item A \underline{decision-maker}
+	 \item A set \(X\) of \underline{outcome}
+	 \item a set of\underline{actions} on feasible choices \(B \subseteq X\)
+	 \item A function \(u : X \rightarrow \mathbb{R} \), which assigns numbers \(u(x)\) to each \(x \in X\), interpreted as DM's utuility from \(x\)
+\end{enumerate}
+
+\subsubsection{Solution (Optimal Choice)}
+Choices by DM that lead to outcomes that best with her preferences 
+Using mathematics, the optimal choice is \(x^\triangle
+ \in X\) which solves :  
+\[ max u(x)_{x \in X} \text{ s.t  } x \in B \]
+
+\end{document}
+
+
+
+
+
