@@ -1,0 +1,147 @@
+%Notes by Harsh Mistry 
+%CS 341
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 341 -  Algorithms
+	\hfill Winter 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{1}{January 4, 2018}{Bin Ma}{Harsh Mistry}
+
+\section{Admin Info}
+\begin{center}
+Bin Ma\\
+TA : Hong Zhou (h76zhou@uwaterloo.ca)
+\end{center}
+
+\subsection{Mark Breakdown}
+\begin{itemize}
+\item Assignments (30 \%)
+\item Midterm - February 27th (25 \%)
+\item Final (45 \%)
+\end{itemize}
+
+\section{Introduction}
+
+The goal of the course is to lean to design an algorithm. More specifically, you will learn 
+\begin{itemize}
+\item Well-known algorithms
+\item Skills to analyse complexities
+\item Skills to adapt existing solutions to new problems
+\item Skills to design new algorithms
+\end{itemize}
+
+ \textbf{What is a problem?} 
+
+\begin{itemize}
+\item A problem defines the format of input desired output
+\item For the purpose of this course, input size is not bounded
+\item A problem does not specify an algorithm
+\end{itemize}
+
+\textbf{What is an algorithm?}
+
+\begin{itemize}
+\item A defined an finite procedure that solves a problem : taking any input of the problem and produces the desired output.
+\end{itemize}
+
+\textbf{How to evaluate an algorithm?}
+\begin{itemize}
+\item Time and Space complexity
+\item Easiness of implementation
+\end{itemize}
+
+\subsection{Course contents}
+\begin{itemize}
+\item Algorithm analysis : correctness and time complexity
+\item Algorithm design techniques : 
+\begin{itemize}
+\item Reduction
+\item Recursion
+\item Divide-and-Conquer
+\item Greedy
+\item Dynamic programming
+\item Exhaustive search 
+\item local search (not studied in this course)
+\item Linear programming (not studied in this course)
+\end{itemize}
+\item Intractability : Not every problem has an efficient algorithm
+\item Undecidabiliy : Not every problem has an algorithm
+\end{itemize}
+
+\end{document}
+
+
+
+
+

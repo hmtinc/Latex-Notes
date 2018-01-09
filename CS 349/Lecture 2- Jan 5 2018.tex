@@ -1,0 +1,209 @@
+%Notes by Harsh Mistry 
+%CS 349
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 349 - User Interfaces
+	\hfill Winter 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{2}{January 5, 2018}{Keiko Katsuragawa}{Harsh Mistry}
+
+\section{History}
+\subsection{Interface v.s Interaction}
+\begin{itemize}
+\item Interface refers to what the system presents to the user
+\begin{itemize}
+\item Its what you can manipulate and what the system uses to present feedback
+\end{itemize}
+\item Interaction refers to the sequence of actions a person expresses and the corresponding system response
+\begin{itemize}
+\item it unfolds over time
+\end{itemize}
+\item Interaction requires an interface to occur
+\item To use an interface there must be interaction
+\end{itemize}
+
+\subsection{Major paradigms of interactions}
+\begin{itemize}
+\item Batch Interfaces (1945-1965)
+\begin{itemize}
+\item Interaction style
+\begin{itemize}
+\item Set of instructions prepared a priori, fed to computer via ounch cards, paper tape, and magnetic tape
+\item Response typically received via paper printout
+\item No real interaction possible as system executes instructions
+\item Responses received in hours/days
+\end{itemize}
+\item Users
+\begin{itemize}
+\item only uses by highly trained individuals
+\end{itemize}
+\end{itemize}
+\item Conversational Interfaces (1965 - 1985+) 
+\begin{itemize}
+\item Interaction style
+\begin{itemize}
+\item Users issues commands
+\item Feedback can be given during execution
+\item Commands need to be learned 
+\item Commands are hard to discover
+\end{itemize}
+\item Users
+\begin{itemize}
+\item Trained experts
+\end{itemize}
+\item Advantages 
+\begin{itemize}
+\item Highly flexible : Can combine commands to create sophisticated sets
+\end{itemize}
+\item Disadvantages
+\begin{itemize}
+\item Users need to the understand the computer 
+\item I/O is in the system language, not task language
+\item Requires \textbf{Recall} rather than \textbf{Recognition}
+\end{itemize}
+\item Consequences
+\begin{itemize}
+\item System in control during execution : user cannot refine execution/ make modifications during program execution
+\end{itemize}
+\end{itemize}
+
+\item Graphical interfaces 
+\begin{itemize}
+\item Interaction Style 
+\begin{itemize}
+\item User in control 
+\begin{itemize}
+\item system waits for input and then responds
+\end{itemize}
+\item Recognition over Recall
+\begin{itemize}
+\item enabled discovery of options and experimentation
+\end{itemize}
+\item Metaphors 
+\begin{itemize}
+\item make interaction language closer to users own language and the task domain
+\end{itemize}
+\item GUI Interaction opens interface up to broader audience
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsection{Visionaries who inspired advances}
+\begin{itemize}
+\item Vannevar Bush
+\begin{itemize}
+\item Headed Office of Scientific Research and Development
+\item Goal was to augment human intellect 
+\item Known for the memex, a device in which stores all forms of information and recall it on demand 
+\end{itemize}
+\item Douglas Engelbart
+\begin{itemize}
+\item Lead team at Stanford Research Institute 
+\item Invented the mouse 
+\item Implemented hypertext
+\item Introduced copy/paste
+\item His vision included computer supported collaborative work
+\end{itemize}
+\item Ivan Sutherland
+\begin{itemize}
+\item Known for the SketchPad (1963)
+\item Expanded computer domain to include artists, draftsmen, etc
+\item Helped language of interface move substantially closer to task domains
+\end{itemize}
+\item Alan Kay
+\begin{itemize}
+\item Pioneering work on 
+\begin{itemize}
+\item Object-oriented programming
+\item Xerox Star : Graphical user interfaces 
+\item Dynabook : conceptual basis for laptops and tablet computers
+\end{itemize}
+\item "The best way to predict the future is to invent it"
+\end{itemize}
+\end{itemize}
+
+\subsection{Modern and Future Interaction}
+\begin{itemize}
+\item Gesture interface
+\item Voice interface
+\item Augmented Reality 
+\item Virtual Reality 
+\end{itemize}
+
+\end{document}
+
+
+
+
+
