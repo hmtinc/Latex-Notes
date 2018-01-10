@@ -1,0 +1,123 @@
+%Notes by Harsh Mistry 
+%CS 341
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 341 -  Algorithms
+	\hfill Winter 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{2}{January 9, 2018}{Bin Ma}{Harsh Mistry}
+
+\section{Analysing Algorithms}
+
+\subsection{Model of Computation}
+Model of computation should be both realistic and abstarct. E.g. 
+\begin{itemize}
+\item Multiplication slower than addition.Too detailed. Too much distraction fromalgorithm design. In principle, we neglect the difference that causes the increase/reduction of running time by only a constant factor.
+\item For loop vs. a single arithmetic operation. Should consider. Running time difference affected by input size, more than a constant factor
+\end{itemize}
+
+\textbf{Word-Ram model} 
+\begin{enumerate}
+\item Each memory cell is a wordof some bitsthat can hold an integer value. 
+\item Random access of memory: accessinga word at the location specified by the value of another wordtakes constant time.
+\item Basic operations (arithmetic, shifting, logical, comparison) on words take constant time. 
+\item We further assume thatword is large enough to hold any integer value used in the input.
+\end{enumerate}
+The word-RAM model closely resemblesthe 32 or 64-bit computers, and is a good balance between reality and simplicity.
+
+\subsection{Worst Case and Asymptotic Analysis}
+\subsubsection{Asymptotical Worst-case Time Complexity }
+When we analyze the time complexity of an algorithm, we are looking for a simple function \(f(n)\), such that the running time of the algorithm for an input size n is \(O(f(n))\)
+
+\(O(f(n))\) is also called the asymptotic \textbf{Upper Bound} of the algorithm's running time. If for some constant c, we can find infinity number of instances such that the time complexity is at least \(c \times f(n) \), then we say that bounf \(O(f(n))\) is tight. 
+
+Speaking of the worst-case time complexity of an algorithm, it is conventional to write a tight upper bound on the running time \(O(f(n))\) as \(\Theta(f(n))\)
+
+\subsubsection{Average Case}
+Average case assumes a probabilistic distribution, and calculate the weighted average of the running time.
+
+This makes sense in some situations. E.g. Hash table. Also, if we know that many of the instances our sorting algorithm encounters are actually already sorted, then the earlier “Smart ”sort algorithm is actually a good idea. In fact, one of the practically used sorting algorithm, Tim Sort, makes use of the property that the array may have a lot of already sorted regions in practical examples.But in CS 340, if not otherwise specified, we always look for worst-case time complexity
+
+\subsection{Reduction}
+Reduction is a useful technique in algorithm design where if you already have algorithm for problem X, and you need design an algorithm for problem Y. Instead of designing a new algorithm, you design a strategy to convert an instance of \(I_Y\) of Y to an instance of \(I_X\) of X; then solve \(I_X\) with the algorithm for X; then you convert teh solution back. 
+
+In essence, reduction is the process of utilizing a given algorithm to solve a different problem by transforming the output or chaining algorithms. 
+
+
+\end{document}
+
+
+
+
+
