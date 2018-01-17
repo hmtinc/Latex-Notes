@@ -1,0 +1,126 @@
+%Notes by Harsh Mistry 
+%CS 341
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   \graphicspath{ {images/} }
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 341 -  Algorithms
+	\hfill Winter 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{4}{January 16, 2018}{Bin Ma}{Harsh Mistry}
+ \section{Recursion Continued}
+
+\subsection{Master Theorem}
+\[T(n) = \begin{cases}\Theta(n^c), \text{if } c  > \log_b a \\
+\Theta(n^c \cdot \log n), \text{ if } c = \log_b a \\
+\Theta(n^{\log_b a}) , \text{if } c < \log_b a 
+\end{cases}\]
+
+\begin{proof}
+Proof for case 1. 
+\begin{itemize}
+\item[\textbf{Base Case : }] Base case is when n is a small constant  where the theorem is obviously true 
+\item[\textbf{I.H. : }] \(T(n) \leq \gamma \cdot n^c\)
+\item[\textbf{I.S : }]
+\[\begin{aligned}
+T(n) & = a \cdot T (\frac{n}{b}) + n^c \\
+& \leq a \cdot \gamma \frac{n}{b}^x + n^c \\
+& = (\gamma \cdot a \cdot b^{-c} + 1) \cdot n^c
+\end{aligned}\]
+Let \(\gamma = \frac{1}{1 - \frac{n}{b^c}}\), it is esy to check that \[ (\gamma \cdot a \cdot b^{-c} + 1) \cdot n^c \leq \gamma n^c\]
+\end{itemize}
+\end{proof}
+
+\subsubsection{Modify Induction conclusion}
+\(T(n) \leq 2 T(\frac{n}{2}) + \sqrt{n} \). We guess \(T(n) = O(n)\). In induction, we have \(T(n) \leq 2c \cdot \frac{n}{2} + \sqrt{n} \leq c \cdot n + \sqrt{n}\)
+. This does not suffice to prove \(T(n) \leq c \cdot n\).
+
+This can be solved by proving a slightly modified property. We want to introduce some \(- \sqrt{n}\) in \(T(\frac{n}{2})\) in order to cancel out the \(\sqrt{n}\). Specifically, we will prove \(T(n) \leq c \cdot n - 3 \sqrt{n}\) for a sightly larger c. 
+
+This does not change our conclusion. However, during induction, we have 
+\[T(n) \leq 2T(\frac{n}{2}) + \sqrt{n} \leq 2\left(c \cdot \frac{n}{2} - 3 \sqrt{\frac{n}{2}} \right) + \sqrt{n} \leq cn - \left(\frac{6}{\sqrt{2}} - 1\right) \sqrt{n} \leq c \cdot n -  3\sqrt{n}\]
+
+\subsubsection{Variable Substitution}
+To solve \(T(n) = 2T(\sqrt{n}) + \log_2 n\). 
+
+Let \(S(m) = T(2^{m/2}) + m = 2S(\frac{m}{2} + m)\), then \(S(m) = m \log m \). Therefore, \(T(n) = S(\log_2 n) = \log_2 n \cdot log_2 n \cdot \log_2 \log_2 n)\)2. 
+
+\section{Divide and Conquer}
+The divide and conquer portion of class was all example. Refer to course slides or notes for additional examples
+
+\end{document}
+
+
+
+
+
