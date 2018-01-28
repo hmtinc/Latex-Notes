@@ -1,0 +1,125 @@
+%Notes by Harsh Mistry 
+%CS 341
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   \graphicspath{ {images/} }
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 341 -  Algorithms
+	\hfill Winter 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{7}{January 25, 2018}{Bin Ma}{Harsh Mistry}
+\section{Greedy Algorithms}
+
+ Greedy algorithm applies to a large class of problems. In general, the solution consists of a series of smaller choices. Since these smaller choices may conflict each other, they need to be optimized together. A brute-forth search will usually take exponential time. Instead, a greedy algorithm uses some simple (and usually heuristic) strategies to make these smaller choices one after another. Once a choice is made, it is committed and won’t change. This makes the algorithm very efficient. And one can almost always come up with an efficient greedy algorithm for a problem. However, the optimality of the solution is not always guaranteed. Only in certain cases, the right choice of the greedy strategy may lead to optimal solution of the original problem. And in most of these cases, the algorithm itself is easy. The proof of the optimality is not as easy.
+ 
+\subsection{Change Making}
+
+A coin system with coin denominations \(d_1 < d_2 < \ldots < d_n\). A target value \(V\). We want to find a list of coins that add up exactly to V.
+
+One strategy is to repeatedly use the largest coin value that is no greater than the residue target v
+
+\textbf{Algorithm :}
+\begin{itemize}
+\item for \(i\) from \(n\) to 1
+\begin{itemize}
+\item output \(\lfloor\frac{V}{d_i}\rfloor\)
+\item \(V \leftarrow V - \lfloor \frac{V}{d_i} \rfloor \cdot d_i \)
+\end{itemize}
+\end{itemize}
+
+If a coin system is such that the greedy algorithm produces the optimal solution, its called \textbf{canonical}.
+
+\begin{theorem}
+The coin system \(2^0, 2^1, \ldots, 2^n\) is canonical.
+\end{theorem}
+
+\begin{proof}
+We do induction on n. The theorem is correct for n = 0. Assume it is correct for \(n < n^\prime\). We prove it is also correct for \(n = n^\prime\)
+
+\begin{itemize}
+\item[Case 1 : ] If \(V < 2^n\), then the solution only uses \(2^0, 2^1, \ldots, 2^{n-1}\). The theorem is true by induction. 
+\item[Case 2 : ] if \(V \geq 2^n\), suppose the optimal solution use \(2^n\) exactly \(k\) times. We claim that \(k = \lfloor V \cdot 2^{-n} \rfloor\). Otherwise, \(k < \lfloor V \cdot 2^{-n}\rfloor\). The solution makes up the remaining value \(V - k \cdot 2^n \geq 2^n\) with \(2^0, 2^1, 2^2, \ldots, 2^{n-1}\). By induction, it must use \(2^{n-1}\) at least twice. The two \(2^{n-1}\) can be replaced by \(2^n\) to make the solution smaller. Contradiction.
+\end{itemize}
+
+Now we showed that optimal solution uses \(2^n\) exactly \(\lfloor \frac{V}{d_n} \rfloor \) times (The same as the greedy algorithm). 
+
+The remaining value is therefore \(V - \lfloor V \cdot 2^{-n} \rfloor \cdot 2^n < 2^n\) and only uses \(2^0, 2^1, \ldots, 2^{n-1}\). By induction, the remaining solution also follows greedy algorithm.
+
+\end{proof}
+
+\end{document}
+
+
+
+
+

@@ -1,0 +1,132 @@
+%Notes by Harsh Mistry 
+%CS 349
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 349 - User Interfaces
+	\hfill Winter 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\graphicspath{ {images/} }
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{9}{January 24, 2018}{Keiko Katsuragawa}{Harsh Mistry}
+
+\section{Layout}
+\subsection{Responsive v.s. Adaptive }
+\begin{itemize}
+\item Responsive : universal design reflows spatial layout to fit width
+\item Adaptive: switch between optimized spatial layouts to fit devices
+\item In practice, the approaches can be combined 
+\end{itemize}
+
+\subsection{Dynamic Layout}
+\begin{itemize}
+\item If a window is resized, we want to 
+\begin{enumerate}
+\item maximize use of available space for displaying widgets
+but we want to do this such that:
+\item maintain consistency with spatial layout
+\item preserve visual quality of spatial layout
+\end{enumerate}
+\item Need to dynamically modify the layout:
+\begin{itemize}
+\item re-allocate space for widgets
+\item adjust location and size of widgets
+\item perhaps even change visibility, look, and/or feel of widgets
+\end{itemize}
+\end{itemize}
+
+\subsection{Intrinsic Size Layout}
+\begin{itemize}
+\item Query each item for its preferred size
+\item Grow the widget to perfectly contain each item
+\item A bottom-up approach where top-level widget’s size completely dependent on its contained widgets
+\end{itemize}
+
+\subsection{Variable Intrinsic Size Layout}
+\begin{itemize}
+\item Layout determined in two-passes 
+\begin{enumerate}
+\item Get each child widget’s preferred size (includes recursively
+asking all of its children for their preferred size...)
+\item Decide on a layout that satisfies everyone’s preferences, then iterate through each child, and set it’s layout (size/position)
+\end{enumerate}
+\end{itemize}
+
+
+
+\end{document}
+
+
+
+
+

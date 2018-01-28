@@ -1,0 +1,277 @@
+%Notes by Harsh Mistry 
+%CS 350
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 350 - Operating Systems
+	\hfill Winter 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break, const},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this, struct},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+
+
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{5}{January 17, 2018}{Lesley Istead}{Harsh Mistry}
+
+\section{Synchronization Continued}
+\subsection{Semaphore}
+\begin{itemize}
+\item A semaphore is a synchronization primitive hat can be used to enforce mutual exclusion requirements. It can also be used to solve other kinds of synchronization problems. 
+\item A semaphore is an object that has an integer value, and that supports two operations: 
+\begin{itemize}
+\item[P: ] if the semaphore value is greater than 0, decrement the value. Otherwise, wait until the value is greater than 0 and then decrement it.
+\item[V: ] increment the value of the semaphore
+\end{itemize}
+\end{itemize}
+
+\subsection{Condition Variables}
+\begin{itemize}
+\item Each condition variable is intended to work together with a lock: condition variables are only used from within the critical section that is protected by the lock
+\item Three operations are possible on a condition variable 
+\begin{itemize}
+\item[Wait: ] This causes a thread to block, and it releases the lock associated with the condition variable. Once the thread is unblocked in reacquires the lock
+\item[Signal: ] If threads are blocked on the signaled condition variable, then one of those threads is unblocked.
+\item[Broadcast: ] Like signal, but unblocks all threads that are blocked on the condition variable.
+\end{itemize}
+\end{itemize}
+
+
+\subsubsection{Using Condition Variables}
+\begin{itemize}
+\item Condition variables get their name because they allow threads to wait for arbitrary conditions to become true inside of a critical section.
+\item Normally, each condition variable corresponds to a particular condition that is of interest to an application.
+\item when a condition is not true, a thread can wait on the corresponding condition variable until it becomes true
+\item when a thread detects that a condition is true, it uses signal or broadcast to notify any threads that may be waiting
+\end{itemize}
+
+\subsubsection{Waiting on Condition Variable}
+\begin{itemize}
+\item when a blocked thread is unblocked (by signal or broadcast), it reacquires the lock before returning from the wait call
+\item a thread is in the critical section when it calls wait, and it will be in the critical section when wait returns. However, in between the call and the return, while the caller is blocked, the caller is out of the critical section, and other threads may enter.
+\item In particular, the thread that calls signal (or broadcast) to wake up the waiting thread will itself be in the critical section when it signals. The waiting thread will have to wait (at least) until the signaller releases the lock before it can unblock and return from the wait call.
+\end{itemize}
+
+\subsection{Deadlocks}
+Deadlocks when multiple threads try to acquire resources that they each other already hold. 
+
+\subsubsection{Two Techniques for Deadlock Prevention}
+
+\begin{itemize}
+\item No Hold and Wait : Prevent a thread from requesting resources if it currently has resources allocated to it. A thread may hold several , but to do so it must make a signal request for all of them.\\
+\textbf{Hold and Wait Implementation (Possible Exam Question) }  
+\begin{lstlisting} 
+Bool Try_Acquire (lock) 
+	lock available ? 
+		YES -> take lock -> return true
+		NO -> return false
+\end{lstlisting}
+\textbf{Sample Usage of Hold and Wait (Possible Exam Question)}
+\begin{lstlisting} 
+acquire(A)
+while(! try_acquire(B)){
+	release(A);
+	acquire(A);
+}
+\end{lstlisting}
+\item Order the resources types, and require that each thread acquire resources in increasing resource type order. That is, a thread may make no requests for resources in increasing resource type order. That is a thread my make no requests for resources of type less than or equal \(i\) if it is holding reosurces of type \(i\)
+\end{itemize}
+
+\section{Processes and System Calls}
+\subsection{Processes}
+
+\begin{definition}
+A process is an environment in which an application program runs.
+\end{definition}
+\begin{itemize}
+\item A process includes virtualized resources that its program can use
+\item Processes are created and managed by the kernel 
+\item Each programs process isolates its from other programs in other processes 
+\end{itemize}
+
+\subsection{System Calls}
+\begin{itemize}
+\item System calls are the interface between processes and the kernel. 
+\item A process uses system calls to request operating system services.
+\item (i.e \verb| fork, execv, waitpid, getpid|)
+\end{itemize}
+
+\subsection{System Calls for Process Management}
+\begin{itemize}
+\item \verb|fork| creates a new process (a child) that is a clone of the original
+\begin{itemize}
+\item after fork, both parent and child are executing copies of the same program
+\item virtual memories of parent and child are identical at the time of the fork, but
+may diverge afterwards
+\item fork is called by the parent, but returns in both the parent and the child
+\item parent and child see different return values from fork
+\end{itemize}
+\item \verb|_exit| terminates the process that call its and possibly supplies a exit status code that is recorded by the kernel 
+\item \verb|waitpid| lets a process wait for anotehr to terminate, and retrieve its exit status code. 
+\end{itemize}
+
+\subsection{The execv System Call}
+\begin{itemize}
+\item \verb|execv| changes the program that a process is running 
+\item The calling process's current virtual memory is destroyed
+\item The process gets a new virtual memory, initialized with the code and data of the new program to run
+\item After \verb|execv|, the new program starts executing. 
+\end{itemize}
+
+\end{document}
+
+
