@@ -1,0 +1,143 @@
+%Notes by Harsh Mistry 
+%Econ 301
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx, color}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Econ 301 - Microeconomic Theory 2
+	\hfill Winter 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+	\graphicspath{ {images/} }
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{8}{January 29, 2018}{Jean Guillaume Forand}{Harsh Mistry}
+
+
+\section{Intertemporal Choice Continued}
+\begin{itemize}
+\item Suppose consumers can borrow against period-2 income at interest rate \(r\)
+\item Maximum loan b that consumers can take out on period -1 is such that \((1+r)b = m_1\) or \(b = \frac{m_2}{1+r}\)\\
+\item Budget set with saving and borrowing 
+\[\beta = \{(c_1, c_2) \in \mathbb{R}^2 \mid pc_2 \leq m_2 + (1+r)[m_1 \cdot pc_1]\]
+\begin{itemize}
+\item If \(m_1 \cdot pc_1 > 0 \) consumers is a \underline{saver}
+\item If \(m_1 \cdot pc_2 < 0\) consumer is a \underline{borrower}
+\item Price of consumption in both periods is \(p_1\) and does not change. This \textbf{does not} mean that the market rate of exchange of consumption at periods 1 and 2 is 1. 
+\item Market rate of exchange is \(1+r\)
+\item Consumer can exchange consumption in period 2 against consumption in period 1 only through financial markets and cost of this is \(1 + r\) 
+\item With this we can rewrite the budget set
+\[\beta = \{ (c_1, c_2) \in \mathbb{R}^2_+  \mid p_1c_1 + \frac{p_2c_2}{1+r} \leq m_1 + \frac{m_2}{1+r}\}\]
+basically present value of lifetime consumption \(\leq\) present value of lifetime income
+\end{itemize}
+\item We assume that consumers preferences over consumer path \((c_1, c_2)\) represented by utility function
+\[u(c_1) + b u(c_2) \hspace{0.2cm} \text{where } u: \mathbb{R} \rightarrow \mathbb{R}  \text{ and } 0 \leq b \leq 1\]
+\begin{itemize}
+\item Given consumption \(c_1\) in period \(i=1,2\) consumers utility is \(u(c_i)\)
+\item Form perspective of period 1, period 2 utility is discounted by \(b\)
+\end{itemize}
+\item Consumers dynamic UMP 
+\[\max_{c_1, c_2 \geq 0} u(c_1) + b u(c_2) \hspace{0.2cm} \text{such that } p_1c_1 + \frac{p}{1+r} c_2 \leq m_1 + \frac{m_2}{1+r}\]
+\item If \(u^\prime(c) > 0\) for all \(c > 0\) then consumers preferences over consumption paths are monotone and budget constant holds as equality at any solution to UMP.
+\begin{itemize}
+\item If \(u\) is differentiable that Lagrangean
+\[L(c_1, c_2, \lambda) = u(c_1) + b u(c_2) + \lambda\left[m_1 + \frac{m_2}{1+r} - pc_1 - \frac{pc_2}{1_r}\right]\]
+\item At any optimal consumption path such that \(c_1^*, c_2^* \neq 0 \) have FOC. 
+\[\frac{d}{dc_1} L(c_1^*, c_2^*, \lambda) = u^\prime(c_1^*) -\lambda p = 0 \text{ (L1)}\]
+\[\frac{d}{dc_2} L(c_1^*, c_2^*, \lambda) = bu^\prime(c_2^*) -\lambda \frac{p}{1+r} = 0 \text{ (L2)}\]
+\[\frac{d}{d\lambda} L(c_1^*, c_2^*, \lambda) = m_1 + \frac{m_2}{1+r} - [pc_1^* + \frac{pc_2^*}{1+r}] = 0 \text{ (L}\lambda)\]
+\item Substitute for \(\lambda\) with (L1) and (L2)
+\[\frac{u^\prime(c_1^*)}{bu^\prime(c_2^*)} = 1+r\]
+marginal rate of inter temporal substitution = market rate of exchange of period 1 and 2 consumption. 
+\item If \(u^\prime(0) = \infty\), then optimal consumption paths such that \(c_1, c_2 \neq 0\)\\
+Then necessary condition is \(\frac{u^\prime(c_1)}{bu^\prime (c_2^*)} \geq  1 + r \)
+\item If \(u^{\prime \prime(c)} \leq 0 \) for all \( c \geq 0\), then consumers preferences over consumption paths are convex, so that necessary conditions are also sufficient. 
+\item This model can be used to study consumption dynamics. 
+\item rewrite (MRS) : 
+\[\frac{u^\prime(c_1^*)}{u^\prime(c_2^*)} = \frac{b}{1 / 1 + r}, \hspace{0.2cm} \text{ if } u^{\prime \prime} \leq 0, \text{ then } c_1^* \geq c_2^* \implies u^prime(c_1^*) \leq u^\prime(c_2^*)\]
+\item \(b\) is rate at which consumers accepts period-1 utility against period-2 utility
+\item \(\frac{1}{1+r}\) is rate at which market accepts period-1 consumption against period-2 consumption. 
+\item If \(b > \frac{1}{1+r}\), then \(c_1^* < c_2^*\), backload consumption
+\item If \(b < \frac{1}{1+r}\), then \(c_1^* > c_2^*\), frontload consumption
+\item If \(b = \frac{1}{1+r}\), then \(c_1^* = c_2^*\), consumption smoothing across period
+\end{itemize}
+
+
+
+ 
+\end{itemize}
+
+
+\end{document}
+
+
+
+
+

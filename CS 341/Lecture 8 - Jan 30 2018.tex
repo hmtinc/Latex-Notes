@@ -1,0 +1,140 @@
+%Notes by Harsh Mistry 
+%CS 341
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   \graphicspath{ {images/} }
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 341 -  Algorithms
+	\hfill Winter 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{7}{January 25, 2018}{Bin Ma}{Harsh Mistry}
+\section{Greedy Algorithms Continued}
+
+\subsection{Interval Scheduling}
+Given a input list of intervals \(I_k = [S(I_k), f(I_k)]\). Find a subset of intervals with the maximum cardinality, such that no two intervals in the subset intersect 
+ 
+An optimized solution to select the interval that ends the earlies, as by choosing the one that finishes the earliest, it resserves more room for future events. Additionally, it combines the earliest start and shortest strategies into one. 
+
+\textbf{Algorithm FinishTimeFirst} :L Greedily choose the next non-conflicting interval 
+
+\textbf{Proof : } To prove this we can use an "Exchange Proof". You start with an optimal solution that is not the greedy solution. then you compare them and identify the difference, Then you modify the optimal solution to make it increasingly "greedier", without increasing the cost. 
+
+\subsection{Interval Colouring} 
+Given n intervals \([s_i, f_i]\). Colour them in k different colors, so that no two intervals with the same color overlap. Minimize k. 
+
+\textbf{Algorithm : }\\ 
+For each interval in the start time order : \\
+Color it with the smallest non-conflicting colour ID 
+
+\subsection{Fractional Knapsack}
+Input: \( n\) items, each has weight \(w_i\) and per unit weight value \(v_i\); a capacity \(W\). \\
+Output : an amount \(0 \leq x_i \leq w_i\) for each i, such that \(\sum_{i=1}^n x_i \leq W\) and \(\sum_{i=1}^n x_i v_i\) us maximized.
+
+since we can allow to take a fraction of each item, so it makes sense to take the most valuable item first. Let us assume that the items are sorted according to per unit weight value.
+
+\textbf{Greedy Algorithm}
+\begin{itemize}
+\item Remaining \(W \leftarrow W\)
+\item For i from 1 to n
+\begin{itemize}
+\item If (remaining \(W >0\)) 
+\begin{itemize}
+\item \(x_i \rightarrow \min\{remaining W, w_i\}\)
+\item remaining\(W \rightarrow w - x_i\)
+\end{itemize}
+else : \(x_i \rightarrow 0\)
+\end{itemize}
+\end{itemize}
+
+\subsection{Stable Matching}
+
+\textbf{Gale Shapely Algorithm}
+\begin{itemize}
+\item While there is an unpaired manager \(M_i\)
+\begin{itemize}
+\item Let \(M_i\) propose to his most favourite student whom he never tried before
+\item if student is not paired then : Pair them 
+\item Else if student prefers the new manager over his old manager 
+\begin{itemize}
+\item Pair the student with the new manager, and turn old manager unpaired. 
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+
+\end{document}
+
+
+
+
+

@@ -1,0 +1,142 @@
+%Notes by Harsh Mistry 
+%Econ 301
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx, color}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Econ 301 - Microeconomic Theory 2
+	\hfill Winter 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+	\graphicspath{ {images/} }
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{10}{February 7, 2018}{Jean Guillaume Forand}{Harsh Mistry}
+
+\section{Competitive Equilibrium Continued}
+\begin{ex}
+Suppose \(\omega^A = (1, 1), \hspace{0.2cm} \omega^B = (1, 2), \hspace{0.2cm} u^A(x_1^A, x_2^A) = x_1^{A 1/2} x_2^{A 1/2}  \hspace{0.2cm} u^B(x_1^B, x_2^B) = min \{x_1^B, x_2^B\}\)\\
+\begin{center}
+\includegraphics[scale=0.1]{15}
+\end{center}
+Consumer Demands : \[(x_1^A(p_1m), x^A_2 (p_1 m) ) = \left(\frac{m^A}{2p_1}, \frac{m^A}{2p_2}\right) = \left(\frac{p_1+p_2}{2p_1}, \frac{p_1+p_2}{2p_2}\right) \]
+\[(x_1^B(p_1m), x^B_2 (p_1 m) )  = \left(\frac{m^B}{p_1 + p_2}, \frac{m^B}{p_1 + p_2}\right) = \left(\frac{p_1 + 2p_2}{p_1 + p_2}, \frac{p_1+2p_2}{p_1 + p_2}\right)\]
+
+
+Would P(1, 1) be a good prediction of the prices in this economy? 
+\[x_1^A ((1, 1), \omega^A) = 1 , \hspace{0.2cm} x_1^B((1, 1), \omega^B) = \frac{3}{2}\]
+No, because \(1 + \frac{3}{2} > 2\) which aggregate demand for good 1 to exceed aggregate endowment\\
+
+What if \(p = (1, \sqrt{2} -1)\)
+\[(x_1^A(p_1m), x^A_2 (p_1 m) ) = \left(\frac{1}{\sqrt{2}}, \frac{\sqrt{2}}{2 \sqrt{2} \cdot 2}\right)\]
+\[(x_1^B(p_1m), x^B_2 (p_1 m) ) = \left(\frac{2 \sqrt{2} - 1}{\sqrt{2}}, \frac{2 \sqrt{2} - 1}{\sqrt{2}}\right)\]
+\end{ex}
+\begin{definition} A \underline{Competitive equilibrium} \((x^{A*}, x^{B*}, p^*)\) consists of an \underline{allocation of goods} \(X^{J*} = (X_1^{J*}, X_2^{J*}) \) for each consumer \(p^* = (p_1^*, p_2^*)\) which satisfy 
+\begin{enumerate}
+\item Given prices \(p^* = (p_1^*, p_2^*)\), the allocation \(X^{J*}\) for consumer \(J = 1, 2\) is a solution to UMP
+\[\max_{x^J \in \mathbb{R}^2_+} u^J (x_1^J, x_2^J)  \hspace{0.2cm} \text{s.t. }  p_1x_1^J + p_2x_2^J \leq p_1 \omega^J_1 + p_2 \omega_2^J \]
+\item For each good \(i = 1, 2\), the aggregate allocations exhaust aggregate endowments : 
+\[\begin{aligned}x_i^{A*} + x_i^{B*} & = \omega_i^{A} + \omega_i^B \hspace{0.2cm}\text{(MCi)} \end{aligned}\]
+\end{enumerate}
+\end{definition}
+\begin{itemize}
+\item (MC1) and (MC2) are \underline{market clearing conditions}
+\begin{itemize}
+\item Through consumers' demand functions, (MC1) and (MC2) is a system of 2 equations in 2 unknowns \(p_1^*\) and \(p_2^*\)
+\item If \((p_1^*, p_2^*)\) one equilibrium prices, then given any \(\alpha > 0\), \((\alpha p_1^*, \alpha p_2^*)\) are equilibrium prices that support the same allocation and hence demands are the same under \((p_1^*, p_2^*)\)  and \((\alpha p_1^*, \alpha p_2^*)\) 
+\item A common approach is to normalize \(p_1^* = 1\)
+\end{itemize}
+\item Now we have 2 conditions (MC1) and (MC2) to determine \(p_2^*\)? 
+\item Result ; If consumer' preferences are monotone and if (MC1) holds, then (MC2) also holds
+\begin{itemize}
+\item If consumers' preferences are monotone, then optimal bundles exhaust their budget : 
+\[x_1^{J*} + p_2^* x_2^{J*} = \omega_1^J + p_2^* \omega_2^J \hspace{0.2cm} \text{for } J = 1, 2\]
+\end{itemize}
+\item Then aggregate spending must equal value of aggregate endowment : 
+\[x_1^{A*} + x_1^{B*} + p_2^* [ x_2^{A*} + x_2^{B*} ] = \omega^A_1 = \omega_1^B - p_2^* [\omega_2^A + \omega_2^B] \]
+\item Rewrite : (LHS = 0, if (MC1) holds)
+\[x_1^{A*} - x_1^{B*} - [\omega_1^A + \omega_1^B] = p_2^* [\omega_2^A + \omega_2^B - [x_2^{A*} + x_2^{B*}]]\]
+\end{itemize}
+\begin{ex} Continued from 9.1\\
+Any equilibrium prices \(p^* = (1, p_2^*)\) must satisfy (MC1) : 
+\[x_1^A ((1, p_1^*), \omega^A) + x_1^B((1, p_2^*), \omega^{B} = 2 \]
+\[\frac{1 + P_2^* }{2 } + \frac{1+2p_2^*}{1 + p_2^*} = 2 \implies (p_2^*)^2 + 2 p_2^* - 1 = 0 \]
+\begin{itemize}
+\item Two Roots are \(-\sqrt{2} - 1 < 0\) and \(\sqrt{2} + 1 > 0\). Therefore prices \(p^*(1, \sqrt{2} -1)\) and allocations 
+\[X^{A*} = \left(\frac{1}{\sqrt{2}}, \frac{\sqrt{2}}{2 \sqrt{2} - 2} \right) \hspace{0.2cm} \text{and } X^{B*} = \left(\frac{2 \sqrt{2} - 1}{\sqrt{2}}, \frac{2 \sqrt{2} - 1}{\sqrt{2}} \right)\]
+are a competitive equilibrium
+\end{itemize}
+\end{ex}
+\end{document}
+
+
+
+
+
