@@ -1,0 +1,132 @@
+%Notes by Harsh Mistry 
+%CS 350
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 458/658 - Computer Security and Privacy
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{1}{September 6, 2018}{Ian Goldberg }{Harsh Mistry}
+
+\section{Introduction to Computer Security and Privacy}
+\begin{itemize}
+\item The goal of computer security is to be able to identify security and privacy issues in various aspects of computing. (Programs, operating systems, Networks, Internet applications, Databases)
+\item The Secondary goal is to be able to use this ability to design systems that are more protective of security and privacy
+\item In the context of computers, security generally means three things : 
+\begin{itemize}
+\item Confidentiality
+\item Integrity
+\item Availability
+\end{itemize}
+\item If CIA is satisfied, that a system is said to be secure
+\item \textbf{Privacy} is "Informational self-determination", which means you get to control information about you
+\end{itemize}
+
+\subsection{Terminology}
+\begin{itemize}
+\item \textbf{Assets} - Things we might want to protect
+\item \textbf{Vulnerabilities} - Weaknesses in a system that may be \textbf{exploited} in order to cause loss or harm
+\item \textbf{Threats} - A loss or harm that might befall a system
+\item \textbf{Threat Model} - A set of threats we are undertaking to defend against
+\item \textbf{Attack} - An action which exploits a vulnerability to execute a threat
+\item \textbf{Control/Defence} - Removing or reducing a vulnerability
+\end{itemize}
+
+\subsection{Defence Steps}
+\begin{itemize}
+\item \textbf{Prevent it} 
+\item \textbf{Deter it} - Make the attack harder or more expensive
+\item \textbf{Deflect it} - Make your self less attractive to attackers
+\item \textbf{Detect it} - Notice that attack is occurring or occurred. 
+\item \textbf{Recover from it} : Mitigate the effects of the attack
+\end{itemize}
+
+Its also worth noting the \textbf{Principle of Easiest Penetration} states a system is only as strong as its weakest link.
+
+\subsection{Methods of Defence}
+
+\begin{itemize}
+\item Cryptography
+\item Software controls
+\item Hardware controls
+\item Physical controls
+\item Policies and procedures
+\end{itemize}
+
+\end{document}
+
+
+
+
+
