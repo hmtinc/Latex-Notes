@@ -1,0 +1,150 @@
+%Notes by Harsh Mistry 
+%CS 350
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 458/658 - Computer Security and Privacy
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{3}{September 13, 2018}{Ian Goldberg }{Harsh Mistry}
+
+\section{Program Security Continued}
+\subsection{Unintentional Flaws Continued }
+\subsubsection{TOCTOU Errors}
+\begin{itemize}
+\item Time of Check to Time of Use errors or otherwise known as race-conditions are errors caused by a change of state after a verification check
+\item The fundamental problem is the after a verification is done, certain values can be modified to allow for access to disallowed behaviour. 
+\item Defences 
+\begin{itemize}
+\item When performing a privileged action on behalf of anoteh rparty, make sure all information is constant
+\item Keep a private copy of request, so it can't be altered. 
+\item Where possible act on the object itself, and not on some level of indirection
+\item If above cases do not apply, use locks to ensure the object is not changed during run time
+\end{itemize}
+\end{itemize}
+
+\subsection{Intentional Malicious Flaws}
+
+Various forms of software are written with malicious intent, but a common characteristic is all malware needs to be executed in order to cause harm. 
+The types of malware are Viruses, Worms, Trojans, and Logic Bombs
+
+\subsubsection{Viruses}
+\begin{itemize}
+\item A virus is malware that infects other files in attempt to replicate it self. 
+\item Viruses typically exuctables are modified to include jump instructions to the virus code in effort to ensure the virus propagates across the system.
+\item Viruses will also try to infect the computer itself such as writing it self to the boot sector or running the entire system in a hyper-visor.
+\item Viruses often contain a payload which is to be activated at a future date to execute the intended action of the virus. 
+\item Finding viruses can be done in two ways
+\begin{itemize}
+\item Detect from time to time, scan the entire system. 
+\item Detect viruses when new files are added to the computer
+\end{itemize}
+\item Signature based detection 
+\begin{itemize}
+\item A unique portion/characteristic of the program is used to form a signature of the virus which can be compared against a running list. 
+\item Viruses can be polymorphic and modify it self in order to ensure the signature does not match. As a result, signature doesn't really effect polymorphic protection
+\end{itemize}
+\item Behaviour based detection
+\begin{itemize}
+\item Behaviour based systems detect viruses by analysing its core-behaviour and purpose. They usually do this within a sandboxed environment. 
+\end{itemize}
+\item False Negative/Positives
+\begin{itemize}
+\item Behaviour Detection has a tendency to have higher false positives.  
+\item Signature Detection has a tendency to have higher false negatives.
+\end{itemize}
+\item False Positives must be lower than the base rate (The actual true percentage of viruses)
+\end{itemize}
+
+\subsubsection{Worms}
+\begin{itemize}
+\item A worm is a self-contained piece of code that can replicate with little or no user involvement
+\item Worms often use security flaws in widely deployed software as a path to infection
+\item Worms typically start searching for other computers to infect. Additionally, there may or may not be a payload that activates at a certain time or by another trigger.
+\end{itemize}
+
+\subsubsection{Trojans}
+\begin{itemize}
+\item Trojan horses are programs which claim to do something innocuous (and usually do), but which also hide malicious behaviour
+\item Often Gain control by getting the user to run code of the attacker’s choice, usually by also providing some code the user wants to run. 
+\item Usually are marked as \verb|PUP| (potentially unwanted programs)
+\item Trojan horses usually do not themselves spread between computers; they rely on multiple users executing the “trojaned” software
+\end{itemize}
+
+\end{document}
+
+
+
+
+
