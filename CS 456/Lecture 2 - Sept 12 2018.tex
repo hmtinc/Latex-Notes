@@ -1,0 +1,235 @@
+%Notes by Harsh Mistry 
+%CS 458/658
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 456/656 - Computer Networks
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{2}{September 12, 2018}{Kamal Zille Huma}{Harsh Mistry}
+
+\section{What's the Internet}
+\begin{itemize}
+\item A Network Billions of connected computing devices
+\item Hosts are the end systems
+\item Communication links are the result of a network established by complex physical infrastructure.
+\item Packet switches help forwards packets (chunks of data) between systems on the internet
+\end{itemize}
+
+\section{Network Structure}
+
+Network structure consist of multiple components
+\begin{itemize}
+\item \textbf{Network Edges} : A collection of hosts which are clients and servers
+\item \textbf{Access Networks and Physical Media} : Various wired and wireless communication links (Provide Access to the Internet)
+\item \textbf{Network Core} : A series of interconnected routers and a network of networks
+\end{itemize}
+
+\section{Access Networks}
+
+\begin{definition}
+\textbf{Capacity Bandwidth} : The physical limit of amount of data carried by a access network
+\end{definition}
+
+\begin{definition}
+\textbf{Frequency Division Multiplexing (FDM)} - Splits a access connection into multiple parts to allow multiple connection by modulating the frequency of each connection
+\end{definition}
+
+\begin{definition}
+\textbf{Time Division Multiplexing (TDM)} - Allocates the full capacity of a access network for one connection for a small period of time before swapping for another connection
+\end{definition}
+
+\begin{itemize}
+\item Digital Subscriber Line (DSL)
+\begin{itemize}
+\item DSL Utilizes existing telephone lines to central office DSLAM. 
+\item Upstream has a theoretical max of 2.5Mbps, but typically is 1Mbps in practice
+\item Downstream has a ideal max of 24Mbps, but typically 10Mbps
+\end{itemize}
+\item Cable Networks
+\begin{itemize}
+\item Due to the concentric nature of the cable network, there is less noise which allows for more data to be transferred.
+\item \textbf{Frequency Division Multiplexing} allows for different channels transmitted in different frequency band. This can be utilized to data in addition to regular tv signals. 
+\item The difference from DSL is that the cable is not dedicated. Coxial Cable are shared by multiple homes along the network. 
+\item HFC (Hybrid Fiber Coax) can typically achieve an asymmetric 30Mbps downstream and 2Mbps upstream
+\end{itemize}
+\end{itemize}
+
+\section{Core Networks}
+
+\begin{itemize}
+\item A mesh of interconnected routers
+\item packet switching: hosts break application layer messages into packets
+\item Access networks connect users to the core and the core forwards connections along to their correct locations
+\item Two key functions  is routing and fowarding
+\end{itemize}
+
+\begin{definition}
+\textbf{Routing } - Determines source destintaion route taken by packets
+\end{definition}
+
+\begin{definition}
+\textbf{Forwarding } - Move packets from routers input to appropriate routers output
+\end{definition}
+
+\begin{itemize}
+\item There are two types of core switching, Circuit and Packet Switching
+\end{itemize}
+
+\subsection{Circuit Switching}
+\begin{itemize}
+\item end-end resources are allocated to ensure there is a dedicated link between each user and the end point. 
+\item circuit segments are unused if let idle.
+\item Circuit switching can use FDM or TDM to divide the singular physical connection
+\end{itemize}
+
+\subsection{Packet Switching}
+
+
+
+\begin{itemize}
+\item Hosts break application-layer messages into packets and forward packets from one router to the next. Each of the packets are transmitted at full link capacity
+\item \verb|L| = bits per packet and \verb|R| = bits per second
+\item Methods for forwarding
+\begin{itemize}
+\item Store-And-Forward
+\begin{itemize}
+\item Entire packet must arrive at router before it can be transmitted on the next link
+\item Takes $\frac{L}{R}$ seconds to transmit $L$-bit packet into link at $R$ bps
+\item end-end delay is $ 2 \frac{L}{R}$ assuming no propagation delay
+\end{itemize}
+\item Cut-Through 
+\begin{itemize}
+\item Switch starts forwarding a frame before the whole frame has been received
+\item This technique reduces latency through the switch and relies on teh destination devices for error handling
+\item Only possible if the speed of the  outgoing network is equal to /greater than the incoming network
+\end{itemize}
+\end{itemize}
+\item Probability of success of a connection on a packet switch network can be modelled via a binomial distribution
+\begin{itemize}
+\item $$p(X=r) = {n \choose r } p^r q^r$$
+\item $r$ = number of failures
+\end{itemize}
+\end{itemize}
+
+\begin{definition}
+\textbf{Queuing and Loss} - If arrival rate to link exceed transmission rate  of link for a period of time 
+\begin{itemize}
+\item Packets will queue, wait to be transmitted on link
+\item packets can be dropped if memory fills up
+\end{itemize}
+\end{definition}
+
+\subsection{Packet Delays}
+
+There are four sources of packet delays
+\begin{itemize}
+\item $d_{proc}$ - Nodal processing delay
+\begin{itemize}
+\item Occurs on the core and is the result of validating data and determining output link. 
+\item Typically is in the milliseconds
+\end{itemize}
+\item $d_{queue}$ - Queuing delay
+\begin{itemize}
+\item Time spent waiting at the output link for transmission. 
+\item Wait times depend on congestion level of router
+\end{itemize}
+\item $d_{trans}$ - Transmission Delay
+\begin{itemize}
+\item  Amount of time required for the router to push out the packet
+\item $d_{trans} = \frac{L}{R}$ 
+\end{itemize}
+\item $d_{prop}$ - Propagation Delay. 
+\begin{itemize}
+\item Time it takes a bit to propagate from one router to the next.
+\item Typically insignificant and irrelevant as the propagation speed is $(\approx 2 \times 10^8  \text{m/sec})$
+\item $d_{prop} = \frac{d}{s}$
+\end{itemize}
+\end{itemize}
+
+\begin{definition}
+\textbf{Throughput} : rate (bits/time unit) at which bits transferred between sender/receiver 
+\begin{itemize}
+\item \textbf{instantaneous: } rate at given point in time
+\item \textbf{average: } rate over longer period of time
+\end{itemize}
+\end{definition}
+
+
+
+\end{document}
+
+
+
+
+
