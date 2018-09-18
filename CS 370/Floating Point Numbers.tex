@@ -146,9 +146,58 @@ $$ E_{ret} = \frac{|x_{exact} - x_{approx}|}{|x_{exact}|}$$
 \end{itemize}
 
 \subsection{Machine Epsilon}
-The maximum relative error, $E$, for a FP system is called machine epsilon
-\end{document}
+\begin{itemize}
+\item The maximum relative error, $E$, for a FP system is called machine epsilon or unit round of error.
+\item It defined as the smallest value such that \(fl(1 + E) > 1\) under the given floating point system,
+\item We can derive the rule
+$$fl(x) = x (1 + \delta) \text{ for some } |\delta| \leq E $$1
+\item With rounding to the nearest, $E = \frac{1}{2} \beta ^{1 -t}$
+\item With Truncation, $E=\beta^{1-t}$
+\item We care about the magnitude of E
+\end{itemize}
 
+\subsection{Arithmetic with Floating Point}
+$$ w \oplus  z  = fl(w + z) = (w + z ) (1 + \delta) $$
+
+\subsection{Catastrophic Cancellation Error}
+Catastrophic cancellation occurs when subtracting numbers of about the same magnitude, and the input numbers contain error.
+All significant digits cancelled out; the result might have no correct digits whatsoever!
+However, if input quantities are known to be exact, we have our usual guarantee on floating point ops (addition, subtraction, etc.):
+
+$$ w \ominus z  = (w - z) (1 + \delta) \text{ for } w, z, \in F$$
+
+\section{Conditioning of Problems}
+\begin{itemize}
+\item Problems may be ill-conditioned or well-conditioned
+\item For problem \(P\), with input \(I\) and output \(O\), of a change to the input, \(\Delta I\), gives a small change in the output \(\Delta O\), \(P\) is well-conditioned. Otherwise, \(P\) is ill-conditioned
+\item This is a property of the problem it self and independent of any any specific implementation 
+\end{itemize}
+
+\subsection{Stability of an Algorithm}
+If any initial error in the data is magnified by an algorithm, the algorithm is considered numerically unstable.
+
+\subsection{Conditioning v.s. Stability }
+\begin{itemize}
+\item Conditioning of a problem is how sensitive the problem is itself to errors/changes in input
+\item Stability of a numerical algorithm is how sensitive the algorithm is to errors/changes in input. 
+\item An algorithm can be unstable even when the problem is well conditioned
+\item An ill-conditioned problem limits how well we can expect any algorithm to perform. 
+\end{itemize}
+
+\section{Summary }
+\begin{itemize}
+\item \(F\) is not \(\mathbb{R}\)
+\item We can use \textbf{round-off error analysis} to roughly bound the errors incurred by floating point operations.
+\item We can analyse whether initial errors grow or shrink to determine the stability of algorithms.
+\end{itemize}
+
+
+
+
+
+
+
+\end{document}
 
 
 

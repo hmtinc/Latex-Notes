@@ -1,0 +1,180 @@
+%Notes by Harsh Mistry 
+%CS 370
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 370 - Numerical Computation
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill  #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{2}{Interpolation}{Christopher Batty}{Harsh Mistry}
+
+The basic problem of Interpolation is, Given a set of data points from an (unknown) function \(y = p(x)\), can we approximate \(p\)'s value at other points 
+
+\section{Uses for Interpolation}
+\begin{itemize}
+\item Fitting curves to data. (Related to Regression)
+\item Estimating an unknown function's properties: values, derivatives, etc
+\item Interpolation plays a role in many numerical methods such as differentiation, integration, differential equations, optimization, etc 
+\end{itemize}
+
+\section{Linear Interpolation}
+\begin{itemize}
+\item The simplest form of interpolation, given two points, find a line that best fits the points.
+\item Calculate the slope between two points and produce a line equation \(y = ax + b\)
+\item Linear interpolation breaks down when attempting to generalize solutions with more than 2 points
+\end{itemize}
+
+\section{Polynomial Interpolation}
+\begin{theorem}
+\textbf{Unisolvence Theorem} - Given \(n\) data pairs \((x_i, y_i)\), \(i = 1, \ldots, n\) with distinct \(x_i\), there is a unique polynomial \(p(x)\) of degree \(\leq n - 1\) that interpolates the data. 
+\end{theorem}
+
+\begin{itemize}
+\item For n points, we must find all coefficients of the polynomial 
+$$p(x) = c_1 + c_2x + \ldots + c_n x^{n-1}$$
+\item As before, each \((x_i, y_i)\) point gives one linear equation
+$$ y_i = c_1 + c_2 x_i + \ldots + c_n x_i^{n-1}$$
+\item Then solve the n x n linear system which should yield \(V \vec{c} = \vec{y}\)
+\item \(V\) is called a Vandermonde Matrix
+\end{itemize}
+
+\textbf{Note : } $ det V = \prod_{i < j} (x_i - x_j)  $
+
+\section{The Monomial Basis}
+$p(x) = c_1 + c_2x + \ldots + c_n x^{n-1}$ is called the monomial form and can be rewritten as 
+$$ p(x) = \sum_{i=1}^{n} c_i x^{i-1} $$
+The sequence \(1, x, x^2, x^3\) ... is called the monomial basis. Monomial form is a sum of coefficients \(c_i\) times these basis functions.
+
+\section{The Lagrange Basis}
+\begin{itemize}
+\item The Lagrange basis is a different basis for interpolating polynomials.
+\item We define the Lagrange basis functions \(L_k(x)\), to construct a polynomial as 
+$$p(x) = y_1 L_1 (x) + y_2L_2(x) + \ldots + y_n L_n(x) = \sum_{k=1}^{n} y_k L_k(x) $$
+where \(y_i\) are coefficients 
+\item Given \(n\) data points \((x_i, y_i)\), we define 
+$$ L_k(x) = \frac{(x - x_1)(\ldots)(x - x_{k-1}) (x - x_{k+1})(\ldots) (x - x_n)   }{  (x_k - x_1) (\ldots) (x_k - x_{k-1}) (x_k - x_{k+1}) (\ldots) (x_k - x_n) } $$
+\end{itemize}
+
+\subsection{Why?}
+We may perfer the Lagrange basis as we can directly write down the polynomial from the Lagrange basis functions, \(L_k\), and the data points, \(x_i, y_i\). There is no need to solve a linear system. 
+
+
+\section{Runge's Phenomenon}
+
+When involving a polynomial with a high degree, we often are left with excessive oscillation and wiggling. This is called Runge's Phenomenon.
+
+\subsection{Avoiding the Phenomenon}
+\begin{itemize}
+\item Select data/interpolation points in a \textit{smarter} way
+\item Fit even higher degree polynomials, but also constrain derivatives to somehow reduce \textit{wiggliness}
+\item Fit lower degree polynomials that don't exactly interpolate, but do minimize some error measure
+\item Or use piecewise polynomials
+\end{itemize}
+
+\section{Piecewise Functions and Interpolation}
+
+\begin{itemize}
+\item As we know, piecewise functions are functions with different definitions for distinct intervals of the domain
+\item One option of Piecewise Interpolation, is to continually apply Liner Interpolation for each set of points, but this can result in an some what unsatisfactory interpolation which may have \textit{kinks}
+\item The goal is to achieve smoothness because its beneficial for aesthetic purposes  and for mathematical applications needing derivatives 
+\end{itemize}
+
+\section{Hermite Interpolation}
+\begin{itemize}
+\item Greater smoothness requires controlling derivatives of the polynomial.
+\item \textbf{Hermite Interpolation } is the problem of fitting a polynomial given function values and derivatives.
+\end{itemize}
+
+\subsection{Closed-form solution}
+If we define the Polynomial on the \(i^{th}\) interval, \(p_i(x)\) as 
+$$ p_i(x) = a_i + b_i (x - x_i) + c_i (x-x_i)^2 + d_i (x-x_i)^3$$
+there exist direct formulas for polynomial coefficients
+\begin{itemize}
+\item $a_i = y_i$
+\item $ b_i = S_i$
+\item $c_i = \frac{3y_i^\prime - 2 S_i - S_{i+1}}{\Delta x_i}$
+\item $d_i = \frac{S_{i+1} + S_i - 2 y_i^\prime}{\Delta x_i^2}$
+\end{itemize}
+where we define 
+\begin{itemize}
+\item \(\Delta x_i = x_{i+1} - x_i \)
+\item \(y_i^\prime = \frac{y_{i+1} - y_i}{\Delta x_i}\)
+\end{itemize}
+
+
+\end{document}
+
+
+
+
