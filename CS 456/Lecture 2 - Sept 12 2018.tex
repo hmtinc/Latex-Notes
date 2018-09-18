@@ -225,6 +225,17 @@ There are four sources of packet delays
 \end{itemize}
 \end{definition}
 
+\subsection{Encapsulation}
+
+On most modern systems there is a series of information added onto a packet to help direct data and abstract network control.
+\begin{itemize}
+\item $M$ - \textbf{Application} Layer provides the message
+\item $H_t$ - \textbf{Transport} Layer adds IP address
+\item $H_n$ - \textbf{Network } Layer is a physical hardware layer that appends its own identifiable information (Black box for now) 
+\item $H_i$ - \textbf{Link} Layer adds system MAC. address (Media Access Control Address)
+\item \textbf{Physical} Layer adds no additional data, but is responsible for physically sending off data across a network. 
+\end{itemize}
+
 
 
 \end{document}
