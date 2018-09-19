@@ -1,0 +1,125 @@
+%Notes by Harsh Mistry 
+%CS 456/656
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 456/656 - Computer Networks
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{4}{September 19, 2018}{Kamal Zille Huma}{Harsh Mistry}
+
+\section{TCP v.s. UDP}
+\begin{itemize}
+\item UDP involves simply sending packets with no handshaking. This requires that the socket be provided with server information each time.
+\item TCP involves handshaking and confirms the client has received packets
+\item TCP requires 2 sockets, one to enable handshaking and another to send data.
+\item When using TCP, the secondary socket does not require any additional server information to send data, as its a dedicated connection upon which the application can push data
+\item TCP port for handshaking is typically standardized 
+\item Once a connection has been negotiated, a new port is opened for each connection. As a result, TCP requires a lot of overhead.
+\end{itemize} 
+
+\section{Application architecture}
+There are typically two different types of architectures 
+\begin{itemize}
+\item Client-Sever
+\begin{itemize}
+\item Requires a dedicated server which handles all requests and is solely responsible for directing data to the client
+\item This raises issues when attempting to scale up, as more data centers with more servers will be required to support more users. This is very cost prohibitive
+\end{itemize}
+\item Peer-to-Peer (P2P)
+\begin{itemize}
+\item Peer-to-Peer attempts to eliminate the central server by linking different clients who have files stored locally
+\item Unfortunately, as we scale P2P across large number of users and files, a smaller server may be required to keep track of users and ip addresses
+\item P2P raises security issues because you must have an open port on your system to send and receive data. 
+\item Some smaller P2P systems use \textbf{Service Discovery}, which involves users broadcasting their presence. Once service is discovered, a client-server relationship is established between the different users. 
+\end{itemize}
+\end{itemize}
+
+\subsection{Needs of the Transport layer}
+A network application requires the transport layer to provide :
+\begin{itemize}
+\item \textbf{Data Integrity} : Applications require \(100\%\) reliable data transfer
+\item \textbf{Timing} : Some apps require low delay
+\item \textbf{Throughput} : Some applications require a minimum amount of throughput
+\item \textbf{Security} : Applications may require the data to secure (i.e encryption, etc)
+\end{itemize}
+
+
+
+
+\end{document}
+
+
+
+
+
