@@ -1,0 +1,150 @@
+%Notes by Harsh Mistry 
+%CS 458
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 458/658 - Computer Security and Privacy
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{4}{September 20, 2018}{Ian Goldberg }{Harsh Mistry}
+
+\section{Program Security Continued}
+
+\subsection{Non Malicious Flaws Continued}
+\subsubsection{Side Channels}
+\begin{itemize}
+\item Side Channel Attacks are powerful attacks that simply involve observing how computers behave in response to sensitive data.
+\item The attacker just has to abuse the nature of how the computer works or how users interact with them. 
+\item \textbf{Constant time} implementations are programs that minimize number of side channels
+\end{itemize}
+
+\subsection{Designing Programs for Security}
+\subsubsection{Modularity}
+\begin{itemize}
+\item Break the module into a number of small pieces each responsible for a specific portion
+\item Modules should also have low coupling, as in they should not be tightly related to other modules.
+\item This helps localize errors and flaws to a specific module.
+\end{itemize}
+\subsubsection{Encapsulation}
+\begin{itemize}
+\item Ensure all information is contained, only share information necessary
+\item Ideally, developers for each module should not need to know how the other modules functions. They should just need to know the API
+\end{itemize}
+\subsubsection{Information Hiding}
+\begin{itemize}
+\item Expanding on encapsulation, external modules should not have access to a modules internal information.
+\item In essence, internal module data should be hidden
+\end{itemize}
+\subsubsection{Mutual Suspicion}
+\begin{itemize}
+\item Even though modules work together, each individual module should validate input
+\item This is done to ensure that security flaws don't propagate through the applications. 
+\item Basically, each module needs to protect against attack vectors exists in other modules
+\end{itemize}
+\subsubsection{Confinement}
+\begin{itemize}
+\item Expanding on mutual suspicion, modules should also be suspicious any other modules called. 
+\item An example of this is \textbf{Sandboxing}
+\end{itemize}
+\subsection{Security Controls}
+\subsubsection{Static code analysis}
+\begin{itemize}
+\item Static code analysis tools are applications that attempt to scan code for common security flaws.
+\item Often looks for buffer overflows, but some can point out TOCTTOU errors and other flaws.
+\end{itemize}
+\subsubsection{Formal Methods}
+\begin{itemize}
+\item Utilize program verification methods to formally prove an application performs to the specification
+\end{itemize}
+\subsubsection{Genetic Diversity}
+\begin{itemize}
+\item The reason worms and viruses are able to propagate is due to the fact alot of computers are running the same vulnerable code 
+\item This could potentially be avoided by using different implementations. 
+\end{itemize}
+\subsubsection{Code Review}
+\begin{itemize}
+\item Code review is the single most effective way to find faults once the code has been written
+\item Kinds of code review
+\begin{itemize}
+\item Someone writes the code and another dedicated person review the code. This is the least effective method
+\item Guided walk-through. Extremely common for safety-critical systems.
+\item Easter Egg Review. Author inserts intentional security flaws to ensure the reviewer actually reviewed it. 
+\end{itemize}
+\end{itemize}
+\end{document}
+
+
+
+
+

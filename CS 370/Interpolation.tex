@@ -173,6 +173,88 @@ where we define
 \end{itemize}
 
 
+\begin{definition}
+\textbf{Knots} : Points where the interpolate transitions from one polynomial/to another
+\end{definition}
+\begin{definition}
+\textbf{Nodes} : Points where some control points/data is  specified
+\end{definition}
+
+For hermite interpolation, these two points are the same, but they can differ for other curves
+
+\section{Cubic Splines}
+Fit a cubic, \(S_i(x)\) on each interval, but now require matching first and second derivatives between intervals
+
+Require "interpolating conditions" on each interval
+$$ S_i(x_i) = y_i, \hspace{1cm} S_i(x_{i+1}) = y_{i+1} $$
+and "derivative conditions" at each interior point \(x_{i+1}\) 
+$$ S_i^\prime(x_{i+1}) = S_{i+1}^\prime(x_{i+1})$$
+$$ s_i^{\prime\prime} (x_{i+1}) = s_{i+1}^{\prime\prime} (x_{i+1})$$
+
+\subsection{Boundary Conditions}
+\begin{itemize}
+\item Clamped/complete- endpoints have slope set to set value
+\item Free/Natural/Variational - "curvature" goes to zero at the end points, so the curve "straightens out"
+\item Periodic Boundary Conditions - start and end derivatives match each other, which gives a "wrap-around" type behaviour 
+\item "Not-a-Knot" boundary conditions - Last two segments on an end become the same polynomial
+\end{itemize}
+
+\subsection{Hermite v.s. Cubic Splines}
+\begin{itemize}
+\item Hermite Interpolation - each interpolant can be found independently
+\begin{itemize}
+\item Solve \(n-1\) separate systems of 4 equations
+\end{itemize}
+\item Cubic Spline - must solve for all polynomials together at once!
+\begin{itemize}
+\item Solve one system with 4(n-1) equations
+\end{itemize}
+
+\end{itemize}
+
+\section{Spline Energy}
+There is an mathematical relationship between physical splines and cubic splines. 
+
+Bending a spline by placing the "drafting ducks" introduces some stored potential energy (the bending energy) 
+
+\subsection{Real spline energy }
+The shape of a spline will find the minimum snergy configuration. (The least smooth shape)
+
+Mathematical splines also minimize an "energy". i.e a measure of the total amount of curvature 
+
+\subsection{Strategies for smooth curves}
+\begin{itemize}
+\item Hermite Interpolation
+\begin{itemize}
+\item Given values and slopes
+\item Separate solve per interval
+\item Continuous 1st derivatives
+\end{itemize}
+\item Cubic spline interpolation
+\begin{itemize}
+\item Given values only
+\item One big solve for all coeffs.
+\item Continuous 1st an 2nd derivatives
+\end{itemize}
+\end{itemize}
+
+\subsection{Size and Cost}
+\begin{itemize}
+\item Naive cubic spline system has matrix size \((4n-4)^2\) for n points
+\item Basic algorithms for linear systems take \(O(N^3)\) time for \(N\) unknowns 
+\end{itemize}
+
+\subsection{Cublic splines via Hermite Interpolation}
+Strategy : Use hermite interpolation as a stepping stone to build a cubic spline
+
+\begin{enumerate}
+\item Express unknown polys with closed form hermite equations
+\item Treat \(s_i\) (slopes at nodes) as unknowns
+\item Solve \(s_i\) that give continuous 2nd derivatives 
+\item Give \(s_i\) plug into closed form Hermite equations to recover polynomial coefficients : \(a_i, b_i, c_i, d_i\)
+\end{enumerate}
+
+
 \end{document}
 
 
