@@ -1,0 +1,250 @@
+%Notes by Harsh Mistry 
+%CS 458
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 458/658 - Computer Security and Privacy
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{4}{September 20, 2018}{Ian Goldberg }{Harsh Mistry}
+
+\section{Operating Systems}
+
+\begin{itemize}
+\item An operating system allows different users to access different resources in a "shared way"
+\item The operating system needs to control this sharing and provide an interface to allow this access
+\item Identification and authentication are required for this access control
+\end{itemize}
+
+\subsection{Protected Objects}
+\begin{itemize}
+\item Memory
+\item Data
+\item CPU
+\item Programs
+\item I/I devices
+\item Networks
+\item OS
+\end{itemize}
+
+\subsection{Separation}
+\begin{itemize}
+\item Physical Separation - Use different physical resources for different users
+\item Temporal Separation - Execute different users' programs at different times
+\item Logical Separation - User is given the impression that no other users exists
+\item Cryptographic Separation - Encrypt data and make it unintelligible to outsiders    
+\end{itemize}
+
+\subsection{Sharing}
+\begin{itemize}
+\item Sometimes users do want to share resources
+\item As a result, OS should allow "flexible" sharing"
+\end{itemize}
+
+\subsection{Memory and Address protection}
+\begin{itemize}
+\item Prevent one program from corrupting other programs or data, operating system and maybe itself
+\item Often, the OS can exploit hardware support for this protection, so it’s cheap
+\item Memory protection is part of translation from virtual to physical addresses
+\item Protection Techniques
+\begin{itemize}
+\item Fence Register 
+\begin{itemize}
+\item Exception if memory access below address in fence
+register
+\item Protects operating system from user programs
+\item Single-user OS only
+\end{itemize}
+\item Base/Bounds register pair
+\begin{itemize}
+\item Exception if memory access below/above address in
+base/bounds register
+\item Different values for each user program
+\item Maintained by operating system during context switch
+\item Limited flexibility
+\end{itemize}
+\item Tagged architecture
+\begin{itemize}
+\item Each memory word has one or more extra bits that
+identify access rights to word
+\item Very flexible
+\item Large overhead
+\item Difficult to port OS from/to other hardware
+architectures
+\end{itemize}
+\item Segmentation 
+\item Paging
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Segmentation}
+\begin{itemize}
+\item Each program has multiple address spaces
+\item Different segments for code, data, and stack
+\item Virtual addresses consist of two parts: Segment Name and offset within Segment 
+\item OS keeps mapping from segment name to its base physical address in Segment Table
+\item OS can (transparently) relocate or resize segments
+and share them between processes
+\item Segment table also keeps protection attributes
+\item Advantages 
+\begin{itemize}
+\item Each address reference is checked for protection by
+hardware
+\item Many different classes of data items can be assigned
+different levels of protection
+\item Users can share access to a segment, with potentially
+different access rights
+\item Users cannot access an unpermitted segment
+\end{itemize}
+\item Disadvantages 
+\begin{itemize}
+\item External fragmentation
+\item Dynamic length of segments requires costly
+out-of-bounds check for generated physical addresses
+\item Segment names are difficult to implement efficiently
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Paging}
+\begin{itemize}
+\item Program (i.e., virtual address space) is divided into equal-sized chunks (pages)
+\item Physical memory is divided into equal-sized chunks (frames)
+\item Frame size equals page size
+\item Virtual addresses consist of two parts: Page number and offset  within page
+\item OS keeps mapping from page \(\#\) to its base physical address in Page Table
+\item Page table also keeps memory protection attributes
+\item Advantages
+\begin{itemize}
+\item Each address reference is checked for protection by
+hardware
+\item Users can share access to a page, with potentially
+different access rights
+\item Users cannot access an unpermitted page
+\item Unpopular pages can be moved to disk to free memory
+\end{itemize}
+\item Disadvantages
+\begin{itemize}
+\item Internal fragmentation
+\item Assigning different levels of protection to different
+classes of data items not feasible
+\end{itemize}
+\end{itemize}
+
+
+\subsubsection{x86}
+\begin{itemize}
+\item x86 architecture has both segmentation and paging
+\item Memory protection bits indicate no access, read/write access or read-only access
+\item Most processors also include NX (No eXecute) bit, forbidding execution of instructions stored in page
+\end{itemize}
+
+\section{Access Control}
+Memory is only one of many objects for which OS has to run access control. In general, access control has three goals :
+\begin{itemize}
+\item Check every access: Else OS might fail to notice that
+access has been revoked
+\item Enforce least privilege: Grant program access only to
+smallest number of objects required to perform a task
+\item Verify acceptable use: Limit types of activity that can be performed on an object
+\end{itemize}
+
+\subsection{Access Control Structures}
+There are 4 different types of control structures
+\begin{itemize}
+\item Access control matrix
+\item Access control lists
+\item Capabilities
+\item Role-based access control
+\end{itemize}
+
+\subsubsection{Access Control Matrix}
+\begin{itemize}
+\item Set of protected objects : O
+\item Set of subjects : S
+\item Set of rights : R
+\item Access control matrix consists of entries \(a[s,o]\), where \(s \in S, o \in O\) and \(a[s,o] \subseteq R\)
+\item Access control matrix is rarely implemented as a matrix, instead an access control matric is typically implemented as 
+\begin{itemize}
+\item A set of access control lists
+\item A set of capabilities 
+\item or some combination
+\end{itemize}
+\end{itemize}
+
+\end{document}
+
+
+
+
+
