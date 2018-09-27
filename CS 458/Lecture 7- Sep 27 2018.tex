@@ -1,0 +1,146 @@
+%Notes by Harsh Mistry 
+%CS 458
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 458/658 - Computer Security and Privacy
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{7}{September 20, 2018}{Ian Goldberg }{Harsh Mistry}
+
+\section{Operating Systems Continued}
+
+\section{Access Control Continued}
+
+\subsubsection{Role-based access control (RBAC)}
+\begin{itemize}
+\item In a company, objects that a user can access often do not depend on the identity of the user.
+\item RBAC involves an administrator assigning a role to a user which grants access certain rights to a rolw
+\item RBAC Extensions 
+\begin{itemize}
+\item Hierarchical roles
+\item Multiple Roles
+\item Separation of Duty - Rights for a task are split across multiple roles
+\end{itemize}
+\end{itemize}
+
+\section{User Authentication}
+\begin{itemize}
+\item Computer systems often have to identify and authenticate users before authorizing them
+\item \textbf{Identification} is determining who you are
+\item \textbf{Authentication} is proving the individuals identity
+\end{itemize}
+
+\subsection{Authentication Factors}
+\begin{itemize}
+\item Factors the user knows (PIN, Password, etc)
+\item Factors the user has (Card, Badge, etc)
+\item Factors impacting who the user is (Biometrics, etc) 
+\item Factors impacting the users context (Location, time, device proximity, etc) 
+\end{itemize}
+
+\subsubsection{Combination of Authentication Factors}
+\begin{itemize}
+\item Different classes of authentication factors can be combined for more solid authentication
+\item User multiple factors from the same class might not provide better authentication
+\end{itemize}
+
+\subsubsection{Passwords}
+\begin{itemize}
+\item Probably oldest authentication mechanism used in computer systems
+\item Many usability problems, such as 
+\begin{itemize}
+\item Entering passwords is inconvenient
+\item Password composition/change rules
+\item Forgotten passwords may not be recoverable 
+\item If password is shared among many people, password update becomes difficult
+\end{itemize}
+\item Security Problems
+\begin{itemize}
+\item If password is disclosed to unauthorized individual
+\item Shoulder surfing 
+\item Keystroke logging
+\item Interface illusions / Phishing 
+\item Passwords could be reused across sites
+\item Passwords can be guessed
+\end{itemize}
+\end{itemize}
+
+
+\end{document}
+
+
+
+
+
