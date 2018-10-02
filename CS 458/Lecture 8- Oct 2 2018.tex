@@ -1,0 +1,150 @@
+%Notes by Harsh Mistry 
+%CS 458
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 458/658 - Computer Security and Privacy
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{7}{September 20, 2018}{Ian Goldberg }{Harsh Mistry}
+
+\section{Operating Systems Continued}
+
+\subsection{User Authentication Continued}
+
+\subsubsection{Graphical Passwords}
+\begin{itemize}
+\item Graphical passwords are an alternative to text based passwords
+\item There are multiple techniques such as 
+\begin{itemize}
+\item User choosing a picture to login 
+\item User choosing a set of places in a picture
+\end{itemize}
+\end{itemize}
+\subsubsection{Server Authentication}
+\begin{itemize}
+\item With the help of a password, system authenticates user (client)
+\item But user should also authenticate system (server) else might end up with attacker
+\end{itemize}
+
+\subsubsection{Biometrics}
+\begin{itemize}
+\item Biometrics have been hailed as a way to get rid of the problems with password and token-based authentication
+\item Unfortunately, they have their own problems
+\item Biometrics are based on the concept of using physical characteristics
+\item If observed trait is sufficiently close to previously stored trait, the system must accept the user
+\item Biometrics can't be changed if compromised
+\item Biometrics work well for local authentication, but are less suited for remote authentication or for identification. 
+\item With local authentication, a guard can ensure that the person is indeed the individual and not someone trying to fool the system
+\item Authentication of biometrics is ensuring a captured trait correspond to a particular stored trait.
+\item Identification is ensuring a capture trait corresponds to any of the stored traits
+\item False positives can make biometrics-based identification useless
+\end{itemize}
+
+
+\subsection{Security Policies and Models}
+\subsubsection{Trusted Operating Systems}
+\begin{itemize}
+\item Trusting an entity means that if this entity misbehaves, the security of the system fails.
+\item We trust an OS if we have confidence that is provides security services
+\item Trusted operating systems typically builds on four factors 
+\begin{itemize}
+\item Policy : A set of rules outlining what is secured and why
+\item Model : A model that implements the policy and that can be used for reasoning about the policy
+\item Design : A specification of how the OS implements the model 
+\item Trust: Assurance that the OS is implemented according to design 
+\end{itemize}
+\item Trusted software means it does what its expected and \textbf{Nothing More!}
+\begin{itemize}
+\item Functional correctness : Software works correctly
+\item Enforcement of integrity : Wrong inputs don't impact correctness of data
+\item Limit Privilege : Access rights are minimized and not passed to others
+\item Appropriate confidence level : Software has been rated as required by environment
+\end{itemize}
+\item Trust can change over time
+\end{itemize}
+\subsubsection{Security Policies}
+\begin{itemize}
+\item Many OS security policies have their roots in military security policies
+\item Each object has a sensitivity level 
+\item Each object might also be assigned to one or more compartments
+
+\end{itemize}
+
+\end{document}
+
+
+
+
+
