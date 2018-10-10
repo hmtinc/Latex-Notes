@@ -1,0 +1,134 @@
+%Notes by Harsh Mistry 
+%CS 456/656
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 456/656 - Computer Networks
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{8}{October 3, 2018}{Kamal Zille Huma}{Harsh Mistry}
+
+\section{DNS}
+\begin{itemize}
+\item DNS (Domain Name Server) is a distributed hierachical database that keeps record of HostNames and correspondng IP addresses. 
+\item If the DNS goes down you won't be able to connect 
+\item DNS is distrbuted to avoid downtime and ensure speedy search results
+\item Names are parsed Right to Left
+\item Root servers given a request route requests to DNS servers for the specific top-level domain
+\item Top-Level Servers will direct you to the DNS server for the specific site
+\item Authoritive server is the last DNS server in the chain
+\item Local DNS will have the location of the Root DNS server
+\item Local DNS is checked first for possible cached values which might have the Authoritive server location
+\item DNS is primarily UDP, but if no response is received, then your client will open a TCP connection
+\item TCP is used as a backup
+\item DNS Definitions
+\begin{itemize}
+\item DNS : Distributed database storing resource records (RR) 
+\item RR format is (name, value, type, ttl) 
+\end{itemize}
+\item Types 
+\begin{itemize}
+\item Type = A 
+\begin{itemize}
+\item Name is the host name
+\item Value is the IP address
+\end{itemize}
+\item Type = NS 
+\begin{itemize}
+\item Name is domain (i.e foo.com)
+\item Value is host name of authoritative name server for this domain 
+\end{itemize}
+\item Type = CNAME
+\begin{itemize}
+\item Name is alias name for the real name 
+\item Value is canonical name (real name)
+\item example : ibm.com is really backup2.ibm.com
+\end{itemize}
+\item Type = MX
+\begin{itemize}
+\item Value is name of mailserver associated with name
+\end{itemize}
+\end{itemize}
+\item DNS Protocols
+
+\end{itemize}
+
+
+
+
+\end{document}
+
+
+
+
+

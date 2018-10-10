@@ -1,0 +1,111 @@
+%Notes by Harsh Mistry 
+%CS 456/656
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 456/656 - Computer Networks
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{7}{October 1, 2018}{Kamal Zille Huma}{Harsh Mistry}
+
+\section{SMTP}
+\begin{itemize}
+\item Simple Mail Transfer Protocol
+\item There is a TCP handshaking process after which the client will initiate SMTP handshaking processes
+\item Status codes are used to indicate action and status of requested actions
+\item The only thing important in SMTP  is the codes, so the implication is that junk data data can be placed such as fake email addresses
+\item Every SMTP command is 4 letters
+\item HELO indicates SMTP
+\item Ehlo indicates ESMTP
+\item SMTP is only used for pushing messages to a server
+\item To retrieve messages, you must use a mail access protocol
+\begin{itemize}
+\item IMAP 
+\item POP3
+\item HTTP
+\end{itemize}
+\item Client must request for new mail via a mail access protocol 
+\item MIME is added to SMTP headers to indicate content:type will be used in the data sections
+\item Content-type is used in the data section to indicate to the client to identify different types of content which will indicate how to open and decode certain files in the SMTP request
+\item Unlike HTTP requests, SMTP supports different content in one message
+\end{itemize}
+
+
+
+
+\end{document}
+
+
+
+
+
