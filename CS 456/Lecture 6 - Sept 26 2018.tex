@@ -1,0 +1,116 @@
+%Notes by Harsh Mistry 
+%CS 456/656
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 456/656 - Computer Networks
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{7}{September 26, 2018}{Kamal Zille Huma}{Harsh Mistry}
+
+\section{HTTP 2.0}
+\begin{itemize}
+\item Based on Google SPDY
+\item Major protocol version because of a new binary framing that is not compatible with HTTP 1.0
+\item HTTP 2.0 decreases latency to improve page load speed in web browsers by considering
+\begin{itemize}
+\item Data compression
+\item Multiplexing asynchronous requests and responses (streams and frames) over a single TCP connection
+\item Stream prioritization 
+\end{itemize}
+\item Fixes head-of-line blocking
+\item Still based upon TCP
+\end{itemize}
+
+\section{HTTP 2.0 Multiplexing}
+\begin{itemize}
+\item HTTP 2.0 creates a virtual connection in a single TCP connection called a stream
+\item Streams support bi-directional data transfer
+\item Frames are the unit of HTTP 2.0 that are physically put into the socket
+\item  Multiple frames form a message 
+\item A message is either a HTTP request or Response
+\item Binary Framing reduces size 
+\item Framing allows for multiplexing 
+\item Headers are compressed and split across different frames. Headers can be compressed by leaving out certain fields that are implicit
+\item Headers and Data are split across different frames
+
+\end{itemize}
+
+
+
+\end{document}
+
+
+
+
+

@@ -1,0 +1,140 @@
+%Notes by Harsh Mistry 
+%CS 456/656
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 456/656 - Computer Networks
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{5}{September 24, 2018}{Kamal Zille Huma}{Harsh Mistry}
+
+\section{HTTP}
+\begin{itemize}
+\item HTTP (Hyper Text Transfer Protocol) provides the ability to point elsewhere from text. It is an application later protocol and it how two applications communicate. 
+\item HTTP involves requests and responses
+\item HTTP/1.0 required connections to be recreated consistently  for each request
+\item A request message is in ASCII format
+\begin{itemize}
+\item Req Line [GET/POST/PUT]
+\item Header
+\begin{itemize}
+\item HOST
+\item User-Agent
+\item Accept
+\item Accept-Language
+\item Accept-Encoding
+\item etc \(\ldots\)
+\end{itemize}
+\end{itemize}
+\item A response is also in ASCII format
+\begin{itemize}
+\item Status Line
+\item Date
+\item Server 
+\item Last Modified
+\item Content Length 
+\item Keep Active 
+\item etc \(\ldots\)
+\end{itemize}
+\item Status Codes 
+\begin{itemize}
+\item 1xx = not used
+\item 2xx = successful 
+\item 3xx = redirections
+\item 4xx = client error 
+\item 5xx = server error
+\end{itemize}
+
+\end{itemize}
+
+\section{HTTP 1.1}
+\begin{itemize}
+\item HTTP 1.1 introduces persistent requests to avoid constant handshaking if the HTTP header "keep-alive" is  set under connection
+\item If client does not request close, it will timeout after a certain limit defined in the headers
+\item Server must implement keep-alive
+\item Time-out duration must be negotiated
+\item HTTP has no way to keep track of repeated requests, as its stateless. This leads to the classic DDOS actions.
+\item HTTP 1.1 uses \textbf{Pipe-lining} which is when multiple requests are issued from the client. This causes the server to queue requests. This does not lead to performance advantages, as head-of-line blocking occurs.
+\end{itemize}
+
+\begin{definition}
+RTT \(\rightarrow\) Round Trip Time, How long it takes for one cycle of information. 
+\end{definition}
+
+
+\end{document}
+
+
+
+
+
