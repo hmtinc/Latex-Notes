@@ -1,0 +1,196 @@
+%Notes by Harsh Mistry 
+%CS 458
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 458/658 - Computer Security and Privacy
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{10}{October 11, 2018}{Ian Goldberg }{Harsh Mistry}
+
+\section{Network Security} 
+\subsection{Network Concepts}
+\begin{itemize}
+\item Internet is a network of network where all components communicate via TCP/IP
+\end{itemize}
+
+\subsubsection{TCP/IP protocol suite}
+\begin{itemize}
+\item Transport and network layer designed in the 1970's to connect local networks at different universities and research labs
+\item Participants knew and trusted each other 
+\item Design addressed non-malicious errors, but no delicious errors.
+\end{itemize}
+
+\subsubsection{Threats in networks}
+\begin{itemize}
+\item Intelligence
+\item Attacks on confidentiality
+\item Impersonation and spoofing
+\item Attacks on integrity
+\item Protocols failures
+\item Web site vulnerabilities
+\item Denial of Service
+\item Botnets
+\item Threats in active/mobile code
+\item Script Kiddies
+\end{itemize}
+
+\subsubsection{Port Scan}
+\begin{itemize}
+\item To distinguish between multiple applications running on the server, each application runs on a port
+\item Attacker sends queries to ports on target machine and tries to identify whether and what kind of application is running on a port
+\item Identification based on loose-lipped applications or how exactly implements a protocol
+\item Loose-lopped systems reveal information that could facilitate an attack
+\item Nmap tool can identify many applications
+\item Goal of attacker is to find application with remotely exploitable flaw
+\end{itemize}
+
+\subsubsection{Intelligence}
+\begin{itemize}
+\item Social Engineering (Attacker gathers sensitive information from a person)
+\item Dumpster diving
+\item Eavesdropping on oral communication
+\begin{itemize}
+\item Owner of node can always monitor communication flowing through node
+\item Can also eavesdrop while communication is flowing across a link 
+\item Eavesdropping can also occur if secure communications are mistakenly sent to the wrong recipient.  
+\end{itemize}
+\item Social media and cloud data can be used to collect alot of senstive information as we share more details online
+\end{itemize}
+
+\subsubsection{Impersonation}
+\begin{itemize}
+\item Impersonate a person by stealing his/her password
+\begin{itemize}
+\item Guessing attack
+\item Exploit default passwords that have not been changed
+\item Sniff password while it is being transmitted two nodes
+\end{itemize}
+\item Exploit trust relationship between machines/accounts
+\begin{itemize}
+\item Rhosts/rlogin allows user A on machine X to specify that user B on machine Y can act as A on X without having to enter password
+\item Rlogin is trust based on encrypted or reliant on passwords
+\end{itemize}
+\end{itemize}
+\subsubsection{Spoofing}
+\begin{itemize}
+\item Object masquerades as another object
+\item URL spoofing
+\item Web page spoofing and URL spoofing are used in Phishing attacks 
+\item \textbf{Evil Twin} attack for Wifi access points
+\item Spoofing is also used in session hijacking and man-in-the-middle attacks
+\end{itemize}
+
+\subsubsection{Session Hijacking}
+\begin{itemize}
+\item TCP protocol sets up state at sender and receiver end nodes and uses the state while exchanging packets
+\item Web servers sometimes have client keep a little piece of data "cookies" to re-identify client for future visits 
+\begin{itemize}
+\item Attacker can sniff or steal cookie and masquerade as client
+\end{itemize}
+\item Man in the middle attacks can be executed to capture sensitive data
+\end{itemize}
+
+\subsubsection{Integrity Attacks}
+\begin{itemize}
+\item Attacker can modify packets while they are being transmitted
+\begin{itemize}
+\item Change  payload of packets
+\item Change address of sender of receiver end node
+\item Replay previously seen packets
+\item Delete or create packets
+\end{itemize}
+\item Line noise, network congestion, or software errors, could also cause these problems.
+\item DNS cache poisoning is an excellent example of an integrity attack
+\begin{itemize}
+\item DNS will keep a cache of mappings between domain names and destination addresses. 
+\item An attacker can modify these mappings or create new wrong ones to point the user to a different end location. 
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Protocol Failures}
+\begin{itemize}
+\item TCP/IP assumes that all nodes implement protocols faithfully
+\item E.g TCP includes a mechanism that ass a sender node to slow down if the network is congested. 
+\item Some implementations do no check whether a packet is well formatted
+\item Protocols can be very complicated, behaviour in rare cases may not be uniquely defined
+\item Some protocols include broken security
+\end{itemize}
+
+\end{document}
+
+
+
+
+
