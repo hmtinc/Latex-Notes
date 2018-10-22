@@ -186,9 +186,45 @@ Parametrization traverses the curve in the opposite direction (left to right) as
 Both Curves cover the same semi-circle curve, in the same direction, but return different poitns for any given value of \(t\) 
 \end{ex}
 
+\subsection{ODE}
+\begin{itemize}
+\item ODE (Ordinary Differential Equations) are equations that provide the relationship between variable and its derivative given by the known function \(y^\prime (t) = f(t, y(t))\). Normally, \(y(t)\) is not given explicitly in closed form
+\item The general form us a differential equation is 
+$$y^\prime (t) = f(t, y(t))$$
+where \(f\) is specified and the initial values are 
+\(y(t_0) = y_0\)
+\end{itemize}
 
+\subsubsection{Complications}
+\begin{enumerate}
+\item Involving more than one unknown variable, or a system of differential equations, the problem can get complicated
+\item Involving higher order differential equations can also cause complications
+\end{enumerate}
 
+\subsubsection{Systems of Differential Equations}
+If given multiple dynamic functions and multiple initial conditions, we can the equations as vectors
+\begin{center}
+\includegraphics[scale=0.3]{1}
+\end{center}
 
+\subsubsection{Time-Stepping}
+Given initial conditions, we repeatedly step sequentially forward to the next time instant, using the derivative info, \(y^\prime\) and a timestep, \(h\)
+
+Set \(n = 0, t=t_0, y = y_0\)
+\begin{enumerate}
+\item Compute \(y_{n+1}\)
+\item Increment time, \(t_{n+1} = t_n + h\)
+\item Advance, \(n = n + 1\)
+\item Repeat
+\end{enumerate}
+
+\begin{itemize}
+\item Single Step Time Stepping involves using information from current time 
+\item Multi Step Time Stepping involves using information from previous time steps
+\item Explicit time stepping is when \(y_{n+1}\) is given as an explicit function to evaluate
+\item Implicit time stepping is when \(y_{n+1}\) is not given as an explicit function to evaluate
+\item Timestep Size \(h\) can be constant or Variable
+\end{itemize}
 
 \end{document}
 
