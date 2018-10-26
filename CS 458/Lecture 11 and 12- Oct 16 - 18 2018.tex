@@ -1,0 +1,184 @@
+%Notes by Harsh Mistry 
+%CS 458
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 458/658 - Computer Security and Privacy
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{11  and 12}{October 16 - 18, 2018}{Ian Goldberg }{Harsh Mistry}
+
+\section{Network Security Continued} 
+\subsection{Network Concepts}
+\subsubsection{Web Site Vulnerabilities}
+\begin{itemize}
+\item Web site defacements
+\item Attacked can examine returned HTML code for vulnerabilities
+\item Attacked can send malicious  URL to web server
+\item HTTP protocol is stateless, so client is often asked to keep the state in the form of a cookie or URL. This can be abused by submitting modified state information to the server
+\item Cross-Site Scripting or Request Forgery attacked which are a form of code injection can be used to add HTML code to somebody else's page
+\item XSS : code steals sensitive information contained in the web page and sends it to attacker
+\item CSRF : Code performs malicious action at some web site if user is currently logged in there
+\end{itemize}
+
+
+\subsection{Denial of Service}
+\begin{itemize}
+\item Exploit knowledge of implementation details about a node to make node perform poorly
+\item A SYN flood is when a attacker initiates a TCP condition and doesn't send any acks
+\item DNS attacks are also common where a users cache can be filled with incorrect host info
+\end{itemize}
+
+\subsubsection{Reflection and Amplification of DDoS Attack}
+\begin{itemize}
+\item An attack where the victim is flooded with legitimate-looking traffic that originates from unsuspecting network nodes on the internet
+\item Amplification : A vulnerable network node runs a service that responds to queries with much more data than the query itself
+\item Reflection : The attacker spoofs the source address of the queries to that of the victim so that the vulnerable network nodes send responses to the victim
+\end{itemize}
+
+\subsubsection{Distributed Denial of Service}
+\begin{itemize}
+\item Similar to DoS expect the attack is spread across a series of devices to mask the source
+\item This networks of devices are often refereed to as a botnets
+\end{itemize}
+
+\subsection{Active code}
+\begin{itemize}
+\item To reduce load on server, a server might ask a client to execute code on its behalf
+\item Obviously, this can be dangerous for clients as this code could possibly be malicious
+\item To combat this, its ideal to run untrusted code in a sandbox
+\end{itemize}
+
+
+\subsection{Network Security Controls}
+\begin{itemize}
+\item Ensure the design validates user inputs
+\item Separate services across multiple devices
+\item Ensure services are duplicated to ensure redundancy
+\item Use Firewalls to filter traffic
+\item Attempt to pass traffic through a few routers to enable easier monitors
+\end{itemize}
+
+\subsection{Firewalls}
+\begin{itemize}
+\item Firewalls allow for all traffic to be passed through choke points
+\item Types of firewalls
+\begin{itemize}
+\item Packet filtering gateways : The simplest type which make decisions based on just the header
+\item Stateful inspection firewalls: Keeps state to identify packets that belong together
+\item Application proxy : All traffic for a specific application is passed through a proxy
+\item Personal firewalls : Typically forbid everything unless explcity allowed and run on a users computer
+\end{itemize}
+\end{itemize}
+
+\subsection{DMZ}
+\begin{itemize}
+\item Sub-network that contains an organizations external services
+\item Often is set-up between a internal and external firewall
+\end{itemize}
+
+\subsection{Intrusion detection systems}
+\begin{itemize}
+\item Firewalls do not protect agaonst inside attackers or insiders making mistakes can be subverted
+\item IDSs are next line of defense
+\item IDss monitor activity to identify malicious or suspicious events
+\item Host Based IDSs
+\begin{itemize}
+\item Run on a host to protect the host 
+\item Can exploit lots of information, and misses out on information available to other hosts
+\end{itemize}
+\item Network Based IDSs
+\begin{itemize}
+\item Runs on dedicated node to protect all hosts on a network 
+\item Has to rely on on information available in monitored packets
+\end{itemize}
+\item Distributed IDSs combine both Network and Host based approaches
+\item Signature Based IDSs
+\begin{itemize}
+\item Attack signatures are compared aganist a collection of known signatures. 
+\end{itemize}
+\item Heuristic/anomaly Based IDSs
+\begin{itemize}
+\item Looks for behaviour that is out the ordinary by modelling good behaviour and raising alerts when system activity no longer resembles this model
+\item  All activity is classified as good or benign, suspicious, or unknown
+\item  The primary disadvantage is that even goof IDs using this method take time to learn and classify unknown events. 
+\end{itemize}
+\end{itemize}
+
+\end{document}
+
+
+
+
+
