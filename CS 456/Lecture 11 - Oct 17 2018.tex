@@ -1,0 +1,116 @@
+%Notes by Harsh Mistry 
+%CS 456/656
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 456/656 - Computer Networks
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{11}{October 17, 2018}{Kamal Zille Huma}{Harsh Mistry}
+\section{Transport Layer Services}
+\begin{itemize}
+\item Transport Layer typically only offers support for UDP and TCP
+\item The Transport layers responsibility is to transfer a packet from an application to an application on the end system
+\item Transport layer takes the application layer message and encapsulates it within a Transport Layer Segment
+\item Most segments will contain 
+\begin{itemize}
+\item Source port number
+\item Destination port number
+\item Source IP address 
+\item Destination IP address
+\item Checksum
+\end{itemize}
+\item Integrity and Packet-loss are the primary concerns of the transport layer
+\end{itemize}
+
+\subsection{RDT (Reliable Data Transport Protocol)}
+\begin{itemize}
+\item RDT is a base upon which lessons for TCP were learned
+\item To check for corruption, a checksum will be appended to the segment
+\item RDT also introduces ACK, NAK, and Sequence Number into the segment
+\item RDT requires each packet to be confirmed by the server before it sends another packet. This stop-and-wait approach causes RDT to have poor performance. 
+\end{itemize}
+\subsection{Go-Back-N}
+\begin{itemize}
+\item Go-Back-N improves upon RDT by introducing Pipe-lining. This allows for \(N\) packets to be sent out in parallel.
+\item Go-Back-N keeps track of sent packets in a window of Size \(N\). Packets are still sent in order as the window can not move till the next sequence number goes beyond the window. 
+\item If the timer fires, all packets that have been sent but not acknowledged are resent
+\item On the server, a counter is maintained to keep track of the expected packet. If the packet sequence number mismatches the expected packet, the server responds with the last received packet.
+\end{itemize}
+
+\end{document}
+
+
+
+
+
