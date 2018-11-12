@@ -1,0 +1,422 @@
+%Notes by Harsh Mistry 
+%CS 458
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 458/658 - Computer Security and Privacy
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{13 - 18}{October 23 - November 8, 2018}{Ian Goldberg }{Harsh Mistry}
+
+\section{Cryptography} 
+\begin{itemize}
+\item Cryptography is the science that studies producing secret messages and breaking secret messages. The intention being, to develop methods to communicate securely via a insecure medium
+\item Cryptography contains three major types of components 
+\begin{itemize}
+\item Confidentiality. Preventing authorized reading
+\item Integrity. Preventing modification
+\item Authenticity. Preventing impersonation
+\end{itemize}
+\item Kerckhoffs' Principle 
+\begin{itemize}
+\item The security of a cry[tosystem should not rely on a secret that's hard (or expensive) to change.
+\item Implication \(\rightarrow\) The system is at most secure as the number of keys
+\item A strong cryptosystem is where the best an attack can do, is try every combination
+\end{itemize}
+\end{itemize}
+
+\subsection{Strong Cryptosystems}
+\begin{itemize}
+\item A attacker may 
+\begin{itemize}
+\item know the algorithm
+\item know part of the plain text
+\item know corresponding plaintext/cipher pairs
+\item have access to an encryption and/or decryption oracle
+\end{itemize}
+\item Strong systems intend to defend against that may know all of these 
+\end{itemize}
+\subsection{Secret Key Encryption}
+\begin{itemize}
+\item Simplest form of cryptography
+\item Also called symmetric encryption
+\item Keys are the same on both sides
+\item Its possible to have a unbreakable system if you use the One-Time pad which involves a system where the key is truly random bit string of the same length. Encrypt and Decrypt are just XOR functions 
+\end{itemize}
+
+\subsubsection{Computational Security}
+\begin{itemize}
+\item In contrast to "Perfect Security", most cryptosystems have computational security. Which means they can be broken with enough work 
+\item 128-bit is the modern standard
+\end{itemize}
+
+\subsubsection{Types of secret-key crypto}
+\begin{itemize}
+\item Stream ciphers
+\begin{itemize}
+\item A stream cipher is what you get if you take the one-time pad, but use a pseudorandom keystream instead of a truly random one
+\item RC4 is the most commonly used stream cipher 
+\item Are really fast and good for sending large amounts of data
+\item Are tricky to use because what happens if use the same key twice
+\item WEP, and PPTP are great examples of ppor Stream implementation
+\end{itemize}
+\item Block ciphers
+\begin{itemize}
+\item Block ciphers operate on blocks of a message rather than each bit
+\item Blocks are usually 64 to 128 bits
+\item AES is an example of a block cipher
+\item Modes of operation
+\begin{itemize}
+\item ECB (Electronic Code Book), encrypt each successive block separately
+\item CBC (Cipher Block Chaining) - Needs IV
+\item CTR (Counter) - Needs IV
+\item GCM (Galois Counter) - Needs IV
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\subsection{Key Exchange}
+\subsubsection{Public Key Cryptography}
+\begin{itemize}
+\item Called asymmetric cryptography
+\item Common example are RSA, ElGamal, ECC, and NTRU
+\item Public key sizes are important, as many public-key methods have short cuts
+\end{itemize}
+\subsubsection{Hybrid Cryptography}
+\begin{itemize}
+\item Public key encryption is slow, so we can take a hybrid approach 
+\begin{enumerate}
+\item Pick a random 128-bit key for a secret-key
+\item Encrypt a large message with the key K
+\item Encrypt K with the public-key
+\item Send the encrypted message with encrypted K to receiver
+\end{enumerate}
+\item This is used for almost every cryptography application on the internet today
+\end{itemize}
+
+\subsection{Integrity}
+\begin{itemize}
+\item Checksum is not a valid way of determining validity, as a new message with the same checksum can be computed
+\item A cryptographic check-sum is needed
+\end{itemize}
+
+\subsubsection{Cryptographic Hash Functions}
+\begin{itemize}
+\item A hash function h takes an arbitrary length string x and computes a fixed length string y = h(x) called a message digest
+\item Hash functions should have 3 properties
+\begin{itemize}
+\item Preimage-resistance, its hard to find the input from the output
+\item Second preimage-resistance, given a input its hard to find a second input that yields the same result
+\item Collision-resistance, Its hard to find two values that yield the same result
+\end{itemize}
+\item Crytographic hash functions aren't a guarantee, as a MIM can just recompute a new message digest,
+\item Hash functions provide integrity guarantees only when there is secure way of sending and/or storing the message digest. 
+\end{itemize}
+
+\subsection{Authentication}
+\subsubsection{Message Authentication Codes}
+\begin{itemize}
+\item We can do the same thing as encryption for hash functions. Used a shared secret key to pick the correct hash function
+\item Only those with the secret key can generate or even check the computed hash (tag)
+\item These keyed hash functions are usually caled Message Authentication Codes or MACs
+\end{itemize}
+
+\subsubsection{Repudiation}
+\begin{itemize}
+\item Repudiation is where the sender can claim the receiver falsely produced the message. 
+\item Its basically a situation, where there is no guarantee a user sent a message
+\end{itemize}
+
+\subsubsection{Digital Signatures}
+\begin{itemize}
+\item For non-repudiation, we can use a digital signature to ensure the sender actually sent the message
+\item To make a digital signature, the sender signs the message with their private key, then the receiver verifies the message with their copy of the public key
+\end{itemize}
+
+\subsubsection{Hybrid Signatures}
+\begin{itemize}
+\item Just like encryption in public key crypto, signing messages is slow
+\item We can hybridize things to make them faster 
+\item Message is sent unsigned, but the hash is signed
+\item Authenticity and confidentiality are separate
+\end{itemize}
+
+
+\subsection{Certificate Authorities}
+\begin{itemize}
+\item One of the hardest problems of public key crypto is key management
+\item CA's solve this problem
+\item CA's are trusted third parties, who keep a directory of people's verification keys 
+\item CA generates a certificate consisting of alice's personal information, as well as her verification key. The entire certificate is signed with the CA's signature key
+\item Everyone is assumed to have a copy of the CA's verification key
+\item There can be multiple levels of certificate authorities
+\end{itemize}
+
+\section{Internet Security and Privacy}
+\begin{itemize}
+\item The primary use for cryptography is "Separating the security of the medium from the security of the message"
+\item Entities you can only communicate with over a network are inherently less trustworthy.
+\item Network cryptography is used at every layer of the network stack for both security and privacy applications
+\end{itemize}
+
+\subsection{Link Layer Security Controls}
+\begin{itemize}
+\item Intended to protect local area networks
+\item WEP (Wired Equivalent Privacy) is a widespread example of a solution where none of the CIA properties were properly enforced
+\end{itemize}
+
+\subsubsection{WEP}
+\begin{itemize}
+\item The sender and receiver share  a secret k where K is either 40 or 104 bits long
+\item In order to transmit a message M 
+\begin{enumerate}
+\item Compute checksum of M : c(M)
+\item Pick an IV (random number) v and generate a keystream RC4(v,k)
+\item XOR \verb|<M, c(M)>| with the keystream to get the cipher text
+\item Transmist v and the ciphertext over the wireless link
+\end{enumerate}
+\item Upon receipt of v and the ciphertext:
+\begin{enumerate}
+\item Use the received c and shared k to generate keystream RC4(v,k)
+\item XOR the cipher text with RC4(v, k) to get \verb|<M',c'>| 
+\item check to see if check sum matches
+\item if it matches, accept the decrypted message
+\end{enumerate}
+\item Authentication Protocol
+\begin{enumerate}
+\item Access point sends a challenge string
+\item Client sends back the challenge, WEP encrypted with the shared secret k
+\item The wireless access point checks if the challenge is correctly encrypted and if so accept the client
+\end{enumerate}
+\end{itemize}
+
+\subsubsection{WEP Problems}
+\begin{itemize}
+\item v is only 24 bits long, which can lead to reused random numbers
+\item Checksum used in WEP is CRC-32, which can easily exploited since it is linear and independent of k and v. This allows an attacker to inject a new message into the network simply by replacing the message and recalculating the check-sum
+\item Authentication protocol gives away plain-text/cipher pair for free
+\item The authentication protocol leaves room for an attacker to execute the protocol himself by observing the authentication process
+\item When RC4 is used on similar keys, the output stream has a subtle weakness. Observing the output stream can lead to a 104-bit ot 40-bit key in under 60 seconds
+\end{itemize}
+
+\subsubsection{WPA}
+\begin{itemize}
+\item Wifi Protected Access is a short term patch to WEP
+\item Replaces CRC-32 with a real MAC (Called a MIC to avoid confusion with Media access control)
+\item IV is 48 bits long
+\item Key is changed frequently 
+\item Has ability to use 802.1x auth server
+\item Can run on most older WEP hardware
+\end{itemize}
+
+\subsubsection{WPA2}
+\begin{itemize}
+\item Replaces RC4 and MIC algorithms in WPA with the CCM auth encryption mode (AES)
+\item Considered strong, but dictionary attacks are still possible
+\end{itemize}
+
+\subsection{Network Layer Security}
+\begin{itemize}
+\item Security within our network is not enough, we need security across networks. 
+\end{itemize}
+
+\subsubsection{VPN}
+\begin{itemize}
+\item VPNs connect two or more networks that are physically separated, and make them appear to be a single network
+\item The goal is to prevent an attacker from being able to read of modify traffic flowing between two locations
+\end{itemize}
+
+\subsubsection{Tunnelling}
+\begin{itemize}
+\item Tunnelling is the sending of message of one protocol inside message of another protocol, out of their usual protocol nesting sequence
+\item TCP-over-IP is not tunnelling, but IP-over-TCP is tunnelling
+\end{itemize}
+
+\subsubsection{IPSec}
+\begin{itemize}
+\item IPSec is one standard way of setting up a VPN
+\item There is two modes
+\begin{itemize}
+\item Transport mode which is useful for connecting a single machine to a home network. Only the contents of the ip are encrypted
+\item Tunnel mode which is useful for connecting two networks. The contents and the header of the original packet are encrypted and authenticated
+\end{itemize}
+\item Some other VPN styles are Microsoft PPTP and VPNs over SSH
+\end{itemize}
+
+\subsection{Transport Layer Security and Privacy}
+\begin{itemize}
+\item Network layer security mechanisms arrange to send individual IP packets securely from one network to another
+\item They transform arbitrary TCP connections to add security
+\item TLS is the main security mechanism and Tor is the main privacy mechanism
+\end{itemize}
+\subsubsection{TLS/SSL}
+\begin{itemize}
+\item High Level
+\begin{enumerate}
+\item Client connections to server indicated it wants to use TLS
+\item Server sends its certificate to client which contains admin info
+\item Server chooses which ciphersuite to use
+\item Client validates server's certificate
+\item Client and Server run a key agreement protocol to establish keys for symmetric encryption an MAC algorithms from the chosen ciphersuite
+\item Communication then proceeds using the chosen symmetric encryption
+\end{enumerate}
+\item Security properties provided by TLS
+\begin{itemize}
+\item Server authentication
+\item Message integrity
+\item Message confidentiality 
+\item Client authentication 
+\end{itemize}
+\item Most successful Privacy Enhancing Technology (PET)
+\end{itemize}
+
+
+\subsubsection{Tor}
+\begin{itemize}
+\item Tor is another successful privacy enhancing technology that works at the transport layer
+\item Tor allows you to make TCP connections without revealing your IP
+\item Tor tunnels your connection across through multiple nodes. Each link is encrypted except the last link
+\item No node knows both the user and website 
+\item The connection between each node results in a new encrypted link with a new encryption secret
+\item Tor provides \textbf{anonymity} for both unlinkably (Long-term) and linkably (short term) 
+\end{itemize}
+
+\subsubsection{The Nymity Slider}
+\begin{itemize}
+\item We can place transactions (both online and offline) on continuum according to the level of nymity they represent 
+\begin{itemize}
+\item Verinymity (e.g Government ID)
+\item Persistent Pseudonymity (e.g Many Blogs)
+\item Linkable anonymity (e.g loyalty cards)
+\item Unlinkable anonymity (e.g Cash Payments)
+\end{itemize}
+\item If you build a system at a certain level of nymity, its easy to modify it to have a higher level of nymity, but hard to modify it to have a lower level. 
+\item So, design systems with a low level of nymity
+\end{itemize}
+\subsection{Application Layer Security And Privacy}
+\begin{itemize}
+\item Many applications want true end to end encryption, so we add an additional layer of security on the application it self
+\end{itemize}
+\subsubsection{SSH}
+\begin{itemize}
+\item Secure Remote Login
+\item Usual Usage 
+\begin{itemize}
+\item Client connects to server
+\item Server sends its verification key
+\item Client and Server run key agreement protocol
+\item Client authenticates to server
+\item Server accepts authentication and login proceeds
+\end{itemize}
+\item There is two methods of authentication, sending a password over a encrypted channel or sending a random challenge with a private signature.
+\end{itemize}
+\subsubsection{Remailer}
+\begin{itemize}
+\item Provide Anonymity for email by providing you the ability to send an email without revealing your own email
+\item Type 0 Remailers work by having a third party server simply forwarding a sent email under a random address. The new address is stored in a table, so the central server can relay responses back to you 
+\item Type 1 Remailers remove the central server by relaying the message through multiple remailers and each step is encrypted to avoid observation. Additionally, remailers delay and reorder messages. This type does not support responses
+\item Type 2 Remailers enforced constant length messages to avoid observers from watching a big file travel through the network, but requires a special mail client to construct message fragments
+\item Type 3 remailers have native support for pseudonymity, but aren't well deployed or mature
+\end{itemize}
+\subsubsection{Pretty Good Privacy}
+\begin{itemize}
+\item First popular implementation of public key cryptography
+\item Primarily used to protect emails 
+\item Main functions
+\begin{itemize}
+\item Four kinds of keys (Encryption, decryption, signature, and verification)
+\item Encrypt messages using someone else's encryption 
+\item Decrypt messages using your own decryption key
+\item Verify signatures using someone elses verification key 
+\item Sign other people's key using your own signature key 
+\end{itemize}
+\end{itemize}
+
+\subsubsection{OTR}
+\begin{itemize}
+\item Off-the-Record Messaging (OTR) is software that allows you to have private conversations over instant messaging providing Confidentiality and Authentication.
+\item Perfect Forward Secrecy : After forwarding the message is unreadable to anyone else
+\item Deniablity : You can't convince others a message was truly sent by someone else even though you know who the sender was
+\item Signal Protocol is a perfect example of this and is used by many popular messaging services
+\begin{itemize}
+\item Uses "ratchet" technique to constantly rotate session keys to ensure Perfect Forward Secrecy
+\item Deniability is provided by Triple Diffie-Hellman deniable authenticated key exchange (DAKE)
+\end{itemize}
+\end{itemize}
+
+\end{document}
+
+
+
+
+
