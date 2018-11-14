@@ -1,0 +1,170 @@
+%Notes by Harsh Mistry 
+%CS 456/656
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 456/656 - Computer Networks
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{13 - 18}{October 29 - November 13, 2018}{Kamal Zille Huma}{Harsh Mistry}
+
+\section{Transport Layer Continued}
+
+\begin{itemize}
+\item Ack indicates the expected packet from the other side 
+\item Timeout Interval = EstimatedRTT + 4 * DEVRTT
+\end{itemize}
+
+\subsection{TCP}
+\begin{itemize}
+\item Retransmissions are triggered by Timeout and Duplicate Acks
+\item TCP added pipelined segments, cumulative acks, and single transmission timer
+\item Sequence number is the byte stream number of first data byte in segment 
+\item Fast Retransmit : If sender receives 3 ACKs for same data, resend unacked segment with smallest sequence number
+\end{itemize}
+
+\subsubsection{TCP Flow Control}
+\begin{itemize}
+\item Receiver controls sender, so sender won't overflow receiver's buffer 
+\item Receiver "advertises" free buffer space by including rwnd value in TCP header of receiver 
+\item rwnd is typically total buffer size - RcvBuffer 
+\item RcvBuffer is typically 4096, but some systems may dynamically change that
+\end{itemize}
+
+\subsubsection{Connection Management}
+\begin{itemize}
+\item Before exchanging data, sender/receeiver need to agree to establish connection and agree on connection parameters
+\item Two-way handshake can not work sure to variable delays , retransmitted messages, and message reordering
+\item Three-way handshaking is introduced to resolve theses issues
+\begin{enumerate}
+\item Client sends SYN Request (Synbit = 1, Seq bit = x) 
+\item Server chooses seq starting point and sends SYN ACK  (SynBit = 1, seq = y, AckBit =1, AckNum = x+1)
+\item Client sends Ack (ACKBit = 1, ACKnum =y+1)
+\end{enumerate}
+\item Closing a connection 
+\begin{enumerate}
+\item Client sends packet with FinBit (FinBit = 1, Seq = x)
+\item Server Acks packet
+\item Server Keeps sending data till its ready to close
+\item Server sends FinBit and can no longer send data (FinBit = 1, Seq = y)
+\item Client Acks Fin Bit Packet
+\item Connection is closed
+\end{enumerate}
+\end{itemize}
+
+\subsubsection{Congestion Control Principles}
+\begin{itemize}
+\item informally:  "too many sources sending too much data too fast for network to handle"
+\item Different from flow control
+\item Can lead to lost packets and long delays
+\end{itemize}
+
+\subsubsection{TCP Congestion Control}
+\begin{itemize}
+\item sender increases transmission rate (window size), probing for usable bandwidth, until loss occurs
+\item \textbf{Additive Increase} : increase cwnd by 1 MSS every RTT until loss detected
+\item \textbf{Multiplicative Decrease} : cut cwnd in half after loss
+\item Sender Limits transmission 
+$$ \text{LastByteSent - LastByteAcked} \leq \text{cwnd}$$
+$$ \text{send rate} \approx \frac{cwnd}{RTT} \text{Bytes/sec} $$
+\item TCP slow start is when cwnd is doubled every RTT. The initial rate is slow, but ramps up exponetially fast
+\item Loss is indicated by 3 duplicate acks 
+\item TCP RENO cuts window in half and the grows linearly
+\item TCP Tahoe resets cwnd to 1
+\end{itemize}
+
+\subsubsection{TCP Throught}
+\begin{itemize}
+\item TCP Throughput = \( \frac{3}{4} \frac{W}{RTT} \) bytes/sec
+\item TCP Throughput = \(\frac{1.22 \times MSS}{RTT \sqrt{L}}\)
+\end{itemize}
+
+\subsubsection{TCP Fairness}
+\begin{itemize}
+\item if K TCP sessions share same bottleneck link of bandwidth R, each should have average rate of R/K
+\end{itemize}
+
+\subsubsection{Explicit Congestion Notification}
+\begin{itemize}
+\item two bits in IP header (ToS field) marked by network router to indicate congestion
+\item receiver (seeing congestion indication in IP datagram) ) sets ECE bit on receiver-to-sender ACK segment to notify sender of congestion
+\end{itemize}
+
+
+
+\end{document}
+
+
+
+
+
