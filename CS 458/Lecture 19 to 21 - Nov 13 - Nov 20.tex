@@ -1,0 +1,259 @@
+%Notes by Harsh Mistry 
+%CS 458
+%Based on Template From  https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass[twoside]{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsmath,amsfonts,graphicx}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   \graphicspath{ {images/} }
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 458/658 - Computer Security and Privacy
+	\hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+
+%Start of Document 
+\begin{document}
+
+\lecture{19 - 21}{November 13 - 20, 2018}{Ian Goldberg }{Harsh Mistry}
+
+\section{Database Security and Privacy} 
+
+\subsection{Security Requirements}
+\begin{itemize}
+\item Physical Database Integrity
+\begin{itemize}
+\item Protect against database corruption
+\item Allow only authorized individuals to perform updates
+\item Recover from physical problems by performing backups or using transactions
+\end{itemize}
+\item Logical Database Integrity 
+\item Element Integrity 
+\begin{itemize}
+\item Ensure correctness/accuracy of database elements
+\item Access control to limit who can update element 
+\item Element checks to validate correctness
+\item Change log or shadow field to undo erroneous changes
+\item Error detection codes to protect against OS or hard disk problems
+\item Two-phase update 
+\begin{itemize}
+\item Phase 1 : Gather information required for changes
+\item Phase 2 : Make changes permanent 
+\item Repeat each step if problem arises
+\end{itemize}
+\item Concurrency Control - Operations need to be atomic
+\end{itemize}
+\item Referential Integrity
+\begin{itemize}
+\item There should be no dangling foreign keys
+\end{itemize}
+\item Auditability
+\begin{itemize}
+\item keep audit log of all database accesses
+\item Access control can be difficult, audit log allows to retroactively identify users
+\end{itemize}
+\item User authentication 
+\item Availability
+\end{itemize}
+
+
+\subsection{Data disclosure and inference}
+
+\subsubsection{Types of data disclosure}
+\begin{itemize}
+\item Exact data
+\item Bounds 
+\item Negative result
+\item Existence
+\item Probable value
+\end{itemize}
+
+\subsubsection{Security vs. precision}
+\begin{itemize}
+\item Security : Forbid any queries that access sensitive data, even if (aggregated) result is no longer sensitive
+\item Precision : Aggregated result should reveal as much non-sensitive data as possible
+\end{itemize}
+
+\subsubsection{Data inference}
+\begin{itemize}
+\item When sensitive data is derived from sensitive data
+\item Controls for statistical inference attacks
+\begin{itemize}
+\item Apply control to query or to data items 
+\item Suppress sensitive data from result
+\item Conceal answer by providing a value close to the actual value
+\item n-item k percent rule : For the set of records that were included in the result, if there is a subset of n records that is responsible for over
+k percent of the result, omit the n records from result
+\item Combined results : report set or range of possible values
+\item Random sample : Compute result on random sample of database
+\item Random data perturbation : Add or subtract small random error to/from each value before computing result
+\item Query analysis :  Maintain history of user’s queries and observe possible
+inferences
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Data aggregation}
+\begin{itemize}
+\item Related to data inference
+\item Building sensitive results from less sensitive inputs
+\item Aggregation can take place outside of a DBMS, which makes it difficult to control
+\end{itemize}
+
+\subsection{Multilevel Security (MLS) Databases}
+\begin{itemize}
+\item Support classification/compartmentalization of information according to its confidentiality
+\item At element level if necessary
+\item In an MLS database, each object has a sensitivity classification and maybe a set of compartments
+\end{itemize}
+
+\subsubsection{*-Property}
+\begin{itemize}
+\item Implementing the *-property (no read up, no write down) in an MLS database is difficult
+\item DBMS must have read and write access at all levels to answer user queries, perform back-ups, optimize database,. 
+\end{itemize}
+
+\subsubsection{Confidentiality}
+\begin{itemize}
+\item Depending on a user’s clearance, he/she might get different answers for a query
+\item Existence of a record itself could be confidential
+\item Keeping existence hidden can lead to having multiple records with the same primary key, but different sensitivity (polyinstantiation)
+\end{itemize}
+
+\subsubsection{Partitioning}
+\begin{itemize}
+\item Have separate database for each classification level
+\item Might lead to data stored redundantly in multiple databases
+\item Doesn’t address the problem of a high-level user needing access to low-level data combined with high-level data
+\end{itemize}
+
+\subsubsection{Encryption}
+\begin{itemize}
+\item Separate data by encrypting it with a key unique to its classification level
+\item Must be careful to use encryption scheme in the right way
+\item Processing of a query becomes expensive, many records might have to be decrypted
+\end{itemize}
+
+\subsubsection{Integrity lock}
+\begin{itemize}
+\item Provides both integrity and access control
+\item Each data item consist of, the actual item, an integrity level, and a cryptographic signature
+\item Signature protects against attacks on the above fields, such as attacks trying to modify the sensitivity label, and attacks trying to move/copy the item in the database
+\item This scheme does not protect against replay attacks
+\item Any (untrusted) database can be used to store data items and their integrity locks
+\item (Trusted) procedure handles access control and manages integrity locks
+\item Have to encrypt items and locks if there are other ways to get access to data in database
+\end{itemize}
+
+\subsection{Designs of secure databases}
+\begin{itemize}
+\item Trusted front end 
+\begin{itemize}
+\item Front end authenticates a user and forwards user query to old-style DBMS
+\item Front end gets result from DBMS and removes data items that user is not allowed to see
+\item Inefficient if DBMS returns lots of items and most of them are being dropped by front end
+\end{itemize}
+\item Commutative filters
+\begin{itemize}
+\item Front end re-writes user query according to a user’s classification
+\item Benefits from DBMS’ superior query processing capabilities and discards forbidden data items early on
+\item Front end might still have to do some post processing
+\end{itemize}
+\item Distributed/federated databases
+\begin{itemize}
+\item Based on partitioning
+\item Front end forwards user query only to databases that user can access based on classification
+\item Front end might have to combine the results from multiple databases
+\end{itemize}
+\item Views
+\begin{itemize}
+\item Many DBMS support views
+\item A view is logical database that represents a subset of some other database
+\end{itemize}
+\item Truman vs. non-Truman semantics
+\begin{itemize}
+\item Truman semantics: the DBMS pretends that the data the user is allowed to access is all the data there is
+\item Non-Truman semantics: the DBMS can reject queries that ask for data the user is not allowed to access
+\end{itemize}
+\end{itemize}
+
+\subsection{Data Mining and Data release}
+\begin{itemize}
+\item Multilevel databases weren’t a commercial success
+\item data miners actively gather additional data from third parties
+\item Data mining tries to automatically find interesting patterns in data using a plethora of technologies
+\item Data mining can be useful for security purposes
+\item Security Problems
+\begin{itemize}
+\item Confidentiality - Derivation of sensitive information
+\item Integrity - Mistakes in data
+\item Availability - Incompatibility of different databases  
+\end{itemize}
+\end{itemize}
+\end{document}
+
+
+
+
+
