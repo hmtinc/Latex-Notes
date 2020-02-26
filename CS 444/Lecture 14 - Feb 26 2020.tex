@@ -1,0 +1,271 @@
+%Notes by Harsh Mistry 
+%CS 444
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\graphicspath{ {./images/} }
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 444 - Compiler Construction 
+	\hfill Winter 2020} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+%Start of Document 
+\begin{document}
+
+\lecture{13}{February 24th , 2020}{Ond\u{r}ej Lhot\'{a}k}{Harsh Mistry}
+
+
+
+\section{Context-sensitive analysis continued}
+
+\begin{itemize}
+\item In Java : 
+\textcolor{blue}{A2} and  \textcolor{red}{A3}
+\begin{enumerate}
+\color{blue}
+\item Build global environment
+\item Resolve type names
+\item Build/check class hierarchy (methods/files)
+
+\color{red}
+\item Disambiguate ambiguous namespace 
+\begin{itemize}
+\item In Java you can't simply determine the namespace based on location of usage
+\end{itemize} 
+\item Resolve "expressions" (Variables, static fields)
+\item Type checking
+\item Resolve methods instance (non-static) fields
+\end{enumerate}
+\item (6) Type Checking Continued: Type system for Joos
+
+\begin{itemize}
+\item C, L, \(\sigma \vdash\) E : \(\tau\) \\
+In class C with local environment L, if method returns \(\sigma\), expression E has type \(\tau\)
+\item C, L, \(\sigma \vdash\) S \\
+In class C, ..., statement S is statically type correct
+\item Literals
+\begin{itemize}
+\item $$ \frac{}{C, L, \sigma \vdash 43 : int}$$
+\item $$ \frac{}{C, L, \sigma \vdash true : boolean}$$
+\item $$ \frac{}{C, L, \sigma \vdash "ABC" : string}$$
+\item $$\frac{}{C, L, \sigma \vdash 'a' : char}$$
+\item $$\frac{}{C, L, \sigma \vdash null : null}$$
+\item $$\frac{L(x) = \gamma}{C, L, \sigma \vdash x : \tau}$$
+\item $$\frac{}{C, L, \sigma \vdash this : C} $$
+\end{itemize}
+\item Operators \textcolor{orange}{(Refer to JLS 15)}
+\begin{itemize}
+\item $$\frac{C, L, \sigma \vdash E : boolean}{C, L, \sigma \vdash !E : boolean} $$
+\item $$\frac{C, L, \sigma \vdash E_1 : \tau_1  \hspace{0.3cm} C, L, \sigma \vdash E_2: \tau_2  \hspace{0.3cm} num(\tau_1) \hspace{0.3cm} num(\tau_2)}{C, L, \sigma \vdash E_1 + E_2 : int}$$
+\item $$\frac{C, L, \sigma \vdash E_1 : string  \hspace{0.3cm} C, L, \sigma \vdash E_2: \tau_2  \hspace{0.3cm} \tau_2 \neq void}{C, L, \sigma \vdash E_1 + E_2 : string}$$
+\item $$\frac{C, L, \sigma \vdash  E : \tau_1 \hspace{0.3cm} C, L, \sigma \vdash E_2 : string \hspace{0.3cm} \tau_1 \neq void}{C, L, \sigma \vdash  E_1 + E_2 : string}$$
+\end{itemize}
+\item Assignment 
+\begin{itemize}
+\item $$ \frac{C, L, \sigma \vdash  E : \tau_2 \hspace{0.3cm} L(x) = \tau_2 \hspace{0.3cm} \tau_1 := \tau_2}{C, L, \sigma \vdash x = E : \tau_1} $$
+\end{itemize}
+\item Assign-ability \textcolor{orange}{(Refer to JLS 5)}
+\begin{itemize}
+\item $$\frac{D \leq C}{C := D }$$
+\item $$ \frac{}{\sigma := \sigma}$$
+\item $$\frac{}{int := short}$$
+\item $$\frac{}{int := char}$$
+\item $$\frac{}{C := null}$$
+\item $$\frac{}{short := byte}$$
+\item $$\frac{\sigma: = \tau \hspace{0.3cm} \tau := P}{\sigma := P}$$
+\end{itemize}
+\item Statements
+\begin{itemize}
+\item $$ \frac{C, L, \sigma \vdash E : \tau}{C, L, \sigma \vdash E}$$
+\item $$ \frac{\forall i: C, L, \sigma \vdash S_i}{C, L, \sigma \vdash \{S_1, \ldots, S_n\}}$$
+\item $$ \frac{C, L[x \rightarrow \tau], \sigma \vdash S}{C, L, \sigma \vdash \{\tau x; S\}}$$
+\item $$ \frac{C, L, \sigma \vdash E : boolean \hspace{0.3cm} C, L, \sigma \vdash S}{C, L, \sigma \vdash if(E) S}$$
+\end{itemize}
+\item Fields
+\begin{itemize}
+\item $$ \frac{static \hspace{0.1cm} \tau \hspace{0.1cm} f \in contain (D)}{C, L, \sigma \vdash D.f : \tau}$$
+\item $$ \frac{C, L, \sigma \vdash E : D \hspace{0.3cm} \tau f \in contain(D)}{C, L, \sigma \vdash E.f : \tau}$$
+\item $$\frac{static \hspace{0.1cm} \tau_1 \hspace{0.1cm} f \in contain(D) \hspace{0.3cm} C, L, \sigma \vdash E: \tau_2 \hspace{0.3cm} \tau_1 := \tau_2 }{C, L, \sigma \vdash D.f = E}$$
+\item $$ \frac{C, L, \sigma \vdash E : D \hspace{0.3cm} \tau_1 f \in contain(D) \hspace{0.3cm} C, L, \sigma \vdash E_2 : \tau_2 \hspace{0.3cm} \tau_1 := \tau_2}{C, L, \sigma \vdash E_1.f = E_2 : \tau_1}$$
+\end{itemize}
+\item Comparisons
+\begin{itemize}
+\item $$ \frac{C, L, \sigma \vdash E_1 : \tau_1 \hspace{0.3cm} C, L, \sigma \vdash E_2 : \tau_2 \hspace{0.3cm} num(\tau_1) \hspace{0.3cm} num(\tau_2)}{C, L, \sigma \vdash E_1 == E_2 : boolean}$$
+\begin{itemize}
+\item Works for other comparison operators (i.e \(!= , \leq,\) etc) 
+\end{itemize}
+\item $$ \frac{C, L, \sigma \vdash E_1 : \tau_1 \hspace{0.3cm} C, L, \sigma \vdash E_2 : \tau_2 \hspace{0.3cm} \tau_1 := \tau_2 \vee \tau_2 := \tau_2 }{C, L, \sigma \vdash E_1 == E_2 : boolean}$$
+\begin{itemize}
+\item Can be used for \(!=\), but not for less then operators
+\end{itemize}
+\end{itemize}
+\item Casts
+\begin{itemize}
+\item $$ \frac{C, L, \sigma \vdash E_1 : \tau_1 \hspace{0.3cm} num(\tau_1) \hspace{0.3cm} num(\tau_2)}{
+C, L, \sigma \vdash (\tau_2) E  : \tau_2}$$
+\item $$ \frac{C, L, \sigma \vdash E_1 : \tau_1 \hspace{0.3cm} \tau_1 := \tau_2 \vee \tau_2 := \tau_1}{C, L, \sigma \vdash (\tau_2) E : \tau_2}$$
+\end{itemize}
+\end{itemize}
+
+\end{itemize}
+
+\end{document}
+
+
+
+
+
+
+
