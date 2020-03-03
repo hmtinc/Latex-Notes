@@ -1,0 +1,161 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{verbatim}
+
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{CS 444\\
+Lecture 15, March 2nd, 2020 \\
+Matthew Walinga\\
+20627018}
+
+\begin{document}
+
+\maketitle
+
+\bigskip
+
+\section{Casts and stuff}
+
+\underline{$C,L,\sigma \vdash E : \tau_1 $  $\tau_1 := \tau_2 \vee \tau_2 := \tau_1$}
+
+$C,L,\sigma \vdash (\tau_2) E$ : $\tau_2$
+\newline
+
+\underline{$C,L,\sigma \vdash E : \tau $  $\tau := D \vee D := \tau$}
+
+$C,L,\sigma \vdash E \text{ instanceof } D $ : boolean
+
+\section{Methods}
+
+- Java closest match is JLS 15.12.2 (we won't do this, we check exact types only)
+\newline
+
+$\forall i:$ \underline{$C,L,\sigma \vdash E_i : \tau_i$  \quad static $\tau \;  m(\tau_1,...,\tau_k) \in $ continue(D)}
+
+$C,L,\sigma \vdash D.m(E_1,...E_k) $ : E
+\newline
+
+$\forall i:$  \underline{$C,L,\sigma \vdash E_i : \tau_i \quad C,L,\sigma \vdash E : D \quad \tau \; m(\tau_1,...,\tau_k) \in$ continue(D)}
+
+$C,L,\sigma \vdash E.m(E_1,...E_k) : \tau$ 
+\newline
+
+$\forall i:$  \underline{$C,L,\sigma \vdash E_i : \tau_i \quad D(\tau_1,...,\tau_k) \in D$}
+
+$C,L,\sigma \vdash new D(E_1,...E_k) : D$ 
+\newline
+
+\subsection{Return types}
+
+\underline{$C,L,\sigma \vdash E_i : \tau_i \quad \sigma := \tau$}
+
+$C,L,\sigma \vdash \text{return } E$ 
+
+$C,L,\sigma \vdash \text{return}$ 
+
+\section{Arrays}
+
+\underline{$C,L,\sigma \vdash E_1 : \tau_1[] \quad C,L,\sigma \vdash E_2 : \tau_2 \quad num(\tau_2)$}
+
+$C,L,\sigma \vdash E_1[E_2] : \tau_1$ 
+\newline
+
+\underline{$C,L,\sigma \vdash E_1 : \tau_1[] \quad C,L,\sigma \vdash E_2 : \tau_2 \quad num(\tau_2) \quad C,L,\sigma \vdash E_3 : \tau_3 \quad \tau_1 := \tau_3$}
+
+$C,L,\sigma \vdash E_1[E_2]  = E_3 : \tau_1$ 
+\newline
+
+\underline{$C,L,\sigma \vdash E : \tau[]$}
+
+$C,L,\sigma \vdash E.length : int$ 
+\newline
+
+\underline{$C,L,\sigma \vdash E : \tau_2 \quad num(\tau_2)$}
+
+$C,L,\sigma \vdash \text{new } \tau_1[E] : \tau_1[]$ 
+
+\subsection{Array Assignability}
+
+- Arrays can be assigned to the following types:
+
+Object := $\sigma[]$
+
+Cloneable := $\sigma[]$
+
+java.io.Serializable := $\sigma[]$
+\newline
+
+\subsubsection{An evil example}
+
+\underline{$D \leq C$}
+
+$C[] := D[] \text{ if } C := D$ (covariant)
+\newline
+
+Here's some code as an example:
+\newline
+
+\begin{verbatim}
+B[] bs = new B[1];
+Object[] os = bs;
+os[0] = new C();
+B b = bs[0];
+\end{verbatim}
+
+This program is not type correct! It assigns a $C$-type object to a $B$-type object :o
+
+The rule we defined makes the static type system \underline{unsound}
+\newline
+
+Solution: To preserve type-correctness, we must "tag" each array element. Java checks the dynamic type at every array store. This may result in a runtime exception: ArrayStoreException (JLS 10.10)
+\newline
+
+The covariant rule we defined above was the problem. Covariants should only be used for data structures that are read-only
+
+\subsubsection{Other soundess holes}
+
+- Casts are intentional soundness holes (programmer tells the compiler "trust me")
+
+\subsubsection{A few more rules}
+
+Two-dimensional arrays (not in Joos so who really cares, but here for completeness)
+
+$\sigma[] := \tau[]$
+
+$\sigma[][] := \tau[][]$
+
+\section{Type-checking pseudocode (Joos)}
+
+"Demand-driven approach"
+\newline
+
+(A)
+\underline{premises}
+	
+	$C,L,\sigma \vdash E : \tau$
+
+\begin{verbatim}
+typecheck(E) {
+	1. find a rule of the form (A) above
+	2. check premises (with recursive calls to typecheck subexpressions)
+	3. return tau
+}
+\end{verbatim}
+
+\section{Static Analysis}
+
+- analyze a program to prove properties of its runtime behaviour
+
+- Applications: generate efficient optimized code
+
+\newpage
+
+\end{document}
