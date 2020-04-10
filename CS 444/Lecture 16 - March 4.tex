@@ -1,0 +1,272 @@
+%Notes by Harsh Mistry 
+%CS 444
+%based on Template from : https://www.cs.cmu.edu/~ggordon/10725-F12/template.tex
+
+\documentclass{article}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{amsfonts,graphicx, amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{listings}
+\graphicspath{ {./images/} }
+\usepackage{scrextend}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   
+   
+%Info Box 
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS 444 - Compiler Construction 
+	\hfill Winter 2020} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Notes By: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+
+
+ 
+}
+
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+	
+\newcommand{\pipe}{\(\mid\)}
+\newcommand{\ctr}{\(\wedge\)}
+
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+\newcommand\E{\mathbb{E}}
+
+%color definitions :
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+
+%Environments
+\newenvironment{exblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgreen,colframe=darkgreen,%
+    colbacklower=limegreen!75!lightgreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{ablock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightcoral,colframe=darkred,%
+    colbacklower=tomato!75!lightcoral,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{cblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightblue,colframe=darkblue,%
+    colbacklower=darkblue!75!lightblue,%
+    title=#1]}%
+    {\endtcolorbox}
+
+
+%Languages
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in,  fi, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+%Listings
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left, 
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+%Start of Document 
+\begin{document}
+
+\lecture{16}{March 4 , 2020}{Ond\u{r}ej Lhot\'{a}k}{Harsh Mistry}
+
+
+
+\section{Static Analysis}
+
+\begin{itemize}
+\item Analyse program to prove properties of its runtime behaviour 
+\begin{itemize}
+\item can program get stuck in infinite loop 
+\item Unreachable code
+\item Division by 0
+\item Dereference null
+\item Access array out of bounds
+\item Construct expression/computation. 
+\end{itemize}
+\end{itemize}
+
+\begin{theorem}
+Rice's Theorem: Let R be any non-trivial property of the execution of a program. Given a program l, it is undecideable whether P has property R
+\end{theorem}
+
+\begin{definition}
+Non Trivial: \(\exists P\) with property R and \(\exists P^\prime\) without property R
+\end{definition}
+
+\begin{definition}
+Analysis if \underline{conservative} if its result is never untrue. 
+\end{definition}
+
+\begin{definition}
+Analysis A is more \underline{precise} then B if A gives a definitive answer for more programs
+\end{definition}
+
+\begin{itemize}
+\item Java spec requires
+\begin{itemize}
+\item Reachability analysis \textcolor{orange}{(Refer to JLS 14.20)}
+\begin{itemize}
+\item Every statement  must potentially execute
+\item No execution of a non-void method ends without a return statement
+\end{itemize}
+\item Define assignment \textcolor{orange}{(Refer to JLS 16)}
+\begin{itemize}
+\item Every local variable is written before it is read
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsection{Java Reachability}
+\begin{itemize}
+\item For each statement S in program define
+\begin{itemize}
+\item in[s] = can S start executing?
+\item out[s] = can S stop executing?
+\end{itemize}
+\item If in[s] = no for some \(S_i\), then S is unreachable
+\item if out[s] = no for some \(S_i\), then S is unreachable 
+\item Constraints
+\begin{itemize}
+\item L: if(E) S
+\begin{itemize}
+\item in[S] = in[L]
+\item out[L] = in[L] \(\vee\) out[S]
+\end{itemize}
+\item L: if(E) \(S_1\) else \(S_2\)
+\begin{itemize}
+\item in[\(S_1\)]  = in[L]
+\item in[\(S_2\)] = in[L]
+\item out[L]  = out[\(S_1\)] \(\vee\) out[\(S_2\)]
+\end{itemize}
+\item L: while(true) S
+\begin{itemize}
+\item in[S] = in[L]
+\item out[L] = no
+\end{itemize}
+\item L: while(false) S
+\begin{itemize}
+\item in[S] = no
+\item out[L] = in[L]
+\end{itemize}
+\item L: while(E) S
+\begin{itemize}
+\item in[S] = in[L]
+\item out[L] = in[L] (\(\vee\) out[S])
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\begin{ablock}{While Constant Expression Note (JLS 15.28)}
+While loops have special static analysis checks to avoid infinite loops due to constant expression, but the definition of constant varies.
+\begin{itemize}
+\item \verb|while(1 == 1) //constant|
+\item \verb|while(x == x) //not constant|
+\end{itemize}
+\end{ablock}
+
+
+\end{document}
+
+
+
+
+
+
+
